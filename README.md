@@ -38,3 +38,11 @@ The custom domain was added through the Pages dashboard, which created a proxied
 To change hosting later, update the Pages custom-domain association and DNS together. A CNAME alone does not attach a domain to a Pages project.
 
 No packages, framework, analytics or build dependencies are needed.
+
+## Support email
+
+The owner selected `support@figure.tvr.works` as the public contact. On October 21, 2026, Cloudflare Email Routing was enabled for `figure.tvr.works` and a forwarding rule was created for `support` to the owner's verified Gmail destination tagged `+figure`. The dashboard reports the destination Verified, the rule Active and the subdomain Enabled with locked DNS records. Existing apex-domain routes were kept unchanged.
+
+Public DNS returns the three Cloudflare MX hosts. The website still returned HTTP 200 after setup. End-to-end message delivery remains to be tested before publishing the address. Forwarding does not configure outgoing messages as the support address; outbound sending remains unconfigured.
+
+Only the public support address belongs in deployed pages. Keep the private forwarding destination out of `public/`.
