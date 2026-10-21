@@ -28,9 +28,13 @@ Connect `tvanreenen/figure-site` to Cloudflare Pages:
 - Framework preset: None.
 - Build command: `exit 0`.
 - Build output directory: `public`.
-- Planned Pages project: `figure-site`.
+- Pages project: `figure-site` (`https://figure-site.pages.dev`).
 - Custom domain: `figure.tvr.works`.
 
-Add the custom domain in the Pages project before creating its DNS record. For a zone already on Cloudflare, Pages can create the CNAME automatically. Keep the project's actual Pages hostname as the record target. Once connected, pushes to `main` deploy automatically.
+Connected to Cloudflare Pages on October 21, 2026. Pushes to `main` deploy automatically. The private GitHub repository contains the source; the deployed placeholder pages are public.
+
+The custom domain was added through the Pages dashboard, which created a proxied CNAME `figure` → `figure-site.pages.dev` in the `tvr.works` zone, TTL Auto. Cloudflare reports Active with SSL enabled. HTTPS checks passed for the home, `/support`, `/privacy` and stylesheet routes, with the missing-page route returning 404.
+
+To change hosting later, update the Pages custom-domain association and DNS together. A CNAME alone does not attach a domain to a Pages project.
 
 No packages, framework, analytics or build dependencies are needed.
