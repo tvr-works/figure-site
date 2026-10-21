@@ -1,0 +1,5 @@
+html { color-scheme: light dark; font-family: system-ui, sans-serif; line-height: 1.5; }
+body { max-width: 38rem; margin: 12vh auto; padding: 0 1.5rem; }
+h1 { font-size: 2rem; line-height: 1.2; }
+nav { display: flex; flex-wrap: wrap; gap: 1.25rem; margin-top: 2rem; }
+a { color: inherit; text-underline-offset: .2em; }
