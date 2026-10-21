@@ -52,3 +52,5 @@ Only the public support address belongs in deployed pages. Keep the private forw
 Published content lives in `public/`; app-repository release notes link here rather than maintain a second policy copy. The privacy policy distinguishes app-local storage, Apple diagnostics, support correspondence and website hosting. Update it when those practices change. Support correspondence must be handled according to its stated retention and deletion policy.
 
 The October 21, 2026 checks covered all three pages in WebKit at 390 × 844 and 1280 × 900, in light and dark appearances. Navigation, contact links and doubled text size passed, with no horizontal overflow or browser console errors. Browser plugin was not available; the checks used installed Playwright with the existing WebKit runtime. Temporary preview/test files stay outside the repository.
+
+Public email links use Cloudflare’s documented `email_off` comments so contact details stay readable and clickable without JavaScript. This exception is scoped to these public links; zone-wide email obfuscation settings are unchanged.
