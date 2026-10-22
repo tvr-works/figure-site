@@ -157,7 +157,7 @@ test('larger screenshot view traps focus, closes with Escape, and restores its t
   await expect(dialog.getByRole('heading', { name: 'Right Triangle' })).toBeVisible();
   expect((await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze()).violations).toEqual([]);
   await page.keyboard.press('Escape');
-  await expect(dialog).toHaveCount(0);
+  await expect(dialog).not.toBeVisible();
   await expect(trigger).toBeFocused();
 });
 

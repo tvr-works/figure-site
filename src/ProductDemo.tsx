@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type FocusEvent } from 'react';
-import { ArrowRight, Pause, Play, RotateCcw, StepForward, ZoomIn } from 'lucide-react';
+import { ArrowRight, Pause, Play, RotateCcw, StepForward } from 'lucide-react';
 import { Button } from './components/ui/button';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from './components/ui/dialog';
+import { ImageViewer } from './ImageViewer';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './components/ui/tabs';
 import { modes, proofs, type Proof } from './demo-content';
 import { advance, framesFor, initialState, nextMode, selectProof } from './demo-state';
@@ -110,17 +110,7 @@ export function ProductDemo() {
                     </div></div>
                     <img className="phone-frame" src="/assets/phone-frame.webp" width="862" height="1825" alt="" aria-hidden="true" />
                   </div>
-                  <figcaption>Actual Figure app captures · Guided demonstration</figcaption>
-                  <Dialog onOpenChange={open => { if (open) setState(current => ({ ...current, playing: false })); }}>
-                    <DialogTrigger render={<Button variant="control" className="mx-auto mt-2 flex" />}><ZoomIn data-icon="inline-start" />View larger</DialogTrigger>
-                    <DialogContent variant="image">
-                      <DialogHeader className="pr-8">
-                        <DialogTitle>{state.proof === 'adaptive' ? mode.label : proof.label}</DialogTitle>
-                        <DialogDescription>{frame.caption}</DialogDescription>
-                      </DialogHeader>
-                      <div className="screenshot-scroll"><img src={imageUrl} alt={frame.caption} width="720" height="1564" /></div>
-                    </DialogContent>
-                  </Dialog>
+                  <ImageViewer imageUrl={imageUrl} title={state.proof === 'adaptive' ? mode.label : proof.label} caption={frame.caption} onOpen={() => setState(current => ({ ...current, playing: false }))} />
                 </figure>
         </div>
       </Tabs>

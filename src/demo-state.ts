@@ -11,7 +11,7 @@ export function adaptiveFrames(modeIndex: number): Frame[] {
     // The cue belongs on the screen before the corresponding native action.
     const action = name === 'launcher' && mode.id === 'cone'
       ? { x: 61, y: 618 }
-      : nextCapture?.action;
+      : name === 'assigned' ? captureByName.get(`${mode.id}-assigned`)?.action : nextCapture?.action;
     const step = name === 'launcher' || name === 'choose' ? 0 : name === 'unit' || name === 'assigned' ? 2 : 1;
     const captions: Record<string, string> = {
       launcher: mode.id === 'cone' ? 'Tap 2nd to reveal Cone on the Cylinder key.' : `Choose ${mode.label} from the calculation modes.`,

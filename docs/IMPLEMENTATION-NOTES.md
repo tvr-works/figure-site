@@ -19,3 +19,15 @@ TypeScript 7 reports that `baseUrl` has been removed. The `@/*` alias uses expli
 ## App evidence
 
 Native media is captured from the Figure app on a dedicated iOS 26.5 simulator, built without changing app code. Simulator screenshots from the MCP tool are optimized to 368px wide; `simctl io screenshot` is used for full-resolution source captures. Media is evidence of the captured examples, not a second calculator implementation or a claim of complete competitor parity.
+
+## Verification-driven choices
+
+Official docs were consulted again for [React effect cleanup](https://react.dev/reference/react/useEffect), [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API), [Page Visibility](https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API), [Playwright emulation](https://playwright.dev/docs/emulation), [accessibility testing](https://playwright.dev/docs/accessibility-testing), and [Tailwind overflow wrapping](https://tailwindcss.com/docs/overflow-wrap).
+
+The enlarged screenshot viewer initially used shadcn's Base UI Dialog. Our installed Base UI 1.9.0 exposes unnamed focus-guard buttons to WebKit's accessibility tree, reproducing [the upstream issue](https://github.com/mui/base-ui/issues/5237). Rather than suppress that accessibility rule or patch library-owned DOM, this small viewer uses native `dialog.showModal()` following [W3C H102](https://www.w3.org/WAI/WCAG22/Techniques/html/H102) and [MDN's dialog reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dialog). The scrollable screenshot region is labeled and keyboard focusable. Tabs and buttons remain the generated Base UI components. The unused Dialog and Collapsible source files were removed.
+
+The static support/privacy files remain at root-level HTML entry points so Vite and Cloudflare's extensionless route handling both resolve `/support` and `/privacy`. A directory-index migration failed the actual production-preview browser test and was corrected.
+
+Pause responds to pointer clicks independently from keyboard focus. Only keyboard focus entering the running proof pauses through the focus handler; a pointer focusing Pause must not toggle it back to Play before the click arrives.
+
+Static navigation/disclosure icons are exports from the installed Lucide library. Figure’s brand layers are copied directly from its app icon source; neither is an invented drawing.
