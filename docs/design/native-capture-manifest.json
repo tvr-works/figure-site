@@ -1,0 +1,641 @@
+{
+  "date": "2026-10-22",
+  "source": "Figure on iOS 26.5, Figure Store phone simulator",
+  "sourceDimensions": [
+    1320,
+    2868
+  ],
+  "exportWidth": 720,
+  "captures": [
+    {
+      "name": "right-launcher",
+      "readout": "e8|swipe|scroll-view|Calculator display|Result, 0.|calculator-display",
+      "action": null
+    },
+    {
+      "name": "right-choose",
+      "readout": "e8|swipe|scroll-view|Calculator display|Result, 0.|calculator-display",
+      "action": null
+    },
+    {
+      "name": "right-selected",
+      "readout": "e8|swipe|scroll-view|Calculator display|Right Triangle, 0.|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e21",
+        "x": 61,
+        "y": 300
+      }
+    },
+    {
+      "name": "right-one",
+      "readout": "e8|swipe|scroll-view|Calculator display|Right Triangle \u00b7 Entry, 1|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e131",
+        "x": 141,
+        "y": 777
+      }
+    },
+    {
+      "name": "right-number",
+      "readout": "e8|swipe|scroll-view|Calculator display|Right Triangle \u00b7 Entry, 12|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e134",
+        "x": 220,
+        "y": 777
+      }
+    },
+    {
+      "name": "right-unit",
+      "readout": "e8|swipe|scroll-view|Calculator display|Right Triangle \u00b7 Entry, 12 inches|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e86",
+        "x": 141,
+        "y": 539
+      }
+    },
+    {
+      "name": "right-assigned",
+      "readout": "e8|swipe|scroll-view|Calculator display|Right Triangle \u00b7 Run, 12 inches|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e34",
+        "x": 61,
+        "y": 300
+      }
+    },
+    {
+      "name": "oblique-launcher",
+      "readout": "e8|swipe|scroll-view|Calculator display|Result, 0.|calculator-display",
+      "action": null
+    },
+    {
+      "name": "oblique-choose",
+      "readout": "e8|swipe|scroll-view|Calculator display|Result, 0.|calculator-display",
+      "action": null
+    },
+    {
+      "name": "oblique-selected",
+      "readout": "e8|swipe|scroll-view|Calculator display|Oblique Triangle, 0.|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e25",
+        "x": 141,
+        "y": 300
+      }
+    },
+    {
+      "name": "oblique-one",
+      "readout": "e8|swipe|scroll-view|Calculator display|Oblique Triangle \u00b7 Entry, 1|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e126",
+        "x": 141,
+        "y": 777
+      }
+    },
+    {
+      "name": "oblique-number",
+      "readout": "e8|swipe|scroll-view|Calculator display|Oblique Triangle \u00b7 Entry, 12|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e129",
+        "x": 220,
+        "y": 777
+      }
+    },
+    {
+      "name": "oblique-unit",
+      "readout": "e8|swipe|scroll-view|Calculator display|Oblique Triangle \u00b7 Entry, 12 inches|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e81",
+        "x": 141,
+        "y": 539
+      }
+    },
+    {
+      "name": "oblique-assigned",
+      "readout": "e8|swipe|scroll-view|Calculator display|Oblique Triangle \u00b7 Side a, 12 inches|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e30",
+        "x": 61,
+        "y": 300
+      }
+    },
+    {
+      "name": "circle-launcher",
+      "readout": "e8|swipe|scroll-view|Calculator display|Result, 0.|calculator-display",
+      "action": null
+    },
+    {
+      "name": "circle-choose",
+      "readout": "e8|swipe|scroll-view|Calculator display|Result, 0.|calculator-display",
+      "action": null
+    },
+    {
+      "name": "circle-selected",
+      "readout": "e8|swipe|scroll-view|Calculator display|Circle, 0.|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e29",
+        "x": 220,
+        "y": 300
+      }
+    },
+    {
+      "name": "circle-one",
+      "readout": "e8|swipe|scroll-view|Calculator display|Circle \u00b7 Entry, 1|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e124",
+        "x": 141,
+        "y": 777
+      }
+    },
+    {
+      "name": "circle-number",
+      "readout": "e8|swipe|scroll-view|Calculator display|Circle \u00b7 Entry, 12|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e128",
+        "x": 220,
+        "y": 777
+      }
+    },
+    {
+      "name": "circle-unit",
+      "readout": "e8|swipe|scroll-view|Calculator display|Circle \u00b7 Entry, 12 inches|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e80",
+        "x": 141,
+        "y": 539
+      }
+    },
+    {
+      "name": "circle-assigned",
+      "readout": "e8|swipe|scroll-view|Calculator display|Circle \u00b7 Diameter, 12 inches|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e26",
+        "x": 61,
+        "y": 300
+      }
+    },
+    {
+      "name": "cylinder-launcher",
+      "readout": "e8|swipe|scroll-view|Calculator display|Result, 0.|calculator-display",
+      "action": null
+    },
+    {
+      "name": "cylinder-choose",
+      "readout": "e8|swipe|scroll-view|Calculator display|Result, 0.|calculator-display",
+      "action": null
+    },
+    {
+      "name": "cylinder-selected",
+      "readout": "e8|swipe|scroll-view|Calculator display|Cylinder, 0.|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e32",
+        "x": 299,
+        "y": 300
+      }
+    },
+    {
+      "name": "cylinder-one",
+      "readout": "e8|swipe|scroll-view|Calculator display|Cylinder \u00b7 Entry, 1|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e123",
+        "x": 141,
+        "y": 777
+      }
+    },
+    {
+      "name": "cylinder-number",
+      "readout": "e8|swipe|scroll-view|Calculator display|Cylinder \u00b7 Entry, 12|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e127",
+        "x": 220,
+        "y": 777
+      }
+    },
+    {
+      "name": "cylinder-unit",
+      "readout": "e8|swipe|scroll-view|Calculator display|Cylinder \u00b7 Entry, 12 inches|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e79",
+        "x": 141,
+        "y": 539
+      }
+    },
+    {
+      "name": "cylinder-assigned",
+      "readout": "e8|swipe|scroll-view|Calculator display|Cylinder \u00b7 Diameter, 12 inches|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e28",
+        "x": 61,
+        "y": 300
+      }
+    },
+    {
+      "name": "cone-launcher",
+      "readout": "e8|swipe|scroll-view|Calculator display|Result, 0.|calculator-display",
+      "action": null
+    },
+    {
+      "name": "cone-choose",
+      "readout": "e8|swipe|scroll-view|Calculator display|2nd, 0.|calculator-display",
+      "action": null
+    },
+    {
+      "name": "cone-selected",
+      "readout": "e8|swipe|scroll-view|Calculator display|Cone, 0.|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e32",
+        "x": 299,
+        "y": 300
+      }
+    },
+    {
+      "name": "cone-one",
+      "readout": "e8|swipe|scroll-view|Calculator display|Cone \u00b7 Entry, 1|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e123",
+        "x": 141,
+        "y": 777
+      }
+    },
+    {
+      "name": "cone-number",
+      "readout": "e8|swipe|scroll-view|Calculator display|Cone \u00b7 Entry, 12|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e127",
+        "x": 220,
+        "y": 777
+      }
+    },
+    {
+      "name": "cone-unit",
+      "readout": "e8|swipe|scroll-view|Calculator display|Cone \u00b7 Entry, 12 inches|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e79",
+        "x": 141,
+        "y": 539
+      }
+    },
+    {
+      "name": "cone-assigned",
+      "readout": "e8|swipe|scroll-view|Calculator display|Cone \u00b7 Diameter, 12 inches|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e28",
+        "x": 61,
+        "y": 300
+      }
+    },
+    {
+      "name": "ratios-launcher",
+      "readout": "e8|swipe|scroll-view|Calculator display|Result, 0.|calculator-display",
+      "action": null
+    },
+    {
+      "name": "ratios-choose",
+      "readout": "e8|swipe|scroll-view|Calculator display|Result, 0.|calculator-display",
+      "action": null
+    },
+    {
+      "name": "ratios-selected",
+      "readout": "e8|swipe|scroll-view|Calculator display|Ratios, 0.|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e35",
+        "x": 379,
+        "y": 300
+      }
+    },
+    {
+      "name": "ratios-one",
+      "readout": "e8|swipe|scroll-view|Calculator display|Ratios \u00b7 Entry, 1|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e124",
+        "x": 141,
+        "y": 777
+      }
+    },
+    {
+      "name": "ratios-number",
+      "readout": "e8|swipe|scroll-view|Calculator display|Ratios \u00b7 Entry, 12|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e128",
+        "x": 220,
+        "y": 777
+      }
+    },
+    {
+      "name": "ratios-unit",
+      "readout": "e8|swipe|scroll-view|Calculator display|Ratios \u00b7 Entry, 12 inches|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e80",
+        "x": 141,
+        "y": 539
+      }
+    },
+    {
+      "name": "ratios-assigned",
+      "readout": "e8|swipe|scroll-view|Calculator display|Ratios \u00b7 A, 12 inches|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e32",
+        "x": 61,
+        "y": 300
+      }
+    },
+    {
+      "name": "offset-launcher",
+      "readout": "e8|swipe|scroll-view|Calculator display|Result, 0.|calculator-display",
+      "action": null
+    },
+    {
+      "name": "offset-choose",
+      "readout": "e8|swipe|scroll-view|Calculator display|Result, 0.|calculator-display",
+      "action": null
+    },
+    {
+      "name": "offset-selected",
+      "readout": "e8|swipe|scroll-view|Calculator display|Offset, 0.|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e38",
+        "x": 61,
+        "y": 380
+      }
+    },
+    {
+      "name": "offset-one",
+      "readout": "e8|swipe|scroll-view|Calculator display|Offset \u00b7 Entry, 1|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e125",
+        "x": 141,
+        "y": 777
+      }
+    },
+    {
+      "name": "offset-number",
+      "readout": "e8|swipe|scroll-view|Calculator display|Offset \u00b7 Entry, 12|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e129",
+        "x": 220,
+        "y": 777
+      }
+    },
+    {
+      "name": "offset-unit",
+      "readout": "e8|swipe|scroll-view|Calculator display|Offset \u00b7 Entry, 12 inches|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e81",
+        "x": 141,
+        "y": 539
+      }
+    },
+    {
+      "name": "offset-assigned",
+      "readout": "e8|swipe|scroll-view|Calculator display|Offset \u00b7 Length, 12 inches|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e30",
+        "x": 61,
+        "y": 300
+      }
+    },
+    {
+      "name": "roof-launcher",
+      "readout": "e8|swipe|scroll-view|Calculator display|Result, 0.|calculator-display",
+      "action": null
+    },
+    {
+      "name": "roof-choose",
+      "readout": "e8|swipe|scroll-view|Calculator display|Result, 0.|calculator-display",
+      "action": null
+    },
+    {
+      "name": "roof-selected",
+      "readout": "e8|swipe|scroll-view|Calculator display|Roof, 0.|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e41",
+        "x": 141,
+        "y": 380
+      }
+    },
+    {
+      "name": "roof-one",
+      "readout": "e8|swipe|scroll-view|Calculator display|Roof \u00b7 Entry, 1|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e124",
+        "x": 141,
+        "y": 777
+      }
+    },
+    {
+      "name": "roof-number",
+      "readout": "e8|swipe|scroll-view|Calculator display|Roof \u00b7 Entry, 12|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e128",
+        "x": 220,
+        "y": 777
+      }
+    },
+    {
+      "name": "roof-unit",
+      "readout": "e8|swipe|scroll-view|Calculator display|Roof \u00b7 Entry, 12 inches|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e80",
+        "x": 141,
+        "y": 539
+      }
+    },
+    {
+      "name": "roof-assigned",
+      "readout": "e8|swipe|scroll-view|Calculator display|Roof \u00b7 Run, 12 inches|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e26",
+        "x": 61,
+        "y": 300
+      }
+    },
+    {
+      "name": "stairs-launcher",
+      "readout": "e8|swipe|scroll-view|Calculator display|Result, 0.|calculator-display",
+      "action": null
+    },
+    {
+      "name": "stairs-choose",
+      "readout": "e8|swipe|scroll-view|Calculator display|Result, 0.|calculator-display",
+      "action": null
+    },
+    {
+      "name": "stairs-selected",
+      "readout": "e8|swipe|scroll-view|Calculator display|Stairs, 0.|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e44",
+        "x": 220,
+        "y": 380
+      }
+    },
+    {
+      "name": "stairs-one",
+      "readout": "e8|swipe|scroll-view|Calculator display|Stairs \u00b7 Entry, 1|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e135",
+        "x": 141,
+        "y": 777
+      }
+    },
+    {
+      "name": "stairs-number",
+      "readout": "e8|swipe|scroll-view|Calculator display|Stairs \u00b7 Entry, 12|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e139",
+        "x": 220,
+        "y": 777
+      }
+    },
+    {
+      "name": "stairs-unit",
+      "readout": "e8|swipe|scroll-view|Calculator display|Stairs \u00b7 Entry, 12 inches|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e91",
+        "x": 141,
+        "y": 539
+      }
+    },
+    {
+      "name": "stairs-assigned",
+      "readout": "e8|swipe|scroll-view|Calculator display|Stairs \u00b7 Rise, 12 inches|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e41",
+        "x": 141,
+        "y": 300
+      }
+    },
+    {
+      "name": "results-inputs",
+      "readout": "e8|swipe|scroll-view|Calculator display|Right Triangle \u00b7 Rise, 4 feet 0 inches|calculator-display",
+      "action": null
+    },
+    {
+      "name": "results-0",
+      "readout": "e8|swipe|scroll-view|Calculator display|Right Triangle \u00b7 Diagonal, 5 feet 0 inches|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e156",
+        "x": 299,
+        "y": 856
+      }
+    },
+    {
+      "name": "results-1",
+      "readout": "e8|swipe|scroll-view|Calculator display|Right Triangle \u00b7 Run, 3 feet 0 inches|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e156",
+        "x": 299,
+        "y": 856
+      }
+    },
+    {
+      "name": "results-2",
+      "readout": "e8|swipe|scroll-view|Calculator display|Right Triangle \u00b7 Rise, 4 feet 0 inches|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e156",
+        "x": 299,
+        "y": 856
+      }
+    },
+    {
+      "name": "results-3",
+      "readout": "e8|swipe|scroll-view|Calculator display|Right Triangle \u00b7 Angle, 53.1301 degrees|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e156",
+        "x": 299,
+        "y": 856
+      }
+    },
+    {
+      "name": "results-4",
+      "readout": "e8|swipe|scroll-view|Calculator display|Right Triangle \u00b7 Other angle, 36.8699 degrees|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e155",
+        "x": 299,
+        "y": 856
+      }
+    },
+    {
+      "name": "results-5",
+      "readout": "e8|swipe|scroll-view|Calculator display|Right Triangle \u00b7 Pitch per 12, 16 inches|calculator-display",
+      "action": {
+        "type": "tap",
+        "elementRef": "e155",
+        "x": 299,
+        "y": 856
+      }
+    },
+    {
+      "name": "help-calculation-before",
+      "readout": "e8|swipe|scroll-view|Calculator display|Right Triangle \u00b7 Entry, 30|calculator-display",
+      "action": null
+    },
+    {
+      "name": "help-guide",
+      "readout": "e9|swipe|scroll-view|Calculator display|Right Triangle \u00b7 Entry, 30|calculator-display",
+      "action": null
+    },
+    {
+      "name": "help-closed",
+      "readout": "e8|swipe|scroll-view|Calculator display|Right Triangle \u00b7 Entry, 30|calculator-display",
+      "action": null
+    },
+    {
+      "name": "help-applied",
+      "readout": "e8|swipe|scroll-view|Calculator display|Right Triangle \u00b7 Rise, 5 feet 0 inches|calculator-display",
+      "action": null
+    },
+    {
+      "name": "help-resumed",
+      "readout": "e9|swipe|scroll-view|Calculator display|Right Triangle \u00b7 Rise, 5 feet 0 inches|calculator-display",
+      "action": null
+    }
+  ]
+}

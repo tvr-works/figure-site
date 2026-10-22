@@ -12,8 +12,8 @@ export default defineConfig({
     rolldownOptions: {
       input: {
         home: fileURLToPath(new URL('./index.html', import.meta.url)),
-        support: fileURLToPath(new URL('./support/index.html', import.meta.url)),
-        privacy: fileURLToPath(new URL('./privacy/index.html', import.meta.url)),
+        support: fileURLToPath(new URL('./support.html', import.meta.url)),
+        privacy: fileURLToPath(new URL('./privacy.html', import.meta.url)),
         notFound: fileURLToPath(new URL('./404.html', import.meta.url)),
       },
     },
