@@ -1,0 +1,172 @@
+[
+  {
+    "image": "help-touch-00",
+    "caption": "A 10 ft slant and a pending 30° entry stay in the calculator. Open More.",
+    "step": 0,
+    "duration": 1400,
+    "cue": {
+      "x": 391,
+      "y": 88
+    }
+  },
+  {
+    "image": "help-touch-01",
+    "caption": "Choose Help. The guide opens over the retained calculation.",
+    "step": 0,
+    "duration": 1200,
+    "cue": {
+      "x": 284,
+      "y": 143
+    }
+  },
+  {
+    "image": "help-touch-02",
+    "caption": "Read how sine and cosine split a slant into rise and run.",
+    "step": 0,
+    "duration": 2800,
+    "cue": {
+      "x": 220,
+      "y": 795,
+      "to": {
+        "x": 220,
+        "y": 604
+      }
+    }
+  },
+  {
+    "image": "help-touch-03",
+    "caption": "Follow the worked 10 ft slant example and its practical uses.",
+    "step": 0,
+    "duration": 2800,
+    "cue": {
+      "x": 220,
+      "y": 812,
+      "to": {
+        "x": 220,
+        "y": 587
+      }
+    }
+  },
+  {
+    "image": "help-touch-04",
+    "caption": "Close Help after reading the sine example and its applications.",
+    "step": 1,
+    "duration": 2400,
+    "pauseBefore": 450,
+    "cue": {
+      "x": 392,
+      "y": 492
+    }
+  },
+  {
+    "image": "help-touch-05",
+    "caption": "The 30° entry is still here. Find its sine.",
+    "step": 1,
+    "duration": 1100,
+    "cue": {
+      "x": 61,
+      "y": 459
+    }
+  },
+  {
+    "image": "help-touch-06",
+    "caption": "Sine of 30° is 0.5. Multiply it by the slant length.",
+    "step": 1,
+    "duration": 950,
+    "cue": {
+      "x": 379,
+      "y": 698
+    }
+  },
+  {
+    "image": "help-touch-07",
+    "caption": "Enter the 10 ft slant length.",
+    "step": 1,
+    "duration": 850,
+    "cue": {
+      "x": 141,
+      "y": 777
+    }
+  },
+  {
+    "image": "help-touch-08",
+    "caption": "Continue the 10 ft entry.",
+    "step": 1,
+    "duration": 850,
+    "cue": {
+      "x": 141,
+      "y": 856
+    }
+  },
+  {
+    "image": "help-touch-09",
+    "caption": "Give the slant length its feet unit.",
+    "step": 1,
+    "duration": 950,
+    "cue": {
+      "x": 61,
+      "y": 539
+    }
+  },
+  {
+    "image": "help-touch-10",
+    "caption": "Calculate 0.5 × 10 ft.",
+    "step": 1,
+    "duration": 1200,
+    "cue": {
+      "x": 299,
+      "y": 856
+    }
+  },
+  {
+    "image": "help-touch-11",
+    "caption": "The result is 5 ft. Assign it as the rise.",
+    "step": 1,
+    "duration": 1800,
+    "cue": {
+      "x": 141,
+      "y": 300
+    }
+  },
+  {
+    "image": "help-touch-12",
+    "caption": "The 5 ft rise is highlighted. Open More to return to Help.",
+    "step": 2,
+    "duration": 1800,
+    "pauseBefore": 450,
+    "cue": {
+      "x": 391,
+      "y": 88
+    }
+  },
+  {
+    "image": "help-touch-13",
+    "caption": "Reopen Help from the More menu.",
+    "step": 2,
+    "duration": 1200,
+    "cue": {
+      "x": 284,
+      "y": 143
+    }
+  },
+  {
+    "image": "help-touch-14",
+    "caption": "Help reopens at the same guide and reading position, above the calculated 5 ft rise.",
+    "step": 2,
+    "duration": 2800,
+    "cue": {
+      "x": 220,
+      "y": 812,
+      "to": {
+        "x": 220,
+        "y": 587
+      }
+    }
+  },
+  {
+    "image": "help-touch-15",
+    "caption": "Continue reading the 5 ft rise example and practical applications. Hold before repeating.",
+    "step": 2,
+    "duration": 4000
+  }
+]
