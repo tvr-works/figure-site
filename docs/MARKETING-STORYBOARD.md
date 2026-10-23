@@ -29,12 +29,13 @@ Show that behavior through authentic examples. Experienced calculator users need
 | Hero actions | Get Figure / See it work | Link to availability and the mode demonstration. |
 | Reassurance | No subscription. No account. No ads. | State the purchase model and absence of signup/advertising. |
 | Compatibility | For iPhone · iOS 26 or later | State the current app requirement. |
+| Demonstration introduction | Choose a mode and follow a complete calculation. Watch the keys adapt to the task and the diagram highlight what each result measures. | Explain how to explore and connect the walkthrough to adaptive keys and visual results. |
 | Calculation demonstration | See how Figure works. / Nine-mode navigation, active mode H3, five or six specific steps per mode and a framed native sequence | Combine breadth, adaptive keys, solved results, diagram highlights and conversions in one area. |
 | Help | Built-in Help / Help without losing your place. | Show approachable guidance and continuity without leaving the calculation. |
 | Help description | Worked examples, plain-language explanations, and practical uses, right alongside your calculation. | Explain what the guide provides. |
 | Availability/footer | Figure for iPhone. / No subscription. Works offline. / Preparing for the App Store. | Give honest availability, support and privacy destinations. |
 
-The calculation section has a fixed H2, “See how Figure works.”, above the active mode H3. There is no proof-tab navigation, separate Visual results section, All calculations inventory, clickable timeline, rotating explanatory sentence, duplicate transcript or larger-image viewer. Each active mode has one static ordered list with five or six specific actions. Help follows in normal document flow. The hero image remains stable.
+The calculation section has a fixed H2, “See how Figure works.”, above the introduction and a quieter 24px mode H3. There is no proof-tab navigation, separate Visual results section, All calculations inventory, clickable timeline, rotating explanatory sentence, duplicate transcript or larger-image viewer. Each active mode has one static ordered list with five or six specific actions. Help follows in normal document flow. The hero image remains stable.
 
 ## Complete mode examples
 
