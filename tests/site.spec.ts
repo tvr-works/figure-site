@@ -114,8 +114,8 @@ test('no-JavaScript content retains the proposition, proof and navigation', asyn
   await page.goto(baseURL!);
   await expect(page.getByRole('heading', { name: 'Trade math. Designed for iPhone.' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Help without losing your place.' })).toBeVisible();
-  await page.getByText('All calculations', { exact: false }).click();
-  await expect(page.getByRole('heading', { name: 'In your units' })).toBeVisible();
+  await page.locator('.hero-actions').getByRole('link', { name: 'Get Figure', exact: true }).click();
+  await expect(page.getByText('Preparing for the App Store.')).toBeInViewport();
   await context.close();
 });
 
