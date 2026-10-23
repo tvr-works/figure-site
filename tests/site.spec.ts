@@ -147,6 +147,16 @@ test('responsive layouts and 200% text retain both sections and controls without
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     await expect(page.locator(calculation)).toBeVisible();
     await expect(page.locator(help)).toBeVisible();
+    for (const selector of [calculation, help]) {
+      const fit = await page.locator(`${selector} .phone-aperture`).evaluate(aperture => {
+        const opening = aperture.getBoundingClientRect();
+        const screen = aperture.querySelector('.native-screen')!.getBoundingClientRect();
+        return { top: screen.top - opening.top, bottom: opening.bottom - screen.bottom, ratio: screen.width / screen.height };
+      });
+      expect(Math.abs(fit.top)).toBeLessThan(.5);
+      expect(Math.abs(fit.bottom)).toBeLessThan(.5);
+      expect(fit.ratio).toBeCloseTo(440 / 956, 3);
+    }
   }
   await page.setViewportSize({ width: 390, height: 844 });
   await page.evaluate(() => {

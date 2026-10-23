@@ -50,3 +50,7 @@ WebKit revealed that direct `/#help` navigation could land above Help after Reac
 Production-preview checks cover Chromium and mobile-width WebKit, complete mode/result progression, smooth touch movement and contact, conversions, keyboard navigation, independent/offscreen/hidden-document pause, reduced motion, 320–1440px layouts, 200% text, failed images, no JavaScript, public routes and automated accessibility scans. These checks do not replace a manual VoiceOver audit.
 
 Final verification for this revision: TypeScript and production build passed, 18 unit tests passed, and all 30 Chromium/WebKit browser cases passed. Desktop and mobile screenshots were inspected outside the repository. The fresh in-app browser preview reported no warnings or errors.
+
+## Fitted phone frame (October 23)
+
+The generated frame's original display opening was taller than the captures and left visible vertical padding. The shared phone now removes a 134px-high straight section from the rendered frame, below its side buttons. Two clipped copies of the same cached asset preserve the corners and artwork at a uniform scale. The 862 × 1691 fitted canvas has a 724 × 1573 display opening, matching the 440 × 956 native layout within subpixel rounding. Calculation and Help use the same geometry. Native screenshots and touch coordinates are unchanged. The implementation uses documented CSS [clip-path](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/clip-path) and [aspect-ratio](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/aspect-ratio).

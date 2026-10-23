@@ -21,7 +21,10 @@ export function DemoPhone({ frame, cue, resetKey, active, reducedMotion, media }
           </span>}
           {media.failed && <p className="media-error">App image could not load. The steps explain the example.</p>}
         </div></div>
-        <img className="phone-frame" src="/assets/phone-frame.webp" width="862" height="1825" alt="" aria-hidden="true" />
+        <div className="phone-frame" aria-hidden="true">
+          <img className="phone-frame-top" src="/assets/phone-frame.webp" width="862" height="1825" alt="" />
+          <img className="phone-frame-bottom" src="/assets/phone-frame.webp" width="862" height="1825" alt="" />
+        </div>
       </div>
     </figure>
   );

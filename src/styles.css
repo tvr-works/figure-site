@@ -107,11 +107,17 @@ h1 { margin: 0; font-size: clamp(48px, 5.25vw, 76px); line-height: 1.045; font-w
 .mode-instructions li[data-current=true]::marker { color: var(--primary); }
 .demo-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 9px; margin-top: 5px; }
 .demo-phone-figure { justify-self: center; margin: 0; width: min(100%, 300px); }
-.demo-phone { position: relative; width: 100%; aspect-ratio: 862 / 1825; }
-.phone-aperture { position: absolute; left: 8%; right: 8%; top: 3.01%; bottom: 3.45%; display: flex; align-items: center; overflow: hidden; border-radius: 11% / 5%; background: #f1f1f7; }
+/* Preserve the 862px-wide frame art, omitting source rows 900–1033 on its straight sides.
+   The resulting 724 × 1573 aperture matches the native 440 × 956 capture within subpixel rounding. */
+.demo-phone { position: relative; width: 100%; aspect-ratio: 862 / 1691; }
+.phone-aperture { position: absolute; left: 8.00464%; right: 8.00464%; top: 3.252513%; bottom: 3.725606%; display: flex; align-items: center; overflow: hidden; border-radius: 11% / 5%; background: #f1f1f7; }
 .native-screen { container-type: inline-size; position: relative; width: 100%; aspect-ratio: 440 / 956; flex: none; }
 .native-screen > img { display: block; width: 100%; height: 100%; }
-.phone-frame { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.phone-frame { position: absolute; inset: 0; pointer-events: none; }
+.phone-frame img { position: absolute; left: 0; width: 100%; height: auto; }
+/* A 1px overlap prevents fractional-scale clipping from exposing a hairline at the join. */
+.phone-frame-top { top: 0; clip-path: inset(0 0 calc(50.684932% - 1px) 0); }
+.phone-frame-bottom { bottom: 0; clip-path: inset(56.657534% 0 0 0); }
 .press-cue { position: absolute; left: 0; top: 0; width: 28px; height: 28px; pointer-events: none; transition: transform 520ms cubic-bezier(.4, 0, .2, 1) var(--touch-delay, 0ms), opacity 180ms ease; }
 .press-cue[data-visible=false] { opacity: 0; }
 .touch-contact { position: absolute; inset: 0; border: 2px solid #007aff; border-radius: 50%; background: #007aff18; box-shadow: 0 0 0 5px #007aff18; }

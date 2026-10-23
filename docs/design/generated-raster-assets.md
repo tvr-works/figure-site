@@ -9,7 +9,7 @@ Generated with the built-in image_gen tool on 2026-10-22.
 - Nonzero-alpha device bounds: x16–845, y19–1800.
 - Display aperture approximate bounding rectangle: x69–792, y55–1762, rounded corners. At horizontal center, island occupies approximately y72–141. Main straight aperture sides are x69–791.
 - Approximate CSS percentage inset relative to image: left 8.00%, right 8.00%, top 3.01%, bottom 3.45%; use rounded clipping on screenshot beneath overlay.
-- Limitation: generated aperture ratio ≈0.424, versus native app screenshot ≈0.460. Use contain and matching screen background; do not distort screenshots.
+- The original aperture ratio ≈0.424 is taller than the native screenshot ≈0.460. The October 23 implementation clips source rows 900–1033 from the straight section below the side buttons in CSS. Two copies of the same cached asset retain the original scale and meet at the cut. The fitted canvas is 862 × 1691; its aperture is x69–793, y55–1628 (724 × 1573), matching the native ratio within subpixel rounding. The source bitmap, corners, bezel and native captures are unchanged.
 - No screenshot or fake screen content included.
 
 ### Exact generation prompt
