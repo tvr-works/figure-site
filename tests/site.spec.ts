@@ -4,6 +4,12 @@ import AxeBuilder from '@axe-core/playwright';
 const demo = '[data-demo-proof]';
 const frame = (page: import('@playwright/test').Page) => page.locator(demo).getAttribute('data-demo-frame');
 
+async function pickMode(page: import('@playwright/test').Page, label: string) {
+  const compact = page.getByRole('combobox', { name: 'Choose a calculation mode' });
+  if (await compact.isVisible()) await compact.selectOption({ label });
+  else await page.getByRole('button', { name: label, exact: true }).click();
+}
+
 test('purchase status and static public routes are honest and reachable', async ({ page, request }) => {
   await page.goto('/');
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex, follow');
@@ -45,8 +51,8 @@ test('reduced motion stays still and manual navigation covers every mode', async
   await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', 'right-assigned');
   await page.waitForTimeout(2600);
   expect(await frame(page)).toBe('right-assigned');
-  for (const id of ['oblique', 'circle', 'cylinder', 'cone', 'ratios', 'offset', 'roof', 'stairs', 'right']) {
-    await page.getByRole('button', { name: 'Next mode', exact: true }).click();
+  for (const [id, label] of [['oblique', 'Oblique Triangle'], ['circle', 'Circle'], ['cylinder', 'Cylinder'], ['cone', 'Cone'], ['ratios', 'Ratios'], ['offset', 'Offset'], ['roof', 'Roof'], ['stairs', 'Stairs'], ['right', 'Right Triangle']]) {
+    await pickMode(page, label);
     await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', `${id}-assigned`);
     await expect(page.locator('.native-screen img')).toBeVisible();
     await expect.poll(() => page.locator('.native-screen img').evaluate((img: HTMLImageElement) => img.naturalWidth)).toBe(720);
@@ -123,12 +129,12 @@ test('responsive layouts and 200% text retain all controls without overflow', as
   await page.setViewportSize({ width: 390, height: 844 });
   // Scale computed text once without compounding sizes on every ancestor.
   await page.evaluate(() => {
-    const nodes = [...document.querySelectorAll<HTMLElement>('h1,h2,h3,p,a,button,summary,strong,small,.step-number')];
+    const nodes = [...document.querySelectorAll<HTMLElement>('h1,h2,h3,p,a,button,select,summary,strong,small,.step-number')];
     const sizes = nodes.map(node => [node, parseFloat(getComputedStyle(node).fontSize)] as const);
     sizes.forEach(([node, size]) => { node.style.fontSize = `${size * 2}px`; });
   });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-  await expect(page.getByRole('button', { name: 'Next mode', exact: true })).toBeVisible();
+  await expect(page.getByRole('combobox', { name: 'Choose a calculation mode' })).toBeVisible();
 });
 
 test('automated accessibility scan passes each proof and policies', async ({ page }) => {
@@ -172,34 +178,37 @@ test('keyboard focus and visibility changes suspend a running demo', async ({ pa
   await expect(page.locator(demo)).toHaveAttribute('data-demo-playing', 'true');
 });
 
-test('adaptive mode uses only a static numbered explanation and mode navigation', async ({ page }) => {
+test('mode picker surveys all nine modes and updates the demonstration directly', async ({ page }) => {
   await page.goto('/#demo');
   await expect(page.locator('.proof-copy .timeline, .proof-copy .proof-description, .proof-copy .demo-caption, .proof-copy .transcript')).toHaveCount(0);
   await expect(page.getByRole('list', { name: 'How to use this mode' }).getByRole('listitem')).toHaveCount(3);
   await expect(page.getByRole('list', { name: 'How to use this mode' }).getByRole('button')).toHaveCount(0);
-  await page.getByRole('button', { name: 'Previous mode', exact: true }).click();
+  await pickMode(page, 'Stairs');
   await expect(page.locator('.proof-copy').getByRole('heading', { name: 'Stairs', exact: true })).toBeVisible();
   await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', 'stairs-assigned');
-  await page.getByRole('button', { name: 'Next mode', exact: true }).click();
+  await pickMode(page, 'Right Triangle');
   await expect(page.locator('.proof-copy').getByRole('heading', { name: 'Right Triangle', exact: true })).toBeVisible();
 });
 
-test('mode selection starts playback and repeats the selected mode', async ({ page }) => {
+test('direct selection starts playback and the mode tour advances after the result', async ({ page }) => {
   test.setTimeout(25000);
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto('/#demo');
   await page.getByRole('button', { name: 'Pause demo', exact: true }).click();
-  await page.getByRole('button', { name: 'Next mode', exact: true }).click();
+  await pickMode(page, 'Oblique Triangle');
   await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', 'oblique-launcher');
   await expect(page.locator(demo)).toHaveAttribute('data-demo-playing', 'true');
   await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', 'oblique-assigned', { timeout: 10000 });
   await expect(page.locator('.press-cue')).toHaveCSS('opacity', '0');
   await expect(page.locator('.mode-instructions [aria-current="step"]')).toContainText('assign the measurement');
-  await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', 'oblique-launcher', { timeout: 4000 });
-  await expect(page.locator('.proof-copy h2')).toHaveText('Oblique Triangle');
+  await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', 'circle-launcher', { timeout: 4000 });
+  await expect(page.locator('.proof-copy h2')).toHaveText('Circle');
+  const compact = page.getByRole('combobox', { name: 'Choose a calculation mode' });
+  if (await compact.isVisible()) await expect(compact).toHaveValue('2');
+  else await expect(page.getByRole('button', { name: 'Circle', exact: true })).toHaveAttribute('aria-pressed', 'true');
   await page.getByRole('tab', { name: 'Visual results', exact: true }).click();
   await page.getByRole('tab', { name: 'Adaptive calculations', exact: true }).click();
-  await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', 'oblique-launcher');
+  await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', 'circle-launcher');
   await expect(page.locator(demo)).toHaveAttribute('data-demo-playing', 'true');
 });
 
@@ -226,4 +235,23 @@ test('touch cue glides through intermediate positions and presses before the scr
   expect(samples.some(sample => sample.y > .4 && sample.y < .75)).toBe(true);
   expect(samples.some(sample => Math.abs(sample.y - 777 / 956) < .01)).toBe(true);
   expect(samples.some(sample => sample.scale < .85)).toBe(true);
+});
+
+test('mode navigation is keyboard accessible without moving focus to the phone', async ({ page }) => {
+  await page.goto('/#demo');
+  const compact = page.getByRole('combobox', { name: 'Choose a calculation mode' });
+  if (await compact.isVisible()) {
+    await compact.focus();
+    await compact.selectOption({ label: 'Cone' });
+    await expect(compact).toBeFocused();
+  } else {
+    const cone = page.getByRole('button', { name: 'Cone', exact: true });
+    await cone.focus();
+    await cone.press('Enter');
+    await expect(cone).toBeFocused();
+    await expect(cone).toHaveAttribute('aria-pressed', 'true');
+  }
+  await expect(page.locator('.proof-copy h2')).toHaveText('Cone');
+  await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', 'cone-assigned');
+  await expect(page.locator(demo)).toHaveAttribute('data-demo-playing', 'false');
 });

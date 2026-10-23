@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { advance, adaptiveFrames, framesFor, initialState, nextMode, previousMode, retreat, selectProof } from './demo-state';
+import { advance, adaptiveFrames, framesFor, initialState, selectMode, retreat, selectProof } from './demo-state';
 import { modes } from './demo-content';
 
 describe('guided demonstration boundaries', () => {
@@ -8,13 +8,13 @@ describe('guided demonstration boundaries', () => {
     expect(state.playing).toBe(false);
     expect(framesFor(state)[state.frame].image).toBe('right-assigned');
   });
-  it('repeats the selected mode without changing its headline or proof', () => {
+  it('cycles from the final mode to the first without changing the proof', () => {
     let state = { ...initialState(false), mode: 8, frame: adaptiveFrames(8).length - 1 };
     state = advance(state);
-    expect(state).toMatchObject({ proof: 'adaptive', mode: 8, frame: 0, playing: true });
+    expect(state).toMatchObject({ proof: 'adaptive', mode: 0, frame: 0, playing: true });
   });
   it('manual mode selection preserves pause and shows the assigned still', () => {
-    const state = nextMode(initialState(true), true);
+    const state = selectMode(initialState(true), 1, true);
     expect(state.playing).toBe(false);
     expect(framesFor(state)[state.frame].image).toBe('oblique-assigned');
   });
@@ -46,8 +46,8 @@ describe('backward demonstration navigation', () => {
     const state = retreat({ proof: 'adaptive', mode: 5, frame: 0, playing: false });
     expect(framesFor(state)[state.frame].image).toBe('cone-assigned');
   });
-  it('wraps to the last mode without starting paused playback', () => {
-    const state = previousMode(initialState(true), true);
+  it('selects the last mode without animating when reduced motion is requested', () => {
+    const state = selectMode(initialState(true), 8, true);
     expect(framesFor(state)[state.frame].image).toBe('stairs-assigned');
     expect(state.playing).toBe(false);
   });
@@ -63,8 +63,9 @@ describe('selected mode playback', () => {
     expect(framesFor(state)[state.frame].image).toBe('right-launcher');
     expect(state.playing).toBe(true);
   });
-  it.each([nextMode, previousMode])('mode selection restarts playback after an explicit pause', selectMode => {
-    const state = selectMode(initialState(true));
+  it.each([0, 4, 8])('direct selection of mode %s restarts playback after an explicit pause', mode => {
+    const state = selectMode(initialState(true), mode);
+    expect(state.mode).toBe(mode);
     expect(state).toMatchObject({ frame: 0, playing: true });
   });
   it.each([false, true])('adaptive proof selection respects reduced motion: %s', reducedMotion => {
@@ -85,4 +86,10 @@ it('pauses between the three stages without slowing each numeric tap', () => {
       [`${modes[mode].id}-unit`, 450],
     ]);
   }
+});
+
+it('ignores a mode index that is not available', () => {
+  const state = initialState(true);
+  expect(selectMode(state, -1)).toBe(state);
+  expect(selectMode(state, modes.length)).toBe(state);
 });

@@ -8,15 +8,15 @@ export interface Frame {
   cue?: { x: number; y: number };
 }
 export const modes = [
-  { id: 'right', label: 'Right Triangle', field: 'Run' },
-  { id: 'oblique', label: 'Oblique Triangle', field: 'a' },
-  { id: 'circle', label: 'Circle', field: 'Diameter' },
-  { id: 'cylinder', label: 'Cylinder', field: 'Diameter' },
-  { id: 'cone', label: 'Cone', field: 'Diameter' },
-  { id: 'ratios', label: 'Ratios', field: 'A' },
-  { id: 'offset', label: 'Offset', field: 'Length' },
-  { id: 'roof', label: 'Roof', field: 'Run' },
-  { id: 'stairs', label: 'Stairs', field: 'Rise' },
+  { id: 'right', label: 'Right Triangle', field: 'Run', summary: 'Run, rise & pitch' },
+  { id: 'oblique', label: 'Oblique Triangle', field: 'a', summary: 'Sides & angles' },
+  { id: 'circle', label: 'Circle', field: 'Diameter', summary: 'Arcs, chords & segments' },
+  { id: 'cylinder', label: 'Cylinder', field: 'Diameter', summary: 'Volume & surface area' },
+  { id: 'cone', label: 'Cone', field: 'Diameter', summary: 'Volume & lateral area' },
+  { id: 'ratios', label: 'Ratios', field: 'A', summary: 'Proportions & scaling' },
+  { id: 'offset', label: 'Offset', field: 'Length', summary: 'Duct offsets & wrappers' },
+  { id: 'roof', label: 'Roof', field: 'Run', summary: 'Common, hip & jack rafters' },
+  { id: 'stairs', label: 'Stairs', field: 'Rise', summary: 'Risers, treads & layout' },
 ] as const;
 export const proofs = {
   adaptive: {

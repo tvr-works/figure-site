@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState, type CSSProperties, type FocusEvent } from 'react';
-import { ArrowLeft, ArrowRight, Pause, Play, RotateCcw, StepForward } from 'lucide-react';
+import { ArrowLeft, Pause, Play, RotateCcw, StepForward } from 'lucide-react';
+import { ModePicker } from './ModePicker';
 import { Button } from './components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './components/ui/tabs';
 import { modes, proofs, type Proof } from './demo-content';
-import { adaptiveFrames, advance, framesFor, initialState, nextMode, previousMode, retreat, selectProof } from './demo-state';
+import { adaptiveFrames, advance, framesFor, initialState, selectMode, retreat, selectProof } from './demo-state';
 
 export function ProductDemo() {
   const [reducedMotion, setReducedMotion] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -73,8 +74,8 @@ export function ProductDemo() {
     setState(next);
     setAnnouncement(framesFor(next)[next.frame].caption);
   }
-  function changeMode(direction: 'previous' | 'next') {
-    const next = direction === 'previous' ? previousMode(state, reducedMotion) : nextMode(state, reducedMotion);
+  function changeMode(modeIndex: number) {
+    const next = selectMode(state, modeIndex, reducedMotion);
     setState(next);
     setAnnouncement(`${modes[next.mode].label}. ${framesFor(next)[next.frame].caption}`);
   }
@@ -99,41 +100,41 @@ export function ProductDemo() {
             {(Object.keys(proofs) as Proof[]).map(key => (
               <TabsContent key={key} value={key}>
                 {state.proof === key && (
-                <div className="proof-copy">
-                  <h2>{state.proof === 'adaptive' ? mode.label : proofs[state.proof].title}</h2>
-                  {state.proof === 'adaptive' ? (
-                    <ol className="mode-instructions" aria-label="How to use this mode">
-                      {adaptiveSteps.map((step, index) => <li key={step} data-current={frame.step === index} aria-current={frame.step === index ? 'step' : undefined}>{step}</li>)}
-                    </ol>
-                  ) : <>
-                    <p className="proof-description">{proofs[state.proof].description}</p>
-                    <ol className="timeline" aria-label="Demo sequence">
-                      {proof.steps.map((step, index) => (
-                        <li key={step} data-current={frame.step === index} aria-current={frame.step === index ? 'step' : undefined}>
-                          <span className="step-number" aria-hidden="true">0{index + 1}</span><strong>{step}</strong>
-                          {state.proof === 'visual' && <small>{['3 ft run · 4 ft rise', 'Tap equals to cycle', 'Edge or angle'][index]}</small>}
-                        </li>
-                      ))}
-                    </ol>
-                    <p className="example-label">{state.proof === 'visual' ? <><strong>Right Triangle</strong> · Result {state.frame + 1} of 6</> : <><strong>Built-in guidance</strong> · Step {state.frame + 1} of {framesFor(state).length}</>}</p>
-                  </>}
-                  <div className="demo-controls" aria-label="Demo playback">
-                    {!reducedMotion && <Button variant="control" onClick={togglePlayback} aria-label={state.playing ? 'Pause demo' : 'Play demo'}>{state.playing ? <Pause data-icon="inline-start" /> : <Play data-icon="inline-start" />}{state.playing ? 'Pause' : 'Play'}</Button>}
-                    {state.proof !== 'adaptive' && <div className="demo-control-pair" role="group" aria-label="Step navigation">
-                      <Button variant="control" aria-label={state.proof === 'visual' ? 'Previous result' : 'Previous step'} onClick={stepBackward} disabled={state.frame === 0}><ArrowLeft data-icon="inline-start" />Back</Button>
-                      <Button variant="control" onClick={stepForward} disabled={state.frame === framesFor(state).length - 1}><StepForward data-icon="inline-start" />{state.proof === 'visual' ? 'Next result' : 'Next step'}</Button>
+                <div className={state.proof === 'adaptive' ? 'adaptive-layout' : undefined}>
+                  {state.proof === 'adaptive' && <ModePicker selected={state.mode} playing={state.playing} reducedMotion={reducedMotion} onSelect={changeMode} onTogglePlayback={togglePlayback} />}
+                  <div className="proof-copy" id={state.proof === 'adaptive' ? 'adaptive-mode-content' : undefined}>
+                    <h2>{state.proof === 'adaptive' ? mode.label : proofs[state.proof].title}</h2>
+                    {state.proof === 'adaptive' ? (
+                      <ol className="mode-instructions" aria-label="How to use this mode">
+                        {adaptiveSteps.map((step, index) => <li key={step} data-current={frame.step === index} aria-current={frame.step === index ? 'step' : undefined}>{step}</li>)}
+                      </ol>
+                    ) : <>
+                      <p className="proof-description">{proofs[state.proof].description}</p>
+                      <ol className="timeline" aria-label="Demo sequence">
+                        {proof.steps.map((step, index) => (
+                          <li key={step} data-current={frame.step === index} aria-current={frame.step === index ? 'step' : undefined}>
+                            <span className="step-number" aria-hidden="true">0{index + 1}</span><strong>{step}</strong>
+                            {state.proof === 'visual' && <small>{['3 ft run · 4 ft rise', 'Tap equals to cycle', 'Edge or angle'][index]}</small>}
+                          </li>
+                        ))}
+                      </ol>
+                      <p className="example-label">{state.proof === 'visual' ? <><strong>Right Triangle</strong> · Result {state.frame + 1} of 6</> : <><strong>Built-in guidance</strong> · Step {state.frame + 1} of {framesFor(state).length}</>}</p>
+                    </>}
+                    {state.proof !== 'adaptive' && <div className="demo-controls" role="group" aria-label="Demo playback">
+                      {!reducedMotion && <Button variant="control" onClick={togglePlayback} aria-label={state.playing ? 'Pause demo' : 'Play demo'}>{state.playing ? <Pause data-icon="inline-start" /> : <Play data-icon="inline-start" />}{state.playing ? 'Pause' : 'Play'}</Button>}
+                      <div className="demo-control-pair" role="group" aria-label="Step navigation">
+                        <Button variant="control" aria-label={state.proof === 'visual' ? 'Previous result' : 'Previous step'} onClick={stepBackward} disabled={state.frame === 0}><ArrowLeft data-icon="inline-start" />Back</Button>
+                        <Button variant="control" onClick={stepForward} disabled={state.frame === framesFor(state).length - 1}><StepForward data-icon="inline-start" />{state.proof === 'visual' ? 'Next result' : 'Next step'}</Button>
+                      </div>
+                      <Button variant="control" onClick={() => { setState(current => ({ ...current, frame: 0, playing: !reducedMotion })); setAnnouncement('Demo restarted.'); }}><RotateCcw data-icon="inline-start" />Replay</Button>
                     </div>}
-                    {state.proof === 'adaptive' ? <div className="demo-control-pair" role="group" aria-label="Mode navigation">
-                      <Button variant="control" onClick={() => changeMode('previous')}><ArrowLeft data-icon="inline-start" />Previous mode</Button>
-                      <Button variant="control" onClick={() => changeMode('next')}>Next mode<ArrowRight data-icon="inline-end" /></Button>
-                    </div> : <Button variant="control" onClick={() => { setState(current => ({ ...current, frame: 0, playing: !reducedMotion })); setAnnouncement('Demo restarted.'); }}><RotateCcw data-icon="inline-start" />Replay</Button>}
+                    {state.proof !== 'adaptive' && <>
+                    <p className="demo-caption">{frame.caption}</p>
+                    <details className="transcript" onToggle={event => { if (event.currentTarget.open) setState(current => ({ ...current, playing: false })); }}>
+                      <summary>Read demo steps</summary><ol>{proofs[state.proof].transcript.map(text => <li key={text}>{text}</li>)}</ol>
+                    </details>
+                    </>}
                   </div>
-                  {state.proof !== 'adaptive' && <>
-                  <p className="demo-caption">{frame.caption}</p>
-                  <details className="transcript" onToggle={event => { if (event.currentTarget.open) setState(current => ({ ...current, playing: false })); }}>
-                    <summary>Read demo steps</summary><ol>{proofs[state.proof].transcript.map(text => <li key={text}>{text}</li>)}</ol>
-                  </details>
-                  </>}
                 </div>
                 )}
               </TabsContent>

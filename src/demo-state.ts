@@ -37,12 +37,12 @@ export function selectProof(state: DemoState, proof: Proof, reducedMotion = fals
 }
 export function advance(state: DemoState): DemoState {
   if (state.frame < framesFor(state).length - 1) return { ...state, frame: state.frame + 1 };
-  if (state.proof === 'adaptive') return { ...state, frame: 0 };
+  if (state.proof === 'adaptive') return { ...state, mode: (state.mode + 1) % modes.length, frame: 0 };
   // Non-repeating proofs hold their ending and never change the selected tab.
   return { ...state, playing: false };
 }
-export function nextMode(state: DemoState, reducedMotion = false): DemoState {
-  const mode = (state.mode + 1) % modes.length;
+export function selectMode(state: DemoState, mode: number, reducedMotion = false): DemoState {
+  if (!modes[mode]) return state;
   return { ...state, mode, frame: reducedMotion ? adaptiveFrames(mode).length - 1 : 0, playing: !reducedMotion };
 }
 
@@ -53,8 +53,4 @@ export function retreat(state: DemoState): DemoState {
     return { ...state, mode, frame: adaptiveFrames(mode).length - 1, playing: false };
   }
   return { ...state, playing: false };
-}
-export function previousMode(state: DemoState, reducedMotion = false): DemoState {
-  const mode = (state.mode + modes.length - 1) % modes.length;
-  return { ...state, mode, frame: reducedMotion ? adaptiveFrames(mode).length - 1 : 0, playing: !reducedMotion };
 }

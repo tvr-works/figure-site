@@ -7,6 +7,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
+        mode: "justify-start rounded-md border-l-2 border-l-transparent bg-transparent text-left text-muted-foreground hover:bg-muted hover:text-foreground aria-pressed:border-l-primary aria-pressed:bg-secondary aria-pressed:text-primary",
         control: "min-h-11 gap-2 rounded-lg px-3 text-sm text-primary hover:bg-secondary",
         default: "bg-primary text-primary-foreground hover:bg-primary/80",
         outline:
@@ -20,6 +21,7 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
+        mode: "h-auto min-h-14 w-full px-3 py-2 whitespace-normal",
         default:
           "h-8 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
         xs: "h-6 gap-1 rounded-[min(var(--radius-md),10px)] px-2 text-xs in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
