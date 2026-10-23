@@ -76,3 +76,13 @@ describe('selected mode playback', () => {
     expect(adaptiveFrames(0).at(-1)?.cue).toBeUndefined();
   });
 });
+
+it('pauses between the three stages without slowing each numeric tap', () => {
+  for (let mode = 0; mode < modes.length; mode++) {
+    const frames = adaptiveFrames(mode);
+    expect(frames.filter(frame => frame.pauseBefore).map(frame => [frame.image, frame.pauseBefore])).toEqual([
+      [`${modes[mode].id}-selected`, 450],
+      [`${modes[mode].id}-unit`, 450],
+    ]);
+  }
+});

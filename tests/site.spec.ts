@@ -207,6 +207,7 @@ test('mode selection starts playback and repeats the selected mode', async ({ pa
   await expect(page.locator(demo)).toHaveAttribute('data-demo-playing', 'true');
   await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', 'oblique-assigned', { timeout: 10000 });
   await expect(page.locator('.press-cue')).toHaveCSS('opacity', '0');
+  await expect(page.locator('.mode-instructions [aria-current="step"]')).toContainText('assign the measurement');
   await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', 'oblique-launcher', { timeout: 4000 });
   await expect(page.locator('.proof-copy h2')).toHaveText('Oblique Triangle');
   await page.getByRole('tab', { name: 'Visual results', exact: true }).click();
@@ -218,21 +219,23 @@ test('mode selection starts playback and repeats the selected mode', async ({ pa
 test('touch cue glides through intermediate positions and presses before the screen changes', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto('/#demo');
-  await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', 'right-selected');
+  await page.waitForFunction(() => document.querySelector('[data-demo-proof]')?.getAttribute('data-demo-frame') === 'right-selected');
+  await expect(page.locator('.mode-instructions [aria-current="step"]')).toHaveText('Enter 12, then Inch to give the measurement a unit.');
   const samples = await page.evaluate(async () => {
     const cue = document.querySelector<HTMLElement>('.press-cue')!;
     const contact = document.querySelector<HTMLElement>('.touch-contact')!;
     const screen = document.querySelector('.native-screen')!.getBoundingClientRect();
-    const samples: { y: number; scale: number }[] = [];
+    const samples: { time: number; y: number; scale: number }[] = [];
     const start = performance.now();
-    while (performance.now() - start < 1100) {
+    while (performance.now() - start < 1600 && contact.isConnected) {
       const bounds = cue.getBoundingClientRect();
       const transform = new DOMMatrix(getComputedStyle(contact).transform);
-      samples.push({ y: (bounds.y + bounds.height / 2 - screen.y) / screen.height, scale: transform.a });
+      samples.push({ time: performance.now() - start, y: (bounds.y + bounds.height / 2 - screen.y) / screen.height, scale: transform.a });
       await new Promise(requestAnimationFrame);
     }
     return samples;
   });
+  expect(samples.filter(sample => sample.time < 180).every(sample => sample.y < .4)).toBe(true);
   expect(samples.some(sample => sample.y > .4 && sample.y < .75)).toBe(true);
   expect(samples.some(sample => Math.abs(sample.y - 777 / 956) < .01)).toBe(true);
   expect(samples.some(sample => sample.scale < .85)).toBe(true);

@@ -57,9 +57,9 @@ export function ProductDemo() {
 
   useEffect(() => {
     if (!activePlayback) return;
-    const timer = window.setTimeout(() => setState(current => advance(current)), frame.duration);
+    const timer = window.setTimeout(() => setState(current => advance(current)), frame.duration + (frame.pauseBefore ?? 0));
     return () => window.clearTimeout(timer);
-  }, [activePlayback, frame.image, frame.duration]);
+  }, [activePlayback, frame.image, frame.duration, frame.pauseBefore]);
 
   function pauseOnFocus(event: FocusEvent<HTMLDivElement>) {
     if (!event.currentTarget.contains(event.relatedTarget) && event.target instanceof HTMLElement && event.target.matches(':focus-visible')) setState(current => ({ ...current, playing: false }));
@@ -104,7 +104,7 @@ export function ProductDemo() {
                   <h2>{state.proof === 'adaptive' ? mode.label : proofs[state.proof].title}</h2>
                   {state.proof === 'adaptive' ? (
                     <ol className="mode-instructions" aria-label="How to use this mode">
-                      {adaptiveSteps.map(step => <li key={step}>{step}</li>)}
+                      {adaptiveSteps.map((step, index) => <li key={step} data-current={frame.step === index} aria-current={frame.step === index ? 'step' : undefined}>{step}</li>)}
                     </ol>
                   ) : <>
                     <p className="proof-description">{proofs[state.proof].description}</p>
@@ -144,7 +144,7 @@ export function ProductDemo() {
                   <div className="demo-phone">
                     <div className="phone-aperture"><div className="native-screen">
                       <img src={imageUrl} width="720" height="1564" alt="" onLoad={() => setLoadedImage(imageUrl)} onError={() => { setFailedImage(imageUrl); setState(current => ({ ...current, playing: false })); }} />
-                      {state.proof === 'adaptive' && cue && failedImage !== imageUrl && <span key={mode.id} className="press-cue" aria-hidden="true" data-visible={Boolean(frame.cue)} style={{ transform: `translate(calc(${cue.x / 440 * 100}cqw - 50%), calc(${cue.y / 440 * 100}cqw - 50%))` }}>
+                      {state.proof === 'adaptive' && cue && failedImage !== imageUrl && <span key={mode.id} className="press-cue" aria-hidden="true" data-visible={Boolean(frame.cue)} style={{ '--touch-delay': `${frame.pauseBefore ?? 0}ms`, transform: `translate(calc(${cue.x / 440 * 100}cqw - 50%), calc(${cue.y / 440 * 100}cqw - 50%))` } as CSSProperties}>
                         <span key={frame.image} className="touch-contact" data-playing={activePlayback && Boolean(frame.cue)} style={{ '--touch-duration': `${frame.duration}ms` } as CSSProperties} />
                       </span>}
                       {failedImage === imageUrl && <p className="media-error">App image could not load. The demo steps describe the calculation.</p>}

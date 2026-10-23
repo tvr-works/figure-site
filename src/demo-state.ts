@@ -22,7 +22,7 @@ export function adaptiveFrames(modeIndex: number): Frame[] {
       unit: `12 in is ready. Tap ${mode.field} to assign it.`,
       assigned: `${mode.field} is now 12 in. The readout and diagram reflect the measurement.`,
     };
-    return { image: `${mode.id}-${name}`, caption: captions[name], step, duration: name === 'assigned' ? 2200 : name === 'one' ? 1000 : 1200, cue: action ? { x: action.x, y: action.y } : undefined };
+    return { image: `${mode.id}-${name}`, caption: captions[name], step, pauseBefore: name === 'selected' || name === 'unit' ? 450 : 0, duration: name === 'assigned' ? 2200 : name === 'one' ? 1000 : 1200, cue: action ? { x: action.x, y: action.y } : undefined };
   });
 }
 export function framesFor(state: DemoState): Frame[] {

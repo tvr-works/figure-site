@@ -4,6 +4,7 @@ export interface Frame {
   caption: string;
   step: number;
   duration: number;
+  pauseBefore?: number;
   cue?: { x: number; y: number };
 }
 export const modes = [
