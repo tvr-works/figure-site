@@ -185,3 +185,24 @@ test('keyboard focus and visibility changes suspend a running demo', async ({ pa
   });
   await expect(page.locator(demo)).toHaveAttribute('data-demo-playing', 'true');
 });
+
+test('adaptive headline names the mode and both steppers navigate in either direction', async ({ page }) => {
+  await page.goto('/#demo');
+  await expect(page.getByText('Built around the calculation.', { exact: true })).toHaveCount(0);
+  await expect(page.locator('.proof-copy').getByRole('heading', { name: 'Right Triangle', exact: true })).toBeVisible();
+  await expect(page.locator('.proof-copy .example-label')).toHaveCount(0);
+  await page.getByRole('button', { name: 'Previous step', exact: true }).click();
+  await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', 'right-unit');
+  await page.getByRole('button', { name: 'Next step', exact: true }).click();
+  await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', 'right-assigned');
+  await page.getByRole('button', { name: 'Previous mode', exact: true }).click();
+  await expect(page.locator('.proof-copy').getByRole('heading', { name: 'Stairs', exact: true })).toBeVisible();
+  await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', 'stairs-assigned');
+  await page.getByRole('button', { name: 'Next mode', exact: true }).click();
+  await expect(page.locator('.proof-copy').getByRole('heading', { name: 'Right Triangle', exact: true })).toBeVisible();
+  await page.getByRole('tab', { name: 'Visual results', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Previous result', exact: true })).toBeDisabled();
+  await page.getByRole('button', { name: 'Next result', exact: true }).click();
+  await page.getByRole('button', { name: 'Previous result', exact: true }).click();
+  await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', 'results-0');
+});

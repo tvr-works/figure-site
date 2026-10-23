@@ -20,7 +20,6 @@ export const modes = [
 export const proofs = {
   adaptive: {
     label: 'Adaptive calculations',
-    title: 'Build your calculation.',
     description: 'Choose a mode, enter a measurement, and tap what it represents.',
     steps: ['Select mode', 'Enter measurement', 'Assign'],
     transcript: ['Select a calculation mode. Cone is reached through 2nd, then Cylinder.', 'Enter 1, then 2, then Inch. The familiar numeric and unit keys stay in place.', 'Tap the field that the measurement represents. The readout and diagram show the assigned value. Close the mode and repeat with the next calculation.'],

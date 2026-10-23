@@ -44,3 +44,16 @@ export function advance(state: DemoState): DemoState {
 export function nextMode(state: DemoState): DemoState {
   return { ...state, mode: (state.mode + 1) % modes.length, frame: state.playing ? 0 : adaptiveFrames((state.mode + 1) % modes.length).length - 1 };
 }
+
+export function retreat(state: DemoState): DemoState {
+  if (state.frame > 0) return { ...state, frame: state.frame - 1, playing: false };
+  if (state.proof === 'adaptive') {
+    const mode = (state.mode + modes.length - 1) % modes.length;
+    return { ...state, mode, frame: adaptiveFrames(mode).length - 1, playing: false };
+  }
+  return { ...state, playing: false };
+}
+export function previousMode(state: DemoState): DemoState {
+  const mode = (state.mode + modes.length - 1) % modes.length;
+  return { ...state, mode, frame: state.playing ? 0 : adaptiveFrames(mode).length - 1 };
+}
