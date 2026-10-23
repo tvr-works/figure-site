@@ -16,7 +16,6 @@ export function ModePicker({ selected, playing, reducedMotion, onSelect, onToggl
   const pickerId = useId();
   return (
     <aside className="mode-picker" aria-label="Calculation modes">
-      <p className="mode-picker-title">Calculation modes</p>
       <div className="mode-list" role="group" aria-label="Choose a calculation mode">
         {modes.map((mode, index) => (
           <Button key={mode.id} variant="mode" size="mode" aria-label={mode.label} aria-pressed={selected === index} aria-controls="adaptive-mode-content" aria-describedby={`${pickerId}-${mode.id}`} onClick={() => onSelect(index)}>
