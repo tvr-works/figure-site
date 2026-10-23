@@ -1,4 +1,4 @@
-# Third proof: Help without losing your place
+# Help without losing your place
 
 October 22, 2026. Storyboard refinement based on the owner's description of integrated Help.
 
@@ -10,7 +10,7 @@ A clear interface can make the controls understandable while a guide helps someo
 
 ## Recommended copy
 
-Proof navigation: **Built-in Help**
+Section label: **Built-in Help**
 
 Headline:
 
@@ -18,13 +18,13 @@ Headline:
 
 Description:
 
-> Bring up worked examples, explanations, and practical uses alongside your calculation. Return to your guide where you left off.
+> Worked examples, plain-language explanations, and practical uses, right alongside your calculation.
 
 The words right alongside and where you left off need visible evidence. Do not add the slogan No manual required while demonstrating a substantial guide library.
 
 ## Demonstration
 
-Keep the same framed iPhone and stable position used in the first two proofs.
+Keep the established framed iPhone. Help is a separate section below the complete calculation demonstration.
 
 | Beat | Actual app action | Visible proof |
 | --- | --- | --- |
@@ -34,7 +34,7 @@ Keep the same framed iPhone and stable position used in the first two proofs.
 | Try it | Dismiss Help and use the retained calculation. | No re-entry of the existing setup is required simply to read Help. |
 | Resume | Reopen Help. Hold on the same article, reading position and expanded content where applicable. | The visitor visibly picks up reading where they left off. |
 
-These five beats can sit under a three-stage website timeline: **Find guidance → Try it → Resume reading**. Explanation and practical applications happen inside the first stage, rather than creating additional top-level proof tabs.
+These five beats sit under a static three-item ordered list: open Help, try the steps, resume reading. Explanation and practical applications happen inside the first item. There is no separate timeline or proof-tab navigation.
 
 Use the actual More → Help access path. Do not invent an in-app persistent Help tab or a drag gesture to reopen Help unless the current app has it. The phrase bring it back up refers to reopening its native sheet, not a new control.
 
@@ -71,12 +71,8 @@ The retained Help state is within the current calculator session. Do not promise
 
 App/Help/Content/MathAnglesGuides.swift contains the worked slant example, concept explanation, diagram and practical uses. MathBasicsGuides.swift contains further explanations, including Why cosine?, square/root relationships and pi/circumference.
 
-## Three-proof page structure
+## Current page structure
 
-1. Adaptive calculations: mode-specific keys and diagrams respond as values are assigned.
-2. Visual results: one solved setup, related outputs and matching component highlights.
-3. Built-in Help: explanations and practical guidance stay close to the calculation and retain the reader's place.
+The October 23 revision combines adaptive keys and visual results in complete examples for all nine modes. Help follows in its own scrolling section, with independent playback and manual controls. The separate Visual results proof and All calculations inventory are removed. See the [current storyboard](MARKETING-STORYBOARD.md).
 
-The separate Trade calculations proof is retired; its range appears through the mode loop, specialist result examples and All calculations inventory. Recent Values remains in that inventory or a small supporting capability item. It does not compete with Help for the third demonstration.
-
-No app behaviour or website implementation is changed by this document.
+The six native Help captures show the pending 10 ft slant, the guide and practical applications, the retained calculation after closing, its 5 ft rise result, and the resumed reading position. They remain the media for this section.

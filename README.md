@@ -13,7 +13,7 @@ npm run build
 npm run preview -- --port 4173 --strictPort
 ```
 
-Vite builds the static home, `/support`, `/privacy` and 404 pages to `dist`. React owns the interactive product demonstration. Tailwind uses its Vite plugin; shadcn components use Base UI. No client router, backend or analytics is included.
+Vite builds the static home, `/support`, `/privacy` and 404 pages to `dist`. React owns the independent calculation and Help demonstrations. Tailwind uses its Vite plugin; shadcn components use Base UI. No client router, backend or analytics is included.
 
 The agreed copy and interaction plan lives in [the storyboard](docs/MARKETING-STORYBOARD.md). Price and the public App Store URL still require the owner's launch decision. Keep `noindex` until public launch is requested.
 
@@ -40,10 +40,10 @@ npx playwright install chromium webkit
 npm run test:browser
 ```
 
-Browser tests use a separate production preview on port 4174. They cover desktop Chromium and mobile-width WebKit, manual keyboard tab activation, native mode/result order, playback pauses, reduced motion, enlarged text, screenshot failure, no JavaScript, policy routes and automated accessibility checks. The in-app browser is used for visual review. These checks do not establish a complete WCAG conformance audit.
+Browser tests use a separate production preview on port 4174. They cover desktop Chromium and mobile-width WebKit, keyboard mode navigation, complete native input/result sequences and conversions, playback pauses, reduced motion, enlarged text, screenshot failure, no JavaScript, policy routes and automated accessibility checks. The in-app browser is used for visual review. These checks do not establish a complete WCAG conformance audit.
 
 ## Launch content
 
 Price is intentionally omitted. Both Get Figure links lead to the availability section until the public App Store URL is verified. At launch, update those links and the availability copy in `index.html`, add the approved price, remove `noindex` from the content pages when indexing is wanted, and update Cloudflare's build settings described above. No store settings, hosting settings, pushes or deployments were performed for this implementation.
 
-The hero is a generated product render based on the supplied app screen. The three guided demos use actual app captures, with tap cues placed from simulator action coordinates. They are edited demonstrations, not a browser calculator. Image sources and native capture evidence live in `docs/design/`.
+The hero is a generated product render based on the supplied app screen. The nine complete mode examples and separate Help sequence use actual app captures, with tap cues placed from simulator action coordinates. They are edited demonstrations, not a browser calculator. Image sources and native capture evidence live in `docs/design/`.

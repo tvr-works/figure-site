@@ -1,95 +1,76 @@
+import { existsSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { advance, adaptiveFrames, framesFor, initialState, selectMode, retreat, selectProof } from './demo-state';
-import { modes } from './demo-content';
+import { framesForMode, modes } from './demo-content';
+import { advance, firstResult, initialState, nextResult, selectMode } from './demo-state';
 
-describe('guided demonstration boundaries', () => {
-  it('provides a meaningful still and no autoplay for reduced motion', () => {
+describe('complete native examples', () => {
+  it.each(modes)('$label has an input path, real results, and available screenshots', mode => {
+    const index = modes.findIndex(item => item.id === mode.id);
+    const frames = framesForMode(index);
+    expect(new Set(frames.map(frame => frame.step))).toEqual(new Set([0, 1, 2]));
+    expect(frames.filter(frame => frame.result).length).toBeGreaterThanOrEqual(2);
+    expect(frames[firstResult(index)].result).toBe(true);
+    expect(frames.at(-1)?.cue).toBeUndefined();
+    for (const frame of frames) {
+      expect(existsSync(`public/assets/demo/${frame.image}.webp`)).toBe(true);
+      expect(frame.duration).toBeGreaterThanOrEqual(850);
+      if (frame.cue) {
+        expect(frame.cue.x).toBeGreaterThanOrEqual(0);
+        expect(frame.cue.x).toBeLessThanOrEqual(440);
+        expect(frame.cue.y).toBeGreaterThanOrEqual(0);
+        expect(frame.cue.y).toBeLessThanOrEqual(956);
+      }
+    }
+  });
+  it('includes native conversions and highlighted results in the right-triangle example', () => {
+    const captions = framesForMode(0).filter(frame => frame.result).map(frame => frame.caption);
+    expect(captions).toEqual(expect.arrayContaining([
+      'Right Triangle · Diagonal, 5 feet 0 inches',
+      'Right Triangle · Diagonal, 60 inches',
+      'Right Triangle · Diagonal, 1.524 meters',
+      'Right Triangle · Angle, 53.1301 degrees',
+    ]));
+  });
+  it('uses a non-right triangle and carries the stair example through to the required run', () => {
+    expect(framesForMode(1).filter(frame => frame.result).map(frame => frame.caption)).not.toContain('Oblique Triangle · Angle C, 90 degrees');
+    expect(framesForMode(8).at(-1)?.caption).toBe('Stairs · Run needed, 12 feet 6 inches');
+  });
+});
+
+describe('mode tour boundaries', () => {
+  it('starts animation at mode selection and reduced motion at a completed result', () => {
+    expect(initialState(false)).toEqual({ mode: 0, frame: 0 });
+    const still = initialState(true);
+    expect(framesForMode(still.mode)[still.frame].result).toBe(true);
+  });
+  it('keeps the selected mode until every captured frame has played', () => {
+    let state = { mode: 0, frame: 0 };
+    for (let i = 1; i < framesForMode(0).length; i++) {
+      state = advance(state);
+      expect(state).toEqual({ mode: 0, frame: i });
+    }
+    expect(advance(state)).toEqual({ mode: 1, frame: 0 });
+  });
+  it('wraps from the final mode to the first', () => {
+    expect(advance({ mode: 8, frame: framesForMode(8).length - 1 })).toEqual({ mode: 0, frame: 0 });
+  });
+  it.each([false, true])('direct selection respects reduced motion: %s', reducedMotion => {
+    const state = selectMode(initialState(false), 4, reducedMotion);
+    expect(state).toEqual({ mode: 4, frame: reducedMotion ? firstResult(4) : 0 });
+  });
+  it('ignores an unavailable mode', () => {
     const state = initialState(true);
-    expect(state.playing).toBe(false);
-    expect(framesFor(state)[state.frame].image).toBe('right-assigned');
+    expect(selectMode(state, -1)).toBe(state);
+    expect(selectMode(state, modes.length)).toBe(state);
   });
-  it('cycles from the final mode to the first without changing the proof', () => {
-    let state = { ...initialState(false), mode: 8, frame: adaptiveFrames(8).length - 1 };
-    state = advance(state);
-    expect(state).toMatchObject({ proof: 'adaptive', mode: 0, frame: 0, playing: true });
+  it('manual result navigation stays in the mode and wraps its results', () => {
+    let state = initialState(true);
+    const results = framesForMode(0).filter(frame => frame.result);
+    for (let i = 0; i < results.length; i++) {
+      expect(framesForMode(0)[state.frame]).toEqual(results[i]);
+      state = nextResult(state);
+      expect(state.mode).toBe(0);
+    }
+    expect(state.frame).toBe(firstResult(0));
   });
-  it('manual mode selection preserves pause and shows the assigned still', () => {
-    const state = selectMode(initialState(true), 1, true);
-    expect(state.playing).toBe(false);
-    expect(framesFor(state)[state.frame].image).toBe('oblique-assigned');
-  });
-  it('stops the prior proof and shows the Help resume state on selection', () => {
-    const state = selectProof(initialState(false), 'help');
-    expect(state.playing).toBe(false);
-    expect(framesFor(state)[state.frame].image).toBe('help-resumed');
-  });
-  it.each(['visual', 'help'] as const)('holds the end of %s without jumping to another tab', proof => {
-    let state = { ...selectProof(initialState(false), proof), playing: true };
-    for (let i = 0; i < 20; i++) state = advance(state);
-    expect(state.proof).toBe(proof);
-    expect(state.frame).toBe(framesFor(state).length - 1);
-    expect(state.playing).toBe(false);
-  });
-  it('shows Cone through the real second-function key path', () => {
-    const cone = adaptiveFrames(modes.findIndex(mode => mode.id === 'cone'));
-    expect(cone.slice(0, 3).map(frame => frame.image)).toEqual(['cone-launcher', 'cone-choose', 'cone-selected']);
-  });
-});
-
-describe('backward demonstration navigation', () => {
-  it('steps back from an assignment and pauses the automatic loop', () => {
-    const state = retreat(initialState(true));
-    expect(framesFor(state)[state.frame].image).toBe('right-unit');
-    expect(state.playing).toBe(false);
-  });
-  it('crosses an adaptive mode boundary using its actual frame count', () => {
-    const state = retreat({ proof: 'adaptive', mode: 5, frame: 0, playing: false });
-    expect(framesFor(state)[state.frame].image).toBe('cone-assigned');
-  });
-  it('selects the last mode without animating when reduced motion is requested', () => {
-    const state = selectMode(initialState(true), 8, true);
-    expect(framesFor(state)[state.frame].image).toBe('stairs-assigned');
-    expect(state.playing).toBe(false);
-  });
-  it.each(['visual', 'help'] as const)('holds at the first %s frame when stepping back', proof => {
-    const state = retreat({ ...initialState(false), proof, frame: 0 });
-    expect(state).toMatchObject({ proof, frame: 0, playing: false });
-  });
-});
-
-describe('selected mode playback', () => {
-  it('starts the initial mode at the launcher with normal motion', () => {
-    const state = initialState(false);
-    expect(framesFor(state)[state.frame].image).toBe('right-launcher');
-    expect(state.playing).toBe(true);
-  });
-  it.each([0, 4, 8])('direct selection of mode %s restarts playback after an explicit pause', mode => {
-    const state = selectMode(initialState(true), mode);
-    expect(state.mode).toBe(mode);
-    expect(state).toMatchObject({ frame: 0, playing: true });
-  });
-  it.each([false, true])('adaptive proof selection respects reduced motion: %s', reducedMotion => {
-    const state = selectProof({ ...initialState(false), proof: 'help' }, 'adaptive', reducedMotion);
-    expect(state.playing).toBe(!reducedMotion);
-    expect(framesFor(state)[state.frame].image).toBe(reducedMotion ? 'right-assigned' : 'right-launcher');
-  });
-  it('hides the touch cue while holding the assigned result', () => {
-    expect(adaptiveFrames(0).at(-1)?.cue).toBeUndefined();
-  });
-});
-
-it('pauses between the three stages without slowing each numeric tap', () => {
-  for (let mode = 0; mode < modes.length; mode++) {
-    const frames = adaptiveFrames(mode);
-    expect(frames.filter(frame => frame.pauseBefore).map(frame => [frame.image, frame.pauseBefore])).toEqual([
-      [`${modes[mode].id}-selected`, 450],
-      [`${modes[mode].id}-unit`, 450],
-    ]);
-  }
-});
-
-it('ignores a mode index that is not available', () => {
-  const state = initialState(true);
-  expect(selectMode(state, -1)).toBe(state);
-  expect(selectMode(state, modes.length)).toBe(state);
 });

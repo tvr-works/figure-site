@@ -1,4 +1,5 @@
-export type Proof = 'adaptive' | 'visual' | 'help';
+import captures from './worked-examples.json';
+
 export interface Frame {
   image: string;
   caption: string;
@@ -6,47 +7,30 @@ export interface Frame {
   duration: number;
   pauseBefore?: number;
   cue?: { x: number; y: number };
+  result?: boolean;
 }
 export const modes = [
-  { id: 'right', label: 'Right Triangle', field: 'Run', summary: 'Run, rise & pitch' },
-  { id: 'oblique', label: 'Oblique Triangle', field: 'a', summary: 'Sides & angles' },
-  { id: 'circle', label: 'Circle', field: 'Diameter', summary: 'Arcs, chords & segments' },
-  { id: 'cylinder', label: 'Cylinder', field: 'Diameter', summary: 'Volume & surface area' },
-  { id: 'cone', label: 'Cone', field: 'Diameter', summary: 'Volume & lateral area' },
-  { id: 'ratios', label: 'Ratios', field: 'A', summary: 'Proportions & scaling' },
-  { id: 'offset', label: 'Offset', field: 'Length', summary: 'Duct offsets & wrappers' },
-  { id: 'roof', label: 'Roof', field: 'Run', summary: 'Common, hip & jack rafters' },
-  { id: 'stairs', label: 'Stairs', field: 'Rise', summary: 'Risers, treads & layout' },
+  { id: 'right', label: 'Right Triangle', summary: 'Run, rise & pitch', steps: ['Select Right Triangle.', 'Assign a 3 ft run and a 4 ft rise.', 'Find the 5 ft diagonal; convert it or cycle related results.'] },
+  { id: 'oblique', label: 'Oblique Triangle', summary: 'Sides & angles', steps: ['Select Oblique Triangle.', 'Assign 5 ft, 6 ft, and 7 ft to the three sides.', 'Cycle through the three angles and the area.'] },
+  { id: 'circle', label: 'Circle', summary: 'Arcs, chords & segments', steps: ['Select Circle.', 'Assign a 5 ft diameter and an 85° arc.', 'Find the arc length, then compare its chord and segment rise.'] },
+  { id: 'cylinder', label: 'Cylinder', summary: 'Volume & surface area', steps: ['Select Cylinder.', 'Assign a 4 ft diameter and a 6 ft height.', 'Cycle volume and surface area from the same setup.'] },
+  { id: 'cone', label: 'Cone', summary: 'Volume & lateral area', steps: ['Tap 2nd, then Cone.', 'Assign a 6 ft diameter and a 4 ft height.', 'Find the volume, then cycle to lateral area.'] },
+  { id: 'ratios', label: 'Ratios', summary: 'Proportions & scaling', steps: ['Select Ratios.', 'Set 1 in : 4 ft, then enter a 3 in drawing measurement.', 'Read 12 ft; change the drawing measurement to 6 in and see 24 ft.'] },
+  { id: 'offset', label: 'Offset', summary: 'Duct offsets & wrappers', steps: ['Select Offset.', 'Assign 10 ft length, 5 ft offset, and 7 ft height.', 'Cycle centerline radius, wrapper length, heel radius, and throat radius.'] },
+  { id: 'roof', label: 'Roof', summary: 'Common, hip & jack rafters', steps: ['Select Roof.', 'Set 6 ft run, 9-in-12 pitch, and 16 in spacing.', 'Compare the common rafter, hip/valley, and jack results.'] },
+  { id: 'stairs', label: 'Stairs', summary: 'Risers, treads & layout', steps: ['Select Stairs.', 'Set 7½ in target risers, 10 in treads, and a 9 ft 11 in rise.', 'Compare actual riser height, counts, and the required run.'] },
 ] as const;
-export const proofs = {
-  adaptive: {
-    label: 'Adaptive calculations',
-    steps: ['Select mode', 'Enter measurement', 'Assign'],
-  },
-  visual: {
-    label: 'Visual results',
-    title: 'See what each result measures.',
-    description: 'Cycle related results from one setup. The diagram highlights the edge or angle behind the number.',
-    steps: ['One setup', 'Related results', 'Matching highlight'],
-    transcript: ['Enter a 3 ft run and 4 ft rise in Right Triangle mode.', 'Tap equals to find the 5 ft diagonal. Keep tapping equals to cycle Run, Rise, Angle, Other angle, and Pitch per 12 in that order.', 'The diagram and readout follow the selected result. The same input dimensions stay in place.'],
-  },
-  help: {
-    label: 'Built-in Help',
-    title: 'Help without losing your place.',
-    description: 'Bring up worked examples, explanations, and practical uses alongside your calculation. Return to your guide where you left off.',
-    steps: ['Find guidance', 'Try it', 'Resume reading'],
-    transcript: ['Open More, then Help, and find “Find rise and run from a slant.” The guide explains how sine and cosine relate a slant to its vertical and horizontal measurements.', 'Close Help to apply the example: a 10 ft slant at 30°. Your calculation is still there.', 'Open Help again to return to the same article and reading position in this calculator session.'],
-  },
-} as const;
 
-export const visualFrames: Frame[] = [
-  { image: 'results-0', caption: 'Diagonal · 5 ft. The sloping edge is highlighted.', step: 2, duration: 2400 },
-  { image: 'results-1', caption: 'Run · 3 ft. The horizontal edge is highlighted.', step: 2, duration: 1900 },
-  { image: 'results-2', caption: 'Rise · 4 ft. The vertical edge is highlighted.', step: 2, duration: 1900 },
-  { image: 'results-3', caption: 'Angle · 53.1301°. The angle at the base is highlighted.', step: 2, duration: 2400 },
-  { image: 'results-4', caption: 'Other angle · 36.8699°. The opposite angle is highlighted.', step: 2, duration: 2400 },
-  { image: 'results-5', caption: 'Pitch per 12 · 16 in. The same triangle, expressed as pitch.', step: 2, duration: 2400 },
-];
+export function framesForMode(mode: number): readonly Frame[] {
+  return captures[modes[mode].id];
+}
+
+export const helpSteps = [
+  'Open Help without leaving your calculation.',
+  'Close Help and try the steps. Your calculation stays in place.',
+  'Reopen the same guide at your saved reading position.',
+] as const;
+
 export const helpFrames: Frame[] = [
   { image: 'help-calculation-before', caption: 'A 10 ft slant is entered. Help opens over the calculation.', step: 0, duration: 1800 },
   { image: 'help-guide', caption: 'Find rise and run from a slant: an explanation, not just a key sequence.', step: 0, duration: 3200 },

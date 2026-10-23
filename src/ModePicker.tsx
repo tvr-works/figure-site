@@ -29,7 +29,7 @@ export function ModePicker({ selected, playing, reducedMotion, onSelect, onToggl
           {modes.map((mode, index) => <NativeSelectOption key={mode.id} value={index}>{mode.label}</NativeSelectOption>)}
         </NativeSelect>
       </div>
-      {!reducedMotion && <div className="mode-playback"><Button variant="control" onClick={onTogglePlayback} aria-label={playing ? 'Pause demo' : 'Play demo'}>{playing ? <Pause data-icon="inline-start" /> : <Play data-icon="inline-start" />}{playing ? 'Pause' : 'Play'}</Button></div>}
+      {!reducedMotion && <div className="mode-playback"><Button variant="control" onClick={onTogglePlayback} aria-label={playing ? 'Pause calculation demo' : 'Play calculation demo'}>{playing ? <Pause data-icon="inline-start" /> : <Play data-icon="inline-start" />}{playing ? 'Pause' : 'Play'}</Button></div>}
     </aside>
   );
 }

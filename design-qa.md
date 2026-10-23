@@ -1,5 +1,7 @@
 # Figure visual verification
 
+Historical comparison report for the October 22 three-tab design. The October 23 complete-mode and separate Help implementation supersedes the layout, controls, asset references and test counts below. Current behavior and verification scope are recorded in [Implementation notes](docs/IMPLEMENTATION-NOTES.md).
+
 Current result: passed after the second visual comparison.
 
 ## Sources and capture normalization
