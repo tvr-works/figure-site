@@ -75,7 +75,7 @@ Its visible ordered list explains:
 2. Close Help and try the steps. Your calculation stays in place.
 3. Reopen the same guide at your saved reading position.
 
-The full-width Help H2 and introduction use the same treatment as the calculation section. A 24px H3 names the demonstrated guide above the three-step list, top-aligned with the phone. The sequence plays when visible and holds the reopened guide at the end. Playback controls and the small Built-in Help label are removed. Hovering over the phone holds playback; leaving resumes it. Reduced motion shows the useful ending as a static proof. The retained article and reading position are within the current calculator session; no cross-restart persistence is promised. See [Help evidence](HELP-PROOF.md).
+The full-width Help H2 and introduction use the same treatment as the calculation section. A 24px H3 names the demonstrated guide above the three-step list, top-aligned with the phone. The sequence plays when visible, holds its ending for four seconds, then repeats. Native tap and scroll cues follow each action. Playback controls and the small Built-in Help label are removed. Hovering over the phone holds playback; leaving resumes it. Reduced motion shows the useful ending as a static proof. The retained article and reading position are within the current calculator session; no cross-restart persistence is promised. See [Help evidence](HELP-PROOF.md).
 
 ## Implementation and verification
 

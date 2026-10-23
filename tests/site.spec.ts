@@ -89,11 +89,11 @@ test('manual results include unit conversion and reduced-motion Help holds the r
   await page.locator(calculation).getByRole('button', { name: 'Next result', exact: true }).click();
   await expect(page.locator(`${calculation} figure`)).toHaveAttribute('aria-label', 'Right Triangle · Diagonal, 1.524 meters');
   await page.locator('#help-title').scrollIntoViewIfNeeded();
-  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-resumed');
+  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-touch-15');
   await expect(page.locator(help).getByRole('heading', { level: 3, name: 'Find rise and run from a slant.' })).toBeVisible();
   await expect(page.locator(help).getByRole('button')).toHaveCount(0);
   await page.waitForTimeout(1500);
-  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-resumed');
+  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-touch-15');
   await expect(page.locator(help)).toHaveAttribute('data-demo-playing', 'false');
   await expect(page.getByRole('list', { name: 'Help demo steps' })).toContainText('saved reading position');
 });
@@ -121,7 +121,7 @@ test('automatic playback pauses offscreen and keyboard pause survives returning'
   const offscreen = await frame(page);
   await page.waitForTimeout(2000);
   expect(await frame(page)).toBe(offscreen);
-  await expect(page.locator(help)).not.toHaveAttribute('data-demo-frame', 'help-calculation-before');
+  await expect(page.locator(help)).not.toHaveAttribute('data-demo-frame', 'help-touch-00');
 });
 
 test('hovering either phone holds its demo and leaving resumes without playback controls', async ({ page }) => {
@@ -295,22 +295,45 @@ test('touch movement and contact remain smooth with a pause between stages', asy
   expect(samples.some(sample => sample.scale < .85)).toBe(true);
 });
 
-test('Help plays its own story on scroll and holds the resumed guide at the end', async ({ page }) => {
-  test.setTimeout(30000);
+test('Help shows native touch gestures, holds its ending, then loops independently', async ({ page }) => {
+  test.setTimeout(45000);
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto('/#help');
   await expect.poll(() => page.locator('#help').evaluate(element => Math.abs(element.getBoundingClientRect().top))).toBeLessThan(80);
   await expect(page.locator(help)).toHaveAttribute('data-demo-playing', 'true');
   await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'false');
   const current = page.locator(`${help} .mode-instructions [aria-current="step"]`);
-  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-guide', { timeout: 5000 });
+  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-touch-02', { timeout: 5000 });
   await expect(current).toHaveText('Open Help without leaving your calculation.');
-  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-reading', { timeout: 5000 });
-  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-closed', { timeout: 5000 });
+  const gesture = await page.evaluate(async () => {
+    const root = document.querySelector<HTMLElement>('[data-demo-kind="help"]')!;
+    const path = root.querySelector<HTMLElement>('.touch-path')!;
+    const contact = path.querySelector<HTMLElement>('.touch-contact')!;
+    const screen = path.closest('.native-screen')!.getBoundingClientRect();
+    const samples: { time: number; y: number; scale: number }[] = [];
+    const start = performance.now();
+    while (performance.now() - start < 2500 && path.isConnected) {
+      const bounds = path.getBoundingClientRect();
+      samples.push({ time: performance.now() - start, y: (bounds.y + bounds.height / 2 - screen.y) / screen.height, scale: new DOMMatrix(getComputedStyle(contact).transform).a });
+      await new Promise(requestAnimationFrame);
+    }
+    return samples;
+  });
+  expect(gesture.some(sample => sample.time > 600 && sample.y > .78)).toBe(true);
+  expect(gesture.some(sample => sample.time > 1500 && Math.abs(sample.y - 604 / 956) < .02)).toBe(true);
+  expect(gesture.some(sample => sample.scale < .85)).toBe(true);
+  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-touch-04', { timeout: 6000 });
   await expect(current).toHaveText('Close Help and try the steps. Your calculation stays in place.');
-  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-applied', { timeout: 5000 });
-  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-resumed', { timeout: 5000 });
+  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-touch-05', { timeout: 5000 });
+  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-touch-12', { timeout: 12000 });
+  await expect(page.locator(`${help} figure`)).toHaveAttribute('aria-label', 'The 5 ft rise is highlighted. Open More to return to Help.');
   await expect(current).toHaveText('Reopen the same guide at your saved reading position.');
-  await expect(page.locator(help)).toHaveAttribute('data-demo-playing', 'false', { timeout: 5000 });
+  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-touch-14', { timeout: 5000 });
+  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-touch-15', { timeout: 5000 });
+  await expect(page.locator(`${help} .press-cue`)).toHaveCSS('opacity', '0');
+  await page.waitForTimeout(2500);
+  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-touch-15');
+  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-touch-00', { timeout: 3000 });
+  await expect(page.locator(help)).toHaveAttribute('data-demo-playing', 'true');
   await expect(page.locator(help).getByRole('button')).toHaveCount(0);
 });

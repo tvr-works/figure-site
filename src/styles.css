@@ -117,9 +117,16 @@ h1 { margin: 0; font-size: clamp(48px, 5.25vw, 76px); line-height: 1.045; font-w
 .phone-frame-bottom { bottom: 0; clip-path: inset(56.657534% 0 0 0); }
 .press-cue { position: absolute; left: 0; top: 0; width: 28px; height: 28px; pointer-events: none; transition: transform 520ms cubic-bezier(.4, 0, .2, 1) var(--touch-delay, 0ms), opacity 180ms ease; }
 .press-cue[data-visible=false] { opacity: 0; }
+.touch-path { position: absolute; inset: 0; }
+.touch-path[data-travel=true] { animation: touch-travel var(--touch-duration) ease-in-out var(--touch-delay, 0ms) both; animation-play-state: paused; }
+.touch-path[data-travel=true][data-playing=true] { animation-play-state: running; }
+.touch-contact[data-swipe=true]::after { display: none; }
+@keyframes touch-travel { 0% { transform: translate(var(--travel-from-x), var(--travel-from-y)); } 25% { transform: translate(0, 0); } 78%, 100% { transform: translate(var(--travel-to-x), var(--travel-to-y)); } }
+@keyframes touch-drag { 0%, 20% { transform: scale(1); } 30%, 80% { transform: scale(.72); background: #007aff55; } 100% { transform: scale(1); } }
 .touch-contact { position: absolute; inset: 0; border: 2px solid #007aff; border-radius: 50%; background: #007aff18; box-shadow: 0 0 0 5px #007aff18; }
 .touch-contact::after { content: ''; position: absolute; inset: -2px; border: 2px solid #007aff; border-radius: inherit; opacity: 0; }
 .touch-contact[data-playing=true] { animation: touch-press var(--touch-duration) linear var(--touch-delay, 0ms) both; }
+.touch-contact[data-swipe=true][data-playing=true] { animation-name: touch-drag; }
 .touch-contact[data-playing=true]::after { animation: touch-ripple var(--touch-duration) linear var(--touch-delay, 0ms) both; }
 @keyframes touch-press { 0%, 64% { transform: scale(1); } 79%, 86% { transform: scale(.72); background: #007aff55; } 100% { transform: scale(1); } }
 @keyframes touch-ripple { 0%, 78% { transform: scale(.7); opacity: 0; } 86% { opacity: .65; } 100% { transform: scale(1.65); opacity: 0; } }

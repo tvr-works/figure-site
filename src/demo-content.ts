@@ -1,4 +1,5 @@
 import captures from './worked-examples.json';
+import helpCaptures from './help-captures.json';
 
 export interface Frame {
   image: string;
@@ -6,7 +7,7 @@ export interface Frame {
   step: number;
   duration: number;
   pauseBefore?: number;
-  cue?: { x: number; y: number };
+  cue?: { x: number; y: number; to?: { x: number; y: number } };
   result?: boolean;
 }
 export const modes = [
@@ -31,11 +32,4 @@ export const helpSteps = [
   'Reopen the same guide at your saved reading position.',
 ] as const;
 
-export const helpFrames: Frame[] = [
-  { image: 'help-calculation-before', caption: 'A 10 ft slant is entered. Help opens over the calculation.', step: 0, duration: 1800 },
-  { image: 'help-guide', caption: 'Find rise and run from a slant: an explanation, not just a key sequence.', step: 0, duration: 3200 },
-  { image: 'help-reading', caption: 'Read the worked example and where you can use it.', step: 0, duration: 3200 },
-  { image: 'help-closed', caption: 'Close Help. The pending calculation stays in place.', step: 1, duration: 1600 },
-  { image: 'help-applied', caption: 'Use the 30° angle to find the 5 ft rise of the same slant.', step: 1, duration: 2600 },
-  { image: 'help-resumed', caption: 'Reopen Help at the same article and reading position.', step: 2, duration: 3600 },
-];
+export const helpFrames: readonly Frame[] = helpCaptures;

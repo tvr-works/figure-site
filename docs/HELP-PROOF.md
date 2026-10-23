@@ -73,6 +73,6 @@ App/Help/Content/MathAnglesGuides.swift contains the worked slant example, conce
 
 ## Current page structure
 
-The October 23 revision combines adaptive keys and visual results in complete examples for all nine modes. Help follows in its own scrolling section, with independent automatic playback and hover suspension. The sequence holds its useful ending; reduced motion shows that ending without animation. The separate Visual results proof and All calculations inventory are removed. See the [current storyboard](MARKETING-STORYBOARD.md).
+The October 23 revision combines adaptive keys and visual results in complete examples for all nine modes. Help follows in its own scrolling section, with independent automatic playback and hover suspension. The sequence pauses on its useful ending for four seconds before repeating; reduced motion shows that ending without animation. The separate Visual results proof and All calculations inventory are removed. See the [current storyboard](MARKETING-STORYBOARD.md).
 
-The six native Help captures show the pending 10 ft slant, the guide and practical applications, the retained calculation after closing, its 5 ft rise result, and the resumed reading position. They remain the media for this section.
+The sixteen native Help captures show every More/Help menu tap, two guide scrolls, closing Help, the 30° sine calculation multiplied by 10 ft, assignment of its 5 ft rise result, reopening at the saved reading position, and continued reading of practical applications. They remain the media for this section.
