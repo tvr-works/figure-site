@@ -147,19 +147,6 @@ test('automated accessibility scan passes each proof and policies', async ({ pag
   expect(errors).toEqual([]);
 });
 
-test('larger screenshot view traps focus, closes with Escape, and restores its trigger', async ({ page }) => {
-  await page.goto('/#demo');
-  const trigger = page.getByRole('button', { name: 'View larger', exact: true });
-  await trigger.click();
-  const dialog = page.getByRole('dialog');
-  await expect(dialog).toBeVisible();
-  await expect(dialog.getByRole('heading', { name: 'Right Triangle' })).toBeVisible();
-  expect((await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze()).violations).toEqual([]);
-  await page.keyboard.press('Escape');
-  await expect(dialog).not.toBeVisible();
-  await expect(trigger).toBeFocused();
-});
-
 test('keyboard focus and visibility changes suspend a running demo', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto('/#demo');

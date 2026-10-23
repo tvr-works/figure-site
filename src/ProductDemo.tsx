@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties, type FocusEvent } from 'react';
 import { ArrowLeft, ArrowRight, Pause, Play, RotateCcw, StepForward } from 'lucide-react';
 import { Button } from './components/ui/button';
-import { ImageViewer } from './ImageViewer';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './components/ui/tabs';
 import { modes, proofs, type Proof } from './demo-content';
 import { adaptiveFrames, advance, framesFor, initialState, nextMode, previousMode, retreat, selectProof } from './demo-state';
@@ -151,7 +150,6 @@ export function ProductDemo() {
                     </div></div>
                     <img className="phone-frame" src="/assets/phone-frame.webp" width="862" height="1825" alt="" aria-hidden="true" />
                   </div>
-                  <ImageViewer imageUrl={imageUrl} title={state.proof === 'adaptive' ? mode.label : proof.label} caption={frame.caption} onOpen={() => setState(current => ({ ...current, playing: false }))} />
                 </figure>
         </div>
       </Tabs>
