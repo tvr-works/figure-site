@@ -91,14 +91,13 @@ h1 { margin: 0; font-size: clamp(48px, 5.25vw, 76px); line-height: 1.045; font-w
 .proof-description { max-width: 480px; margin: 0; color: var(--muted-foreground); font-size: 21px; line-height: 1.5; letter-spacing: -.015em; }
 .timeline { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; gap: 16px; margin: 30px 0 23px; padding: 0; list-style: none; }
 .timeline li { border-top: 2px solid var(--border); padding-top: 15px; font-size: 13px; color: var(--muted-foreground); line-height: 1.4; }
-.timeline li:has(> .timeline-step) { padding-top: 0; }
-.timeline-step { display: block; width: 100%; min-height: 96px; padding: 15px 0 8px; border: 0; background: transparent; color: inherit; font: inherit; text-align: left; }
-.timeline-step:hover { background: var(--secondary); }
-.timeline-step:hover strong, .timeline-step:focus-visible strong { text-decoration: underline; text-underline-offset: 3px; }
 .timeline li[data-current=true] { border-color: var(--primary); color: var(--primary); }
 .timeline .step-number { display: block; margin-bottom: 8px; font-size: 13px; font-weight: 650; }
 .timeline strong { display: block; font-weight: 600; }
 .timeline small { display: block; margin-top: 5px; font-size: 12px; color: var(--muted-foreground); }
+.mode-instructions { list-style: decimal; max-width: 460px; margin: 8px 0 28px; padding-left: 1.45em; color: var(--muted-foreground); font-size: 19px; line-height: 1.6; }
+.mode-instructions li { padding-left: .3em; margin-bottom: 15px; }
+.mode-instructions li::marker { color: var(--primary); font-weight: 600; }
 .example-label { margin: 0 0 16px; font-size: 14px; color: var(--muted-foreground); }
 .example-label strong { color: var(--primary); font-weight: 650; }
 .demo-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 9px; margin-top: 5px; }
@@ -107,10 +106,18 @@ h1 { margin: 0; font-size: clamp(48px, 5.25vw, 76px); line-height: 1.045; font-w
 .demo-phone-figure { justify-self: center; margin: 0; width: min(100%, 300px); }
 .demo-phone { position: relative; width: 100%; aspect-ratio: 862 / 1825; }
 .phone-aperture { position: absolute; left: 8%; right: 8%; top: 3.01%; bottom: 3.45%; display: flex; align-items: center; overflow: hidden; border-radius: 11% / 5%; background: #f1f1f7; }
-.native-screen { position: relative; width: 100%; aspect-ratio: 440 / 956; flex: none; }
+.native-screen { container-type: inline-size; position: relative; width: 100%; aspect-ratio: 440 / 956; flex: none; }
 .native-screen > img { display: block; width: 100%; height: 100%; }
 .phone-frame { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
-.press-cue { position: absolute; width: 28px; height: 28px; border: 2px solid #007aff; border-radius: 50%; transform: translate(-50%, -50%); box-shadow: 0 0 0 5px #007aff25; pointer-events: none; }
+.press-cue { position: absolute; left: 0; top: 0; width: 28px; height: 28px; pointer-events: none; transition: transform 520ms cubic-bezier(.4, 0, .2, 1), opacity 180ms ease; }
+.press-cue[data-visible=false] { opacity: 0; }
+.touch-contact { position: absolute; inset: 0; border: 2px solid #007aff; border-radius: 50%; background: #007aff18; box-shadow: 0 0 0 5px #007aff18; }
+.touch-contact::after { content: ''; position: absolute; inset: -2px; border: 2px solid #007aff; border-radius: inherit; opacity: 0; }
+.touch-contact[data-playing=true] { animation: touch-press var(--touch-duration) linear both; }
+.touch-contact[data-playing=true]::after { animation: touch-ripple var(--touch-duration) linear both; }
+@keyframes touch-press { 0%, 64% { transform: scale(1); } 79%, 86% { transform: scale(.72); background: #007aff55; } 100% { transform: scale(1); } }
+@keyframes touch-ripple { 0%, 78% { transform: scale(.7); opacity: 0; } 86% { opacity: .65; } 100% { transform: scale(1.65); opacity: 0; } }
+
 .demo-phone-figure figcaption { margin-top: 10px; text-align: center; color: var(--muted-foreground); font-size: 11px; }
 .media-error { position: absolute; inset: 20% 6%; display: grid; place-items: center; background: #f1f1f7; padding: 20px; text-align: center; color: #333; font-size: 15px; }
 .transcript { margin-top: 12px; color: var(--muted-foreground); font-size: 13px; line-height: 1.6; max-width: 470px; }
@@ -163,7 +170,7 @@ h1 { margin: 0; font-size: clamp(48px, 5.25vw, 76px); line-height: 1.045; font-w
   .demo-section { padding-top: 38px; }
   .proof-stage { grid-template-columns: 1fr; gap: 30px; min-height: 0; padding-block: 30px 22px; }
   .proof-copy h2 { font-size: 37px; max-width: 420px; margin-bottom: 15px; }
-  .proof-description { font-size: 17px; }
+  .proof-description, .mode-instructions { font-size: 17px; }
   .timeline { margin-block: 25px 22px; gap: 12px; }
   .timeline li { font-size: 12px; }
   .timeline small { font-size: 11px; }

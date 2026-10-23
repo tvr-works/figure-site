@@ -98,8 +98,7 @@ test('missing screenshots retain readable guidance', async ({ page }) => {
   await page.route('**/assets/demo/**', route => route.abort());
   await page.goto('/#demo');
   await expect(page.getByText('App image could not load. The demo steps describe the calculation.')).toBeVisible();
-  await page.getByText('Read demo steps', { exact: true }).click();
-  await expect(page.getByText('Enter 1, then 2, then Inch. The familiar numeric and unit keys stay in place.')).toBeVisible();
+  await expect(page.getByRole('list', { name: 'How to use this mode' })).toContainText('Enter 12, then Inch');
   await expect(page.locator(demo)).toHaveAttribute('data-demo-playing', 'false');
 });
 
@@ -186,48 +185,55 @@ test('keyboard focus and visibility changes suspend a running demo', async ({ pa
   await expect(page.locator(demo)).toHaveAttribute('data-demo-playing', 'true');
 });
 
-test('adaptive steps jump directly and modes navigate in either direction', async ({ page }) => {
+test('adaptive mode uses only a static numbered explanation and mode navigation', async ({ page }) => {
   await page.goto('/#demo');
-  await expect(page.getByText('Built around the calculation.', { exact: true })).toHaveCount(0);
-  await expect(page.locator('.proof-copy').getByRole('heading', { name: 'Right Triangle', exact: true })).toBeVisible();
-  await expect(page.locator('.proof-copy .example-label')).toHaveCount(0);
-  await expect(page.getByRole('group', { name: 'Step navigation' })).toHaveCount(0);
-  for (const [label, image] of [['Select mode Right Triangle', 'right-launcher'], ['Assign Run', 'right-unit'], ['Enter measurement 12 in', 'right-selected']]) {
-    const step = page.getByRole('button', { name: label, exact: true });
-    await step.click();
-    await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', image);
-    await expect(step).toHaveAttribute('aria-current', 'step');
-    await expect(page.locator('.timeline [aria-current="step"]')).toHaveCount(1);
-  }
+  await expect(page.locator('.proof-copy .timeline, .proof-copy .proof-description, .proof-copy .demo-caption, .proof-copy .transcript')).toHaveCount(0);
+  await expect(page.getByRole('list', { name: 'How to use this mode' }).getByRole('listitem')).toHaveCount(3);
+  await expect(page.getByRole('list', { name: 'How to use this mode' }).getByRole('button')).toHaveCount(0);
   await page.getByRole('button', { name: 'Previous mode', exact: true }).click();
   await expect(page.locator('.proof-copy').getByRole('heading', { name: 'Stairs', exact: true })).toBeVisible();
   await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', 'stairs-assigned');
   await page.getByRole('button', { name: 'Next mode', exact: true }).click();
   await expect(page.locator('.proof-copy').getByRole('heading', { name: 'Right Triangle', exact: true })).toBeVisible();
-  await page.getByRole('tab', { name: 'Visual results', exact: true }).click();
-  await expect(page.getByRole('button', { name: 'Previous result', exact: true })).toBeDisabled();
-  await page.getByRole('button', { name: 'Next result', exact: true }).click();
-  await page.getByRole('button', { name: 'Previous result', exact: true }).click();
-  await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', 'results-0');
 });
 
-test('step buttons support keyboard activation and pause automatic playback', async ({ page }) => {
+test('mode selection starts playback and repeats the selected mode', async ({ page }) => {
+  test.setTimeout(25000);
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto('/#demo');
+  await page.getByRole('button', { name: 'Pause demo', exact: true }).click();
+  await page.getByRole('button', { name: 'Next mode', exact: true }).click();
+  await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', 'oblique-launcher');
   await expect(page.locator(demo)).toHaveAttribute('data-demo-playing', 'true');
-  const selectMode = page.getByRole('button', { name: 'Select mode Right Triangle', exact: true });
-  await selectMode.focus();
-  await selectMode.press('Enter');
-  await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', 'right-launcher');
-  await selectMode.press('Tab');
-  const measurement = page.getByRole('button', { name: 'Enter measurement 12 in', exact: true });
-  await expect(measurement).toBeFocused();
-  await measurement.press('Space');
-  await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', 'right-selected');
-  await page.waitForTimeout(1500);
-  await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', 'right-selected');
-  await expect(page.locator(demo)).toHaveAttribute('data-demo-playing', 'false');
-  await expect(measurement).toBeFocused();
-  await page.getByRole('button', { name: 'Play demo', exact: true }).click();
+  await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', 'oblique-assigned', { timeout: 10000 });
+  await expect(page.locator('.press-cue')).toHaveCSS('opacity', '0');
+  await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', 'oblique-launcher', { timeout: 4000 });
+  await expect(page.locator('.proof-copy h2')).toHaveText('Oblique Triangle');
+  await page.getByRole('tab', { name: 'Visual results', exact: true }).click();
+  await page.getByRole('tab', { name: 'Adaptive calculations', exact: true }).click();
+  await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', 'oblique-launcher');
   await expect(page.locator(demo)).toHaveAttribute('data-demo-playing', 'true');
+});
+
+test('touch cue glides through intermediate positions and presses before the screen changes', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto('/#demo');
+  await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', 'right-selected');
+  const samples = await page.evaluate(async () => {
+    const cue = document.querySelector<HTMLElement>('.press-cue')!;
+    const contact = document.querySelector<HTMLElement>('.touch-contact')!;
+    const screen = document.querySelector('.native-screen')!.getBoundingClientRect();
+    const samples: { y: number; scale: number }[] = [];
+    const start = performance.now();
+    while (performance.now() - start < 1100) {
+      const bounds = cue.getBoundingClientRect();
+      const transform = new DOMMatrix(getComputedStyle(contact).transform);
+      samples.push({ y: (bounds.y + bounds.height / 2 - screen.y) / screen.height, scale: transform.a });
+      await new Promise(requestAnimationFrame);
+    }
+    return samples;
+  });
+  expect(samples.some(sample => sample.y > .4 && sample.y < .75)).toBe(true);
+  expect(samples.some(sample => Math.abs(sample.y - 777 / 956) < .01)).toBe(true);
+  expect(samples.some(sample => sample.scale < .85)).toBe(true);
 });

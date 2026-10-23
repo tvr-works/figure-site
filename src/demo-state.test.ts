@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { advance, adaptiveFrames, framesFor, initialState, nextMode, previousMode, retreat, selectAdaptiveStep, selectProof } from './demo-state';
+import { advance, adaptiveFrames, framesFor, initialState, nextMode, previousMode, retreat, selectProof } from './demo-state';
 import { modes } from './demo-content';
 
 describe('guided demonstration boundaries', () => {
@@ -8,13 +8,13 @@ describe('guided demonstration boundaries', () => {
     expect(state.playing).toBe(false);
     expect(framesFor(state)[state.frame].image).toBe('right-assigned');
   });
-  it('loops every mode without changing the selected proof', () => {
+  it('repeats the selected mode without changing its headline or proof', () => {
     let state = { ...initialState(false), mode: 8, frame: adaptiveFrames(8).length - 1 };
     state = advance(state);
-    expect(state).toMatchObject({ proof: 'adaptive', mode: 0, frame: 0, playing: true });
+    expect(state).toMatchObject({ proof: 'adaptive', mode: 8, frame: 0, playing: true });
   });
   it('manual mode selection preserves pause and shows the assigned still', () => {
-    const state = nextMode(initialState(true));
+    const state = nextMode(initialState(true), true);
     expect(state.playing).toBe(false);
     expect(framesFor(state)[state.frame].image).toBe('oblique-assigned');
   });
@@ -38,7 +38,7 @@ describe('guided demonstration boundaries', () => {
 
 describe('backward demonstration navigation', () => {
   it('steps back from an assignment and pauses the automatic loop', () => {
-    const state = retreat(initialState(false));
+    const state = retreat(initialState(true));
     expect(framesFor(state)[state.frame].image).toBe('right-unit');
     expect(state.playing).toBe(false);
   });
@@ -47,7 +47,7 @@ describe('backward demonstration navigation', () => {
     expect(framesFor(state)[state.frame].image).toBe('cone-assigned');
   });
   it('wraps to the last mode without starting paused playback', () => {
-    const state = previousMode(initialState(true));
+    const state = previousMode(initialState(true), true);
     expect(framesFor(state)[state.frame].image).toBe('stairs-assigned');
     expect(state.playing).toBe(false);
   });
@@ -57,13 +57,22 @@ describe('backward demonstration navigation', () => {
   });
 });
 
-describe('direct adaptive step selection', () => {
-  it.each(modes)('jumps to each phase of $label and pauses playback', mode => {
-    const state = { ...initialState(false), mode: modes.indexOf(mode) };
-    for (const [step, suffix] of [[0, 'launcher'], [1, 'selected'], [2, 'unit']] as const) {
-      const next = selectAdaptiveStep(state, step);
-      expect(framesFor(next)[next.frame]).toMatchObject({ image: `${mode.id}-${suffix}`, step });
-      expect(next).toMatchObject({ mode: state.mode, playing: false });
-    }
+describe('selected mode playback', () => {
+  it('starts the initial mode at the launcher with normal motion', () => {
+    const state = initialState(false);
+    expect(framesFor(state)[state.frame].image).toBe('right-launcher');
+    expect(state.playing).toBe(true);
+  });
+  it.each([nextMode, previousMode])('mode selection restarts playback after an explicit pause', selectMode => {
+    const state = selectMode(initialState(true));
+    expect(state).toMatchObject({ frame: 0, playing: true });
+  });
+  it.each([false, true])('adaptive proof selection respects reduced motion: %s', reducedMotion => {
+    const state = selectProof({ ...initialState(false), proof: 'help' }, 'adaptive', reducedMotion);
+    expect(state.playing).toBe(!reducedMotion);
+    expect(framesFor(state)[state.frame].image).toBe(reducedMotion ? 'right-assigned' : 'right-launcher');
+  });
+  it('hides the touch cue while holding the assigned result', () => {
+    expect(adaptiveFrames(0).at(-1)?.cue).toBeUndefined();
   });
 });

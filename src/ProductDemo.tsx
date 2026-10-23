@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState, type FocusEvent } from 'react';
+import { useEffect, useRef, useState, type CSSProperties, type FocusEvent } from 'react';
 import { ArrowLeft, ArrowRight, Pause, Play, RotateCcw, StepForward } from 'lucide-react';
 import { Button } from './components/ui/button';
 import { ImageViewer } from './ImageViewer';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './components/ui/tabs';
 import { modes, proofs, type Proof } from './demo-content';
-import { advance, framesFor, initialState, nextMode, previousMode, retreat, selectAdaptiveStep, selectProof } from './demo-state';
+import { adaptiveFrames, advance, framesFor, initialState, nextMode, previousMode, retreat, selectProof } from './demo-state';
 
 export function ProductDemo() {
   const [reducedMotion, setReducedMotion] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -19,6 +19,12 @@ export function ProductDemo() {
   const imageUrl = `/assets/demo/${frame.image}.webp`;
   const proof = proofs[state.proof];
   const mode = modes[state.mode];
+  const adaptiveSteps = [
+    mode.id === 'cone' ? 'Tap 2nd, then Cone to reveal its inputs.' : `Select ${mode.label} to reveal its inputs.`,
+    'Enter 12, then Inch to give the measurement a unit.',
+    `Tap “${mode.field}” to assign the measurement and update the diagram.`,
+  ];
+  const cue = frame.cue ?? (state.proof === 'adaptive' ? adaptiveFrames(state.mode).at(-2)?.cue : undefined);
   const activePlayback = state.playing && inView && pageVisible && !reducedMotion && loadedImage === imageUrl && failedImage !== imageUrl;
 
   useEffect(() => {
@@ -40,6 +46,16 @@ export function ProductDemo() {
   }, []);
 
   useEffect(() => {
+    // Decode the selected mode ahead of playback so screenshot swaps do not stall the touch path.
+    if (state.proof !== 'adaptive') return;
+    for (const frame of adaptiveFrames(state.mode)) {
+      const image = new Image();
+      image.src = `/assets/demo/${frame.image}.webp`;
+      void image.decode().catch(() => {});
+    }
+  }, [state.proof, state.mode]);
+
+  useEffect(() => {
     if (!activePlayback) return;
     const timer = window.setTimeout(() => setState(current => advance(current)), frame.duration);
     return () => window.clearTimeout(timer);
@@ -58,19 +74,14 @@ export function ProductDemo() {
     setState(next);
     setAnnouncement(framesFor(next)[next.frame].caption);
   }
-  function jumpToStep(step: 0 | 1 | 2) {
-    const next = selectAdaptiveStep(state, step);
-    setState(next);
-    setAnnouncement(framesFor(next)[next.frame].caption);
-  }
   function changeMode(direction: 'previous' | 'next') {
-    const next = direction === 'previous' ? previousMode(state) : nextMode(state);
+    const next = direction === 'previous' ? previousMode(state, reducedMotion) : nextMode(state, reducedMotion);
     setState(next);
     setAnnouncement(`${modes[next.mode].label}. ${framesFor(next)[next.frame].caption}`);
   }
   function changeProof(value: string | number | null) {
     if (value !== 'adaptive' && value !== 'visual' && value !== 'help') return;
-    setState(current => selectProof(current, value));
+    setState(current => selectProof(current, value, reducedMotion));
     setAnnouncement('');
   }
   function togglePlayback() {
@@ -91,23 +102,22 @@ export function ProductDemo() {
                 {state.proof === key && (
                 <div className="proof-copy">
                   <h2>{state.proof === 'adaptive' ? mode.label : proofs[state.proof].title}</h2>
-                  <p className="proof-description">{proof.description}</p>
-                  <ol className="timeline" aria-label="Demo sequence">
-                    {proof.steps.map((step, index) => (
-                      <li key={step} data-current={frame.step === index} aria-current={state.proof !== 'adaptive' && frame.step === index ? 'step' : undefined}>
-                        {state.proof === 'adaptive' ? (
-                          <button className="timeline-step" type="button" tabIndex={0} onClick={() => jumpToStep(index as 0 | 1 | 2)} aria-current={frame.step === index ? 'step' : undefined}>
-                            <span className="step-number" aria-hidden="true">0{index + 1}</span><strong>{step}</strong>
-                            <small>{index === 0 ? mode.label : index === 1 ? '12 in' : mode.field}</small>
-                          </button>
-                        ) : <>
+                  {state.proof === 'adaptive' ? (
+                    <ol className="mode-instructions" aria-label="How to use this mode">
+                      {adaptiveSteps.map(step => <li key={step}>{step}</li>)}
+                    </ol>
+                  ) : <>
+                    <p className="proof-description">{proofs[state.proof].description}</p>
+                    <ol className="timeline" aria-label="Demo sequence">
+                      {proof.steps.map((step, index) => (
+                        <li key={step} data-current={frame.step === index} aria-current={frame.step === index ? 'step' : undefined}>
                           <span className="step-number" aria-hidden="true">0{index + 1}</span><strong>{step}</strong>
                           {state.proof === 'visual' && <small>{['3 ft run · 4 ft rise', 'Tap equals to cycle', 'Edge or angle'][index]}</small>}
-                        </>}
-                      </li>
-                    ))}
-                  </ol>
-                  {state.proof !== 'adaptive' && <p className="example-label">{state.proof === 'visual' ? <><strong>Right Triangle</strong> · Result {state.frame + 1} of 6</> : <><strong>Built-in guidance</strong> · Step {state.frame + 1} of {framesFor(state).length}</>}</p>}
+                        </li>
+                      ))}
+                    </ol>
+                    <p className="example-label">{state.proof === 'visual' ? <><strong>Right Triangle</strong> · Result {state.frame + 1} of 6</> : <><strong>Built-in guidance</strong> · Step {state.frame + 1} of {framesFor(state).length}</>}</p>
+                  </>}
                   <div className="demo-controls" aria-label="Demo playback">
                     {!reducedMotion && <Button variant="control" onClick={togglePlayback} aria-label={state.playing ? 'Pause demo' : 'Play demo'}>{state.playing ? <Pause data-icon="inline-start" /> : <Play data-icon="inline-start" />}{state.playing ? 'Pause' : 'Play'}</Button>}
                     {state.proof !== 'adaptive' && <div className="demo-control-pair" role="group" aria-label="Step navigation">
@@ -119,10 +129,12 @@ export function ProductDemo() {
                       <Button variant="control" onClick={() => changeMode('next')}>Next mode<ArrowRight data-icon="inline-end" /></Button>
                     </div> : <Button variant="control" onClick={() => { setState(current => ({ ...current, frame: 0, playing: !reducedMotion })); setAnnouncement('Demo restarted.'); }}><RotateCcw data-icon="inline-start" />Replay</Button>}
                   </div>
+                  {state.proof !== 'adaptive' && <>
                   <p className="demo-caption">{frame.caption}</p>
                   <details className="transcript" onToggle={event => { if (event.currentTarget.open) setState(current => ({ ...current, playing: false })); }}>
-                    <summary>Read demo steps</summary><ol>{proof.transcript.map(text => <li key={text}>{text}</li>)}</ol>
+                    <summary>Read demo steps</summary><ol>{proofs[state.proof].transcript.map(text => <li key={text}>{text}</li>)}</ol>
                   </details>
+                  </>}
                 </div>
                 )}
               </TabsContent>
@@ -132,7 +144,9 @@ export function ProductDemo() {
                   <div className="demo-phone">
                     <div className="phone-aperture"><div className="native-screen">
                       <img src={imageUrl} width="720" height="1564" alt="" onLoad={() => setLoadedImage(imageUrl)} onError={() => { setFailedImage(imageUrl); setState(current => ({ ...current, playing: false })); }} />
-                      {frame.cue && failedImage !== imageUrl && <span className="press-cue" aria-hidden="true" style={{ left: `${frame.cue.x / 440 * 100}%`, top: `${frame.cue.y / 956 * 100}%` }} />}
+                      {state.proof === 'adaptive' && cue && failedImage !== imageUrl && <span key={mode.id} className="press-cue" aria-hidden="true" data-visible={Boolean(frame.cue)} style={{ transform: `translate(calc(${cue.x / 440 * 100}cqw - 50%), calc(${cue.y / 440 * 100}cqw - 50%))` }}>
+                        <span key={frame.image} className="touch-contact" data-playing={activePlayback && Boolean(frame.cue)} style={{ '--touch-duration': `${frame.duration}ms` } as CSSProperties} />
+                      </span>}
                       {failedImage === imageUrl && <p className="media-error">App image could not load. The demo steps describe the calculation.</p>}
                     </div></div>
                     <img className="phone-frame" src="/assets/phone-frame.webp" width="862" height="1825" alt="" aria-hidden="true" />

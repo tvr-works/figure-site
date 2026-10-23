@@ -31,3 +31,9 @@ The static support/privacy files remain at root-level HTML entry points so Vite 
 Pause responds to pointer clicks independently from keyboard focus. Only keyboard focus entering the running proof pauses through the focus handler; a pointer focusing Pause must not toggle it back to Play before the click arrives.
 
 Static navigation/disclosure icons are exports from the installed Lucide library. Figure’s brand layers are copied directly from its app icon source; neither is an invented drawing.
+
+## Adaptive demo playback (October 23)
+
+The selected mode repeats its own input sequence. Selecting a different mode or returning to the adaptive tab restarts playback; reduced motion retains an assigned still. The visible explanation is one static ordered list, without a timeline, rotating caption, or duplicate transcript.
+
+[Motion for React](https://motion.dev/docs/react-animation) was considered, but the small touch sequence uses native [CSS transitions](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/transition) and keyframes. A persistent outer cue interpolates its transform between captured key coordinates; an inner contact compresses and emits a ripple near the end of each frame, before the corresponding screenshot changes. The result holds without a cue before the loop restarts. Container-relative units keep targets aligned as the phone scales. Captures for the selected mode are decoded ahead of playback, with the existing image-load gate and readable failure state retained. Browser tests sample actual cue positions and contact scale in Chromium and WebKit, alongside repeat, selection, pause, visibility, keyboard, and reduced-motion checks.
