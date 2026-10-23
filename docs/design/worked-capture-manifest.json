@@ -1,0 +1,1522 @@
+{
+  "date": "2026-10-23",
+  "source": "Figure 1.0 (3), works.tvr.figure on iOS 26.5, Figure Store phone",
+  "sourceDimensions": [
+    1320,
+    2868
+  ],
+  "exportWidth": 720,
+  "method": "Native UI taps with runtime accessibility snapshots; simctl screenshots exported as lossless WebP. No app source changes.",
+  "examples": [
+    {
+      "id": "right",
+      "label": "Right Triangle",
+      "frames": [
+        {
+          "image": "worked-right-00",
+          "step": 0,
+          "caption": "Choose Right Triangle.",
+          "readout": "Result, 0.",
+          "duration": 1200,
+          "cue": {
+            "x": 61,
+            "y": 300
+          }
+        },
+        {
+          "image": "worked-right-01",
+          "step": 1,
+          "caption": "Enter the measurements for Right Triangle.",
+          "readout": "Right Triangle, 0.",
+          "duration": 1200,
+          "pauseBefore": 450,
+          "cue": {
+            "x": 299,
+            "y": 777
+          }
+        },
+        {
+          "image": "worked-right-02",
+          "step": 1,
+          "caption": "Right Triangle · Entry, 3",
+          "readout": "Right Triangle · Entry, 3",
+          "duration": 850,
+          "cue": {
+            "x": 61,
+            "y": 539
+          }
+        },
+        {
+          "image": "worked-right-03",
+          "step": 1,
+          "caption": "Right Triangle · Entry, 3 feet 0 inches",
+          "readout": "Right Triangle · Entry, 3 feet 0 inches",
+          "duration": 950,
+          "cue": {
+            "x": 61,
+            "y": 300
+          }
+        },
+        {
+          "image": "worked-right-04",
+          "step": 1,
+          "caption": "Right Triangle · Run, 3 feet 0 inches",
+          "readout": "Right Triangle · Run, 3 feet 0 inches",
+          "duration": 850,
+          "cue": {
+            "x": 141,
+            "y": 698
+          }
+        },
+        {
+          "image": "worked-right-05",
+          "step": 1,
+          "caption": "Right Triangle · Entry, 4",
+          "readout": "Right Triangle · Entry, 4",
+          "duration": 850,
+          "cue": {
+            "x": 61,
+            "y": 539
+          }
+        },
+        {
+          "image": "worked-right-06",
+          "step": 1,
+          "caption": "Right Triangle · Entry, 4 feet 0 inches",
+          "readout": "Right Triangle · Entry, 4 feet 0 inches",
+          "duration": 950,
+          "cue": {
+            "x": 141,
+            "y": 300
+          }
+        },
+        {
+          "image": "worked-right-07",
+          "step": 2,
+          "caption": "Right Triangle · Rise, 4 feet 0 inches",
+          "readout": "Right Triangle · Rise, 4 feet 0 inches",
+          "duration": 850,
+          "pauseBefore": 450,
+          "cue": {
+            "x": 299,
+            "y": 856
+          }
+        },
+        {
+          "image": "worked-right-08",
+          "step": 2,
+          "caption": "Right Triangle · Diagonal, 5 feet 0 inches",
+          "readout": "Right Triangle · Diagonal, 5 feet 0 inches",
+          "duration": 2200,
+          "result": true,
+          "cue": {
+            "x": 141,
+            "y": 539
+          }
+        },
+        {
+          "image": "worked-right-09",
+          "step": 2,
+          "caption": "Right Triangle · Diagonal, 60 inches",
+          "readout": "Right Triangle · Diagonal, 60 inches",
+          "duration": 2200,
+          "result": true,
+          "cue": {
+            "x": 61,
+            "y": 618
+          }
+        },
+        {
+          "image": "worked-right-10",
+          "step": 2,
+          "caption": "2nd, 60 inches",
+          "readout": "2nd, 60 inches",
+          "duration": 850,
+          "cue": {
+            "x": 220,
+            "y": 539
+          }
+        },
+        {
+          "image": "worked-right-11",
+          "step": 2,
+          "caption": "Right Triangle · Diagonal, 1.524 meters",
+          "readout": "Right Triangle · Diagonal, 1.524 meters",
+          "duration": 2600,
+          "result": true,
+          "cue": {
+            "x": 299,
+            "y": 856
+          }
+        },
+        {
+          "image": "worked-right-12",
+          "step": 2,
+          "caption": "Right Triangle · Run, 3 feet 0 inches",
+          "readout": "Right Triangle · Run, 3 feet 0 inches",
+          "duration": 2200,
+          "result": true,
+          "cue": {
+            "x": 299,
+            "y": 856
+          }
+        },
+        {
+          "image": "worked-right-13",
+          "step": 2,
+          "caption": "Right Triangle · Rise, 4 feet 0 inches",
+          "readout": "Right Triangle · Rise, 4 feet 0 inches",
+          "duration": 2200,
+          "result": true,
+          "cue": {
+            "x": 299,
+            "y": 856
+          }
+        },
+        {
+          "image": "worked-right-14",
+          "step": 2,
+          "caption": "Right Triangle · Angle, 53.1301 degrees",
+          "readout": "Right Triangle · Angle, 53.1301 degrees",
+          "duration": 2200,
+          "result": true
+        }
+      ]
+    },
+    {
+      "id": "oblique",
+      "label": "Oblique Triangle",
+      "frames": [
+        {
+          "image": "worked-oblique-00",
+          "step": 0,
+          "caption": "Choose Oblique Triangle.",
+          "readout": "Result, 0.",
+          "duration": 1200,
+          "cue": {
+            "x": 141,
+            "y": 300
+          }
+        },
+        {
+          "image": "worked-oblique-01",
+          "step": 1,
+          "caption": "Enter the measurements for Oblique Triangle.",
+          "readout": "Oblique Triangle, 0.",
+          "duration": 1200,
+          "pauseBefore": 450,
+          "cue": {
+            "x": 220,
+            "y": 698
+          }
+        },
+        {
+          "image": "worked-oblique-02",
+          "step": 1,
+          "caption": "Oblique Triangle · Entry, 5",
+          "readout": "Oblique Triangle · Entry, 5",
+          "duration": 850,
+          "cue": {
+            "x": 61,
+            "y": 539
+          }
+        },
+        {
+          "image": "worked-oblique-03",
+          "step": 1,
+          "caption": "Oblique Triangle · Entry, 5 feet 0 inches",
+          "readout": "Oblique Triangle · Entry, 5 feet 0 inches",
+          "duration": 950,
+          "cue": {
+            "x": 61,
+            "y": 300
+          }
+        },
+        {
+          "image": "worked-oblique-04",
+          "step": 1,
+          "caption": "Oblique Triangle · Side a, 5 feet 0 inches",
+          "readout": "Oblique Triangle · Side a, 5 feet 0 inches",
+          "duration": 850,
+          "cue": {
+            "x": 299,
+            "y": 698
+          }
+        },
+        {
+          "image": "worked-oblique-05",
+          "step": 1,
+          "caption": "Oblique Triangle · Entry, 6",
+          "readout": "Oblique Triangle · Entry, 6",
+          "duration": 850,
+          "cue": {
+            "x": 61,
+            "y": 539
+          }
+        },
+        {
+          "image": "worked-oblique-06",
+          "step": 1,
+          "caption": "Oblique Triangle · Entry, 6 feet 0 inches",
+          "readout": "Oblique Triangle · Entry, 6 feet 0 inches",
+          "duration": 950,
+          "cue": {
+            "x": 141,
+            "y": 300
+          }
+        },
+        {
+          "image": "worked-oblique-07",
+          "step": 1,
+          "caption": "Oblique Triangle · Side b, 6 feet 0 inches",
+          "readout": "Oblique Triangle · Side b, 6 feet 0 inches",
+          "duration": 850,
+          "cue": {
+            "x": 141,
+            "y": 618
+          }
+        },
+        {
+          "image": "worked-oblique-08",
+          "step": 1,
+          "caption": "Oblique Triangle · Entry, 7",
+          "readout": "Oblique Triangle · Entry, 7",
+          "duration": 850,
+          "cue": {
+            "x": 61,
+            "y": 539
+          }
+        },
+        {
+          "image": "worked-oblique-09",
+          "step": 1,
+          "caption": "Oblique Triangle · Entry, 7 feet 0 inches",
+          "readout": "Oblique Triangle · Entry, 7 feet 0 inches",
+          "duration": 950,
+          "cue": {
+            "x": 220,
+            "y": 300
+          }
+        },
+        {
+          "image": "worked-oblique-10",
+          "step": 2,
+          "caption": "Oblique Triangle · Side c, 7 feet 0 inches",
+          "readout": "Oblique Triangle · Side c, 7 feet 0 inches",
+          "duration": 850,
+          "pauseBefore": 450,
+          "cue": {
+            "x": 299,
+            "y": 856
+          }
+        },
+        {
+          "image": "worked-oblique-11",
+          "step": 2,
+          "caption": "Oblique Triangle · Angle A, 44.41531 degrees",
+          "readout": "Oblique Triangle · Angle A, 44.41531 degrees",
+          "duration": 2200,
+          "result": true,
+          "cue": {
+            "x": 299,
+            "y": 856
+          }
+        },
+        {
+          "image": "worked-oblique-12",
+          "step": 2,
+          "caption": "Oblique Triangle · Angle B, 57.12165 degrees",
+          "readout": "Oblique Triangle · Angle B, 57.12165 degrees",
+          "duration": 2200,
+          "result": true,
+          "cue": {
+            "x": 299,
+            "y": 856
+          }
+        },
+        {
+          "image": "worked-oblique-13",
+          "step": 2,
+          "caption": "Oblique Triangle · Angle C, 78.46304 degrees",
+          "readout": "Oblique Triangle · Angle C, 78.46304 degrees",
+          "duration": 2200,
+          "result": true,
+          "cue": {
+            "x": 299,
+            "y": 856
+          }
+        },
+        {
+          "image": "worked-oblique-14",
+          "step": 2,
+          "caption": "Oblique Triangle · Area, 14.69694 square feet",
+          "readout": "Oblique Triangle · Area, 14.69694 square feet",
+          "duration": 2600,
+          "result": true
+        }
+      ]
+    },
+    {
+      "id": "circle",
+      "label": "Circle",
+      "frames": [
+        {
+          "image": "worked-circle-00",
+          "step": 0,
+          "caption": "Choose Circle.",
+          "readout": "Result, 0.",
+          "duration": 1200,
+          "cue": {
+            "x": 220,
+            "y": 300
+          }
+        },
+        {
+          "image": "worked-circle-01",
+          "step": 1,
+          "caption": "Enter the measurements for Circle.",
+          "readout": "Circle, 0.",
+          "duration": 1200,
+          "pauseBefore": 450,
+          "cue": {
+            "x": 220,
+            "y": 698
+          }
+        },
+        {
+          "image": "worked-circle-02",
+          "step": 1,
+          "caption": "Circle · Entry, 5",
+          "readout": "Circle · Entry, 5",
+          "duration": 850,
+          "cue": {
+            "x": 61,
+            "y": 539
+          }
+        },
+        {
+          "image": "worked-circle-03",
+          "step": 1,
+          "caption": "Circle · Entry, 5 feet 0 inches",
+          "readout": "Circle · Entry, 5 feet 0 inches",
+          "duration": 950,
+          "cue": {
+            "x": 61,
+            "y": 300
+          }
+        },
+        {
+          "image": "worked-circle-04",
+          "step": 1,
+          "caption": "Circle · Diameter, 5 feet 0 inches",
+          "readout": "Circle · Diameter, 5 feet 0 inches",
+          "duration": 850,
+          "cue": {
+            "x": 220,
+            "y": 618
+          }
+        },
+        {
+          "image": "worked-circle-05",
+          "step": 1,
+          "caption": "Circle · Entry, 8",
+          "readout": "Circle · Entry, 8",
+          "duration": 850,
+          "cue": {
+            "x": 220,
+            "y": 698
+          }
+        },
+        {
+          "image": "worked-circle-06",
+          "step": 1,
+          "caption": "Circle · Entry, 85",
+          "readout": "Circle · Entry, 85",
+          "duration": 850,
+          "cue": {
+            "x": 379,
+            "y": 300
+          }
+        },
+        {
+          "image": "worked-circle-07",
+          "step": 2,
+          "caption": "Circle · Arc, 85 degrees",
+          "readout": "Circle · Arc, 85 degrees",
+          "duration": 850,
+          "pauseBefore": 450,
+          "cue": {
+            "x": 299,
+            "y": 856
+          }
+        },
+        {
+          "image": "worked-circle-08",
+          "step": 2,
+          "caption": "Circle · Arc length, 3 feet 8 and 1/2 inches",
+          "readout": "Circle · Arc length, 3 feet 8 and 1/2 inches",
+          "duration": 2200,
+          "result": true,
+          "cue": {
+            "x": 299,
+            "y": 856
+          }
+        },
+        {
+          "image": "worked-circle-09",
+          "step": 2,
+          "caption": "Circle · Chord, 3 feet 4 and 9/16 inches",
+          "readout": "Circle · Chord, 3 feet 4 and 9/16 inches",
+          "duration": 2200,
+          "result": true,
+          "cue": {
+            "x": 299,
+            "y": 856
+          }
+        },
+        {
+          "image": "worked-circle-10",
+          "step": 2,
+          "caption": "Circle · Segment rise, 0 feet 7 and 7/8 inches",
+          "readout": "Circle · Segment rise, 0 feet 7 and 7/8 inches",
+          "duration": 2600,
+          "result": true
+        }
+      ]
+    },
+    {
+      "id": "cylinder",
+      "label": "Cylinder",
+      "frames": [
+        {
+          "image": "worked-cylinder-00",
+          "step": 0,
+          "caption": "Choose Cylinder.",
+          "readout": "Result, 0.",
+          "duration": 1200,
+          "cue": {
+            "x": 299,
+            "y": 300
+          }
+        },
+        {
+          "image": "worked-cylinder-01",
+          "step": 1,
+          "caption": "Enter the measurements for Cylinder.",
+          "readout": "Cylinder, 0.",
+          "duration": 1200,
+          "pauseBefore": 450,
+          "cue": {
+            "x": 141,
+            "y": 698
+          }
+        },
+        {
+          "image": "worked-cylinder-02",
+          "step": 1,
+          "caption": "Cylinder · Entry, 4",
+          "readout": "Cylinder · Entry, 4",
+          "duration": 850,
+          "cue": {
+            "x": 61,
+            "y": 539
+          }
+        },
+        {
+          "image": "worked-cylinder-03",
+          "step": 1,
+          "caption": "Cylinder · Entry, 4 feet 0 inches",
+          "readout": "Cylinder · Entry, 4 feet 0 inches",
+          "duration": 950,
+          "cue": {
+            "x": 61,
+            "y": 300
+          }
+        },
+        {
+          "image": "worked-cylinder-04",
+          "step": 1,
+          "caption": "Cylinder · Diameter, 4 feet 0 inches",
+          "readout": "Cylinder · Diameter, 4 feet 0 inches",
+          "duration": 850,
+          "cue": {
+            "x": 299,
+            "y": 698
+          }
+        },
+        {
+          "image": "worked-cylinder-05",
+          "step": 1,
+          "caption": "Cylinder · Entry, 6",
+          "readout": "Cylinder · Entry, 6",
+          "duration": 850,
+          "cue": {
+            "x": 61,
+            "y": 539
+          }
+        },
+        {
+          "image": "worked-cylinder-06",
+          "step": 1,
+          "caption": "Cylinder · Entry, 6 feet 0 inches",
+          "readout": "Cylinder · Entry, 6 feet 0 inches",
+          "duration": 950,
+          "cue": {
+            "x": 220,
+            "y": 300
+          }
+        },
+        {
+          "image": "worked-cylinder-07",
+          "step": 2,
+          "caption": "Cylinder · Height, 6 feet 0 inches",
+          "readout": "Cylinder · Height, 6 feet 0 inches",
+          "duration": 850,
+          "pauseBefore": 450,
+          "cue": {
+            "x": 299,
+            "y": 856
+          }
+        },
+        {
+          "image": "worked-cylinder-08",
+          "step": 2,
+          "caption": "Cylinder · Volume, 75.39822 cubic feet",
+          "readout": "Cylinder · Volume, 75.39822 cubic feet",
+          "duration": 2200,
+          "result": true,
+          "cue": {
+            "x": 299,
+            "y": 856
+          }
+        },
+        {
+          "image": "worked-cylinder-09",
+          "step": 2,
+          "caption": "Cylinder · Surface area, 100.531 square feet",
+          "readout": "Cylinder · Surface area, 100.531 square feet",
+          "duration": 2600,
+          "result": true
+        }
+      ]
+    },
+    {
+      "id": "cone",
+      "label": "Cone",
+      "frames": [
+        {
+          "image": "worked-cone-00",
+          "step": 0,
+          "caption": "Choose Cone.",
+          "readout": "Result, 0.",
+          "duration": 1200,
+          "cue": {
+            "x": 61,
+            "y": 618
+          }
+        },
+        {
+          "image": "worked-cone-01",
+          "step": 0,
+          "caption": "Reveal Cone on the second-function keys.",
+          "readout": "2nd, 0.",
+          "duration": 1200,
+          "cue": {
+            "x": 299,
+            "y": 300
+          }
+        },
+        {
+          "image": "worked-cone-02",
+          "step": 1,
+          "caption": "Enter the measurements for Cone.",
+          "readout": "Cone, 0.",
+          "duration": 1200,
+          "pauseBefore": 450,
+          "cue": {
+            "x": 299,
+            "y": 698
+          }
+        },
+        {
+          "image": "worked-cone-03",
+          "step": 1,
+          "caption": "Cone · Entry, 6",
+          "readout": "Cone · Entry, 6",
+          "duration": 850,
+          "cue": {
+            "x": 61,
+            "y": 539
+          }
+        },
+        {
+          "image": "worked-cone-04",
+          "step": 1,
+          "caption": "Cone · Entry, 6 feet 0 inches",
+          "readout": "Cone · Entry, 6 feet 0 inches",
+          "duration": 950,
+          "cue": {
+            "x": 61,
+            "y": 300
+          }
+        },
+        {
+          "image": "worked-cone-05",
+          "step": 1,
+          "caption": "Cone · Diameter, 6 feet 0 inches",
+          "readout": "Cone · Diameter, 6 feet 0 inches",
+          "duration": 850,
+          "cue": {
+            "x": 141,
+            "y": 698
+          }
+        },
+        {
+          "image": "worked-cone-06",
+          "step": 1,
+          "caption": "Cone · Entry, 4",
+          "readout": "Cone · Entry, 4",
+          "duration": 850,
+          "cue": {
+            "x": 61,
+            "y": 539
+          }
+        },
+        {
+          "image": "worked-cone-07",
+          "step": 1,
+          "caption": "Cone · Entry, 4 feet 0 inches",
+          "readout": "Cone · Entry, 4 feet 0 inches",
+          "duration": 950,
+          "cue": {
+            "x": 220,
+            "y": 300
+          }
+        },
+        {
+          "image": "worked-cone-08",
+          "step": 2,
+          "caption": "Cone · Height, 4 feet 0 inches",
+          "readout": "Cone · Height, 4 feet 0 inches",
+          "duration": 850,
+          "pauseBefore": 450,
+          "cue": {
+            "x": 299,
+            "y": 856
+          }
+        },
+        {
+          "image": "worked-cone-09",
+          "step": 2,
+          "caption": "Cone · Volume, 37.69911 cubic feet",
+          "readout": "Cone · Volume, 37.69911 cubic feet",
+          "duration": 2200,
+          "result": true,
+          "cue": {
+            "x": 299,
+            "y": 856
+          }
+        },
+        {
+          "image": "worked-cone-10",
+          "step": 2,
+          "caption": "Cone · Lateral area, 47.12389 square feet",
+          "readout": "Cone · Lateral area, 47.12389 square feet",
+          "duration": 2600,
+          "result": true
+        }
+      ]
+    },
+    {
+      "id": "ratios",
+      "label": "Ratios",
+      "frames": [
+        {
+          "image": "worked-ratios-00",
+          "step": 0,
+          "caption": "Choose Ratios.",
+          "readout": "Result, 0.",
+          "duration": 1200,
+          "cue": {
+            "x": 379,
+            "y": 300
+          }
+        },
+        {
+          "image": "worked-ratios-01",
+          "step": 1,
+          "caption": "Enter the measurements for Ratios.",
+          "readout": "Ratios, 0.",
+          "duration": 1200,
+          "pauseBefore": 450,
+          "cue": {
+            "x": 141,
+            "y": 777
+          }
+        },
+        {
+          "image": "worked-ratios-02",
+          "step": 1,
+          "caption": "Ratios · Entry, 1",
+          "readout": "Ratios · Entry, 1",
+          "duration": 850,
+          "cue": {
+            "x": 141,
+            "y": 539
+          }
+        },
+        {
+          "image": "worked-ratios-03",
+          "step": 1,
+          "caption": "Ratios · Entry, 1 inches",
+          "readout": "Ratios · Entry, 1 inches",
+          "duration": 950,
+          "cue": {
+            "x": 61,
+            "y": 300
+          }
+        },
+        {
+          "image": "worked-ratios-04",
+          "step": 1,
+          "caption": "Ratios · A, 1 inches",
+          "readout": "Ratios · A, 1 inches",
+          "duration": 850,
+          "cue": {
+            "x": 141,
+            "y": 698
+          }
+        },
+        {
+          "image": "worked-ratios-05",
+          "step": 1,
+          "caption": "Ratios · Entry, 4",
+          "readout": "Ratios · Entry, 4",
+          "duration": 850,
+          "cue": {
+            "x": 61,
+            "y": 539
+          }
+        },
+        {
+          "image": "worked-ratios-06",
+          "step": 1,
+          "caption": "Ratios · Entry, 4 feet 0 inches",
+          "readout": "Ratios · Entry, 4 feet 0 inches",
+          "duration": 950,
+          "cue": {
+            "x": 141,
+            "y": 300
+          }
+        },
+        {
+          "image": "worked-ratios-07",
+          "step": 1,
+          "caption": "Ratios · B, 4 feet 0 inches",
+          "readout": "Ratios · B, 4 feet 0 inches",
+          "duration": 850,
+          "cue": {
+            "x": 299,
+            "y": 777
+          }
+        },
+        {
+          "image": "worked-ratios-08",
+          "step": 1,
+          "caption": "Ratios · Entry, 3",
+          "readout": "Ratios · Entry, 3",
+          "duration": 850,
+          "cue": {
+            "x": 141,
+            "y": 539
+          }
+        },
+        {
+          "image": "worked-ratios-09",
+          "step": 2,
+          "caption": "Ratios · Entry, 3 inches",
+          "readout": "Ratios · Entry, 3 inches",
+          "duration": 950,
+          "pauseBefore": 450,
+          "cue": {
+            "x": 220,
+            "y": 300
+          }
+        },
+        {
+          "image": "worked-ratios-10",
+          "step": 2,
+          "caption": "Ratios · D, 12 feet 0 inches",
+          "readout": "Ratios · D, 12 feet 0 inches",
+          "duration": 2200,
+          "result": true,
+          "cue": {
+            "x": 299,
+            "y": 698
+          }
+        },
+        {
+          "image": "worked-ratios-11",
+          "step": 2,
+          "caption": "Ratios · Entry, 6",
+          "readout": "Ratios · Entry, 6",
+          "duration": 850,
+          "cue": {
+            "x": 141,
+            "y": 539
+          }
+        },
+        {
+          "image": "worked-ratios-12",
+          "step": 2,
+          "caption": "Ratios · Entry, 6 inches",
+          "readout": "Ratios · Entry, 6 inches",
+          "duration": 950,
+          "cue": {
+            "x": 220,
+            "y": 300
+          }
+        },
+        {
+          "image": "worked-ratios-13",
+          "step": 2,
+          "caption": "Ratios · D, 24 feet 0 inches",
+          "readout": "Ratios · D, 24 feet 0 inches",
+          "duration": 2600,
+          "result": true
+        }
+      ]
+    },
+    {
+      "id": "offset",
+      "label": "Offset",
+      "frames": [
+        {
+          "image": "worked-offset-00",
+          "step": 0,
+          "caption": "Choose Offset.",
+          "readout": "Result, 0.",
+          "duration": 1200,
+          "cue": {
+            "x": 61,
+            "y": 380
+          }
+        },
+        {
+          "image": "worked-offset-01",
+          "step": 1,
+          "caption": "Enter the measurements for Offset.",
+          "readout": "Offset, 0.",
+          "duration": 1200,
+          "pauseBefore": 450,
+          "cue": {
+            "x": 141,
+            "y": 777
+          }
+        },
+        {
+          "image": "worked-offset-02",
+          "step": 1,
+          "caption": "Offset · Entry, 1",
+          "readout": "Offset · Entry, 1",
+          "duration": 850,
+          "cue": {
+            "x": 141,
+            "y": 856
+          }
+        },
+        {
+          "image": "worked-offset-03",
+          "step": 1,
+          "caption": "Offset · Entry, 10",
+          "readout": "Offset · Entry, 10",
+          "duration": 850,
+          "cue": {
+            "x": 61,
+            "y": 539
+          }
+        },
+        {
+          "image": "worked-offset-04",
+          "step": 1,
+          "caption": "Offset · Entry, 10 feet 0 inches",
+          "readout": "Offset · Entry, 10 feet 0 inches",
+          "duration": 950,
+          "cue": {
+            "x": 61,
+            "y": 300
+          }
+        },
+        {
+          "image": "worked-offset-05",
+          "step": 1,
+          "caption": "Offset · Length, 10 feet 0 inches",
+          "readout": "Offset · Length, 10 feet 0 inches",
+          "duration": 850,
+          "cue": {
+            "x": 220,
+            "y": 698
+          }
+        },
+        {
+          "image": "worked-offset-06",
+          "step": 1,
+          "caption": "Offset · Entry, 5",
+          "readout": "Offset · Entry, 5",
+          "duration": 850,
+          "cue": {
+            "x": 61,
+            "y": 539
+          }
+        },
+        {
+          "image": "worked-offset-07",
+          "step": 1,
+          "caption": "Offset · Entry, 5 feet 0 inches",
+          "readout": "Offset · Entry, 5 feet 0 inches",
+          "duration": 950,
+          "cue": {
+            "x": 141,
+            "y": 300
+          }
+        },
+        {
+          "image": "worked-offset-08",
+          "step": 1,
+          "caption": "Offset · Offset, 5 feet 0 inches",
+          "readout": "Offset · Offset, 5 feet 0 inches",
+          "duration": 850,
+          "cue": {
+            "x": 141,
+            "y": 618
+          }
+        },
+        {
+          "image": "worked-offset-09",
+          "step": 1,
+          "caption": "Offset · Entry, 7",
+          "readout": "Offset · Entry, 7",
+          "duration": 850,
+          "cue": {
+            "x": 61,
+            "y": 539
+          }
+        },
+        {
+          "image": "worked-offset-10",
+          "step": 1,
+          "caption": "Offset · Entry, 7 feet 0 inches",
+          "readout": "Offset · Entry, 7 feet 0 inches",
+          "duration": 950,
+          "cue": {
+            "x": 220,
+            "y": 300
+          }
+        },
+        {
+          "image": "worked-offset-11",
+          "step": 2,
+          "caption": "Offset · Height, 7 feet 0 inches",
+          "readout": "Offset · Height, 7 feet 0 inches",
+          "duration": 850,
+          "pauseBefore": 450,
+          "cue": {
+            "x": 299,
+            "y": 856
+          }
+        },
+        {
+          "image": "worked-offset-12",
+          "step": 2,
+          "caption": "Offset · Centerline radius, 6 feet 3 inches",
+          "readout": "Offset · Centerline radius, 6 feet 3 inches",
+          "duration": 2200,
+          "result": true,
+          "cue": {
+            "x": 299,
+            "y": 856
+          }
+        },
+        {
+          "image": "worked-offset-13",
+          "step": 2,
+          "caption": "Offset · Wrapper length, 11 feet 7 and 1/8 inches",
+          "readout": "Offset · Wrapper length, 11 feet 7 and 1/8 inches",
+          "duration": 2200,
+          "result": true,
+          "cue": {
+            "x": 299,
+            "y": 856
+          }
+        },
+        {
+          "image": "worked-offset-14",
+          "step": 2,
+          "caption": "Offset · Heel radius, 9 feet 9 inches",
+          "readout": "Offset · Heel radius, 9 feet 9 inches",
+          "duration": 2200,
+          "result": true,
+          "cue": {
+            "x": 299,
+            "y": 856
+          }
+        },
+        {
+          "image": "worked-offset-15",
+          "step": 2,
+          "caption": "Offset · Throat radius, 2 feet 9 inches",
+          "readout": "Offset · Throat radius, 2 feet 9 inches",
+          "duration": 2600,
+          "result": true
+        }
+      ]
+    },
+    {
+      "id": "roof",
+      "label": "Roof",
+      "frames": [
+        {
+          "image": "worked-roof-00",
+          "step": 0,
+          "caption": "Choose Roof.",
+          "readout": "Result, 0.",
+          "duration": 1200,
+          "cue": {
+            "x": 141,
+            "y": 380
+          }
+        },
+        {
+          "image": "worked-roof-01",
+          "step": 1,
+          "caption": "Enter the measurements for Roof.",
+          "readout": "Roof, 0.",
+          "duration": 1200,
+          "pauseBefore": 450,
+          "cue": {
+            "x": 141,
+            "y": 777
+          }
+        },
+        {
+          "image": "worked-roof-02",
+          "step": 1,
+          "caption": "Roof · Entry, 1",
+          "readout": "Roof · Entry, 1",
+          "duration": 850,
+          "cue": {
+            "x": 299,
+            "y": 698
+          }
+        },
+        {
+          "image": "worked-roof-03",
+          "step": 1,
+          "caption": "Roof · Entry, 16",
+          "readout": "Roof · Entry, 16",
+          "duration": 850,
+          "cue": {
+            "x": 141,
+            "y": 539
+          }
+        },
+        {
+          "image": "worked-roof-04",
+          "step": 1,
+          "caption": "Roof · Entry, 16 inches",
+          "readout": "Roof · Entry, 16 inches",
+          "duration": 950,
+          "cue": {
+            "x": 379,
+            "y": 300
+          }
+        },
+        {
+          "image": "worked-roof-05",
+          "step": 1,
+          "caption": "Roof · Spacing, 16 inches",
+          "readout": "Roof · Spacing, 16 inches",
+          "duration": 850,
+          "cue": {
+            "x": 299,
+            "y": 698
+          }
+        },
+        {
+          "image": "worked-roof-06",
+          "step": 1,
+          "caption": "Roof · Entry, 6",
+          "readout": "Roof · Entry, 6",
+          "duration": 850,
+          "cue": {
+            "x": 61,
+            "y": 539
+          }
+        },
+        {
+          "image": "worked-roof-07",
+          "step": 1,
+          "caption": "Roof · Entry, 6 feet 0 inches",
+          "readout": "Roof · Entry, 6 feet 0 inches",
+          "duration": 950,
+          "cue": {
+            "x": 61,
+            "y": 300
+          }
+        },
+        {
+          "image": "worked-roof-08",
+          "step": 1,
+          "caption": "Roof · Run, 6 feet 0 inches",
+          "readout": "Roof · Run, 6 feet 0 inches",
+          "duration": 850,
+          "cue": {
+            "x": 299,
+            "y": 618
+          }
+        },
+        {
+          "image": "worked-roof-09",
+          "step": 1,
+          "caption": "Roof · Entry, 9",
+          "readout": "Roof · Entry, 9",
+          "duration": 850,
+          "cue": {
+            "x": 141,
+            "y": 539
+          }
+        },
+        {
+          "image": "worked-roof-10",
+          "step": 1,
+          "caption": "Roof · Entry, 9 inches",
+          "readout": "Roof · Entry, 9 inches",
+          "duration": 950,
+          "cue": {
+            "x": 220,
+            "y": 300
+          }
+        },
+        {
+          "image": "worked-roof-11",
+          "step": 2,
+          "caption": "Roof · Pitch 1, 9 inches",
+          "readout": "Roof · Pitch 1, 9 inches",
+          "duration": 850,
+          "pauseBefore": 450,
+          "cue": {
+            "x": 61,
+            "y": 380
+          }
+        },
+        {
+          "image": "worked-roof-12",
+          "step": 2,
+          "caption": "Roof · Common Length, 7 feet 6 inches",
+          "readout": "Roof · Common Length, 7 feet 6 inches",
+          "duration": 2200,
+          "result": true,
+          "cue": {
+            "x": 141,
+            "y": 380
+          }
+        },
+        {
+          "image": "worked-roof-13",
+          "step": 2,
+          "caption": "Roof · Hip/Valley Length, 9 feet 7 and 1/4 inches",
+          "readout": "Roof · Hip/Valley Length, 9 feet 7 and 1/4 inches",
+          "duration": 2200,
+          "result": true,
+          "cue": {
+            "x": 299,
+            "y": 856
+          }
+        },
+        {
+          "image": "worked-roof-14",
+          "step": 2,
+          "caption": "Roof · Hip/Valley Plumb cut, 27.93835 degrees",
+          "readout": "Roof · Hip/Valley Plumb cut, 27.93835 degrees",
+          "duration": 2200,
+          "result": true,
+          "cue": {
+            "x": 220,
+            "y": 380
+          }
+        },
+        {
+          "image": "worked-roof-15",
+          "step": 2,
+          "caption": "Roof · Pitch 1 spacing, 16 inches",
+          "readout": "Roof · Pitch 1 spacing, 16 inches",
+          "duration": 2200,
+          "result": true,
+          "cue": {
+            "x": 299,
+            "y": 856
+          }
+        },
+        {
+          "image": "worked-roof-16",
+          "step": 2,
+          "caption": "Roof · Pitch 1 jack 1, 5 feet 10 inches",
+          "readout": "Roof · Pitch 1 jack 1, 5 feet 10 inches",
+          "duration": 2600,
+          "result": true
+        }
+      ]
+    },
+    {
+      "id": "stairs",
+      "label": "Stairs",
+      "frames": [
+        {
+          "image": "worked-stairs-00",
+          "step": 0,
+          "caption": "Choose Stairs.",
+          "readout": "Result, 0.",
+          "duration": 1200,
+          "cue": {
+            "x": 220,
+            "y": 380
+          }
+        },
+        {
+          "image": "worked-stairs-01",
+          "step": 1,
+          "caption": "Enter the measurements for Stairs.",
+          "readout": "Stairs, 0.",
+          "duration": 1200,
+          "pauseBefore": 450,
+          "cue": {
+            "x": 141,
+            "y": 618
+          }
+        },
+        {
+          "image": "worked-stairs-02",
+          "step": 1,
+          "caption": "Stairs · Entry, 7",
+          "readout": "Stairs · Entry, 7",
+          "duration": 850,
+          "cue": {
+            "x": 220,
+            "y": 856
+          }
+        },
+        {
+          "image": "worked-stairs-03",
+          "step": 1,
+          "caption": "Stairs · Entry, 7.",
+          "readout": "Stairs · Entry, 7.",
+          "duration": 850,
+          "cue": {
+            "x": 220,
+            "y": 698
+          }
+        },
+        {
+          "image": "worked-stairs-04",
+          "step": 1,
+          "caption": "Stairs · Entry, 7.5",
+          "readout": "Stairs · Entry, 7.5",
+          "duration": 850,
+          "cue": {
+            "x": 141,
+            "y": 539
+          }
+        },
+        {
+          "image": "worked-stairs-05",
+          "step": 1,
+          "caption": "Stairs · Entry, 7 and 1/2 inches",
+          "readout": "Stairs · Entry, 7 and 1/2 inches",
+          "duration": 950,
+          "cue": {
+            "x": 220,
+            "y": 300
+          }
+        },
+        {
+          "image": "worked-stairs-06",
+          "step": 1,
+          "caption": "Stairs · Target riser, 7 and 1/2 inches",
+          "readout": "Stairs · Target riser, 7 and 1/2 inches",
+          "duration": 850,
+          "cue": {
+            "x": 141,
+            "y": 777
+          }
+        },
+        {
+          "image": "worked-stairs-07",
+          "step": 1,
+          "caption": "Stairs · Entry, 1",
+          "readout": "Stairs · Entry, 1",
+          "duration": 850,
+          "cue": {
+            "x": 141,
+            "y": 856
+          }
+        },
+        {
+          "image": "worked-stairs-08",
+          "step": 1,
+          "caption": "Stairs · Entry, 10",
+          "readout": "Stairs · Entry, 10",
+          "duration": 850,
+          "cue": {
+            "x": 141,
+            "y": 539
+          }
+        },
+        {
+          "image": "worked-stairs-09",
+          "step": 1,
+          "caption": "Stairs · Entry, 10 inches",
+          "readout": "Stairs · Entry, 10 inches",
+          "duration": 950,
+          "cue": {
+            "x": 61,
+            "y": 380
+          }
+        },
+        {
+          "image": "worked-stairs-10",
+          "step": 1,
+          "caption": "Stairs · Target tread, 10 inches",
+          "readout": "Stairs · Target tread, 10 inches",
+          "duration": 850,
+          "cue": {
+            "x": 299,
+            "y": 618
+          }
+        },
+        {
+          "image": "worked-stairs-11",
+          "step": 1,
+          "caption": "Stairs · Entry, 9",
+          "readout": "Stairs · Entry, 9",
+          "duration": 850,
+          "cue": {
+            "x": 61,
+            "y": 539
+          }
+        },
+        {
+          "image": "worked-stairs-12",
+          "step": 1,
+          "caption": "Stairs · Entry, 9 feet 0 inches",
+          "readout": "Stairs · Entry, 9 feet 0 inches",
+          "duration": 950,
+          "cue": {
+            "x": 141,
+            "y": 777
+          }
+        },
+        {
+          "image": "worked-stairs-13",
+          "step": 1,
+          "caption": "Stairs · Entry, 1",
+          "readout": "Stairs · Entry, 1",
+          "duration": 850,
+          "cue": {
+            "x": 141,
+            "y": 777
+          }
+        },
+        {
+          "image": "worked-stairs-14",
+          "step": 1,
+          "caption": "Stairs · Entry, 11",
+          "readout": "Stairs · Entry, 11",
+          "duration": 850,
+          "cue": {
+            "x": 141,
+            "y": 539
+          }
+        },
+        {
+          "image": "worked-stairs-15",
+          "step": 1,
+          "caption": "Stairs · Entry, 9 feet 11 inches",
+          "readout": "Stairs · Entry, 9 feet 11 inches",
+          "duration": 950,
+          "cue": {
+            "x": 141,
+            "y": 300
+          }
+        },
+        {
+          "image": "worked-stairs-16",
+          "step": 2,
+          "caption": "Stairs · Rise, 9 feet 11 inches",
+          "readout": "Stairs · Rise, 9 feet 11 inches",
+          "duration": 850,
+          "pauseBefore": 450,
+          "cue": {
+            "x": 299,
+            "y": 856
+          }
+        },
+        {
+          "image": "worked-stairs-17",
+          "step": 2,
+          "caption": "Stairs · Riser height, 7 and 7/16 inches",
+          "readout": "Stairs · Riser height, 7 and 7/16 inches",
+          "duration": 2200,
+          "result": true,
+          "cue": {
+            "x": 299,
+            "y": 856
+          }
+        },
+        {
+          "image": "worked-stairs-18",
+          "step": 2,
+          "caption": "Stairs · Risers, 16.",
+          "readout": "Stairs · Risers, 16.",
+          "duration": 2200,
+          "result": true,
+          "cue": {
+            "x": 299,
+            "y": 856
+          }
+        },
+        {
+          "image": "worked-stairs-19",
+          "step": 2,
+          "caption": "Stairs · Tread depth, 10 inches",
+          "readout": "Stairs · Tread depth, 10 inches",
+          "duration": 2200,
+          "result": true,
+          "cue": {
+            "x": 299,
+            "y": 856
+          }
+        },
+        {
+          "image": "worked-stairs-20",
+          "step": 2,
+          "caption": "Stairs · Treads, 15.",
+          "readout": "Stairs · Treads, 15.",
+          "duration": 2600,
+          "result": true,
+          "cue": {
+            "x": 299,
+            "y": 856
+          }
+        },
+        {
+          "image": "worked-stairs-21",
+          "step": 2,
+          "caption": "Stairs · Run needed, 12 feet 6 inches",
+          "readout": "Stairs · Run needed, 12 feet 6 inches",
+          "duration": 2600,
+          "result": true
+        }
+      ]
+    }
+  ]
+}
