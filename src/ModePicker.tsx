@@ -1,18 +1,14 @@
 import { useId } from 'react';
-import { Pause, Play } from 'lucide-react';
 import { Button } from './components/ui/button';
 import { NativeSelect, NativeSelectOption } from './components/ui/native-select';
 import { modes } from './demo-content';
 
 interface ModePickerProps {
   selected: number;
-  playing: boolean;
-  reducedMotion: boolean;
   onSelect: (mode: number) => void;
-  onTogglePlayback: () => void;
 }
 
-export function ModePicker({ selected, playing, reducedMotion, onSelect, onTogglePlayback }: ModePickerProps) {
+export function ModePicker({ selected, onSelect }: ModePickerProps) {
   const pickerId = useId();
   return (
     <aside className="mode-picker" aria-label="Calculation modes">
@@ -28,7 +24,6 @@ export function ModePicker({ selected, playing, reducedMotion, onSelect, onToggl
           {modes.map((mode, index) => <NativeSelectOption key={mode.id} value={index}>{mode.label}</NativeSelectOption>)}
         </NativeSelect>
       </div>
-      {!reducedMotion && <div className="mode-playback"><Button variant="control" onClick={onTogglePlayback} aria-label={playing ? 'Pause calculation demo' : 'Play calculation demo'}>{playing ? <Pause data-icon="inline-start" /> : <Play data-icon="inline-start" />}{playing ? 'Pause' : 'Play'}</Button></div>}
     </aside>
   );
 }

@@ -6,7 +6,7 @@ export function prefersReducedMotion() {
 }
 
 // Each section owns its playback; only browser/media synchronization is shared.
-export function useDemoPlayback(frames: readonly Frame[], index: number, onAdvance: () => boolean) {
+export function useDemoPlayback(frames: readonly Frame[], index: number, onAdvance: () => boolean, suspended = false) {
   const [reducedMotion, setReducedMotion] = useState(prefersReducedMotion);
   const [playing, setPlaying] = useState(() => !prefersReducedMotion());
   const [inView, setInView] = useState(false);
@@ -17,7 +17,7 @@ export function useDemoPlayback(frames: readonly Frame[], index: number, onAdvan
   const frame = frames[index];
   const src = `/assets/demo/${frame.image}.webp`;
   const failed = failedImage === src;
-  const active = playing && inView && pageVisible && !reducedMotion && loadedImage === src && !failed;
+  const active = !suspended && playing && inView && pageVisible && !reducedMotion && loadedImage === src && !failed;
 
   useEffect(() => {
     const preference = window.matchMedia('(prefers-reduced-motion: reduce)');

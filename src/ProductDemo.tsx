@@ -10,11 +10,12 @@ import { prefersReducedMotion, useDemoPlayback } from './useDemoPlayback';
 export function ProductDemo() {
   const [state, setState] = useState(() => initialState(prefersReducedMotion()));
   const [announcement, setAnnouncement] = useState('');
+  const [phoneHovered, setPhoneHovered] = useState(false);
   const onAdvance = useCallback(() => { setState(advance); return true; }, []);
   const frames = framesForMode(state.mode);
   const frame = frames[state.frame];
   const mode = modes[state.mode];
-  const playback = useDemoPlayback(frames, state.frame, onAdvance);
+  const playback = useDemoPlayback(frames, state.frame, onAdvance, phoneHovered);
   const cue = frame.cue ?? frames[state.frame - 1]?.cue;
 
   function changeMode(index: number) {
@@ -29,23 +30,19 @@ export function ProductDemo() {
     playback.pause();
     setAnnouncement(frames[next.frame].caption);
   }
-  function togglePlayback() {
-    if (!playback.playing && state.frame === frames.length - 1) setState(current => ({ ...current, frame: 0 }));
-    playback.toggle();
-  }
 
   return (
     <div ref={playback.ref} onFocusCapture={playback.onFocusCapture} data-demo-kind="calculation" data-demo-frame={frame.image} data-demo-playing={playback.active}>
       <div className="calculation-layout">
-        <ModePicker selected={state.mode} playing={playback.playing} reducedMotion={playback.reducedMotion} onSelect={changeMode} onTogglePlayback={togglePlayback} />
+        <ModePicker selected={state.mode} onSelect={changeMode} />
         <div className="proof-copy" id="adaptive-mode-content">
-          <h2>{mode.label}</h2>
+          <h3>{mode.label}</h3>
           <ol className="mode-instructions" aria-label="How to use this mode">
             {mode.steps.map((step, index) => <li key={step} data-current={frame.step === index} aria-current={frame.step === index ? 'step' : undefined}>{step}</li>)}
           </ol>
           {!playback.playing && <Button variant="control" onClick={showNextResult}><StepForward data-icon="inline-start" />Next result</Button>}
         </div>
-        <DemoPhone frame={frame} cue={cue} resetKey={mode.id} active={playback.active} reducedMotion={playback.reducedMotion} media={playback.media} />
+        <DemoPhone onHoverChange={setPhoneHovered} frame={frame} cue={cue} resetKey={mode.id} active={playback.active} reducedMotion={playback.reducedMotion} media={playback.media} />
       </div>
       <p className="sr-only" aria-live="polite" aria-atomic="true">{announcement}</p>
     </div>

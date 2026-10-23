@@ -7,12 +7,13 @@ interface DemoPhoneProps {
   resetKey: string;
   active: boolean;
   reducedMotion: boolean;
+  onHoverChange?: (hovered: boolean) => void;
   media: { src: string; failed: boolean; onLoad: () => void; onError: () => void };
 }
 
-export function DemoPhone({ frame, cue, resetKey, active, reducedMotion, media }: DemoPhoneProps) {
+export function DemoPhone({ frame, cue, resetKey, active, reducedMotion, media, onHoverChange }: DemoPhoneProps) {
   return (
-    <figure className="demo-phone-figure" aria-label={frame.caption}>
+    <figure className="demo-phone-figure" aria-label={frame.caption} onPointerEnter={event => { if (event.pointerType === 'mouse') onHoverChange?.(true); }} onPointerLeave={() => onHoverChange?.(false)}>
       <div className="demo-phone">
         <div className="phone-aperture"><div className="native-screen">
           <img src={media.src} width="720" height="1564" alt="" loading="lazy" onLoad={media.onLoad} onError={media.onError} />

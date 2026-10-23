@@ -29,6 +29,10 @@ test('hero states the value and Help follows the complete calculation section wi
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Trade math.Made intuitive.');
   await expect(page.locator('.hero-description')).toHaveText('Helpful modes. Adaptive keys. Visual results. Easy conversions.');
   await expect(page.getByRole('tab')).toHaveCount(0);
+  await expect(page.getByRole('heading', { level: 2, name: 'See how Figure works.' })).toBeVisible();
+  await expect(page.locator(calculation).getByRole('heading', { level: 3, name: 'Right Triangle' })).toBeVisible();
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await expect(page.locator(calculation).getByRole('button', { name: /Pause|Play/ })).toHaveCount(0);
   const calculationBox = await page.locator('#demo').boundingBox();
   const helpBox = await page.locator('#help').boundingBox();
   expect(helpBox!.y).toBeGreaterThanOrEqual(calculationBox!.y + calculationBox!.height);
@@ -95,11 +99,14 @@ test('manual results include unit conversion and the Help sequence retains its r
   await expect(page.getByRole('list', { name: 'Help demo steps' })).toContainText('saved reading position');
 });
 
-test('automatic playback pauses offscreen and explicit pause survives returning', async ({ page }) => {
+test('automatic playback pauses offscreen and keyboard pause survives returning', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto('/#demo');
   await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'true');
-  await page.getByRole('button', { name: 'Pause calculation demo', exact: true }).click();
+  const picker = page.getByRole('combobox', { name: 'Choose a calculation mode' });
+  if (await picker.isVisible()) await picker.focus();
+  else await page.getByRole('button', { name: 'Right Triangle', exact: true }).focus();
+  await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'false');
   const paused = await frame(page);
   await page.waitForTimeout(1800);
   expect(await frame(page)).toBe(paused);
@@ -107,7 +114,7 @@ test('automatic playback pauses offscreen and explicit pause survives returning'
   await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'false');
   await page.locator(calculation).scrollIntoViewIfNeeded();
   await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'false');
-  await page.getByRole('button', { name: 'Play calculation demo', exact: true }).click();
+  await pickMode(page, 'Right Triangle');
   await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'true');
   await page.locator(help).scrollIntoViewIfNeeded();
   await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'false');
@@ -116,6 +123,20 @@ test('automatic playback pauses offscreen and explicit pause survives returning'
   await page.waitForTimeout(2000);
   expect(await frame(page)).toBe(offscreen);
   await expect(page.locator(help)).not.toHaveAttribute('data-demo-frame', 'help-calculation-before');
+});
+
+test('hovering the phone holds the demo and leaving resumes without a pause button', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto('/#demo');
+  await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'true');
+  await page.locator(`${calculation} .demo-phone-figure`).hover();
+  await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'false');
+  const held = await frame(page);
+  await page.waitForTimeout(1500);
+  expect(await frame(page)).toBe(held);
+  await page.mouse.move(0, 0);
+  await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'true');
+  await expect(page.locator(calculation).getByRole('button', { name: /Pause|Play/ })).toHaveCount(0);
 });
 
 test('missing screenshots retain readable calculation and Help guidance', async ({ page }) => {
@@ -194,7 +215,7 @@ test('keyboard focus and visibility changes suspend a running calculation', asyn
   if (await compact.isVisible()) await compact.focus();
   else await page.getByRole('button', { name: 'Right Triangle', exact: true }).focus();
   await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'false');
-  await page.getByRole('button', { name: 'Play calculation demo', exact: true }).click();
+  await pickMode(page, 'Right Triangle');
   await page.evaluate(() => {
     Object.defineProperty(document, 'hidden', { configurable: true, get: () => true });
     document.dispatchEvent(new Event('visibilitychange'));
@@ -224,7 +245,7 @@ test('mode navigation is keyboard accessible and starts from a completed still',
     await expect(cone).toBeFocused();
     await expect(cone).toHaveAttribute('aria-pressed', 'true');
   }
-  await expect(page.locator('#adaptive-mode-content h2')).toHaveText('Cone');
+  await expect(page.locator('#adaptive-mode-content h3')).toHaveText('Cone');
   await expect(page.locator(`${calculation} figure`)).toHaveAttribute('aria-label', /Cone · Volume/);
   await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'false');
 });
@@ -245,7 +266,7 @@ test('the automatic tour completes the cylinder results before moving to Cone', 
   await expect(page.locator(`${calculation} figure`)).toHaveAttribute('aria-label', /Cylinder · Surface area, 100.531 square feet/, { timeout: 5000 });
   await expect(current).toHaveText('Cycle to the surface area.');
   await expect(page.locator(calculation)).toHaveAttribute('data-demo-frame', 'worked-cone-00', { timeout: 5000 });
-  await expect(page.locator('#adaptive-mode-content h2')).toHaveText('Cone');
+  await expect(page.locator('#adaptive-mode-content h3')).toHaveText('Cone');
 });
 
 test('touch movement and contact remain smooth with a pause between stages', async ({ page }) => {
