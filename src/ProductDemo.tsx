@@ -4,7 +4,7 @@ import { Button } from './components/ui/button';
 import { ImageViewer } from './ImageViewer';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './components/ui/tabs';
 import { modes, proofs, type Proof } from './demo-content';
-import { advance, framesFor, initialState, nextMode, previousMode, retreat, selectProof } from './demo-state';
+import { advance, framesFor, initialState, nextMode, previousMode, retreat, selectAdaptiveStep, selectProof } from './demo-state';
 
 export function ProductDemo() {
   const [reducedMotion, setReducedMotion] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -58,6 +58,11 @@ export function ProductDemo() {
     setState(next);
     setAnnouncement(framesFor(next)[next.frame].caption);
   }
+  function jumpToStep(step: 0 | 1 | 2) {
+    const next = selectAdaptiveStep(state, step);
+    setState(next);
+    setAnnouncement(framesFor(next)[next.frame].caption);
+  }
   function changeMode(direction: 'previous' | 'next') {
     const next = direction === 'previous' ? previousMode(state) : nextMode(state);
     setState(next);
@@ -89,20 +94,26 @@ export function ProductDemo() {
                   <p className="proof-description">{proof.description}</p>
                   <ol className="timeline" aria-label="Demo sequence">
                     {proof.steps.map((step, index) => (
-                      <li key={step} data-current={frame.step === index} aria-current={frame.step === index ? 'step' : undefined}>
-                        <span className="step-number" aria-hidden="true">0{index + 1}</span><strong>{step}</strong>
-                        {state.proof === 'adaptive' && <small>{index === 0 ? mode.label : index === 1 ? '12 in' : mode.field}</small>}
-                        {state.proof === 'visual' && <small>{['3 ft run · 4 ft rise', 'Tap equals to cycle', 'Edge or angle'][index]}</small>}
+                      <li key={step} data-current={frame.step === index} aria-current={state.proof !== 'adaptive' && frame.step === index ? 'step' : undefined}>
+                        {state.proof === 'adaptive' ? (
+                          <button className="timeline-step" type="button" tabIndex={0} onClick={() => jumpToStep(index as 0 | 1 | 2)} aria-current={frame.step === index ? 'step' : undefined}>
+                            <span className="step-number" aria-hidden="true">0{index + 1}</span><strong>{step}</strong>
+                            <small>{index === 0 ? mode.label : index === 1 ? '12 in' : mode.field}</small>
+                          </button>
+                        ) : <>
+                          <span className="step-number" aria-hidden="true">0{index + 1}</span><strong>{step}</strong>
+                          {state.proof === 'visual' && <small>{['3 ft run · 4 ft rise', 'Tap equals to cycle', 'Edge or angle'][index]}</small>}
+                        </>}
                       </li>
                     ))}
                   </ol>
                   {state.proof !== 'adaptive' && <p className="example-label">{state.proof === 'visual' ? <><strong>Right Triangle</strong> · Result {state.frame + 1} of 6</> : <><strong>Built-in guidance</strong> · Step {state.frame + 1} of {framesFor(state).length}</>}</p>}
                   <div className="demo-controls" aria-label="Demo playback">
                     {!reducedMotion && <Button variant="control" onClick={togglePlayback} aria-label={state.playing ? 'Pause demo' : 'Play demo'}>{state.playing ? <Pause data-icon="inline-start" /> : <Play data-icon="inline-start" />}{state.playing ? 'Pause' : 'Play'}</Button>}
-                    <div className="demo-control-pair" role="group" aria-label="Step navigation">
-                      <Button variant="control" aria-label={state.proof === 'visual' ? 'Previous result' : 'Previous step'} onClick={stepBackward} disabled={state.proof !== 'adaptive' && state.frame === 0}><ArrowLeft data-icon="inline-start" />Back</Button>
-                      <Button variant="control" onClick={stepForward} disabled={state.proof !== 'adaptive' && state.frame === framesFor(state).length - 1}><StepForward data-icon="inline-start" />{state.proof === 'visual' ? 'Next result' : 'Next step'}</Button>
-                    </div>
+                    {state.proof !== 'adaptive' && <div className="demo-control-pair" role="group" aria-label="Step navigation">
+                      <Button variant="control" aria-label={state.proof === 'visual' ? 'Previous result' : 'Previous step'} onClick={stepBackward} disabled={state.frame === 0}><ArrowLeft data-icon="inline-start" />Back</Button>
+                      <Button variant="control" onClick={stepForward} disabled={state.frame === framesFor(state).length - 1}><StepForward data-icon="inline-start" />{state.proof === 'visual' ? 'Next result' : 'Next step'}</Button>
+                    </div>}
                     {state.proof === 'adaptive' ? <div className="demo-control-pair" role="group" aria-label="Mode navigation">
                       <Button variant="control" onClick={() => changeMode('previous')}><ArrowLeft data-icon="inline-start" />Previous mode</Button>
                       <Button variant="control" onClick={() => changeMode('next')}>Next mode<ArrowRight data-icon="inline-end" /></Button>

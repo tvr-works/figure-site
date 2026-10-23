@@ -186,15 +186,19 @@ test('keyboard focus and visibility changes suspend a running demo', async ({ pa
   await expect(page.locator(demo)).toHaveAttribute('data-demo-playing', 'true');
 });
 
-test('adaptive headline names the mode and both steppers navigate in either direction', async ({ page }) => {
+test('adaptive steps jump directly and modes navigate in either direction', async ({ page }) => {
   await page.goto('/#demo');
   await expect(page.getByText('Built around the calculation.', { exact: true })).toHaveCount(0);
   await expect(page.locator('.proof-copy').getByRole('heading', { name: 'Right Triangle', exact: true })).toBeVisible();
   await expect(page.locator('.proof-copy .example-label')).toHaveCount(0);
-  await page.getByRole('button', { name: 'Previous step', exact: true }).click();
-  await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', 'right-unit');
-  await page.getByRole('button', { name: 'Next step', exact: true }).click();
-  await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', 'right-assigned');
+  await expect(page.getByRole('group', { name: 'Step navigation' })).toHaveCount(0);
+  for (const [label, image] of [['Select mode Right Triangle', 'right-launcher'], ['Assign Run', 'right-unit'], ['Enter measurement 12 in', 'right-selected']]) {
+    const step = page.getByRole('button', { name: label, exact: true });
+    await step.click();
+    await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', image);
+    await expect(step).toHaveAttribute('aria-current', 'step');
+    await expect(page.locator('.timeline [aria-current="step"]')).toHaveCount(1);
+  }
   await page.getByRole('button', { name: 'Previous mode', exact: true }).click();
   await expect(page.locator('.proof-copy').getByRole('heading', { name: 'Stairs', exact: true })).toBeVisible();
   await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', 'stairs-assigned');
@@ -205,4 +209,25 @@ test('adaptive headline names the mode and both steppers navigate in either dire
   await page.getByRole('button', { name: 'Next result', exact: true }).click();
   await page.getByRole('button', { name: 'Previous result', exact: true }).click();
   await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', 'results-0');
+});
+
+test('step buttons support keyboard activation and pause automatic playback', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto('/#demo');
+  await expect(page.locator(demo)).toHaveAttribute('data-demo-playing', 'true');
+  const selectMode = page.getByRole('button', { name: 'Select mode Right Triangle', exact: true });
+  await selectMode.focus();
+  await selectMode.press('Enter');
+  await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', 'right-launcher');
+  await selectMode.press('Tab');
+  const measurement = page.getByRole('button', { name: 'Enter measurement 12 in', exact: true });
+  await expect(measurement).toBeFocused();
+  await measurement.press('Space');
+  await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', 'right-selected');
+  await page.waitForTimeout(1500);
+  await expect(page.locator(demo)).toHaveAttribute('data-demo-frame', 'right-selected');
+  await expect(page.locator(demo)).toHaveAttribute('data-demo-playing', 'false');
+  await expect(measurement).toBeFocused();
+  await page.getByRole('button', { name: 'Play demo', exact: true }).click();
+  await expect(page.locator(demo)).toHaveAttribute('data-demo-playing', 'true');
 });

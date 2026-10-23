@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { advance, adaptiveFrames, framesFor, initialState, nextMode, previousMode, retreat, selectProof } from './demo-state';
+import { advance, adaptiveFrames, framesFor, initialState, nextMode, previousMode, retreat, selectAdaptiveStep, selectProof } from './demo-state';
 import { modes } from './demo-content';
 
 describe('guided demonstration boundaries', () => {
@@ -54,5 +54,16 @@ describe('backward demonstration navigation', () => {
   it.each(['visual', 'help'] as const)('holds at the first %s frame when stepping back', proof => {
     const state = retreat({ ...initialState(false), proof, frame: 0 });
     expect(state).toMatchObject({ proof, frame: 0, playing: false });
+  });
+});
+
+describe('direct adaptive step selection', () => {
+  it.each(modes)('jumps to each phase of $label and pauses playback', mode => {
+    const state = { ...initialState(false), mode: modes.indexOf(mode) };
+    for (const [step, suffix] of [[0, 'launcher'], [1, 'selected'], [2, 'unit']] as const) {
+      const next = selectAdaptiveStep(state, step);
+      expect(framesFor(next)[next.frame]).toMatchObject({ image: `${mode.id}-${suffix}`, step });
+      expect(next).toMatchObject({ mode: state.mode, playing: false });
+    }
   });
 });

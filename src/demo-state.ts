@@ -57,3 +57,7 @@ export function previousMode(state: DemoState): DemoState {
   const mode = (state.mode + modes.length - 1) % modes.length;
   return { ...state, mode, frame: state.playing ? 0 : adaptiveFrames(mode).length - 1 };
 }
+
+export function selectAdaptiveStep(state: DemoState, step: 0 | 1 | 2): DemoState {
+  return { ...state, frame: adaptiveFrames(state.mode).findIndex(frame => frame.step === step), playing: false };
+}
