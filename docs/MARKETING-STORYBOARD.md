@@ -31,7 +31,7 @@ Show that behavior through authentic examples. Experienced calculator users need
 | Compatibility | For iPhone · iOS 26 or later | State the current app requirement. |
 | Demonstration introduction | Choose a mode and follow a complete calculation. Watch the keys adapt to the task and the diagram highlight what each result measures. | Explain how to explore and connect the walkthrough to adaptive keys and visual results. |
 | Calculation demonstration | See how Figure works. / Nine-mode navigation, active mode H3, five or six specific steps per mode and a framed native sequence | Combine breadth, adaptive keys, solved results, diagram highlights and conversions in one area. |
-| Help | Built-in Help / Help without losing your place. | Show approachable guidance and continuity without leaving the calculation. |
+| Help | Help without losing your place. / Find rise and run from a slant. | Show approachable guidance and continuity without leaving the calculation. |
 | Help description | Worked examples, plain-language explanations, and practical uses, right alongside your calculation. | Explain what the guide provides. |
 | Availability/footer | Figure for iPhone. / No subscription. Works offline. / Preparing for the App Store. | Give honest availability, support and privacy destinations. |
 
@@ -75,7 +75,7 @@ Its visible ordered list explains:
 2. Close Help and try the steps. Your calculation stays in place.
 3. Reopen the same guide at your saved reading position.
 
-The sequence plays when visible and holds the reopened guide at the end. Pause/Play, Back, Next step and Replay remain local to Help. Reduced motion shows its useful ending and keeps manual controls. The retained article and reading position are within the current calculator session; no cross-restart persistence is promised. See [Help evidence](HELP-PROOF.md).
+The full-width Help H2 and introduction use the same treatment as the calculation section. A 24px H3 names the demonstrated guide above the three-step list, top-aligned with the phone. The sequence plays when visible and holds the reopened guide at the end. Playback controls and the small Built-in Help label are removed. Hovering over the phone holds playback; leaving resumes it. Reduced motion shows the useful ending as a static proof. The retained article and reading position are within the current calculator session; no cross-restart persistence is promised. See [Help evidence](HELP-PROOF.md).
 
 ## Implementation and verification
 

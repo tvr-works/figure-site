@@ -10,7 +10,7 @@ A clear interface can make the controls understandable while a guide helps someo
 
 ## Recommended copy
 
-Section label: **Built-in Help**
+The section uses a full-width H2 and introduction, followed by a 24px H3 naming the demonstrated guide. The small section label and playback controls have been removed.
 
 Headline:
 
@@ -73,6 +73,6 @@ App/Help/Content/MathAnglesGuides.swift contains the worked slant example, conce
 
 ## Current page structure
 
-The October 23 revision combines adaptive keys and visual results in complete examples for all nine modes. Help follows in its own scrolling section, with independent playback and manual controls. The separate Visual results proof and All calculations inventory are removed. See the [current storyboard](MARKETING-STORYBOARD.md).
+The October 23 revision combines adaptive keys and visual results in complete examples for all nine modes. Help follows in its own scrolling section, with independent automatic playback and hover suspension. The sequence holds its useful ending; reduced motion shows that ending without animation. The separate Visual results proof and All calculations inventory are removed. See the [current storyboard](MARKETING-STORYBOARD.md).
 
 The six native Help captures show the pending 10 ft slant, the guide and practical applications, the retained calculation after closing, its 5 ft rise result, and the resumed reading position. They remain the media for this section.

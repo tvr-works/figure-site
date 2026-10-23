@@ -81,7 +81,7 @@ test('specific mode steps track completed results and conversion boundaries', as
   }
 });
 
-test('manual results include unit conversion and the Help sequence retains its reading position', async ({ page }) => {
+test('manual results include unit conversion and reduced-motion Help holds the resumed guide', async ({ page }) => {
   await page.goto('/#demo');
   await expect(page.locator(`${calculation} figure`)).toHaveAttribute('aria-label', 'Right Triangle · Diagonal, 5 feet 0 inches');
   await page.locator(calculation).getByRole('button', { name: 'Next result', exact: true }).click();
@@ -90,12 +90,11 @@ test('manual results include unit conversion and the Help sequence retains its r
   await expect(page.locator(`${calculation} figure`)).toHaveAttribute('aria-label', 'Right Triangle · Diagonal, 1.524 meters');
   await page.locator('#help-title').scrollIntoViewIfNeeded();
   await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-resumed');
-  await page.locator(help).getByRole('button', { name: 'Replay', exact: true }).click();
-  for (const image of ['help-guide', 'help-reading', 'help-closed', 'help-applied', 'help-resumed']) {
-    await page.getByRole('button', { name: 'Next Help step', exact: true }).click();
-    await expect(page.locator(help)).toHaveAttribute('data-demo-frame', image);
-  }
-  await expect(page.getByRole('button', { name: 'Next Help step', exact: true })).toBeDisabled();
+  await expect(page.locator(help).getByRole('heading', { level: 3, name: 'Find rise and run from a slant.' })).toBeVisible();
+  await expect(page.locator(help).getByRole('button')).toHaveCount(0);
+  await page.waitForTimeout(1500);
+  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-resumed');
+  await expect(page.locator(help)).toHaveAttribute('data-demo-playing', 'false');
   await expect(page.getByRole('list', { name: 'Help demo steps' })).toContainText('saved reading position');
 });
 
@@ -125,18 +124,20 @@ test('automatic playback pauses offscreen and keyboard pause survives returning'
   await expect(page.locator(help)).not.toHaveAttribute('data-demo-frame', 'help-calculation-before');
 });
 
-test('hovering the phone holds the demo and leaving resumes without a pause button', async ({ page }) => {
+test('hovering either phone holds its demo and leaving resumes without playback controls', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
-  await page.goto('/#demo');
-  await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'true');
-  await page.locator(`${calculation} .demo-phone-figure`).hover();
-  await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'false');
-  const held = await frame(page);
-  await page.waitForTimeout(1500);
-  expect(await frame(page)).toBe(held);
-  await page.mouse.move(0, 0);
-  await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'true');
-  await expect(page.locator(calculation).getByRole('button', { name: /Pause|Play/ })).toHaveCount(0);
+  for (const [selector, anchor] of [[calculation, 'demo'], [help, 'help']]) {
+    await page.goto(`/#${anchor}`);
+    await expect(page.locator(selector)).toHaveAttribute('data-demo-playing', 'true');
+    await page.locator(`${selector} .demo-phone-figure`).hover();
+    await expect(page.locator(selector)).toHaveAttribute('data-demo-playing', 'false');
+    const held = await frame(page, selector);
+    await page.waitForTimeout(1500);
+    expect(await frame(page, selector)).toBe(held);
+    await page.mouse.move(0, 0);
+    await expect(page.locator(selector)).toHaveAttribute('data-demo-playing', 'true');
+    await expect(page.locator(selector).getByRole('button', { name: /Pause|Play|Replay|Back|Next step/ })).toHaveCount(0);
+  }
 });
 
 test('missing screenshots retain readable calculation and Help guidance', async ({ page }) => {
@@ -301,7 +302,15 @@ test('Help plays its own story on scroll and holds the resumed guide at the end'
   await expect.poll(() => page.locator('#help').evaluate(element => Math.abs(element.getBoundingClientRect().top))).toBeLessThan(80);
   await expect(page.locator(help)).toHaveAttribute('data-demo-playing', 'true');
   await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'false');
-  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-resumed', { timeout: 18000 });
+  const current = page.locator(`${help} .mode-instructions [aria-current="step"]`);
+  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-guide', { timeout: 5000 });
+  await expect(current).toHaveText('Open Help without leaving your calculation.');
+  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-reading', { timeout: 5000 });
+  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-closed', { timeout: 5000 });
+  await expect(current).toHaveText('Close Help and try the steps. Your calculation stays in place.');
+  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-applied', { timeout: 5000 });
+  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-resumed', { timeout: 5000 });
+  await expect(current).toHaveText('Reopen the same guide at your saved reading position.');
   await expect(page.locator(help)).toHaveAttribute('data-demo-playing', 'false', { timeout: 5000 });
-  await expect(page.getByRole('button', { name: 'Play Help demo', exact: true })).toBeVisible();
+  await expect(page.locator(help).getByRole('button')).toHaveCount(0);
 });

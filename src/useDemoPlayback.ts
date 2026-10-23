@@ -61,7 +61,6 @@ export function useDemoPlayback(frames: readonly Frame[], index: number, onAdvan
     ref, reducedMotion, playing, active, onFocusCapture,
     start: () => setPlaying(!reducedMotion),
     pause: () => setPlaying(false),
-    toggle: () => setPlaying(current => !reducedMotion && !current),
     media: { src, failed, onLoad: () => setLoadedImage(src), onError: () => { setFailedImage(src); setPlaying(false); } },
   };
 }
