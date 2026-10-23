@@ -53,6 +53,30 @@ test('reduced motion shows completed examples and allows manual results in every
   }
 });
 
+test('specific mode steps track completed results and conversion boundaries', async ({ page }) => {
+  await page.goto('/#demo');
+  const current = page.locator(`${calculation} .mode-instructions [aria-current="step"]`);
+  const cases = [
+    { mode: 'Right Triangle', count: 6, highlights: ['Find the 5 ft diagonal.', 'Convert to inches or meters.', 'Convert to inches or meters.', 'Cycle through the sides and angles.'] },
+    { mode: 'Oblique Triangle', count: 6, highlights: ['Find the three angles.', 'Find the three angles.', 'Find the three angles.', 'Cycle to the triangle’s area.'] },
+    { mode: 'Circle', count: 6, highlights: ['Find the arc length.', 'Cycle to the chord length.', 'Cycle to the segment rise.'] },
+    { mode: 'Cylinder', count: 5, highlights: ['Find the volume.', 'Cycle to the surface area.'] },
+    { mode: 'Cone', count: 5, highlights: ['Find the volume.', 'Cycle to the lateral area.'] },
+    { mode: 'Ratios', count: 6, highlights: ['Read the 12 ft result.', 'Read the updated 24 ft result.'] },
+    { mode: 'Offset', count: 6, highlights: ['Find the centerline radius.', 'Compare wrapper length, heel radius, and throat radius.'] },
+    { mode: 'Roof', count: 6, highlights: ['Compare common and hip/valley rafters.', 'Compare common and hip/valley rafters.', 'Compare common and hip/valley rafters.', 'Cycle to the jack rafter results.'] },
+    { mode: 'Stairs', count: 6, highlights: ['Compare riser height and stair counts.', 'Compare riser height and stair counts.', 'Compare riser height and stair counts.', 'Compare riser height and stair counts.', 'Find the 12 ft 6 in required run.'] },
+  ];
+  for (const example of cases) {
+    await pickMode(page, example.mode);
+    await expect(page.locator(`${calculation} .mode-instructions li`)).toHaveCount(example.count);
+    for (const [index, highlight] of example.highlights.entries()) {
+      if (index) await page.locator(calculation).getByRole('button', { name: 'Next result', exact: true }).click();
+      await expect(current).toHaveText(highlight);
+    }
+  }
+});
+
 test('manual results include unit conversion and the Help sequence retains its reading position', async ({ page }) => {
   await page.goto('/#demo');
   await expect(page.locator(`${calculation} figure`)).toHaveAttribute('aria-label', 'Right Triangle · Diagonal, 5 feet 0 inches');
@@ -98,7 +122,7 @@ test('missing screenshots retain readable calculation and Help guidance', async 
   await page.route('**/assets/demo/**', route => route.abort());
   await page.goto('/#demo');
   await expect(page.locator(calculation).getByText('App image could not load. The steps explain the example.')).toBeVisible();
-  await expect(page.getByRole('list', { name: 'How to use this mode' })).toContainText('3 ft run and a 4 ft rise');
+  await expect(page.getByRole('list', { name: 'How to use this mode' })).toContainText('Set the run to 3 ft.');
   await page.locator(help).scrollIntoViewIfNeeded();
   await expect(page.locator(help).getByText('App image could not load. The steps explain the example.')).toBeVisible();
   await expect(page.getByRole('list', { name: 'Help demo steps' })).toContainText('Your calculation stays in place');
@@ -202,8 +226,14 @@ test('the automatic tour completes the cylinder results before moving to Cone', 
   await pickMode(page, 'Cylinder');
   await expect(page.locator(calculation)).toHaveAttribute('data-demo-frame', 'worked-cylinder-00');
   await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'true');
-  await expect(page.locator(`${calculation} figure`)).toHaveAttribute('aria-label', /Cylinder · Volume, 75.39822 cubic feet/, { timeout: 18000 });
+  const current = page.locator(`${calculation} .mode-instructions [aria-current="step"]`);
+  await expect(current).toHaveText('Select Cylinder.');
+  await expect(current).toHaveText('Set the diameter to 4 ft.', { timeout: 5000 });
+  await expect(current).toHaveText('Set the height to 6 ft.', { timeout: 5000 });
+  await expect(current).toHaveText('Find the volume.', { timeout: 5000 });
+  await expect(page.locator(`${calculation} figure`)).toHaveAttribute('aria-label', /Cylinder · Volume, 75.39822 cubic feet/, { timeout: 5000 });
   await expect(page.locator(`${calculation} figure`)).toHaveAttribute('aria-label', /Cylinder · Surface area, 100.531 square feet/, { timeout: 5000 });
+  await expect(current).toHaveText('Cycle to the surface area.');
   await expect(page.locator(calculation)).toHaveAttribute('data-demo-frame', 'worked-cone-00', { timeout: 5000 });
   await expect(page.locator('#adaptive-mode-content h2')).toHaveText('Cone');
 });
@@ -212,7 +242,7 @@ test('touch movement and contact remain smooth with a pause between stages', asy
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto('/#demo');
   await page.waitForFunction(() => document.querySelector('[data-demo-kind="calculation"]')?.getAttribute('data-demo-frame') === 'worked-right-01');
-  await expect(page.locator(`${calculation} .mode-instructions [aria-current="step"]`)).toHaveText('Assign a 3 ft run and a 4 ft rise.');
+  await expect(page.locator(`${calculation} .mode-instructions [aria-current="step"]`)).toHaveText('Set the run to 3 ft.');
   const samples = await page.evaluate(async () => {
     const cue = document.querySelector<HTMLElement>('[data-demo-kind="calculation"] .press-cue')!;
     const contact = cue.querySelector<HTMLElement>('.touch-contact')!;

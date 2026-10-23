@@ -29,12 +29,12 @@ Show that behavior through authentic examples. Experienced calculator users need
 | Hero actions | Get Figure / See it work | Link to availability and the mode demonstration. |
 | Reassurance | No subscription. No account. No ads. | State the purchase model and absence of signup/advertising. |
 | Compatibility | For iPhone · iOS 26 or later | State the current app requirement. |
-| Calculation demonstration | Nine-mode navigation, active mode headline, three explanatory steps and a framed native sequence | Combine breadth, adaptive keys, solved results, diagram highlights and conversions in one area. |
+| Calculation demonstration | Nine-mode navigation, active mode headline, five or six specific steps per mode and a framed native sequence | Combine breadth, adaptive keys, solved results, diagram highlights and conversions in one area. |
 | Help | Built-in Help / Help without losing your place. | Show approachable guidance and continuity without leaving the calculation. |
 | Help description | Worked examples, plain-language explanations, and practical uses, right alongside your calculation. | Explain what the guide provides. |
 | Availability/footer | Figure for iPhone. / No subscription. Works offline. / Preparing for the App Store. | Give honest availability, support and privacy destinations. |
 
-There is no umbrella demonstration headline, proof-tab navigation, separate Visual results section, All calculations inventory, clickable timeline, rotating explanatory sentence, duplicate transcript or larger-image viewer. Each active mode has one static ordered list. Help follows in normal document flow. The hero image remains stable.
+There is no umbrella demonstration headline, proof-tab navigation, separate Visual results section, All calculations inventory, clickable timeline, rotating explanatory sentence, duplicate transcript or larger-image viewer. Each active mode has one static ordered list with five or six specific actions. Help follows in normal document flow. The hero image remains stable.
 
 ## Complete mode examples
 
@@ -58,7 +58,7 @@ The stair capture uses the verified 80 in headroom and 10 in floor-thickness set
 
 The desktop mode panel lists all nine modes with short capability summaries. Small screens use a labelled native select. Visitors can choose a mode directly; normal-motion selection starts its complete demonstration. The automatic tour holds its results before moving to the next mode, then repeats after Stairs.
 
-The three-step list subtly emphasizes the current action. A smooth touch cue travels between real input coordinates, compresses and ripples on contact. Brief pauses separate the selection, entry and result stages. Result frames remain longer for inspection.
+Each mode’s list follows the captured input order, separates measurements, and groups related results. Its highlight follows the active input, conversion or result. A smooth touch cue travels between real input coordinates, compresses and ripples on contact. Brief pauses separate the selection, entry and result stages. Result frames remain longer for inspection.
 
 Pause is always available for normal-motion playback. While paused, Next result advances within the selected mode. Reduced motion begins at a solved result, suppresses automatic movement and touch effects, and retains manual result navigation. Keyboard focus is not moved by the tour; entering it by keyboard pauses playback. Scrolling offscreen or hiding the document suspends timers without resetting the selected mode. Explicit pause persists when returning.
 

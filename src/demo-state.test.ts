@@ -7,10 +7,16 @@ describe('complete native examples', () => {
   it.each(modes)('$label has an input path, real results, and available screenshots', mode => {
     const index = modes.findIndex(item => item.id === mode.id);
     const frames = framesForMode(index);
-    expect(new Set(frames.map(frame => frame.step))).toEqual(new Set([0, 1, 2]));
+    expect(new Set(frames.map(frame => frame.step))).toEqual(new Set(mode.steps.map((_, step) => step)));
     expect(frames.filter(frame => frame.result).length).toBeGreaterThanOrEqual(2);
     expect(frames[firstResult(index)].result).toBe(true);
     expect(frames.at(-1)?.cue).toBeUndefined();
+    expect(frames[0].step).toBe(0);
+    expect(frames.at(-1)?.step).toBe(mode.steps.length - 1);
+    for (let i = 1; i < frames.length; i++) {
+      expect(frames[i].step - frames[i - 1].step).toBeGreaterThanOrEqual(0);
+      expect(frames[i].step - frames[i - 1].step).toBeLessThanOrEqual(1);
+    }
     for (const frame of frames) {
       expect(existsSync(`public/assets/demo/${frame.image}.webp`)).toBe(true);
       expect(frame.duration).toBeGreaterThanOrEqual(850);
