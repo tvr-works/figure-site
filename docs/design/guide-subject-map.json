@@ -1,0 +1,1803 @@
+{
+  "schemaVersion": 1,
+  "status": "proposal",
+  "routePrefix": "/guides/",
+  "source": {
+    "repository": "figure",
+    "commit": "c15f25e5ae168df4b1275a9fd2ba75f896f325f6",
+    "catalogPath": "App/Help/Models/HelpCatalog.swift",
+    "contentDirectory": "App/Help/Content",
+    "topicCount": 53,
+    "recipeCount": 147
+  },
+  "categories": [
+    {
+      "id": "math",
+      "title": "Math and relationships"
+    },
+    {
+      "id": "measurements",
+      "title": "Measurements and units"
+    },
+    {
+      "id": "geometry",
+      "title": "Shapes and geometry"
+    },
+    {
+      "id": "construction",
+      "title": "Roof and stairs"
+    },
+    {
+      "id": "hvac",
+      "title": "HVAC"
+    },
+    {
+      "id": "controls",
+      "title": "Using Figure"
+    }
+  ],
+  "guides": [
+    {
+      "id": "guide-percentages",
+      "slug": "percentages",
+      "title": "Percentages",
+      "summary": "Find a percentage amount, add an allowance, apply a discount, or divide by a percentage.",
+      "categoryId": "math",
+      "searchAliases": [
+        "waste allowance",
+        "markup",
+        "discount",
+        "percent"
+      ],
+      "featuredSectionId": "math-percent",
+      "sourceRecipes": [
+        {
+          "topicId": "math-percent",
+          "recipeId": "math-percent",
+          "sectionId": "math-percent"
+        },
+        {
+          "topicId": "percent",
+          "recipeId": "percent-portion",
+          "sectionId": "percent-portion"
+        },
+        {
+          "topicId": "percent",
+          "recipeId": "percent-markup",
+          "sectionId": "percent-markup"
+        },
+        {
+          "topicId": "percent",
+          "recipeId": "percent-discount",
+          "sectionId": "percent-discount"
+        },
+        {
+          "topicId": "percent",
+          "recipeId": "percent-divisor",
+          "sectionId": "percent-divisor"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-measurement-arithmetic",
+        "guide-ratios-and-proportions"
+      ]
+    },
+    {
+      "id": "guide-calculation-order",
+      "slug": "calculation-order",
+      "title": "Calculation order and parentheses",
+      "summary": "Understand precedence, left-to-right calculation, and grouping with parentheses.",
+      "categoryId": "math",
+      "searchAliases": [
+        "order of operations",
+        "brackets",
+        "chain calculation"
+      ],
+      "featuredSectionId": "math-parentheses",
+      "sourceRecipes": [
+        {
+          "topicId": "math-parentheses",
+          "recipeId": "math-parentheses",
+          "sectionId": "math-parentheses"
+        },
+        {
+          "topicId": "math-order",
+          "recipeId": "normal-order",
+          "sectionId": "normal-order"
+        },
+        {
+          "topicId": "math-order",
+          "recipeId": "chain-order",
+          "sectionId": "chain-order"
+        },
+        {
+          "topicId": "math-order",
+          "recipeId": "group-order",
+          "sectionId": "group-order"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-measurement-arithmetic",
+        "guide-signed-values"
+      ]
+    },
+    {
+      "id": "guide-signed-values",
+      "slug": "signed-values",
+      "title": "Positive and negative values",
+      "summary": "Represent values above and below a reference and change a number’s sign.",
+      "categoryId": "math",
+      "searchAliases": [
+        "negative numbers",
+        "elevation",
+        "plus minus"
+      ],
+      "featuredSectionId": "math-signed-value",
+      "sourceRecipes": [
+        {
+          "topicId": "math-signed-value",
+          "recipeId": "math-signed-value",
+          "sectionId": "math-signed-value"
+        },
+        {
+          "topicId": "powers-exponents",
+          "recipeId": "negative-number",
+          "sectionId": "negative-number"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-measurement-arithmetic",
+        "guide-calculation-order"
+      ]
+    },
+    {
+      "id": "guide-squares-and-square-roots",
+      "slug": "squares-and-square-roots",
+      "title": "Squares and square roots",
+      "summary": "Square numbers or measured lengths and recover a square’s side from its area.",
+      "categoryId": "math",
+      "searchAliases": [
+        "square area",
+        "side from area",
+        "x squared",
+        "square root"
+      ],
+      "featuredSectionId": "math-square-root",
+      "sourceRecipes": [
+        {
+          "topicId": "math-square-root",
+          "recipeId": "math-square-root",
+          "sectionId": "math-square-root"
+        },
+        {
+          "topicId": "powers-exponents",
+          "recipeId": "power-square-area",
+          "sectionId": "power-square-area"
+        },
+        {
+          "topicId": "powers-exponents",
+          "recipeId": "square-root",
+          "sectionId": "square-root"
+        },
+        {
+          "topicId": "area-volume",
+          "recipeId": "square-area",
+          "sectionId": "square-area"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-areas-and-volumes",
+        "guide-cubes-and-cube-roots"
+      ]
+    },
+    {
+      "id": "guide-cubes-and-cube-roots",
+      "slug": "cubes-and-cube-roots",
+      "title": "Cubes and cube roots",
+      "summary": "Cube numbers or measured lengths and recover a cube’s side from its volume.",
+      "categoryId": "math",
+      "searchAliases": [
+        "cube volume",
+        "side from volume",
+        "cube root"
+      ],
+      "featuredSectionId": "math-cube-root",
+      "sourceRecipes": [
+        {
+          "topicId": "math-cube-root",
+          "recipeId": "math-cube-root",
+          "sectionId": "math-cube-root"
+        },
+        {
+          "topicId": "powers-exponents",
+          "recipeId": "cube-number",
+          "sectionId": "cube-number"
+        },
+        {
+          "topicId": "powers-exponents",
+          "recipeId": "cube-volume",
+          "sectionId": "cube-volume"
+        },
+        {
+          "topicId": "powers-exponents",
+          "recipeId": "cube-root-number",
+          "sectionId": "cube-root-number"
+        },
+        {
+          "topicId": "powers-exponents",
+          "recipeId": "cube-root-volume",
+          "sectionId": "cube-root-volume"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-squares-and-square-roots",
+        "guide-areas-and-volumes"
+      ]
+    },
+    {
+      "id": "guide-sine-and-cosine",
+      "slug": "sine-and-cosine",
+      "title": "Sine and cosine",
+      "summary": "Relate a right triangle’s angle and sloping length to its horizontal and vertical components.",
+      "categoryId": "math",
+      "searchAliases": [
+        "rise and run from a slant",
+        "sin",
+        "cos",
+        "horizontal projection"
+      ],
+      "featuredSectionId": "math-sine-cosine",
+      "sourceRecipes": [
+        {
+          "topicId": "math-sine-cosine",
+          "recipeId": "math-sine-cosine",
+          "sectionId": "math-sine-cosine"
+        },
+        {
+          "topicId": "angles-trig",
+          "recipeId": "trig-direct",
+          "sectionId": "trig-direct"
+        },
+        {
+          "topicId": "angles-trig",
+          "recipeId": "trig-cosine",
+          "sectionId": "trig-cosine"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-right-triangles",
+        "guide-tangent",
+        "guide-inverse-sine",
+        "guide-inverse-cosine"
+      ]
+    },
+    {
+      "id": "guide-tangent",
+      "slug": "tangent",
+      "title": "Tangent",
+      "summary": "Relate rise, horizontal run, and the angle of a right triangle.",
+      "categoryId": "math",
+      "searchAliases": [
+        "rise from run and angle",
+        "tan",
+        "slope ratio"
+      ],
+      "featuredSectionId": "math-tangent",
+      "sourceRecipes": [
+        {
+          "topicId": "math-tangent",
+          "recipeId": "math-tangent",
+          "sectionId": "math-tangent"
+        },
+        {
+          "topicId": "angles-trig",
+          "recipeId": "trig-tangent",
+          "sectionId": "trig-tangent"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-right-triangles",
+        "guide-inverse-tangent",
+        "guide-roof-pitch"
+      ]
+    },
+    {
+      "id": "guide-inverse-sine",
+      "slug": "inverse-sine",
+      "title": "Inverse sine",
+      "summary": "Find an angle from a sine ratio or from rise and sloping length in a right triangle.",
+      "categoryId": "math",
+      "searchAliases": [
+        "arcsine",
+        "asin",
+        "angle from rise and slant",
+        "offset angle"
+      ],
+      "featuredSectionId": "math-inverse-sine",
+      "sourceRecipes": [
+        {
+          "topicId": "math-inverse-sine",
+          "recipeId": "math-inverse-sine",
+          "sectionId": "math-inverse-sine"
+        },
+        {
+          "topicId": "angles-trig",
+          "recipeId": "trig-inverse-sine",
+          "sectionId": "trig-inverse-sine"
+        },
+        {
+          "topicId": "angles-trig",
+          "recipeId": "trig-side",
+          "sectionId": "trig-side"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-sine-and-cosine",
+        "guide-inverse-cosine",
+        "guide-inverse-tangent"
+      ]
+    },
+    {
+      "id": "guide-inverse-cosine",
+      "slug": "inverse-cosine",
+      "title": "Inverse cosine",
+      "summary": "Find an angle from a cosine ratio or from horizontal reach and sloping length.",
+      "categoryId": "math",
+      "searchAliases": [
+        "arccosine",
+        "acos",
+        "brace angle",
+        "angle from two sides"
+      ],
+      "featuredSectionId": "math-brace-angle",
+      "sourceRecipes": [
+        {
+          "topicId": "math-brace-angle",
+          "recipeId": "math-brace-angle",
+          "sectionId": "math-brace-angle"
+        },
+        {
+          "topicId": "angles-trig",
+          "recipeId": "trig-inverse-cosine",
+          "sectionId": "trig-inverse-cosine"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-sine-and-cosine",
+        "guide-inverse-sine",
+        "guide-inverse-tangent"
+      ]
+    },
+    {
+      "id": "guide-inverse-tangent",
+      "slug": "inverse-tangent",
+      "title": "Inverse tangent",
+      "summary": "Find a slope’s angle from a tangent ratio or measured rise and horizontal run.",
+      "categoryId": "math",
+      "searchAliases": [
+        "arctangent",
+        "atan",
+        "slope angle",
+        "angle from rise and run"
+      ],
+      "featuredSectionId": "math-inverse-tangent",
+      "sourceRecipes": [
+        {
+          "topicId": "math-inverse-tangent",
+          "recipeId": "math-inverse-tangent",
+          "sectionId": "math-inverse-tangent"
+        },
+        {
+          "topicId": "angles-trig",
+          "recipeId": "trig-inverse-tangent",
+          "sectionId": "trig-inverse-tangent"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-tangent",
+        "guide-inverse-sine",
+        "guide-inverse-cosine",
+        "guide-roof-pitch"
+      ]
+    },
+    {
+      "id": "guide-reciprocals",
+      "slug": "reciprocals",
+      "title": "Reciprocals",
+      "summary": "Understand one divided by a value and its use in converting a rate to spacing.",
+      "categoryId": "math",
+      "searchAliases": [
+        "one over x",
+        "1/x",
+        "threads per inch"
+      ],
+      "featuredSectionId": "math-reciprocal",
+      "sourceRecipes": [
+        {
+          "topicId": "math-reciprocal",
+          "recipeId": "math-reciprocal",
+          "sectionId": "math-reciprocal"
+        },
+        {
+          "topicId": "powers-exponents",
+          "recipeId": "reciprocal",
+          "sectionId": "reciprocal"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-ratios-and-proportions",
+        "guide-equal-spacing"
+      ]
+    },
+    {
+      "id": "guide-scientific-notation",
+      "slug": "scientific-notation",
+      "title": "Scientific notation",
+      "summary": "Read, enter, calculate with, and correct powers-of-ten notation.",
+      "categoryId": "math",
+      "searchAliases": [
+        "powers of ten",
+        "exponent entry",
+        "negative exponent"
+      ],
+      "featuredSectionId": "math-scientific",
+      "sourceRecipes": [
+        {
+          "topicId": "math-scientific",
+          "recipeId": "math-scientific",
+          "sectionId": "math-scientific"
+        },
+        {
+          "topicId": "powers-exponents",
+          "recipeId": "exponent-add",
+          "sectionId": "exponent-add"
+        },
+        {
+          "topicId": "powers-exponents",
+          "recipeId": "exponent-negative",
+          "sectionId": "exponent-negative"
+        },
+        {
+          "topicId": "powers-exponents",
+          "recipeId": "exponent-delete",
+          "sectionId": "exponent-delete"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-display-settings",
+        "guide-calculator-messages"
+      ]
+    },
+    {
+      "id": "guide-angle-formats",
+      "slug": "angle-formats",
+      "title": "Angle formats",
+      "summary": "Enter and convert decimal degrees and degrees, minutes, and seconds.",
+      "categoryId": "math",
+      "searchAliases": [
+        "DMS",
+        "decimal degrees",
+        "degrees minutes seconds"
+      ],
+      "featuredSectionId": "dms-to-decimal",
+      "sourceRecipes": [
+        {
+          "topicId": "angles-trig",
+          "recipeId": "dms-to-decimal",
+          "sectionId": "dms-to-decimal"
+        },
+        {
+          "topicId": "angles-trig",
+          "recipeId": "decimal-to-dms",
+          "sectionId": "decimal-to-dms"
+        },
+        {
+          "topicId": "angles-trig",
+          "recipeId": "dms-normalize",
+          "sectionId": "dms-normalize"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-display-settings",
+        "guide-sine-and-cosine"
+      ]
+    },
+    {
+      "id": "guide-feet-and-inches",
+      "slug": "feet-and-inches",
+      "title": "Feet and inches",
+      "summary": "Enter mixed feet, whole inches, and inch fractions.",
+      "categoryId": "measurements",
+      "searchAliases": [
+        "inch fractions",
+        "mixed imperial measurements"
+      ],
+      "featuredSectionId": "mixed-length",
+      "sourceRecipes": [
+        {
+          "topicId": "feet-inches",
+          "recipeId": "mixed-length",
+          "sectionId": "mixed-length"
+        },
+        {
+          "topicId": "feet-inches",
+          "recipeId": "inch-fraction",
+          "sectionId": "inch-fraction"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-length-conversions",
+        "guide-measurement-arithmetic",
+        "guide-fraction-precision"
+      ]
+    },
+    {
+      "id": "guide-metric-measurements",
+      "slug": "metric-measurements",
+      "title": "Metric measurements",
+      "summary": "Enter millimeters, centimeters, and meters and combine metric and imperial lengths.",
+      "categoryId": "measurements",
+      "searchAliases": [
+        "metric entry",
+        "mixed units",
+        "millimeters",
+        "meters"
+      ],
+      "featuredSectionId": "meters-entry",
+      "sourceRecipes": [
+        {
+          "topicId": "metric-entry",
+          "recipeId": "meters-entry",
+          "sectionId": "meters-entry"
+        },
+        {
+          "topicId": "metric-entry",
+          "recipeId": "mm-entry",
+          "sectionId": "mm-entry"
+        },
+        {
+          "topicId": "metric-entry",
+          "recipeId": "mixed-metric",
+          "sectionId": "mixed-metric"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-length-conversions",
+        "guide-measurement-arithmetic"
+      ]
+    },
+    {
+      "id": "guide-length-conversions",
+      "slug": "length-conversions",
+      "title": "Length conversions",
+      "summary": "Convert between mixed feet and inches, decimal values, fractions, and metric units.",
+      "categoryId": "measurements",
+      "searchAliases": [
+        "decimal feet",
+        "fractional inches",
+        "feet to meters"
+      ],
+      "featuredSectionId": "decimal-feet",
+      "sourceRecipes": [
+        {
+          "topicId": "convert-length",
+          "recipeId": "decimal-feet",
+          "sectionId": "decimal-feet"
+        },
+        {
+          "topicId": "convert-length",
+          "recipeId": "decimal-to-mixed",
+          "sectionId": "decimal-to-mixed"
+        },
+        {
+          "topicId": "convert-length",
+          "recipeId": "decimal-inches",
+          "sectionId": "decimal-inches"
+        },
+        {
+          "topicId": "convert-length",
+          "recipeId": "fractional-inches",
+          "sectionId": "fractional-inches"
+        },
+        {
+          "topicId": "convert-length",
+          "recipeId": "metric-length",
+          "sectionId": "metric-length"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-feet-and-inches",
+        "guide-metric-measurements",
+        "guide-fraction-precision"
+      ]
+    },
+    {
+      "id": "guide-area-and-volume-units",
+      "slug": "area-and-volume-units",
+      "title": "Area and volume units",
+      "summary": "Label known square or cubic values and convert their units.",
+      "categoryId": "measurements",
+      "searchAliases": [
+        "square units",
+        "cubic units",
+        "square millimeters",
+        "cubic millimeters"
+      ],
+      "featuredSectionId": "square-entry",
+      "sourceRecipes": [
+        {
+          "topicId": "area-volume-entry",
+          "recipeId": "square-entry",
+          "sectionId": "square-entry"
+        },
+        {
+          "topicId": "area-volume-entry",
+          "recipeId": "cubic-entry",
+          "sectionId": "cubic-entry"
+        },
+        {
+          "topicId": "area-volume-entry",
+          "recipeId": "square-mm-entry",
+          "sectionId": "square-mm-entry"
+        },
+        {
+          "topicId": "area-volume-entry",
+          "recipeId": "cubic-mm-entry",
+          "sectionId": "cubic-mm-entry"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-areas-and-volumes",
+        "guide-squares-and-square-roots",
+        "guide-cubes-and-cube-roots"
+      ]
+    },
+    {
+      "id": "guide-measurement-arithmetic",
+      "slug": "measurement-arithmetic",
+      "title": "Arithmetic with measurements",
+      "summary": "Add, subtract, scale, and divide measured lengths and inch fractions.",
+      "categoryId": "measurements",
+      "searchAliases": [
+        "dimensional arithmetic",
+        "add lengths",
+        "divide lengths",
+        "fraction arithmetic"
+      ],
+      "featuredSectionId": "add-lengths",
+      "sourceRecipes": [
+        {
+          "topicId": "measurement-arithmetic",
+          "recipeId": "add-lengths",
+          "sectionId": "add-lengths"
+        },
+        {
+          "topicId": "measurement-arithmetic",
+          "recipeId": "subtract-lengths",
+          "sectionId": "subtract-lengths"
+        },
+        {
+          "topicId": "measurement-arithmetic",
+          "recipeId": "scale-length",
+          "sectionId": "scale-length"
+        },
+        {
+          "topicId": "measurement-arithmetic",
+          "recipeId": "divide-length",
+          "sectionId": "divide-length"
+        },
+        {
+          "topicId": "measurement-arithmetic",
+          "recipeId": "count-lengths",
+          "sectionId": "count-lengths"
+        },
+        {
+          "topicId": "measurement-arithmetic",
+          "recipeId": "fraction-arithmetic",
+          "sectionId": "fraction-arithmetic"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-feet-and-inches",
+        "guide-metric-measurements",
+        "guide-calculation-order"
+      ]
+    },
+    {
+      "id": "guide-areas-and-volumes",
+      "slug": "areas-and-volumes",
+      "title": "Areas and volumes",
+      "summary": "Calculate rectangle and triangle area and rectangular-box volume, including metric output.",
+      "categoryId": "measurements",
+      "searchAliases": [
+        "rectangle area",
+        "triangle area",
+        "box volume",
+        "cubic meters"
+      ],
+      "featuredSectionId": "rectangle-area",
+      "sourceRecipes": [
+        {
+          "topicId": "area-volume",
+          "recipeId": "rectangle-area",
+          "sectionId": "rectangle-area"
+        },
+        {
+          "topicId": "area-volume",
+          "recipeId": "triangle-area",
+          "sectionId": "triangle-area"
+        },
+        {
+          "topicId": "area-volume",
+          "recipeId": "box-volume",
+          "sectionId": "box-volume"
+        },
+        {
+          "topicId": "area-volume",
+          "recipeId": "container-metric",
+          "sectionId": "container-metric"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-squares-and-square-roots",
+        "guide-cubes-and-cube-roots",
+        "guide-area-and-volume-units",
+        "guide-circles",
+        "guide-cylinders",
+        "guide-cones"
+      ]
+    },
+    {
+      "id": "guide-ratios-and-proportions",
+      "slug": "ratios-and-proportions",
+      "title": "Ratios and proportions",
+      "summary": "Set corresponding values consistently and solve a missing value using a scale drawing example.",
+      "categoryId": "measurements",
+      "searchAliases": [
+        "scale drawings",
+        "scaling",
+        "solve a proportion",
+        "fourth proportional"
+      ],
+      "featuredSectionId": "ratio-scale",
+      "sourceRecipes": [
+        {
+          "topicId": "proportion",
+          "recipeId": "ratio-scale",
+          "sectionId": "ratio-scale"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-fan-laws",
+        "guide-reciprocals",
+        "guide-measurement-arithmetic"
+      ]
+    },
+    {
+      "id": "guide-right-triangles",
+      "slug": "right-triangles",
+      "title": "Right triangles",
+      "summary": "Find missing rise, run, or diagonal from two sides or a side and an angle.",
+      "categoryId": "geometry",
+      "searchAliases": [
+        "Pythagorean theorem",
+        "diagonal",
+        "hypotenuse",
+        "transition length"
+      ],
+      "featuredSectionId": "diagonal",
+      "sourceRecipes": [
+        {
+          "topicId": "triangle",
+          "recipeId": "diagonal",
+          "sectionId": "diagonal"
+        },
+        {
+          "topicId": "triangle",
+          "recipeId": "missing-run",
+          "sectionId": "missing-run"
+        },
+        {
+          "topicId": "triangle",
+          "recipeId": "missing-rise",
+          "sectionId": "missing-rise"
+        },
+        {
+          "topicId": "angles-trig",
+          "recipeId": "trig-transition",
+          "sectionId": "trig-transition"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-sine-and-cosine",
+        "guide-tangent",
+        "guide-oblique-triangles",
+        "guide-roof-pitch"
+      ]
+    },
+    {
+      "id": "guide-oblique-triangles",
+      "slug": "oblique-triangles",
+      "title": "Oblique triangles",
+      "summary": "Find angles and area from three measured sides with the Law of Cosines.",
+      "categoryId": "geometry",
+      "searchAliases": [
+        "three-sided triangle",
+        "Law of Cosines",
+        "angles from sides"
+      ],
+      "featuredSectionId": "three-sides",
+      "sourceRecipes": [
+        {
+          "topicId": "three-side-triangle",
+          "recipeId": "three-sides",
+          "sectionId": "three-sides"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-right-triangles",
+        "guide-single-duct-offsets"
+      ]
+    },
+    {
+      "id": "guide-circles",
+      "slug": "circles",
+      "title": "Circle measurements",
+      "summary": "Relate diameter, radius, circumference, and area, including multiplication by pi.",
+      "categoryId": "geometry",
+      "searchAliases": [
+        "pi",
+        "circumference",
+        "pipe wrap",
+        "circle area"
+      ],
+      "featuredSectionId": "math-pi",
+      "sourceRecipes": [
+        {
+          "topicId": "math-pi",
+          "recipeId": "math-pi",
+          "sectionId": "math-pi"
+        },
+        {
+          "topicId": "circle",
+          "recipeId": "circle-diameter",
+          "sectionId": "circle-diameter"
+        },
+        {
+          "topicId": "circle",
+          "recipeId": "circle-radius",
+          "sectionId": "circle-radius"
+        },
+        {
+          "topicId": "powers-exponents",
+          "recipeId": "pi-diameter",
+          "sectionId": "pi-diameter"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-arcs",
+        "guide-circular-segments",
+        "guide-areas-and-volumes"
+      ]
+    },
+    {
+      "id": "guide-arcs",
+      "slug": "arcs",
+      "title": "Arcs",
+      "summary": "Relate circle size, arc length, and central angle and calculate arc length manually.",
+      "categoryId": "geometry",
+      "searchAliases": [
+        "arc length",
+        "arc angle",
+        "radius and arc"
+      ],
+      "featuredSectionId": "arc-angle",
+      "sourceRecipes": [
+        {
+          "topicId": "arc",
+          "recipeId": "arc-angle",
+          "sectionId": "arc-angle"
+        },
+        {
+          "topicId": "arc",
+          "recipeId": "arc-radius",
+          "sectionId": "arc-radius"
+        },
+        {
+          "topicId": "arc",
+          "recipeId": "arc-length",
+          "sectionId": "arc-length"
+        },
+        {
+          "topicId": "arc",
+          "recipeId": "arc-constant",
+          "sectionId": "arc-constant"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-circles",
+        "guide-circular-segments",
+        "guide-angle-formats"
+      ]
+    },
+    {
+      "id": "guide-circular-segments",
+      "slug": "circular-segments",
+      "title": "Circular segments",
+      "summary": "Relate chord width, rise, radius, and arc measurements using an arched-window example.",
+      "categoryId": "geometry",
+      "searchAliases": [
+        "chord",
+        "sagitta",
+        "arched-window radius",
+        "segment rise"
+      ],
+      "featuredSectionId": "window-segment",
+      "sourceRecipes": [
+        {
+          "topicId": "segment",
+          "recipeId": "window-segment",
+          "sectionId": "window-segment"
+        },
+        {
+          "topicId": "segment",
+          "recipeId": "window-arc",
+          "sectionId": "window-arc"
+        },
+        {
+          "topicId": "segment",
+          "recipeId": "segment-missing-rise",
+          "sectionId": "segment-missing-rise"
+        },
+        {
+          "topicId": "segment",
+          "recipeId": "segment-missing-chord",
+          "sectionId": "segment-missing-chord"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-arcs",
+        "guide-circles",
+        "guide-arched-walls"
+      ]
+    },
+    {
+      "id": "guide-arched-walls",
+      "slug": "arched-walls",
+      "title": "Arched walls",
+      "summary": "Use chord width, center rise, and spacing to calculate stud heights along an arch.",
+      "categoryId": "geometry",
+      "searchAliases": [
+        "arched-wall studs",
+        "curved wall",
+        "stud lengths"
+      ],
+      "featuredSectionId": "arched-studs",
+      "sourceRecipes": [
+        {
+          "topicId": "arched-wall",
+          "recipeId": "arched-studs",
+          "sectionId": "arched-studs"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-circular-segments",
+        "guide-equal-spacing"
+      ]
+    },
+    {
+      "id": "guide-cylinders",
+      "slug": "cylinders",
+      "title": "Cylinders",
+      "summary": "Calculate closed-cylinder volume and surface area from diameter and height.",
+      "categoryId": "geometry",
+      "searchAliases": [
+        "cylinder volume",
+        "cylinder surface area",
+        "round column"
+      ],
+      "featuredSectionId": "cylinder-cycle",
+      "sourceRecipes": [
+        {
+          "topicId": "column-cone",
+          "recipeId": "cylinder-cycle",
+          "sectionId": "cylinder-cycle"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-circles",
+        "guide-cones",
+        "guide-area-and-volume-units"
+      ]
+    },
+    {
+      "id": "guide-cones",
+      "slug": "cones",
+      "title": "Cones",
+      "summary": "Calculate cone volume and lateral area from circle size and perpendicular height.",
+      "categoryId": "geometry",
+      "searchAliases": [
+        "cone volume",
+        "lateral area",
+        "cone height"
+      ],
+      "featuredSectionId": "cone-cycle",
+      "sourceRecipes": [
+        {
+          "topicId": "column-cone",
+          "recipeId": "cone-cycle",
+          "sectionId": "cone-cycle"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-cylinders",
+        "guide-circles",
+        "guide-area-and-volume-units"
+      ]
+    },
+    {
+      "id": "guide-roof-pitch",
+      "slug": "roof-pitch",
+      "title": "Roof pitch",
+      "summary": "Enter or compare pitch in inches per foot, degrees, percent grade, and slope, then find related dimensions.",
+      "categoryId": "construction",
+      "searchAliases": [
+        "rise per foot",
+        "percent grade",
+        "roof slope",
+        "pitch angle"
+      ],
+      "featuredSectionId": "pitch-inches",
+      "sourceRecipes": [
+        {
+          "topicId": "pitch",
+          "recipeId": "pitch-inches",
+          "sectionId": "pitch-inches"
+        },
+        {
+          "topicId": "pitch",
+          "recipeId": "pitch-degrees",
+          "sectionId": "pitch-degrees"
+        },
+        {
+          "topicId": "pitch",
+          "recipeId": "pitch-grade",
+          "sectionId": "pitch-grade"
+        },
+        {
+          "topicId": "pitch",
+          "recipeId": "pitch-rise",
+          "sectionId": "pitch-rise"
+        },
+        {
+          "topicId": "pitch",
+          "recipeId": "pitch-rise-diagonal",
+          "sectionId": "pitch-rise-diagonal"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-common-rafters",
+        "guide-inverse-tangent",
+        "guide-right-triangles"
+      ]
+    },
+    {
+      "id": "guide-common-rafters",
+      "slug": "common-rafters",
+      "title": "Common rafters",
+      "summary": "Find rafter length and cuts from pitch and span or measured rise and run.",
+      "categoryId": "construction",
+      "searchAliases": [
+        "common-rafter length",
+        "plumb cut",
+        "level cut",
+        "half-span"
+      ],
+      "featuredSectionId": "rafter-span",
+      "sourceRecipes": [
+        {
+          "topicId": "rafter",
+          "recipeId": "rafter-span",
+          "sectionId": "rafter-span"
+        },
+        {
+          "topicId": "rafter",
+          "recipeId": "rafter-measured",
+          "sectionId": "rafter-measured"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-roof-pitch",
+        "guide-hip-valley-and-jack-rafters",
+        "guide-roof-sheathing"
+      ]
+    },
+    {
+      "id": "guide-roof-sheathing",
+      "slug": "roof-sheathing",
+      "title": "Roof sheathing",
+      "summary": "Find horizontal sheathing run from roof pitch and sheet width along the slope.",
+      "categoryId": "construction",
+      "searchAliases": [
+        "sheathing run",
+        "plywood run",
+        "sheet width"
+      ],
+      "featuredSectionId": "sheathing",
+      "sourceRecipes": [
+        {
+          "topicId": "rafter",
+          "recipeId": "sheathing",
+          "sectionId": "sheathing"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-roof-pitch",
+        "guide-common-rafters",
+        "guide-right-triangles"
+      ]
+    },
+    {
+      "id": "guide-hip-valley-and-jack-rafters",
+      "slug": "hip-valley-and-jack-rafters",
+      "title": "Hip, valley and jack rafters",
+      "summary": "Read the regular-roof rafter results using pitch, run, and on-center spacing.",
+      "categoryId": "construction",
+      "searchAliases": [
+        "hip rafters",
+        "valley rafters",
+        "jack rafters",
+        "regular roof"
+      ],
+      "featuredSectionId": "regular-jacks",
+      "sourceRecipes": [
+        {
+          "topicId": "jacks",
+          "recipeId": "regular-jacks",
+          "sectionId": "regular-jacks"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-common-rafters",
+        "guide-irregular-roofs",
+        "guide-roof-pitch"
+      ]
+    },
+    {
+      "id": "guide-irregular-roofs",
+      "slug": "irregular-roofs",
+      "title": "Irregular roofs",
+      "summary": "Calculate hip, valley, and jack results for two roof pitches and compare jack spacing and ordering.",
+      "categoryId": "construction",
+      "searchAliases": [
+        "unequal roof pitches",
+        "irregular hips",
+        "opposing jack alignment"
+      ],
+      "featuredSectionId": "irregular-hip",
+      "sourceRecipes": [
+        {
+          "topicId": "irregular-roof",
+          "recipeId": "irregular-hip",
+          "sectionId": "irregular-hip"
+        },
+        {
+          "topicId": "irregular-roof",
+          "recipeId": "irregular-jacks",
+          "sectionId": "irregular-jacks"
+        },
+        {
+          "topicId": "irregular-roof",
+          "recipeId": "irregular-ascending",
+          "sectionId": "irregular-ascending"
+        },
+        {
+          "topicId": "irregular-roof",
+          "recipeId": "irregular-mate",
+          "sectionId": "irregular-mate"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-hip-valley-and-jack-rafters",
+        "guide-roof-pitch"
+      ]
+    },
+    {
+      "id": "guide-stairs",
+      "slug": "stairs",
+      "title": "Stair layout",
+      "summary": "Use total rise, total run, and step targets to calculate a stair layout and its related results.",
+      "categoryId": "construction",
+      "searchAliases": [
+        "riser height",
+        "tread depth",
+        "headroom",
+        "stair run"
+      ],
+      "featuredSectionId": "stairs-rise",
+      "sourceRecipes": [
+        {
+          "topicId": "stairs",
+          "recipeId": "stairs-rise",
+          "sectionId": "stairs-rise"
+        },
+        {
+          "topicId": "stairs",
+          "recipeId": "stairs-run",
+          "sectionId": "stairs-run"
+        },
+        {
+          "topicId": "stairs",
+          "recipeId": "stairs-both",
+          "sectionId": "stairs-both"
+        },
+        {
+          "topicId": "stairs",
+          "recipeId": "stairs-targets",
+          "sectionId": "stairs-targets"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-measurement-arithmetic",
+        "guide-display-settings"
+      ]
+    },
+    {
+      "id": "guide-equal-spacing",
+      "slug": "equal-spacing",
+      "title": "Equal spacing",
+      "summary": "Calculate occupied width and equal clear gaps, including end gaps, using balusters as the example.",
+      "categoryId": "construction",
+      "searchAliases": [
+        "baluster gaps",
+        "clear gaps",
+        "equal end gaps"
+      ],
+      "featuredSectionId": "baluster-gaps",
+      "sourceRecipes": [
+        {
+          "topicId": "material-spacing",
+          "recipeId": "baluster-gaps",
+          "sectionId": "baluster-gaps"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-measurement-arithmetic",
+        "guide-reciprocals",
+        "guide-arched-walls"
+      ]
+    },
+    {
+      "id": "guide-duct-offsets",
+      "slug": "duct-offsets",
+      "title": "Duct offsets",
+      "summary": "Calculate wrapper and radius results, compare an offset change, and divide bend angles into elbows.",
+      "categoryId": "hvac",
+      "searchAliases": [
+        "OGEE offset",
+        "wrapper length",
+        "heel radius",
+        "throat radius",
+        "offset elbows"
+      ],
+      "featuredSectionId": "basic-offset",
+      "sourceRecipes": [
+        {
+          "topicId": "offset",
+          "recipeId": "basic-offset",
+          "sectionId": "basic-offset"
+        },
+        {
+          "topicId": "offset",
+          "recipeId": "fractional-offset",
+          "sectionId": "fractional-offset"
+        },
+        {
+          "topicId": "offset",
+          "recipeId": "metric-offset",
+          "sectionId": "metric-offset"
+        },
+        {
+          "topicId": "change-offset",
+          "recipeId": "changed-ogee",
+          "sectionId": "changed-ogee"
+        },
+        {
+          "topicId": "offset-elbows",
+          "recipeId": "offset-angle-elbows",
+          "sectionId": "offset-angle-elbows"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-single-duct-offsets",
+        "guide-double-duct-offsets",
+        "guide-right-angle-duct-offsets"
+      ]
+    },
+    {
+      "id": "guide-single-duct-offsets",
+      "slug": "single-duct-offsets",
+      "title": "Single duct offsets",
+      "summary": "Use measured triangle sides to find angle, offset, and length for the illustrated single-offset arrangements.",
+      "categoryId": "hvac",
+      "searchAliases": [
+        "inline single offset",
+        "measured triangle",
+        "duct transition"
+      ],
+      "featuredSectionId": "single-duct",
+      "sourceRecipes": [
+        {
+          "topicId": "duct-single-offset",
+          "recipeId": "single-duct",
+          "sectionId": "single-duct"
+        },
+        {
+          "topicId": "duct-single-offset",
+          "recipeId": "measured-to-right",
+          "sectionId": "measured-to-right"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-oblique-triangles",
+        "guide-right-triangles",
+        "guide-duct-offsets",
+        "guide-double-duct-offsets"
+      ]
+    },
+    {
+      "id": "guide-double-duct-offsets",
+      "slug": "double-duct-offsets",
+      "title": "Double duct offsets",
+      "summary": "Separate plan and elevation calculations and correct the sloping length for a double offset.",
+      "categoryId": "hvac",
+      "searchAliases": [
+        "plan and elevation",
+        "double offset true length"
+      ],
+      "featuredSectionId": "double-duct",
+      "sourceRecipes": [
+        {
+          "topicId": "duct-double-offset",
+          "recipeId": "double-duct",
+          "sectionId": "double-duct"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-single-duct-offsets",
+        "guide-right-angle-duct-offsets"
+      ]
+    },
+    {
+      "id": "guide-right-angle-duct-offsets",
+      "slug": "right-angle-duct-offsets",
+      "title": "Right angle duct offsets",
+      "summary": "Correct measured elevation slants before solving the plan triangle for ducts at right angles.",
+      "categoryId": "hvac",
+      "searchAliases": [
+        "perpendicular ducts",
+        "right-angle plan dimensions"
+      ],
+      "featuredSectionId": "right-angle-duct",
+      "sourceRecipes": [
+        {
+          "topicId": "duct-right-angle",
+          "recipeId": "right-angle-duct",
+          "sectionId": "right-angle-duct"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-single-duct-offsets",
+        "guide-double-duct-offsets"
+      ]
+    },
+    {
+      "id": "guide-airflow",
+      "slug": "airflow",
+      "title": "Airflow from area and speed",
+      "summary": "Calculate duct airflow from free cross-sectional area and average air speed.",
+      "categoryId": "hvac",
+      "searchAliases": [
+        "duct airflow",
+        "free area",
+        "CFM from area and velocity"
+      ],
+      "featuredSectionId": "duct-airflow-calculation",
+      "sourceRecipes": [
+        {
+          "topicId": "duct-airflow",
+          "recipeId": "duct-airflow-calculation",
+          "sectionId": "duct-airflow-calculation"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-airflow-conversions",
+        "guide-air-speed-conversions",
+        "guide-velocity-pressure"
+      ]
+    },
+    {
+      "id": "guide-airflow-conversions",
+      "slug": "airflow-conversions",
+      "title": "Airflow conversions",
+      "summary": "Convert airflow between CFM, liters per second, and cubic meters per hour.",
+      "categoryId": "hvac",
+      "searchAliases": [
+        "CFM",
+        "L/s",
+        "cubic meters per hour"
+      ],
+      "featuredSectionId": "airflow-conversion",
+      "sourceRecipes": [
+        {
+          "topicId": "airflow-units",
+          "recipeId": "airflow-conversion",
+          "sectionId": "airflow-conversion"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-airflow",
+        "guide-fan-laws"
+      ]
+    },
+    {
+      "id": "guide-air-speed-conversions",
+      "slug": "air-speed-conversions",
+      "title": "Air speed conversions",
+      "summary": "Convert air speed between feet per minute and meters per second.",
+      "categoryId": "hvac",
+      "searchAliases": [
+        "FPM",
+        "meters per second",
+        "air velocity"
+      ],
+      "featuredSectionId": "air-speed-conversion",
+      "sourceRecipes": [
+        {
+          "topicId": "air-speed-units",
+          "recipeId": "air-speed-conversion",
+          "sectionId": "air-speed-conversion"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-airflow",
+        "guide-velocity-pressure"
+      ]
+    },
+    {
+      "id": "guide-pressure-conversions",
+      "slug": "pressure-conversions",
+      "title": "Pressure conversions",
+      "summary": "Convert pressure between water column, PSI, pascals, and kilopascals.",
+      "categoryId": "hvac",
+      "searchAliases": [
+        "inches of water",
+        "Pa",
+        "kPa",
+        "PSI"
+      ],
+      "featuredSectionId": "pressure-conversion",
+      "sourceRecipes": [
+        {
+          "topicId": "pressure-units",
+          "recipeId": "pressure-conversion",
+          "sectionId": "pressure-conversion"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-velocity-pressure",
+        "guide-fan-laws"
+      ]
+    },
+    {
+      "id": "guide-velocity-pressure",
+      "slug": "velocity-pressure",
+      "title": "Velocity pressure",
+      "summary": "Calculate air speed from velocity pressure, or reverse the calculation, with the stated formula and units.",
+      "categoryId": "hvac",
+      "searchAliases": [
+        "velocity pressure to FPM",
+        "4005 formula",
+        "inches water column"
+      ],
+      "featuredSectionId": "vp-to-fpm",
+      "sourceRecipes": [
+        {
+          "topicId": "velocity-pressure",
+          "recipeId": "vp-to-fpm",
+          "sectionId": "vp-to-fpm"
+        },
+        {
+          "topicId": "velocity-pressure",
+          "recipeId": "fpm-to-vp",
+          "sectionId": "fpm-to-vp"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-air-speed-conversions",
+        "guide-pressure-conversions",
+        "guide-airflow"
+      ]
+    },
+    {
+      "id": "guide-fan-laws",
+      "slug": "fan-laws",
+      "title": "Fan laws",
+      "summary": "Use proportional, squared, and cubed relationships to compare airflow, speed, pressure, and power.",
+      "categoryId": "hvac",
+      "searchAliases": [
+        "fan affinity laws",
+        "fan RPM",
+        "fan pressure",
+        "fan power",
+        "BHP"
+      ],
+      "featuredSectionId": "ratio-speed",
+      "sourceRecipes": [
+        {
+          "topicId": "proportion",
+          "recipeId": "ratio-speed",
+          "sectionId": "ratio-speed"
+        },
+        {
+          "topicId": "proportion",
+          "recipeId": "ratio-airflow",
+          "sectionId": "ratio-airflow"
+        },
+        {
+          "topicId": "proportion",
+          "recipeId": "ratio-pressure",
+          "sectionId": "ratio-pressure"
+        },
+        {
+          "topicId": "proportion",
+          "recipeId": "ratio-power",
+          "sectionId": "ratio-power"
+        },
+        {
+          "topicId": "proportion",
+          "recipeId": "ratio-pressure-airflow",
+          "sectionId": "ratio-pressure-airflow"
+        },
+        {
+          "topicId": "proportion",
+          "recipeId": "ratio-power-airflow",
+          "sectionId": "ratio-power-airflow"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-ratios-and-proportions",
+        "guide-squares-and-square-roots",
+        "guide-cubes-and-cube-roots",
+        "guide-pressure-conversions"
+      ]
+    },
+    {
+      "id": "guide-correcting-and-clearing",
+      "slug": "correcting-and-clearing",
+      "title": "Correcting and clearing",
+      "summary": "Delete a digit, replace an operand, clear temporary inputs, or recover from an error.",
+      "categoryId": "controls",
+      "searchAliases": [
+        "backspace",
+        "clear entry",
+        "start fresh",
+        "C key"
+      ],
+      "featuredSectionId": "correct-digit",
+      "sourceRecipes": [
+        {
+          "topicId": "clear",
+          "recipeId": "correct-digit",
+          "sectionId": "correct-digit"
+        },
+        {
+          "topicId": "clear",
+          "recipeId": "replace-operand",
+          "sectionId": "replace-operand"
+        },
+        {
+          "topicId": "clear",
+          "recipeId": "fresh-expression",
+          "sectionId": "fresh-expression"
+        },
+        {
+          "topicId": "clear",
+          "recipeId": "recover-clear",
+          "sectionId": "recover-clear"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-second-functions",
+        "guide-calculator-messages"
+      ]
+    },
+    {
+      "id": "guide-second-functions",
+      "slug": "second-functions",
+      "title": "Second functions",
+      "summary": "Reveal and cancel the alternate functions available through 2nd.",
+      "categoryId": "controls",
+      "searchAliases": [
+        "2nd key",
+        "alternate keys",
+        "cancel modifier"
+      ],
+      "featuredSectionId": "second-function",
+      "sourceRecipes": [
+        {
+          "topicId": "convert-recall",
+          "recipeId": "second-function",
+          "sectionId": "second-function"
+        },
+        {
+          "topicId": "convert-recall",
+          "recipeId": "cancel-conv",
+          "sectionId": "cancel-conv"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-length-conversions",
+        "guide-correcting-and-clearing"
+      ]
+    },
+    {
+      "id": "guide-fraction-precision",
+      "slug": "fraction-precision",
+      "title": "Fraction precision",
+      "summary": "Choose displayed fractional increments and denominator format while retaining underlying precision.",
+      "categoryId": "controls",
+      "searchAliases": [
+        "fraction rounding",
+        "constant denominator",
+        "nearest 1/32 inch"
+      ],
+      "featuredSectionId": "fraction-resolution",
+      "sourceRecipes": [
+        {
+          "topicId": "fraction-settings",
+          "recipeId": "fraction-resolution",
+          "sectionId": "fraction-resolution"
+        },
+        {
+          "topicId": "fraction-settings",
+          "recipeId": "constant-fraction",
+          "sectionId": "constant-fraction"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-feet-and-inches",
+        "guide-length-conversions",
+        "guide-display-settings"
+      ]
+    },
+    {
+      "id": "guide-display-settings",
+      "slug": "display-settings",
+      "title": "Display settings",
+      "summary": "Choose area output units, decimal places, angle formatting, and scientific-notation display.",
+      "categoryId": "controls",
+      "searchAliases": [
+        "decimal places",
+        "output units",
+        "answer formatting"
+      ],
+      "featuredSectionId": "area-settings",
+      "sourceRecipes": [
+        {
+          "topicId": "display-settings",
+          "recipeId": "area-settings",
+          "sectionId": "area-settings"
+        },
+        {
+          "topicId": "display-settings",
+          "recipeId": "meter-settings",
+          "sectionId": "meter-settings"
+        },
+        {
+          "topicId": "display-settings",
+          "recipeId": "degree-settings",
+          "sectionId": "degree-settings"
+        },
+        {
+          "topicId": "display-settings",
+          "recipeId": "scientific-settings",
+          "sectionId": "scientific-settings"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-fraction-precision",
+        "guide-angle-formats",
+        "guide-scientific-notation"
+      ]
+    },
+    {
+      "id": "guide-calculator-messages",
+      "slug": "calculator-messages",
+      "title": "Calculator messages and results",
+      "summary": "Understand error messages, correct their causes, and read result captions.",
+      "categoryId": "controls",
+      "searchAliases": [
+        "division by zero",
+        "invalid units",
+        "out of range",
+        "result labels"
+      ],
+      "featuredSectionId": "error-division",
+      "sourceRecipes": [
+        {
+          "topicId": "errors-results",
+          "recipeId": "error-division",
+          "sectionId": "error-division"
+        },
+        {
+          "topicId": "errors-results",
+          "recipeId": "error-entry",
+          "sectionId": "error-entry"
+        },
+        {
+          "topicId": "errors-results",
+          "recipeId": "error-dimension",
+          "sectionId": "error-dimension"
+        },
+        {
+          "topicId": "errors-results",
+          "recipeId": "error-trig",
+          "sectionId": "error-trig"
+        },
+        {
+          "topicId": "errors-results",
+          "recipeId": "error-exponent",
+          "sectionId": "error-exponent"
+        },
+        {
+          "topicId": "errors-results",
+          "recipeId": "error-type",
+          "sectionId": "error-type"
+        },
+        {
+          "topicId": "errors-results",
+          "recipeId": "error-overflow",
+          "sectionId": "error-overflow"
+        },
+        {
+          "topicId": "errors-results",
+          "recipeId": "error-throat",
+          "sectionId": "error-throat"
+        },
+        {
+          "topicId": "errors-results",
+          "recipeId": "error-stairs",
+          "sectionId": "error-stairs"
+        },
+        {
+          "topicId": "errors-results",
+          "recipeId": "readout-labels",
+          "sectionId": "readout-labels"
+        }
+      ],
+      "relatedGuideIds": [
+        "guide-correcting-and-clearing",
+        "guide-scientific-notation",
+        "guide-duct-offsets",
+        "guide-stairs"
+      ]
+    }
+  ],
+  "duplicateExampleCandidates": [
+    {
+      "guideId": "guide-squares-and-square-roots",
+      "sources": [
+        {
+          "topicId": "area-volume",
+          "recipeId": "square-area"
+        },
+        {
+          "topicId": "powers-exponents",
+          "recipeId": "power-square-area"
+        }
+      ],
+      "reason": "Both currently calculate the same measured square and the same result. Retain both source associations and render one worked example after confirming execution and display settings match."
+    }
+  ]
+}
