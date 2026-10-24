@@ -6,7 +6,7 @@ Each web guide has an enduring subject, an explicit URL slug, and a title that c
 
 The proposed library has 50 subjects across six browsing categories. It accounts for all 53 current native Help topics and 147 recipes, including worked examples and reference entries. The article boundaries follow subject matter and reader tasks. The landing page keeps its existing calculation and Help demonstrations, with a Guides link into the library.
 
-The complete source mapping is [guide-subject-map.json](design/guide-subject-map.json). It references the native catalog at Figure commit `c15f25e5ae168df4b1275a9fd2ba75f896f325f6`. Public routes and articles have not been implemented in this increment.
+The complete source mapping is [guide-subject-map.json](design/guide-subject-map.json). It references the native catalog at Figure commit `c15f25e5ae168df4b1275a9fd2ba75f896f325f6`. The first implemented slice publishes `/guides` and `/guides/inverse-cosine`. The other article routes below remain proposed until their content and diagrams are ready.
 
 ## Guide identity
 

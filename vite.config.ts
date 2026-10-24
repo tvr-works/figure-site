@@ -2,6 +2,8 @@ import { fileURLToPath, URL } from 'node:url';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
+import publishedGuides from './content/published-guides.json' with { type: 'json' };
+import { site } from './src/site.ts';
 import { tanstackStart } from '@tanstack/react-start/plugin/vite';
 
 export default defineConfig({
@@ -9,7 +11,8 @@ export default defineConfig({
     tailwindcss(),
     tanstackStart({
       prerender: { enabled: true, autoStaticPathsDiscovery: false, autoSubfolderIndex: false, crawlLinks: false, failOnError: true },
-      pages: [{ path: '/' }, { path: '/support' }, { path: '/privacy' }, { path: '/404', sitemap: { exclude: true }, prerender: { outputPath: '/404.html' } }],
+      sitemap: { enabled: true, host: site.origin },
+      pages: [{ path: '/guides' }, ...publishedGuides.map(slug => ({ path: `/guides/${slug}` })), { path: '/' }, { path: '/support' }, { path: '/privacy' }, { path: '/404', sitemap: { exclude: true }, prerender: { outputPath: '/404.html' } }],
     }),
     react(),
   ],

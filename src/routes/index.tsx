@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { MarketingPage } from '../components/MarketingPage';
 import { pageHead } from '../site';
 
-const homeHead = pageHead('/', 'Figure · Trade math. Made intuitive.', 'Trade math. Made intuitive. Figure for iPhone brings helpful modes, adaptive keys, visual results, and easy conversions to construction, fabrication, and DIY.');
+const homeHead = pageHead('/', 'Figure · Construction calculator for iPhone', 'Construction, fabrication and DIY calculations with adaptive keys, visual results, feet, inches, fractions and metric. No subscription.');
 
 export const Route = createFileRoute('/')({
   head: () => ({

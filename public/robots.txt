@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://figure.tvr.works/sitemap.xml
