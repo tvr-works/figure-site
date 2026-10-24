@@ -7,7 +7,7 @@ import { GuideRecipe } from './GuideRecipe';
 export function GuideArticlePage({ article }: { article: GuideArticle }) {
   return <>
     <a className="skip-link" href="#main">Skip to content</a>
-    <SiteHeader guides />
+    <SiteHeader />
     <main id="main" className="guide-shell">
       <div className="guide-main page-width">
         <GuideBreadcrumb title={article.title} />

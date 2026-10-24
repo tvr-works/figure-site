@@ -12,7 +12,7 @@ export const Route = createFileRoute('/guides/')({
 
 function GuideIndex() {
   const categories = [...new Set(guideSummaries.map(guide => guide.categoryTitle))];
-  return <><a className="skip-link" href="#main">Skip to content</a><SiteHeader guides />
+  return <><a className="skip-link" href="#main">Skip to content</a><SiteHeader />
     <main id="main" className="guide-shell"><div className="guide-main page-width">
       <GuideBreadcrumb />
       <header className="guide-header"><h1 className="guide-heading">Guides</h1><p className="guide-lede">Understand the math, work through an example, and follow the steps in Figure.</p></header>

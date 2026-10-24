@@ -1,3 +1,4 @@
+import { Link } from '@tanstack/react-router';
 import { ProductDemo } from '../ProductDemo';
 import { HelpDemo } from '../HelpDemo';
 import { SiteHeader, SiteFooter } from './SiteChrome';
@@ -29,7 +30,7 @@ export function MarketingPage() {
   <section id="help" className="help-section" aria-labelledby="help-title">
     <div className="page-width">
       <h2 id="help-title" className="demo-section-title">Help without losing your place.</h2>
-      <p className="demo-section-intro">Worked examples, plain-language explanations, and practical uses, right alongside your calculation.</p>
+      <p className="demo-section-intro">Worked examples, plain-language explanations, and practical uses, right alongside your calculation. <Link className="help-guides-link" to="/guides">Browse the guides →</Link></p>
       <div id="help-demo"><HelpDemo /></div>
     </div>
   </section>

@@ -1,3 +1,4 @@
+import { Link } from '@tanstack/react-router';
 import { LegalPage, SupportEmail } from './LegalPage';
 
 export function SupportPage() {
@@ -5,7 +6,7 @@ export function SupportPage() {
     <h1>Figure support</h1>
     <p>Questions, problems or suggestions? Email <SupportEmail />.</p>
     <h2>How to calculate</h2>
-    <p>In Figure, open <strong>… → Help</strong>. Search for a task or browse a topic for short steps and worked examples. Your calculation stays in place while you read.</p>
+    <p>In Figure, open <strong>… → Help</strong>. Search for a task or browse a topic for short steps and worked examples. Your calculation stays in place while you read. You can also <Link to="/guides">browse the guides online</Link>.</p>
     <h2>Report a calculation problem</h2>
     <p>Include:</p>
     <ul>
