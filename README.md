@@ -15,7 +15,7 @@ npm run preview -- --port 4173 --strictPort
 
 Vite builds the static home, `/support`, `/privacy` and 404 pages to `dist`. React owns the independent calculation and Help demonstrations. Tailwind uses its Vite plugin; shadcn components use Base UI. No client router, backend or analytics is included.
 
-The agreed copy and interaction plan lives in [the storyboard](docs/MARKETING-STORYBOARD.md). Price and the public App Store URL still require the owner's launch decision. Keep `noindex` until public launch is requested.
+The agreed copy and interaction plan lives in [the storyboard](docs/MARKETING-STORYBOARD.md). The proposed subject-based web Help library is mapped in [the guide structure](docs/GUIDE-LIBRARY-STRUCTURE.md). Price and the public App Store URL still require the owner's launch decision. Keep `noindex` until public launch is requested.
 
 ## Deployment
 
