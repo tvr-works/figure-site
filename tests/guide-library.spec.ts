@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
 import native from '../content/native-help.json' with { type: 'json' };
 import map from '../docs/design/guide-subject-map.json' with { type: 'json' };
 import context from '../content/guide-context.json' with { type: 'json' };
@@ -74,4 +75,48 @@ test('native result disclosures and duplicate example anchors work with the keyb
   await expect(page.locator('#power-square-area')).toBeAttached();
   await expect(page.getByRole('heading', { level: 2, name: 'Square area', exact: true })).toBeInViewport();
   await expect(page.locator('.guide-example')).toHaveCount(3);
+});
+
+
+test('guide search supports direct query URLs, native application terms and browser history', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('pageerror', error => errors.push(error.message));
+  page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
+  await page.goto('/guides?q=fan%20speed');
+  const search = page.getByRole('searchbox', { name: 'Search guides' });
+  await expect(search).toHaveValue('fan speed');
+  await expect(page.locator('.guide-index a')).toHaveCount(1);
+  await expect(page.locator('.guide-index a')).toContainText('Fan laws');
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://figure.tvr.works/guides');
+  await search.fill('pipe wrap');
+  await expect(page.locator('.guide-index a[href="/guides/circles"]')).toBeVisible();
+  await page.locator('.guide-index a[href="/guides/circles"]').click();
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Circle measurements');
+  await page.goBack();
+  await expect(search).toHaveValue('pipe wrap');
+  await search.fill('unrelatedword');
+  await expect(page.getByRole('status')).toHaveText('0 guides found');
+  await expect(page.getByText('No guides match this search. Try a subject, measurement, or application.')).toBeVisible();
+  await search.fill('');
+  await expect(page.locator('.guide-index a')).toHaveCount(50);
+  await page.getByRole('navigation', { name: 'Guide categories' }).getByRole('link', { name: 'HVAC', exact: true }).click();
+  await expect(page.locator('#guide-category-hvac')).toBeInViewport();
+  await page.goto('/guides?q=%5B%22fan%22%5D');
+  await expect(search).toHaveValue('');
+  await expect(page.locator('.guide-index a')).toHaveCount(50);
+  expect(errors).toEqual([]);
+});
+
+test('expanded guide types retain accessible and responsive reading layouts', async ({ page }) => {
+  for (const slug of ['circles', 'stairs', 'duct-offsets', 'right-angle-duct-offsets', 'fan-laws', 'calculator-messages']) {
+    await page.setViewportSize({ width: 320, height: 900 });
+    await page.goto(`/guides/${slug}`);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), slug).toBe(true);
+    expect((await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze()).violations, slug).toEqual([]);
+    await page.evaluate(() => {
+      const sizes = [...document.querySelectorAll<HTMLElement>('h1,h2,h3,h4,p,a,span,kbd,li,dt,dd,summary,text')].map(node => [node, parseFloat(getComputedStyle(node).fontSize)] as const);
+      for (const [node, size] of sizes) node.style.fontSize = `${size * 2}px`;
+    });
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `${slug} at 200% text`).toBe(true);
+  }
 });

@@ -151,3 +151,16 @@ All fifty subjects are now explicitly published across the six mapped categories
 Every article is prerendered, giving 55 static pages including the marketing, index, policy and 404 routes. The sitemap includes every published subject and excludes 404. The prelaunch noindex policy remains unchanged.
 
 The new full-library browser contract checks all fifty articles without JavaScript in Chromium and WebKit: concept text, native instructions, settings, results, cycle summaries, accessible diagrams, source/alias anchors, canonical/robots metadata and internal example destinations. It also verifies keyboard-operated result disclosures and the retained square-area alias. All four browser cases passed, in addition to the prior template checks; static analysis and 32 unit tests passed.
+
+
+## Searchable library and final review (October 24)
+
+The index has category jump links and a responsive two-column subject list that becomes one column on phones. Search matches every query word across subject titles, summaries, category names, native recipe titles and authored/native aliases. Examples include brace angle, pipe wrap, fan speed and 1/32. A native output element reports the result count. Search uses the official shadcn Base UI Input, Field, Label and Separator sources; the input owns its 44px minimum height. Label explicitly forwards htmlFor, and the Field layout wrapper has no redundant group role. Genuine field groups retain FieldSet. No accessibility lint rule was disabled.
+
+TanStack Router validates the query and stores it in the URL with replace navigation. Back restores the query after opening an article. Static hosting serves the same index HTML for query URLs, so the published index stays complete for SSR and first hydration. The public useHydrated/ClientOnly APIs then enable search. Without JavaScript the search control is absent and category/article links remain functional. Invalid non-text queries explicitly become undefined so raw router search values cannot reach the text filter. Search URLs retain the base index canonical.
+
+The final visual review covered the desktop/mobile index, application search, article navigation, and all thirteen schematic variants currently used by recipes. SVG labels now use the native Canvas text-centering behavior; the OGEE Offset label sits clear of its dimension line. Browser request inspection confirmed only the selected article chunk is downloaded, with no unrelated guide bodies. Captures and temporary probes remain outside the repository.
+
+Final validation passed lint, TypeScript, production prerendering and 38 unit tests. All original marketing/guide regression cases passed in the expanded run. After the malformed-query fix and SVG alignment adjustment, all eight affected full-library, keyboard disclosure, search/history, responsive and WCAG 2.2 automated-scan cases passed in Chromium and WebKit. The complete-library contract reads every article without JavaScript and checks content and internal links. New guide types were checked at 320px and 200% text. Browser console captures were clear. Browser plugin not available; validation used the existing Playwright workflow. This does not establish complete WCAG conformance or a manual VoiceOver audit.
+
+Local commits only. The app source, public indexing policy and deployment settings remain unchanged.

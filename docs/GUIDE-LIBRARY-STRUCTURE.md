@@ -61,7 +61,7 @@ Fan-law and velocity-pressure articles need their applicable conditions and unit
 
 ## Subjects
 
-The featured recipe column shows the current native title. It is an example or reference within the proposed article. The recipe count includes all mapped variants, not a target number of sections to render unchanged.
+The featured recipe column shows the current native title. It is an example or reference within the article. The recipe count includes all mapped variants, not a target number of sections to render unchanged.
 
 ### Math and relationships
 
@@ -147,7 +147,7 @@ The featured recipe column shows the current native title. It is an example or r
 
 The native structured Help catalog remains the source for recipe text, sections, ordered actions, example results, settings, diagrams, and native related-guide references. The web map owns public guide identity, grouping, summaries, search aliases, and related subjects. Native titles can stay useful in the app while the web provides broader subject headings.
 
-The native `Tools/HelpExport/export.sh` evaluates the typed catalog and action labels into a versioned public format. It should preserve instruction grouping, spoken labels, diagram identities, result captions, optional sections, and example preferences. Export public content fields explicitly. Internal source records, test identifiers, and the flattened `searchText` field are not article body content. The original declaration inventory was used for grouping; ordinary builds consume the committed typed export.
+The native `Tools/HelpExport/export.sh` evaluates the typed catalog and action labels into a versioned public format. It preserves instruction grouping, spoken labels, diagram identities, result captions, optional sections, and example preferences. Only public content fields are exported. Internal source records, test identifiers, and the flattened `searchText` field are not article body content. The original declaration inventory was used for grouping; ordinary builds consume the committed typed export.
 
 The web build resolves the source references in this map against that export. Missing or renamed source IDs must fail validation. Web-specific concept introductions can live alongside the mapping without copying all native recipe bodies into a second manually maintained collection. Any verified correction to a shared recipe belongs in its authoritative source first.
 
@@ -155,12 +155,12 @@ For this expanded library, TanStack Start is the rendering foundation. Its docum
 
 Each article supplies its subject title, description, canonical URL, and sharing metadata. Sitemap entries come from the same public route list. Search and category filters select existing subjects; they do not create additional canonical articles. The current prelaunch indexing policy remains in place until launch is requested.
 
-## Implementation sequence
+## Implementation and verification
 
-1. Validate a native export and this mapping together. Preserve all source recipes, including reference entries, and confirm the duplicate-example candidate.
-2. Implement static guide index and article routes with the existing design tokens and components. Prove the content template with Inverse cosine, Circle measurements, Ratios and proportions, Fan laws, Common rafters, and Calculator messages and results. These cover concept/example naming, merged and split topics, domain conditions, and reference content.
-3. Verify complete HTML, links, metadata, diagrams, native key labels, and example values before expanding the template across the mapped library. Keep the marketing page and demo behavior under their existing browser checks.
-4. Add search as an enhancement to the linked index. Verify practical application terms resolve to the intended subjects and that keyboard and browser navigation remain predictable.
+1. The typed native export and subject map are validated together. All source recipes are accounted for, and the confirmed square-area duplicate retains both anchors.
+2. The static template was proved with Inverse cosine, Circle measurements, Ratios and proportions, Fan laws, Common rafters, and Calculator messages and results before expansion.
+3. All fifty subjects now prerender complete HTML, metadata, diagrams, native keys and verified example values. Unknown subjects receive the static 404.
+4. Search enhances the linked index through validated URL state. Practical application terms, browser history, direct query URLs, category links and the no-JavaScript index are covered by browser tests.
 
 The export checks should reject missing source references, duplicate primary assignments, duplicate slugs, unknown categories, broken related-guide links, missing featured sections, and duplicate section anchors. Route checks should verify canonical paths, old-slug redirects when introduced, article and index content without JavaScript, and direct example links. Browser checks should cover hydration, keyboard navigation, responsive layout, and the existing reduced-motion behavior.
 
@@ -168,7 +168,7 @@ The export checks should reject missing source references, duplicate primary ass
 
 The library follows Google's guidance on [helpful content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content) and [readable URL structure](https://developers.google.com/search/docs/crawling-indexing/url-structure). Subjects, descriptions, and examples explain the actual tasks. Search aliases help readers find those tasks inside the library. They are not rendered as keyword lists in articles.
 
-These are editorial subject choices grounded in the existing Help content. Search demand and conversion performance will be evaluated after public launch; no traffic estimates are attached to the proposed routes.
+These are editorial subject choices grounded in the existing Help content. Search demand and conversion performance will be evaluated after public launch; no traffic estimates are attached to the mapped routes.
 
 ## Review checks
 

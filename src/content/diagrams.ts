@@ -19,7 +19,7 @@ export const guideDiagrams: Record<string, Drawing> = {
       {
         "text": "8 ft",
         "x": 250,
-        "y": 228
+        "y": 223.2
       },
       {
         "text": "10 ft",
@@ -29,7 +29,7 @@ export const guideDiagrams: Record<string, Drawing> = {
       {
         "text": "θ",
         "x": 150,
-        "y": 180
+        "y": 177.6
       }
     ]
   },
@@ -252,7 +252,7 @@ export const guideDiagrams: Record<string, Drawing> = {
       },
       {
         "text": "O",
-        "x": 450,
+        "x": 480,
         "y": 172.8
       },
       {
