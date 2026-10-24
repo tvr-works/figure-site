@@ -33,7 +33,7 @@ Show that behavior through authentic examples. Experienced calculator users need
 | Calculation demonstration | See how Figure works. / Nine-mode navigation, active mode H3, five or six specific steps per mode and a framed native sequence | Combine breadth, adaptive keys, solved results, diagram highlights and conversions in one area. |
 | Help | Help without losing your place. / Find rise and run from a slant. | Show approachable guidance and continuity without leaving the calculation. |
 | Help description | Worked examples, plain-language explanations, and practical uses, right alongside your calculation. | Explain what the guide provides. |
-| Availability/footer | Figure for iPhone. / No subscription. Works offline. / Preparing for the App Store. | Give honest availability, support and privacy destinations. |
+| Footer | Figure / Preparing for the App Store. / Support · Privacy | Give honest availability and practical links in one compact row, with the status below on mobile. |
 
 The calculation section has a fixed H2, “See how Figure works.”, above the introduction and a quieter 24px mode H3. There is no proof-tab navigation, separate Visual results section, All calculations inventory, clickable timeline, rotating explanatory sentence, duplicate transcript or larger-image viewer. Each active mode has one static ordered list with five or six specific actions. Help follows in normal document flow. The hero image remains stable.
 
@@ -87,7 +87,7 @@ Verify complete native result order, unit conversions, mode selection, contact m
 
 ## Launch and local commits
 
-Price remains the owner's decision. The owner considered $4.99 once; the earlier $9.99 proposal was never approved. No price or fabricated discount appears on the page. Both Get Figure links lead to an honest availability section until the public App Store destination is verified.
+Price remains the owner's decision. The owner considered $4.99 once; the earlier $9.99 proposal was never approved. No price or fabricated discount appears on the page. Both Get Figure links lead to the footer’s honest availability note until the public App Store destination is verified.
 
 Keep `noindex` until public launch is requested. Preserve `/support`, `/privacy` and 404 behavior. Hosting build settings must be updated for Vite before deployment, as described in the repository README. Work proceeds through checked local commits; this task does not authorize pushing or deploying.
 

@@ -44,6 +44,6 @@ Browser tests use a separate production preview on port 4174. They cover desktop
 
 ## Launch content
 
-Price is intentionally omitted. Both Get Figure links lead to the availability section until the public App Store URL is verified. At launch, update those links and the availability copy in `index.html`, add the approved price, remove `noindex` from the content pages when indexing is wanted, and update Cloudflare's build settings described above. No store settings, hosting settings, pushes or deployments were performed for this implementation.
+Price is intentionally omitted. Both Get Figure links lead to the footer availability note until the public App Store URL is verified. At launch, update those links and the footer availability copy in `index.html`, add the approved price, remove `noindex` from the content pages when indexing is wanted, and update Cloudflare's build settings described above. No store settings, hosting settings, pushes or deployments were performed for this implementation.
 
 The hero is a generated product render based on the supplied app screen. The nine complete mode examples and separate Help sequence use actual app captures, with tap cues placed from simulator action coordinates. They are edited demonstrations, not a browser calculator. Image sources and native capture evidence live in `docs/design/`.
