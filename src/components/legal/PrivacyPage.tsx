@@ -1,7 +1,7 @@
 import { LegalPage, SupportEmail } from './LegalPage';
 
 export function PrivacyPage() {
-  return <LegalPage><main>
+  return <LegalPage><main className="typeset typeset-figure-policy">
     <h1>Figure privacy</h1>
     <p className="muted">Last updated: <time dateTime="2026-10-21">October 21, 2026</time></p>
     <p>Figure calculates on your device. The app does not send your measurements, calculations or settings to us. It has no accounts, advertising, tracking or third-party analytics.</p>

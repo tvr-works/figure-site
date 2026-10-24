@@ -13,7 +13,7 @@ export function GuideArticlePage({ article }: { article: GuideArticle }) {
         <GuideBreadcrumb title={article.title} />
         <header className="guide-header"><p className="guide-category">{article.categoryTitle}</p><h1 className="guide-heading">{article.title}</h1><p className="guide-lede">{article.summary}</p></header>
         <div className="guide-article-layout">
-          <article className="guide-article" aria-label={article.title}>
+          <article className="guide-article typeset typeset-figure-guide" aria-label={article.title}>
             {article.recipes.map(recipe => <GuideRecipe key={recipe.id} recipe={recipe} />)}
             <div className="guide-app-note"><h2>Keep the guide beside your calculation.</h2><p>These examples are built into Figure. Open Help while you calculate, then return to the same guide and reading position.</p><Link to="/" hash="help">See Help in Figure →</Link></div>
           </article>

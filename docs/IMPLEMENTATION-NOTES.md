@@ -110,3 +110,16 @@ Validation passed lint, TypeScript, content generation, production prerendering,
 
 
 The standalone route-generation command calls the pinned public ESM `Generator`/`getConfig` exports already used by Start. The packaged CLI's CommonJS entry emitted a circular-dependency warning in Router Core; using the same generator through its ESM export avoids that path without patching dependencies or suppressing warnings.
+
+
+## Scoped Typeset reading styles (October 24)
+
+The official [Typeset stylesheet](https://ui.shadcn.com/typeset.css) was copied unchanged to `src/typeset.css` and imported after Tailwind, following the [integration guidance](https://ui.shadcn.com/docs/typeset). The CLI confirms Typeset is not a registry component; the builder supplies a standalone stylesheet. The copied source has SHA-256 `47e2af83b960d10cfa3196c9527bb0c143a71883f78e7da709cfca8de9576288`. It adds no runtime JavaScript or package dependencies. Figure's presets remain in the main stylesheet, so later source refreshes can preserve the product's reading choices.
+
+Guide prose uses the guide preset for font size, leading and flow, with the existing stronger H2 hierarchy and heading tracking. The responsive preset accounts for Typeset's documented small-screen size adjustment. Section layout resets heading top spacing at explicit content boundaries. General paragraph and heading rules no longer live under `.guide-article`.
+
+Support, privacy and the shared 404 content use the policy preset on their main content. Their navigation stays outside Typeset. The former duplicate policy heading, paragraph and list rules were removed. The legal shell defines its existing light/dark palette through scoped tokens used by Typeset, retaining the prior colors without changing the marketing theme.
+
+Instruction lists, result panels, settings definition lists, result cycles and diagram figures use the documented `data-not-typeset` escape hatch. These blocks retain their own styles; shadcn key groups also have Typeset's automatic `data-slot` exclusion. Page shells, hero, mode navigation and demonstrations retain their existing layout ownership.
+
+Validation: lint, TypeScript, 29 unit tests, static production build and all 44 Chromium/WebKit browser cases passed. Temporary Playwright probes verified policy layouts at 320, 390, 768 and 1440px, 200% text at 320px, keyboard activation of the support-to-privacy link, and dark-mode axe checks in both engines. Browser console captures were clear, and desktop/mobile screenshots were inspected. Calculator key sizing and result styles were preserved, as were the dark policy colors. The desktop hero screenshot matched its baseline pixel for pixel; mobile hero text and geometry were unchanged in the measured layout and visual review. The mobile background raster differed slightly between captures. Browser plugin not available; the existing Playwright workflow provided validation. Automated scans do not replace a manual assistive-technology audit.

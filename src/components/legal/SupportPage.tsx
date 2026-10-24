@@ -1,7 +1,7 @@
 import { LegalPage, SupportEmail } from './LegalPage';
 
 export function SupportPage() {
-  return <LegalPage><main>
+  return <LegalPage><main className="typeset typeset-figure-policy">
     <h1>Figure support</h1>
     <p>Questions, problems or suggestions? Email <SupportEmail />.</p>
     <h2>How to calculate</h2>

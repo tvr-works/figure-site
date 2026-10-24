@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./typeset.css";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "./legal.css";
@@ -217,7 +218,21 @@
 }
 
 @layer components {
-  /* The guide library shares Figure's typography and tokens with a reading-focused layout. */
+  /* Reading presets tune the official Typeset stylesheet; layout stays with each page. */
+  .typeset-figure-guide, .typeset-figure-policy {
+    --typeset-font-heading: inherit;
+    --typeset-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --typeset-leading: 1.65;
+    --typeset-flow: 1.1em;
+  }
+  .typeset-figure-guide { --typeset-size: 1.125rem; }
+  .typeset-figure-guide :where(h2) { font-size: 1.666667em; line-height: 1.2; letter-spacing: -.035em; }
+  .typeset-figure-guide :where(h3) { letter-spacing: -.015em; }
+  .typeset-figure-policy { --typeset-size: 1rem; }
+  .typeset-figure-policy :where(h1) { letter-spacing: -.035em; }
+  @media (width < 48rem) { .typeset-figure-guide { --typeset-size: .9375rem; } }
+
+  /* Guide layout and calculator-specific blocks own their geometry and styles. */
   .guide-shell { background: var(--background); color: var(--foreground); }
   .guide-main { padding-block: 40px 80px; min-height: calc(100svh - 178px); }
   .guide-header { max-width: 850px; padding-block: 6px 42px; }
@@ -225,19 +240,18 @@
   .guide-heading { font-size: clamp(40px, 4.5vw, 64px); line-height: 1.08; letter-spacing: -.05em; overflow-wrap: anywhere; }
   .guide-lede { max-width: 680px; margin: 22px 0 0; font-size: 22px; line-height: 1.5; color: var(--muted-foreground); }
   .guide-article-layout { display: grid; grid-template-columns: minmax(0, 740px) minmax(180px, 1fr); gap: 80px; align-items: start; border-top: 1px solid var(--border); padding-top: 36px; }
-  .guide-article { min-width: 0; font-size: 18px; line-height: 1.65; }
-  .guide-article p { margin: 12px 0 20px; }
-  .guide-article h2 { margin: 0 0 16px; font-size: 30px; line-height: 1.2; letter-spacing: -.035em; font-weight: 650; }
-  .guide-article h3 { margin: 0 0 12px; font-size: 20px; line-height: 1.35; font-weight: 600; letter-spacing: -.015em; }
+  .guide-article { min-width: 0; }
+  .guide-article :where(.guide-example, .guide-step-section, .guide-settings, .guide-app-note) > :where(h2, h3) { margin-block-start: 0; }
   .guide-example { scroll-margin-top: 30px; }
   .guide-example + .guide-example { margin-top: 56px; padding-top: 36px; border-top: 1px solid var(--border); }
   .guide-step-section { margin-top: 32px; }
   .guide-instructions { list-style: decimal; padding-left: 24px; margin: 24px 0; }
   .guide-instructions li { padding-left: 8px; margin-block: 22px; }
   .guide-instructions li::marker { color: var(--primary); font-size: 14px; font-weight: 600; }
+  .guide-instructions p, .guide-cycle p { margin: 12px 0 20px; }
   .guide-instructions .guide-instruction-title { font-weight: 550; margin-bottom: 10px; }
   .guide-key-arrow { margin-inline: 2px; color: var(--muted-foreground); font-size: 13px; }
-  .guide-result { display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: baseline; padding: 16px 20px; border-left: 3px solid var(--primary); background: var(--secondary); }
+  .guide-result { margin-block: var(--typeset-flow) 0; display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: baseline; padding: 16px 20px; border-left: 3px solid var(--primary); background: var(--secondary); }
   .guide-result span { font-size: 14px; color: var(--muted-foreground); }
   .guide-result strong { font-size: 25px; font-weight: 600; }
   .guide-settings, .guide-cycle { margin-block: 24px; }
@@ -277,8 +291,6 @@
     .guide-on-this-page > a { display: none; }
     .guide-on-this-page ol { margin-bottom: 12px; }
     .guide-on-this-page li { margin-block: 10px; }
-    .guide-article { font-size: 17px; }
-    .guide-article h2 { font-size: 27px; }
     .guide-index h3 { font-size: 25px; }
   }
 }

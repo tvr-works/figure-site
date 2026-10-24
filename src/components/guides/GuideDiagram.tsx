@@ -3,7 +3,7 @@ import { useId } from 'react';
 export function GuideDiagram({ diagram }: { diagram: { id: string; explanation: string } }) {
   const titleId = useId();
   if (diagram.id !== 'braceAngle') throw new Error(`The published guide needs a web diagram for ${diagram.id}.`);
-  return <figure className="guide-diagram">
+  return <figure className="guide-diagram" data-not-typeset>
     {/* oxlint-disable-next-line jsx-a11y/prefer-tag-over-role -- Inline SVG needs a named image role; an HTML img cannot contain its vector geometry. */}
     <svg viewBox="0 0 500 240" role="img" aria-labelledby={titleId}>
       <title id={titleId}>{diagram.explanation}</title>
