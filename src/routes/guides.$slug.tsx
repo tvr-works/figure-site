@@ -1,13 +1,16 @@
 import { createFileRoute, notFound } from '@tanstack/react-router';
-import { guideArticles } from '../content/generated/library';
+import type { GuideArticle } from '../content/catalog';
+
 import { GuideArticlePage } from '../components/guides/GuideArticlePage';
 import { pageHead, site } from '../site';
 
+const articles = import.meta.glob<GuideArticle>('../content/generated/articles/*.json', { import: 'default' });
+
 export const Route = createFileRoute('/guides/$slug')({
-  loader: ({ params }) => {
-    const article = guideArticles.find(guide => guide.slug === params.slug);
-    if (!article) throw notFound();
-    return article;
+  loader: async ({ params }) => {
+    const load = articles[`../content/generated/articles/${params.slug}.json`];
+    if (!load) throw notFound();
+    return load();
   },
   head: ({ loaderData }) => {
     if (!loaderData) return {};

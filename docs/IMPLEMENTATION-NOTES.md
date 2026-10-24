@@ -130,3 +130,15 @@ Validation: lint, TypeScript, 29 unit tests, static production build and all 44 
 The marketing and guide pages share one header: Guides, Support and Get Figure. The old Explore/Guides conditional and mobile Explore-hiding rule were removed. The hero retains See it work as the direct demo link. Contextual links from the Help introduction and Support's How to calculate paragraph lead to the guide index; footer and article breadcrumb navigation remain available.
 
 Lint, TypeScript, 29 unit tests, production prerendering and 14 relevant Chromium/WebKit cases passed. Temporary browser probes exercised keyboard navigation from home through the guide index to an article, both contextual entry links, consistent visible header links at 320–1440px, and no-JavaScript header navigation. Desktop and mobile captures were inspected; console captures had no errors. Browser plugin not available; verification used the existing Playwright workflow.
+
+## Expanded guide template (October 24)
+
+The six representative subjects now cover concept/reference merging, Circle mode, proportions, fan-law conditions, rafter cycles and calculator messages. Every subject has separate web concept copy in `content/guide-context.json`; native recipe wording, actions and values remain in the exported snapshot. The fan-law introduction cites Beckett Air and ASHRAE for the fixed-size/density and corresponding-operating-point assumptions.
+
+Vite's documented lazy glob imports load one generated article module at a time. Summaries are a separate lightweight index; the full native snapshot and all article bodies are not a shared client import. Generated output is replaced on each content run so an unpublished article cannot leave a stale module behind.
+
+All fourteen native schematic definitions are represented by the shared accessible SVG renderer, with original letter assignments, measurements and exported descriptions. Diagram geometry follows `HelpDiagramView` at the snapshot's native revision. Unknown diagram identities block publication. Native result disclosures use job-summary names where the app does and numeric cycles otherwise. Native related-example links resolve to published article anchors, and the subject map supplies related-guide links.
+
+The declared square-area duplicate has identical execution, display settings and answers. It renders once with both source associations and anchors. Content validation fails if those examples diverge. The complete mapping still accounts for all 147 source recipes.
+
+Validation passed lint, TypeScript, 32 unit tests, prerendering of all eleven current pages and twelve Chromium/WebKit guide cases. All six representative articles were captured and checked on desktop and mobile with no horizontal overflow or console errors. Browser plugin not available; the existing Playwright workflow supplied validation.

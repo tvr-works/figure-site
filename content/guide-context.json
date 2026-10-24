@@ -1,0 +1,263 @@
+{
+  "percentages": {
+    "paragraphs": [
+      "A percentage describes a share of a starting amount. Multiplying finds that share; adding or subtracting applies it to the original amount. Choose the operation before entering an allowance, discount or portion."
+    ]
+  },
+  "calculation-order": {
+    "paragraphs": [
+      "The same numbers can give different answers when operations run in a different order. Figure supports ordinary precedence and left-to-right calculation. Parentheses make a group explicit in either setting."
+    ]
+  },
+  "signed-values": {
+    "paragraphs": [
+      "A sign locates a value relative to a reference. Choose which direction is positive and keep that convention throughout the calculation. Changing a number’s sign and subtracting a number are separate actions."
+    ]
+  },
+  "squares-and-square-roots": {
+    "paragraphs": [
+      "A square’s area is side × side. Squaring a measured length produces square units; taking the square root of an area returns a length. Labeling an existing number with square units does not square it."
+    ]
+  },
+  "cubes-and-cube-roots": {
+    "paragraphs": [
+      "A cube’s volume is side × side × side. Cubing a length produces cubic units, and cube root returns the side of a cube from its volume. Other shapes need their own volume relationship."
+    ]
+  },
+  "sine-and-cosine": {
+    "paragraphs": [
+      "In a right triangle, sine relates an angle to the opposite side and hypotenuse; cosine relates it to the adjacent side and hypotenuse. Measure the angle from the stated reference before choosing the relationship."
+    ]
+  },
+  "tangent": {
+    "paragraphs": [
+      "Tangent is the ratio of opposite side to adjacent side in a right triangle. With an angle measured from horizontal, that is rise ÷ run. The sloping length is a different side and cannot replace the horizontal run."
+    ]
+  },
+  "inverse-sine": {
+    "paragraphs": [
+      "Inverse sine finds an angle from an opposite-side-to-hypotenuse ratio. For a right-triangle angle above horizontal, divide rise by slant using matching units. The ratio must fall within the function’s permitted range."
+    ]
+  },
+  "inverse-cosine": {
+    "paragraphs": [
+      "Inverse cosine finds an angle from an adjacent-side-to-hypotenuse ratio. A horizontal reach and a sloping brace supply one practical example; the same relationship also works with a known cosine ratio."
+    ]
+  },
+  "inverse-tangent": {
+    "paragraphs": [
+      "Inverse tangent turns a rise-to-run ratio into an angle. Both measurements must use the same units. A ratio, a percent grade and an angle describe the slope in different forms."
+    ]
+  },
+  "reciprocals": {
+    "paragraphs": [
+      "The reciprocal of a nonzero number is one divided by that number. Reversing a rate also reverses what its units mean: threads per inch becomes inches per thread. Keep that interpretation with the result."
+    ]
+  },
+  "scientific-notation": {
+    "paragraphs": [
+      "Scientific notation writes a value as a number multiplied by a power of ten. The exponent changes the size of the value; it does not change the source units or replace a general power operation."
+    ]
+  },
+  "angle-formats": {
+    "paragraphs": [
+      "Decimal degrees and degrees, minutes and seconds describe the same angle differently. There are 60 minutes in a degree and 60 seconds in a minute. The examples use Figure’s degrees.minutes.seconds entry convention rather than treating that entry as decimal degrees."
+    ]
+  },
+  "feet-and-inches": {
+    "paragraphs": [
+      "Enter a measurement in parts: feet, whole inches, then an inch fraction. The fraction-entry key builds a fraction; the division key performs arithmetic. Keep those two roles separate when reading a key sequence."
+    ]
+  },
+  "metric-measurements": {
+    "paragraphs": [
+      "A unit tells Figure how to interpret a number. Label millimeters, centimeters or meters when entering a dimension, and label each operand separately when combining metric and imperial measurements."
+    ]
+  },
+  "length-conversions": {
+    "paragraphs": [
+      "Converting a measurement changes its unit or displayed format while keeping the same length. A decimal foot is a portion of a foot, not a number of inches. Displayed fractions follow your fraction-precision setting."
+    ]
+  },
+  "area-and-volume-units": {
+    "paragraphs": [
+      "Square and cubic unit keys label quantities that are already areas or volumes. They do not apply a square or cube operation to the number. Once labeled, the same quantity can be displayed in another compatible unit."
+    ]
+  },
+  "measurement-arithmetic": {
+    "paragraphs": [
+      "Measured arithmetic keeps track of units as well as numbers. Adding two lengths gives a length, multiplying a length by a count scales it, and dividing one length by another gives a unitless count."
+    ]
+  },
+  "areas-and-volumes": {
+    "paragraphs": [
+      "Area measures a surface and uses square units; volume measures three-dimensional space and uses cubic units. Choose the relationship for the shape, label its dimensions, then select the output format you need."
+    ]
+  },
+  "ratios-and-proportions": {
+    "paragraphs": [
+      "A proportion keeps A ÷ B equal to C ÷ D. Supply three known values and leave the answer position empty. Matching the roles and units on both sides is what makes the comparison meaningful."
+    ]
+  },
+  "right-triangles": {
+    "paragraphs": [
+      "A right triangle has one 90° corner. Run, rise and diagonal describe its horizontal, vertical and sloping sides. Two compatible independent inputs determine the remaining sides and related angles."
+    ]
+  },
+  "oblique-triangles": {
+    "paragraphs": [
+      "A measured triangle does not need a right angle. Keep each side paired with its opposite angle: a with A, b with B, and c with C. Three valid side lengths determine the angles and area."
+    ]
+  },
+  "circles": {
+    "paragraphs": [
+      "Diameter crosses the whole circle through its center; radius reaches from the center to the edge. Circumference is the distance around it, and area is the surface enclosed. Use the measurement at the surface relevant to the job."
+    ]
+  },
+  "arcs": {
+    "paragraphs": [
+      "An arc is part of a circle’s curved edge. Its central angle describes how much of the circle it spans. Arc length follows the curve; the chord is the straight line between its endpoints."
+    ]
+  },
+  "circular-segments": {
+    "paragraphs": [
+      "A circular segment lies between a chord and its arc. Chord width and segment rise describe an opening such as an arched window. The rise starts at the chord and is different from the circle’s radius."
+    ]
+  },
+  "arched-walls": {
+    "paragraphs": [
+      "An arched-wall layout combines a circular segment with on-center stud spacing. Heights are measured above the chord and mirrored about the center. Add any base-wall height separately when transferring the layout."
+    ]
+  },
+  "cylinders": {
+    "paragraphs": [
+      "For a circular cylinder, volume depends on the base-circle area and perpendicular height. Figure’s closed-cylinder surface area includes the curved side and both ends. Radius and diameter describe different inputs for the same base circle."
+    ]
+  },
+  "cones": {
+    "paragraphs": [
+      "A circular cone’s volume uses its base circle and perpendicular height. Lateral area is the curved surface and excludes the base. The height entered into the mode is not the slant length along the side."
+    ]
+  },
+  "roof-pitch": {
+    "paragraphs": [
+      "Pitch per foot, degrees, percent grade and rise/run ratio describe the same slope in different forms. Distinguish horizontal run from full roof span and from the sloping rafter length."
+    ]
+  },
+  "common-rafters": {
+    "paragraphs": [
+      "A common rafter follows the roof’s rise and horizontal run. Half of the full span supplies the run only for a symmetric layout. The geometric length excludes project-specific overhang and ridge adjustments."
+    ]
+  },
+  "roof-sheathing": {
+    "paragraphs": [
+      "A sheet measured along the roof slope covers a shorter horizontal distance. Use the roof pitch to relate that sloping sheet width to its horizontal projection; neither is the full roof span."
+    ]
+  },
+  "hip-valley-and-jack-rafters": {
+    "paragraphs": [
+      "A regular roof uses equal pitches on its adjoining sides. Pitch, run and on-center spacing establish the hip or valley and its jack-rafter sequence. The saved jack-order setting controls how the length list is presented."
+    ]
+  },
+  "irregular-roofs": {
+    "paragraphs": [
+      "Different roof pitches produce different lengths, cuts and jack spacing on the two sides. Keep Pitch 1 and Pitch 2 attached to the correct sides of the sketch, and review the saved alignment and ordering settings with each example."
+    ]
+  },
+  "stairs": {
+    "paragraphs": [
+      "Stair layout relates total rise, horizontal run and target step dimensions. Calculated riser and tread sizes can differ from those targets. The examples state the rounding, headroom and floor-thickness assumptions that affect later results."
+    ]
+  },
+  "equal-spacing": {
+    "paragraphs": [
+      "Clear gaps and on-center spacing are different measurements. First choose a whole number of balusters, subtract their occupied width, then distribute the remaining space across the gaps included in your layout."
+    ]
+  },
+  "duct-offsets": {
+    "paragraphs": [
+      "The Offset mode uses straight length, vertical shift and opening height to calculate an OGEE fitting’s related dimensions. Diagonal slant length is not the straight-length input. Label these measurements before comparing wrappers, radii or elbow angles."
+    ]
+  },
+  "single-duct-offsets": {
+    "paragraphs": [
+      "A measured triangle establishes an angle and a sloping side; a corresponding right triangle separates that side into layout components. The letter assignments and angle conversion follow the particular sketch shown in the example."
+    ]
+  },
+  "double-duct-offsets": {
+    "paragraphs": [
+      "A double-offset layout separates plan and elevation information before finding true length. A length seen in plan can still include an elevation slant. Record intermediate results with their view and meaning before transferring them."
+    ]
+  },
+  "right-angle-duct-offsets": {
+    "paragraphs": [
+      "This layout needs several linked calculations. Correct the elevation slants first, then use the resulting horizontal lengths in the plan triangle. Keep the same letter assignments and recorded precision through every stage."
+    ]
+  },
+  "airflow": {
+    "paragraphs": [
+      "Volume airflow equals the free cross-sectional area multiplied by average air speed through that area. Use the open area air can pass through, and keep the speed and area units attached to their values."
+    ]
+  },
+  "airflow-conversions": {
+    "paragraphs": [
+      "CFM, liters per second and cubic meters per hour are units of volume flow rate. Converting them expresses the same airflow in another unit; it does not change the duct area or air speed."
+    ]
+  },
+  "air-speed-conversions": {
+    "paragraphs": [
+      "Feet per minute and meters per second describe air speed. Converting a speed changes its unit while keeping the same motion. Airflow and pressure use separate unit families because they measure different quantities."
+    ]
+  },
+  "pressure-conversions": {
+    "paragraphs": [
+      "Pressure units describe a pressure difference. Converting between water column, PSI, pascals and kilopascals changes the unit, not the type of pressure measured. A pressure conversion alone does not determine air speed."
+    ]
+  },
+  "velocity-pressure": {
+    "paragraphs": [
+      "These examples use V = 4005 × √VP, with air speed V in feet per minute and velocity pressure VP in inches of water column. The factor assumes standard-density air at 0.075 lb/ft³. Static pressure is a different quantity."
+    ]
+  },
+  "fan-laws": {
+    "paragraphs": [
+      "At constant fan size and air density, airflow follows speed, pressure follows the square of the speed ratio, and power follows its cube. The examples express these relationships through Figure’s proportion mode using consistent units.",
+      "These proportional estimates apply to the same fan, or aerodynamically similar fans at corresponding operating points, with comparable efficiency and unchanged air density. A different fan geometry or system condition needs its own assessment rather than a simple ratio."
+    ],
+    "references": [
+      {
+        "title": "Beckett Air: Fan laws",
+        "url": "https://beckettair.com/resources/fan-laws/"
+      },
+      {
+        "title": "ASHRAE Handbook: Fans",
+        "url": "https://handbook.ashrae.org/Handbooks/S16/SI/s16_ch21/s16_ch21_si.aspx"
+      }
+    ]
+  },
+  "correcting-and-clearing": {
+    "paragraphs": [
+      "Deleting a digit, replacing the current operand and clearing a calculation have different effects. Choose the smallest correction that keeps the values you still need. A completed calculation is not undone by deleting an entry digit."
+    ]
+  },
+  "second-functions": {
+    "paragraphs": [
+      "The 2nd key temporarily changes the available button functions. Select it before the alternate action, and select it again to cancel. Your preferred-unit setting determines which unit labels appear on the main keys."
+    ]
+  },
+  "fraction-precision": {
+    "paragraphs": [
+      "Fraction precision controls the displayed increment and denominator format. Arithmetic generally retains the underlying value even when the displayed fraction is rounded. The stair workflows explicitly describe their separate step-rounding behavior."
+    ]
+  },
+  "display-settings": {
+    "paragraphs": [
+      "Output settings choose how a result is shown, including area units, decimal places and scientific notation. They do not change the meaning of the entered dimensions. More displayed digits do not make the original measurements more accurate."
+    ]
+  },
+  "calculator-messages": {
+    "paragraphs": [
+      "Read the value together with its caption and units. When an error appears, correct its cause before repeating the calculation. The examples distinguish clearing a failed operation from clearing temporary inputs or changing saved preferences."
+    ]
+  }
+}

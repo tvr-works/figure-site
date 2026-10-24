@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { ArrowUpRight } from 'lucide-react';
-import { guideSummaries } from '../content/generated/library';
+import { guideSummaries } from '../content/generated/summaries';
 import { SiteHeader, SiteFooter } from '../components/SiteChrome';
 import { GuideBreadcrumb } from '../components/guides/GuideBreadcrumb';
 import { pageHead } from '../site';

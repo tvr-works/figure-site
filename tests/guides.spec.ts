@@ -54,7 +54,7 @@ test('guide metadata and sitemap match the public subject routes while indexing 
   const sitemap = await (await request.get('/sitemap.xml')).text();
   expect(sitemap).toContain('<loc>https://figure.tvr.works/guides/inverse-cosine</loc>');
   expect(sitemap).not.toContain('/404');
-  expect(sitemap).not.toContain('/guides/fan-laws');
+  expect(sitemap).not.toContain('/guides/not-a-guide');
 });
 
 test('guide layouts and enlarged text fit desktop and narrow browsers', async ({ page }) => {
@@ -80,8 +80,8 @@ test('guide index and article pass automated accessibility checks', async ({ pag
   }
 });
 
-test('unpublished subjects return the static 404 instead of a homepage fallback', async ({ page }) => {
-  expect((await page.goto('/guides/fan-laws'))?.status()).toBe(404);
+test('unknown subjects return the static 404 instead of a homepage fallback', async ({ page }) => {
+  expect((await page.goto('/guides/not-a-guide'))?.status()).toBe(404);
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Page not found');
   await expect(page.getByRole('link', { name: 'Figure', exact: true })).toBeVisible();
 });
