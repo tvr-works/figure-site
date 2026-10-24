@@ -10,7 +10,7 @@ export function HelpDemo() {
     setIndex(current => (current + 1) % helpFrames.length);
     return true;
   }, []);
-  const playback = useDemoPlayback(helpFrames, index, onAdvance, phoneHovered);
+  const { ref: demoRef, reducedMotion, active, onFocusCapture, media } = useDemoPlayback(helpFrames, index, onAdvance, phoneHovered);
   const frame = helpFrames[index];
   const previousCue = helpFrames[index - 1]?.cue;
   const cue = frame.cue ?? previousCue;
@@ -19,7 +19,7 @@ export function HelpDemo() {
     if (window.location.hash === '#help') document.getElementById('help')?.scrollIntoView();
   }, []);
   return (
-    <div ref={playback.ref} onFocusCapture={playback.onFocusCapture} data-demo-kind="help" data-demo-frame={frame.image} data-demo-playing={playback.active}>
+    <div ref={demoRef} onFocusCapture={onFocusCapture} data-demo-kind="help" data-demo-frame={frame.image} data-demo-playing={active}>
       <div className="help-layout">
         <div className="proof-copy">
           <h3>Find rise and run from a slant.</h3>
@@ -27,7 +27,7 @@ export function HelpDemo() {
             {helpSteps.map((step, stepIndex) => <li key={step} data-current={frame.step === stepIndex} aria-current={frame.step === stepIndex ? 'step' : undefined}>{step}</li>)}
           </ol>
         </div>
-        <DemoPhone onHoverChange={setPhoneHovered} cue={cue} previousCue={previousCue} frame={frame} resetKey="help" active={playback.active} reducedMotion={playback.reducedMotion} media={playback.media} />
+        <DemoPhone onHoverChange={setPhoneHovered} cue={cue} previousCue={previousCue} frame={frame} resetKey="help" active={active} reducedMotion={reducedMotion} media={media} />
       </div>
     </div>
   );

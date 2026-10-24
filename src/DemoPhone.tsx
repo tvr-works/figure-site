@@ -19,14 +19,13 @@ export function DemoPhone({ frame, cue, resetKey, active, reducedMotion, media, 
     '--travel-from-y': `${previousCue?.to ? (previousCue.to.y - previousCue.y) / 440 * 100 : 0}cqw`,
     '--travel-to-x': `${cue?.to ? (cue.to.x - cue.x) / 440 * 100 : 0}cqw`,
     '--travel-to-y': `${cue?.to ? (cue.to.y - cue.y) / 440 * 100 : 0}cqw`,
-    transform: !frame.cue ? 'translate(var(--travel-to-x), var(--travel-to-y))' : undefined,
   } as CSSProperties;
   return (
     <figure className="demo-phone-figure" aria-label={frame.caption} onPointerEnter={event => { if (event.pointerType === 'mouse') onHoverChange?.(true); }} onPointerLeave={() => onHoverChange?.(false)}>
       <div className="demo-phone">
         <div className="phone-aperture"><div className="native-screen">
           <img src={media.src} width="720" height="1564" alt="" loading="lazy" onLoad={media.onLoad} onError={media.onError} />
-          {cue && !reducedMotion && !media.failed && <span key={resetKey} className="press-cue" aria-hidden="true" data-visible={Boolean(frame.cue)} style={{ '--touch-delay': `${frame.pauseBefore ?? 0}ms`, transform: `translate(calc(${cue.x / 440 * 100}cqw - 50%), calc(${cue.y / 440 * 100}cqw - 50%))` } as CSSProperties}>
+          {cue && !reducedMotion && !media.failed && <span key={resetKey} className="press-cue" aria-hidden="true" data-visible={Boolean(frame.cue)} style={{ '--touch-delay': `${frame.pauseBefore ?? 0}ms`, '--touch-x': `${cue.x / 440 * 100}cqw`, '--touch-y': `${cue.y / 440 * 100}cqw` } as CSSProperties}>
             <span key={frame.image} className="touch-path" data-travel={Boolean(frame.cue && (frame.cue.to || previousCue?.to))} data-playing={active} style={travel}>
               <span className="touch-contact" data-swipe={Boolean(frame.cue?.to)} data-playing={active && Boolean(frame.cue)} />
             </span>

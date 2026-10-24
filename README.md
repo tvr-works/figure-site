@@ -34,11 +34,19 @@ Public email links retain Cloudflare's documented `email_off` comments so contac
 ## Verification
 
 ```sh
-npm test
+npm run check
 npm run build
 npx playwright install chromium webkit
 npm run test:browser
 ```
+
+`npm run check` runs lint, TypeScript, and unit tests. Production builds also run lint before typechecking and bundling. Use `npm run lint` for the lint pass alone; `npm run lint:fix` applies safe fixes for review.
+
+Oxlint 1.89.0 and `@shadcn/lint` 0.2.3 are pinned development dependencies. Configure them in `.oxlintrc.json`. The baseline enforces native correctness rules, React hooks/effect dependencies, JSX accessibility, and shadcn component ownership, known classes, theme colors, and CSS-owned styles. Warnings and unused disable directives fail the lint command.
+
+`shadcn/no-restyle` is disabled only within `src/components/ui`, where the components define their appearance. The other shadcn rules still check those files. Animation coordinates and timings pass through CSS custom properties; transforms are defined in the stylesheet. Component discovery uses the existing `components.json`, aliases, variants and theme.
+
+The TypeScript compiler remains the type checker; this baseline does not enable Oxlint’s separate type-aware mode. The linters do not check plain CSS declarations or static HTML, so retain the build and browser checks below.
 
 Browser tests use a separate production preview on port 4174. They cover desktop Chromium and mobile-width WebKit, keyboard mode navigation, complete native input/result sequences and conversions, playback pauses, reduced motion, enlarged text, screenshot failure, no JavaScript, policy routes and automated accessibility checks. The in-app browser is used for visual review. These checks do not establish a complete WCAG conformance audit.
 

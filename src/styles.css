@@ -92,7 +92,7 @@ h1 { margin: 0; font-size: clamp(48px, 5.25vw, 76px); line-height: 1.045; font-w
 .help-section { padding-block: 36px; border-top: 1px solid var(--border); background: #eef1f6; scroll-margin-top: 18px; }
 .help-layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; align-items: start; gap: 96px; min-height: 690px; padding-block: 16px; }
 .mode-picker { min-width: 0; }
-.mode-list { display: flex; flex-direction: column; gap: 3px; }
+.mode-list { min-width: 0; margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 3px; }
 .mode-option-copy { display: block; min-width: 0; }
 .mode-option-copy strong { display: block; font-size: 14px; line-height: 1.4; font-weight: 600; }
 .mode-option-copy small { display: block; margin-top: 3px; font-size: 11px; line-height: 1.4; color: var(--muted-foreground); }
@@ -115,9 +115,10 @@ h1 { margin: 0; font-size: clamp(48px, 5.25vw, 76px); line-height: 1.045; font-w
 /* A 1px overlap prevents fractional-scale clipping from exposing a hairline at the join. */
 .phone-frame-top { top: 0; clip-path: inset(0 0 calc(50.684932% - 1px) 0); }
 .phone-frame-bottom { bottom: 0; clip-path: inset(56.657534% 0 0 0); }
-.press-cue { position: absolute; left: 0; top: 0; width: 28px; height: 28px; pointer-events: none; transition: transform 520ms cubic-bezier(.4, 0, .2, 1) var(--touch-delay, 0ms), opacity 180ms ease; }
+.press-cue { transform: translate(calc(var(--touch-x) - 50%), calc(var(--touch-y) - 50%)); position: absolute; left: 0; top: 0; width: 28px; height: 28px; pointer-events: none; transition: transform 520ms cubic-bezier(.4, 0, .2, 1) var(--touch-delay, 0ms), opacity 180ms ease; }
 .press-cue[data-visible=false] { opacity: 0; }
 .touch-path { position: absolute; inset: 0; }
+.press-cue[data-visible=false] .touch-path { transform: translate(var(--travel-to-x), var(--travel-to-y)); }
 .touch-path[data-travel=true] { animation: touch-travel var(--touch-duration) ease-in-out var(--touch-delay, 0ms) both; animation-play-state: paused; }
 .touch-path[data-travel=true][data-playing=true] { animation-play-state: running; }
 .touch-contact[data-swipe=true]::after { display: none; }
