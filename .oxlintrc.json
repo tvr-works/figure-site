@@ -1,21 +1,50 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["eslint", "typescript", "unicorn", "oxc", "react", "jsx-a11y"],
-  "jsPlugins": ["@shadcn/lint"],
-  "categories": { "correctness": "error" },
+  "plugins": [
+    "eslint",
+    "typescript",
+    "unicorn",
+    "oxc",
+    "react",
+    "jsx-a11y"
+  ],
+  "jsPlugins": [
+    "@shadcn/lint"
+  ],
+  "categories": {
+    "correctness": "error"
+  },
   "rules": {
     "react/rules-of-hooks": "error",
     "react/exhaustive-deps": "error",
-    "shadcn/no-restyle": ["error", { "allow": ["layout"] }],
+    "shadcn/no-restyle": [
+      "error",
+      {
+        "allow": [
+          "layout"
+        ]
+      }
+    ],
     "shadcn/no-unknown-classes": "error",
     "shadcn/no-raw-colors": "error",
     "shadcn/no-inline-styles": "error"
   },
   "overrides": [
     {
-      "files": ["src/components/ui/**"],
-      "rules": { "shadcn/no-restyle": "off" }
+      "files": [
+        "src/components/ui/**"
+      ],
+      "rules": {
+        "shadcn/no-restyle": "off"
+      }
     }
   ],
-  "ignorePatterns": ["dist/**", "playwright-report/**", "test-results/**"]
+  "ignorePatterns": [
+    "dist/**",
+    "playwright-report/**",
+    "test-results/**",
+    "src/content/generated/**",
+    "src/routeTree.gen.ts",
+    ".tanstack/**"
+  ]
 }

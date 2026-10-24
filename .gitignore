@@ -4,3 +4,6 @@ dist/
 .vite/
 playwright-report/
 test-results/
+src/content/generated/
+src/routeTree.gen.ts
+.tanstack/

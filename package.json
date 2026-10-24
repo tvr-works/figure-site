@@ -12,7 +12,8 @@
     "test:browser": "playwright test",
     "lint": "oxlint --deny-warnings --report-unused-disable-directives",
     "lint:fix": "oxlint --fix --deny-warnings --report-unused-disable-directives",
-    "check": "npm run lint && npm run typecheck && npm test"
+    "check": "npm run lint && npm run typecheck && npm test",
+    "content": "tsx scripts/build-guides.ts"
   },
   "engines": {
     "node": ">=22.12.0"
@@ -21,6 +22,8 @@
   "dependencies": {
     "@base-ui/react": "1.9.0",
     "@fontsource-variable/geist": "^5.3.0",
+    "@tanstack/react-router": "1.170.46",
+    "@tanstack/react-start": "1.169.4",
     "class-variance-authority": "0.7.1",
     "cn": "^0.5.0",
     "lucide-react": "1.61.0",
@@ -40,8 +43,10 @@
     "oxlint": "1.89.0",
     "shadcn": "^4.22.1",
     "tailwindcss": "4.3.3",
+    "tsx": "4.23.15",
     "typescript": "7.0.2",
     "vite": "8.3.5",
-    "vitest": "5.0.5"
+    "vitest": "5.0.5",
+    "zod": "4.6.7"
   }
 }
