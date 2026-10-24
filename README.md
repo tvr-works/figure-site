@@ -13,7 +13,7 @@ npm run build
 npm run preview -- --port 4173 --strictPort
 ```
 
-Vite builds the static home, `/support`, `/privacy` and 404 pages to `dist`. React owns the independent calculation and Help demonstrations. Tailwind uses its Vite plugin; shadcn components use Base UI. No client router, backend or analytics is included.
+TanStack Start and Vite prerender the home, `/support`, `/privacy` and 404 pages to `dist/client`. React hydrates the existing calculation and Help demonstrations. Tailwind uses its Vite plugin; shadcn components use Base UI. The site deploys as static files; no runtime backend or analytics is required.
 
 The agreed copy and interaction plan lives in [the storyboard](docs/MARKETING-STORYBOARD.md). The proposed subject-based web Help library is mapped in [the guide structure](docs/GUIDE-LIBRARY-STRUCTURE.md). Price and the public App Store URL still require the owner's launch decision. Keep `noindex` until public launch is requested.
 
@@ -21,11 +21,11 @@ The agreed copy and interaction plan lives in [the storyboard](docs/MARKETING-ST
 
 The existing Cloudflare Pages project is `figure-site`, domain `figure.tvr.works`, production branch `main`. The previous configuration used build command `exit 0` and output `public`.
 
-Before deploying this implementation, change the Pages build command to `npm run build` and output directory to `dist`. These dashboard settings have not been changed here. Pushes to `main` deploy automatically; local worktree commits do not publish the site.
+Before deploying this implementation, change the Pages build command to `npm run build` and output directory to `dist/client`. These dashboard settings have not been changed here. Pushes to `main` deploy automatically; local worktree commits do not publish the site.
 
 ## Content and support
 
-`support.html` and `privacy.html` retain the existing public policies and contact information. They share `src/legal.css`. Update the privacy policy if app, website or support data practices change.
+The support and privacy route components retain the existing public policies and contact information. They share the scoped styles in `src/legal.css`. Update the privacy policy if app, website or support data practices change.
 
 The public contact is `support@figure.tvr.works`. Cloudflare Email Routing was verified on October 21, 2026, including receipt of a test message. Outbound sending as that address remains unconfigured. Private forwarding destinations do not belong in published files.
 
@@ -40,7 +40,7 @@ npx playwright install chromium webkit
 npm run test:browser
 ```
 
-`npm run check` runs lint, TypeScript, and unit tests. Production builds also run lint before typechecking and bundling. Use `npm run lint` for the lint pass alone; `npm run lint:fix` applies safe fixes for review.
+`npm run check` runs lint, content validation, generated-route types, TypeScript, and unit tests. Production builds validate content and run lint before prerendering and typechecking. Generated routes and public guide slices are recreated from source; do not edit them directly. Use `npm run lint` for the lint pass alone; `npm run lint:fix` applies safe fixes for review.
 
 Oxlint 1.89.0 and `@shadcn/lint` 0.2.3 are pinned development dependencies. Configure them in `.oxlintrc.json`. The baseline enforces native correctness rules, React hooks/effect dependencies, JSX accessibility, and shadcn component ownership, known classes, theme colors, and CSS-owned styles. Warnings and unused disable directives fail the lint command.
 
@@ -52,6 +52,10 @@ Browser tests use a separate production preview on port 4174. They cover desktop
 
 ## Launch content
 
-Price is intentionally omitted. Both Get Figure links lead to the footer availability note until the public App Store URL is verified. At launch, update those links and the footer availability copy in `index.html`, add the approved price, remove `noindex` from the content pages when indexing is wanted, and update Cloudflare's build settings described above. No store settings, hosting settings, pushes or deployments were performed for this implementation.
+Price is intentionally omitted. Both Get Figure links lead to the footer availability note until the public App Store URL is verified. At launch, update those links and the footer availability copy in the marketing route components, add the approved price, remove `noindex` from the content pages when indexing is wanted, and update Cloudflare's build settings described above. No store settings, hosting settings, pushes or deployments were performed for this implementation.
 
 The hero is a generated product render based on the supplied app screen. The nine complete mode examples and separate Help sequence use actual app captures, with tap cues placed from simulator action coordinates. They are edited demonstrations, not a browser calculator. Image sources and native capture evidence live in `docs/design/`.
+
+## Native guide content
+
+`content/native-help.json` is a committed snapshot generated by the private app repository’s `Tools/HelpExport/export.sh`. Ordinary web builds need no Swift toolchain or app checkout. `npm run content` validates every source recipe against `docs/design/guide-subject-map.json`, then generates only the explicitly published subjects listed in `content/published-guides.json`. The entire native snapshot is excluded from the client application; generated article data is its publication boundary.

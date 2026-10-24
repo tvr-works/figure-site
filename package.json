@@ -4,16 +4,17 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "npm run lint && tsc --noEmit && vite build",
+    "dev": "npm run content && vite",
+    "build": "npm run content && npm run lint && vite build && tsc --noEmit",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "npm run content && npm run routes && tsc --noEmit",
     "test": "vitest run",
     "test:browser": "playwright test",
     "lint": "oxlint --deny-warnings --report-unused-disable-directives",
     "lint:fix": "oxlint --fix --deny-warnings --report-unused-disable-directives",
     "check": "npm run lint && npm run typecheck && npm test",
-    "content": "tsx scripts/build-guides.ts"
+    "content": "tsx scripts/build-guides.ts",
+    "routes": "tsr generate"
   },
   "engines": {
     "node": ">=22.12.0"
@@ -36,6 +37,7 @@
     "@playwright/test": "1.64.1",
     "@shadcn/lint": "0.2.3",
     "@tailwindcss/vite": "4.3.3",
+    "@tanstack/router-cli": "1.167.46",
     "@types/node": "26.6.5",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",

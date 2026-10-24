@@ -1,31 +1,35 @@
-html {
+@layer components {
+.legal-shell {
   color-scheme: light dark;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.6;
   background: #fafafa;
+  min-height: 100svh;
+  padding-block: clamp(2rem, 8vh, 5rem);
   color: #202124;
   -webkit-text-size-adjust: 100%;
 }
-body {
+.legal-page {
   max-width: 39rem;
-  margin: clamp(2rem, 8vh, 5rem) auto;
+  margin-inline: auto;
   padding: 0 1.5rem;
 }
-h1 { font-size: 2.25rem; line-height: 1.15; letter-spacing: -.035em; margin: 0 0 1.25rem; }
-h2 { font-size: 1.15rem; line-height: 1.35; margin: 2rem 0 .5rem; }
-p { margin: 0 0 1rem; }
-.lead { font-size: 1.25rem; }
-.muted { color: #62666c; }
-ul { padding-inline-start: 1.3rem; margin: .5rem 0 1.25rem; }
-li { padding-inline-start: .15rem; margin: .4rem 0; }
-a { color: inherit; text-underline-offset: .2em; overflow-wrap: anywhere; }
-a:hover { text-decoration-thickness: .13em; }
-a:focus-visible { outline: 2px solid currentColor; outline-offset: 5px; border-radius: 2px; }
-nav { display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid #d8dadd; }
-nav a { display: inline-flex; align-items: center; min-height: 44px; }
-nav a[aria-current="page"] { font-weight: 600; }
+.legal-page h1 { font-size: 2.25rem; line-height: 1.15; letter-spacing: -.035em; margin: 0 0 1.25rem; }
+.legal-page h2 { font-size: 1.15rem; line-height: 1.35; margin: 2rem 0 .5rem; }
+.legal-page p { margin: 0 0 1rem; }
+.legal-page .lead { font-size: 1.25rem; }
+.legal-page .muted { color: #62666c; }
+.legal-page ul { padding-inline-start: 1.3rem; margin: .5rem 0 1.25rem; }
+.legal-page li { padding-inline-start: .15rem; margin: .4rem 0; }
+.legal-page a { color: inherit; text-underline-offset: .2em; overflow-wrap: anywhere; }
+.legal-page a:hover { text-decoration-thickness: .13em; }
+.legal-page a:focus-visible { outline: 2px solid currentColor; outline-offset: 5px; border-radius: 2px; }
+.legal-page nav { display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid #d8dadd; }
+.legal-page nav a { display: inline-flex; align-items: center; min-height: 44px; }
+.legal-page nav a[aria-current="page"] { font-weight: 600; }
 @media (prefers-color-scheme: dark) {
-  html { background: #141414; color: #ededed; }
-  .muted { color: #a9adb4; }
-  nav { border-color: #383838; }
+  .legal-shell { background: #141414; color: #ededed; }
+  .legal-page .muted { color: #a9adb4; }
+  .legal-page nav { border-color: #383838; }
+}
 }

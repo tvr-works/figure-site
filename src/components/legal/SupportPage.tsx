@@ -1,18 +1,9 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex, follow">
-  <meta name="description" content="Get help with Figure, report a calculation or display problem, or contact support.">
-  <meta name="color-scheme" content="light dark">
-  <title>Support · Figure</title>
-  <link rel="stylesheet" href="/src/legal.css">
-</head>
-<body>
-  <main>
+import { LegalPage, SupportEmail } from './LegalPage';
+
+export function SupportPage() {
+  return <LegalPage><main>
     <h1>Figure support</h1>
-    <p>Questions, problems or suggestions? Email <!--email_off--><a href="mailto:support@figure.tvr.works">support@figure.tvr.works</a><!--/email_off-->.</p>
+    <p>Questions, problems or suggestions? Email <SupportEmail />.</p>
     <h2>How to calculate</h2>
     <p>In Figure, open <strong>… → Help</strong>. Search for a task or browse a topic for short steps and worked examples. Your calculation stays in place while you read.</p>
     <h2>Report a calculation problem</h2>
@@ -25,6 +16,5 @@
     <p>Include your iPhone model, iOS version and Figure version. For layout problems, note whether the phone was upright or sideways and whether you use larger text. A screenshot helps.</p>
     <p>Leave out client details, addresses and other private information you do not want to share. See our <a href="/privacy">privacy policy</a> for how support messages are handled.</p>
   </main>
-  <nav aria-label="Site"><a href="/">Figure</a><a href="/support" aria-current="page">Support</a><a href="/privacy">Privacy</a></nav>
-</body>
-</html>
+  <nav aria-label="Site"><a href="/">Figure</a><a href="/support" aria-current="page">Support</a><a href="/privacy">Privacy</a></nav></LegalPage>;
+}

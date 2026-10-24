@@ -1,16 +1,19 @@
 import { useCallback, useEffect, useState } from 'react';
 import { DemoPhone } from './DemoPhone';
 import { helpFrames, helpSteps } from './demo-content';
-import { prefersReducedMotion, useDemoPlayback } from './useDemoPlayback';
+import { useDemoPlayback } from './useDemoPlayback';
+import { useDemoEnvironment } from './useDemoEnvironment';
 
 export function HelpDemo() {
-  const [index, setIndex] = useState(() => prefersReducedMotion() ? helpFrames.length - 1 : 0);
+  const environment = useDemoEnvironment();
+  const [position, setIndex] = useState<number | null>(null);
+  const index = position ?? (environment.reducedMotion ? helpFrames.length - 1 : 0);
   const [phoneHovered, setPhoneHovered] = useState(false);
   const onAdvance = useCallback(() => {
-    setIndex(current => (current + 1) % helpFrames.length);
+    setIndex(current => ((current ?? 0) + 1) % helpFrames.length);
     return true;
   }, []);
-  const { ref: demoRef, reducedMotion, active, onFocusCapture, media } = useDemoPlayback(helpFrames, index, onAdvance, phoneHovered);
+  const { ref: demoRef, reducedMotion, active, onFocusCapture, media } = useDemoPlayback(helpFrames, index, onAdvance, environment, phoneHovered);
   const frame = helpFrames[index];
   const previousCue = helpFrames[index - 1]?.cue;
   const cue = frame.cue ?? previousCue;

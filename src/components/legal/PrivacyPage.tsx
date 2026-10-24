@@ -1,18 +1,9 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex, follow">
-  <meta name="description" content="How Figure handles local calculator data, diagnostics, support email and visits to this website.">
-  <meta name="color-scheme" content="light dark">
-  <title>Privacy · Figure</title>
-  <link rel="stylesheet" href="/src/legal.css">
-</head>
-<body>
-  <main>
+import { LegalPage, SupportEmail } from './LegalPage';
+
+export function PrivacyPage() {
+  return <LegalPage><main>
     <h1>Figure privacy</h1>
-    <p class="muted">Last updated: <time datetime="2026-10-21">October 21, 2026</time></p>
+    <p className="muted">Last updated: <time dateTime="2026-10-21">October 21, 2026</time></p>
     <p>Figure calculates on your device. The app does not send your measurements, calculations or settings to us. It has no accounts, advertising, tracking or third-party analytics.</p>
     <h2>Saved on your device</h2>
     <p>Figure saves preferences, Recent Values and selected calculator settings locally so you can use them again. They stay there until you change or clear them, or delete the app. Figure does not operate a separate cloud-sync or backup service. Your device’s backup settings may include app data.</p>
@@ -25,12 +16,11 @@
     <p>Apple may collect and share app diagnostics according to your device settings and <a href="https://www.apple.com/legal/privacy/">Apple’s privacy policy</a>. During TestFlight testing, Apple also handles beta feedback and diagnostic information. Figure does not include a separate analytics or crash-reporting service.</p>
     <h2>When you contact support</h2>
     <p>If you contact support, we receive your email address, message and attachments through our email providers. We use them to reply, troubleshoot problems and improve Figure.</p>
-    <p>We keep support correspondence as needed to resolve your request and maintain a record of the issue. To request deletion, email <!--email_off--><a href="mailto:support@figure.tvr.works">support@figure.tvr.works</a><!--/email_off-->. We will delete it unless retention is required by law. You do not need to contact support or provide personal information to use the calculator.</p>
+    <p>We keep support correspondence as needed to resolve your request and maintain a record of the issue. To request deletion, email <SupportEmail />. We will delete it unless retention is required by law. You do not need to contact support or provide personal information to use the calculator.</p>
     <h2>This website</h2>
     <p>This website uses Cloudflare for hosting and security, which involves processing basic connection information such as your IP address. We don’t add advertising or analytics.</p>
     <h2>Questions or changes</h2>
-    <p>For privacy questions or deletion requests, email <!--email_off--><a href="mailto:support@figure.tvr.works">support@figure.tvr.works</a><!--/email_off-->. If these practices change, we will update this page and its date.</p>
+    <p>For privacy questions or deletion requests, email <SupportEmail />. If these practices change, we will update this page and its date.</p>
   </main>
-  <nav aria-label="Site"><a href="/">Figure</a><a href="/support">Support</a><a href="/privacy" aria-current="page">Privacy</a></nav>
-</body>
-</html>
+  <nav aria-label="Site"><a href="/">Figure</a><a href="/support">Support</a><a href="/privacy" aria-current="page">Privacy</a></nav></LegalPage>;
+}
