@@ -72,3 +72,13 @@ The initial findings were resolved with a semantic fieldset for mode controls, e
 Temporary probes outside the repository verified that missing effect dependencies, component padding overrides, unknown Tailwind classes, raw palette colors and inline colors fail lint. Valid component variants, layout classes and dynamic CSS custom properties pass. Relative and aliased UI imports both resolve the project's Button variants.
 
 `npm run lint` rejects warnings and unused disable directives; `lint:fix` applies safe fixes. `npm run check` combines lint, TypeScript and unit tests. `npm run build` also runs lint, so the production build and Playwright preview build enforce the same policy.
+
+## Styling cleanup (October 24)
+
+The dependency list now follows shadcn's `cn` package convention: `cn` remains the shared class-merging implementation, `src/lib/utils.ts` keeps the supported re-export, and unused direct `clsx` and `tailwind-merge` declarations were removed. Dependencies that still require `clsx` retain their own transitive dependency. The shadcn package is development tooling; its stylesheet import remains available during the production build. Existing package versions were preserved.
+
+In `src/styles.css`, root tokens and global defaults live in Tailwind's base layer, and page components and responsive rules live in the components layer. The phone geometry and touch animations remain custom CSS in explicitly grouped sections. Dark surfaces, supporting text, Help/native backgrounds, and touch feedback use named color roles. Step and touch tints derive from their base colors using the original alpha values. No additional utilities or component wrappers were introduced.
+
+Responsive rules are grouped together. Redundant wide-screen and mobile phone-size declarations, duplicate compact CTA declarations, and unused fallback heading/caption selectors were removed. Existing breakpoint thresholds and the phone aperture geometry are preserved. A temporary Playwright comparison outside the repository checked eight widths (320, 390, 740, 741, 900, 1050, 1051 and 1440 px); element rectangles were unchanged, and the six desktop/mobile hero, calculation and Help screenshots matched the baseline byte for byte. Browser validation uses the existing Playwright workflow because the Browser plugin is not available in this session.
+
+Validation passed lint, TypeScript, production build, 18 unit tests and 32 Chromium/WebKit browser tests. Additional temporary probes verified page identity, absence of framework overlays and console errors, Cone selection, utility precedence over the component layer, and primary-token changes propagating to the active-step tint in both browser engines.
