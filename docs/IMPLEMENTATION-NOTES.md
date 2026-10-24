@@ -142,3 +142,12 @@ All fourteen native schematic definitions are represented by the shared accessib
 The declared square-area duplicate has identical execution, display settings and answers. It renders once with both source associations and anchors. Content validation fails if those examples diverge. The complete mapping still accounts for all 147 source recipes.
 
 Validation passed lint, TypeScript, 32 unit tests, prerendering of all eleven current pages and twelve Chromium/WebKit guide cases. All six representative articles were captured and checked on desktop and mobile with no horizontal overflow or console errors. Browser plugin not available; the existing Playwright workflow supplied validation.
+
+
+## Complete subject publication (October 24)
+
+All fifty subjects are now explicitly published across the six mapped categories. The map is active, with stable concept-level slugs. Native app content remains unchanged. The current public snapshot still accounts for 147 native recipes; the one verified duplicate yields 146 rendered recipe sections while preserving both links.
+
+Every article is prerendered, giving 55 static pages including the marketing, index, policy and 404 routes. The sitemap includes every published subject and excludes 404. The prelaunch noindex policy remains unchanged.
+
+The new full-library browser contract checks all fifty articles without JavaScript in Chromium and WebKit: concept text, native instructions, settings, results, cycle summaries, accessible diagrams, source/alias anchors, canonical/robots metadata and internal example destinations. It also verifies keyboard-operated result disclosures and the retained square-area alias. All four browser cases passed, in addition to the prior template checks; static analysis and 32 unit tests passed.

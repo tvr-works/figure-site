@@ -1,12 +1,12 @@
 # Figure guide library structure
 
-Proposal for review, October 24, 2026.
+Implemented library structure, October 24, 2026.
 
 Each web guide has an enduring subject, an explicit URL slug, and a title that can improve over time. Worked examples belong to that subject. A brace, pipe, waste allowance, or set of sample dimensions gives readers a practical way to understand the relationship.
 
-The proposed library has 50 subjects across six browsing categories. It accounts for all 53 current native Help topics and 147 recipes, including worked examples and reference entries. The article boundaries follow subject matter and reader tasks. The landing page keeps its existing calculation and Help demonstrations, with a Guides link into the library.
+The library has 50 subjects across six browsing categories. It accounts for all 53 current native Help topics and 147 recipes, including worked examples and reference entries. The article boundaries follow subject matter and reader tasks. The landing page keeps its existing calculation and Help demonstrations, with a Guides link into the library.
 
-The complete source mapping is [guide-subject-map.json](design/guide-subject-map.json). It references the native catalog at Figure commit `c15f25e5ae168df4b1275a9fd2ba75f896f325f6`. The first implemented slice publishes `/guides` and `/guides/inverse-cosine`. The other article routes below remain proposed until their content and diagrams are ready.
+The complete source mapping is [guide-subject-map.json](design/guide-subject-map.json). It references the native catalog at Figure commit `c15f25e5ae168df4b1275a9fd2ba75f896f325f6`. All 50 subject routes are implemented and prerendered. `content/native-help.json` records the current exported source revision; `content/published-guides.json` is the explicit publication list.
 
 ## Guide identity
 
@@ -59,7 +59,7 @@ The existing catalog supplies much of the content, but some recipes are primaril
 
 Fan-law and velocity-pressure articles need their applicable conditions and units stated with the relationships. Geometry examples retain their sketch orientation and domain limits. Project-specific settings, such as stair targets and permitted baluster gaps, remain explicit inputs. These details belong with the relevant examples.
 
-## Proposed subjects
+## Subjects
 
 The featured recipe column shows the current native title. It is an example or reference within the proposed article. The recipe count includes all mapped variants, not a target number of sections to render unchanged.
 
@@ -147,11 +147,11 @@ The featured recipe column shows the current native title. It is an example or r
 
 The native structured Help catalog remains the source for recipe text, sections, ordered actions, example results, settings, diagrams, and native related-guide references. The web map owns public guide identity, grouping, summaries, search aliases, and related subjects. Native titles can stay useful in the app while the web provides broader subject headings.
 
-A future export should evaluate the typed catalog and action labels into a versioned public format. It should preserve instruction grouping, spoken labels, diagram identities, result captions, optional sections, and example preferences. Export public content fields explicitly. Internal source records, test identifiers, and the flattened `searchText` field are not article body content. The temporary declaration inventory used for this proposal is not a production exporter.
+The native `Tools/HelpExport/export.sh` evaluates the typed catalog and action labels into a versioned public format. It should preserve instruction grouping, spoken labels, diagram identities, result captions, optional sections, and example preferences. Export public content fields explicitly. Internal source records, test identifiers, and the flattened `searchText` field are not article body content. The original declaration inventory was used for grouping; ordinary builds consume the committed typed export.
 
 The web build resolves the source references in this map against that export. Missing or renamed source IDs must fail validation. Web-specific concept introductions can live alongside the mapping without copying all native recipe bodies into a second manually maintained collection. Any verified correction to a shared recipe belongs in its authoritative source first.
 
-For this expanded library, TanStack Start is the proposed rendering foundation. Its documented [static prerendering](https://tanstack.com/start/latest/docs/framework/react/guide/static-prerendering) gives the guide index and articles complete HTML at build time. React, Tailwind, Base UI, and shadcn remain the UI stack. The landing page keeps its compact structure, and the native guide export remains independent of the routing framework.
+For this expanded library, TanStack Start is the rendering foundation. Its documented [static prerendering](https://tanstack.com/start/latest/docs/framework/react/guide/static-prerendering) gives the guide index and articles complete HTML at build time. React, Tailwind, Base UI, and shadcn remain the UI stack. The landing page keeps its compact structure, and the native guide export remains independent of the routing framework.
 
 Each article supplies its subject title, description, canonical URL, and sharing metadata. Sitemap entries come from the same public route list. Search and category filters select existing subjects; they do not create additional canonical articles. The current prelaunch indexing policy remains in place until launch is requested.
 
@@ -172,4 +172,4 @@ These are editorial subject choices grounded in the existing Help content. Searc
 
 ## Review checks
 
-The declaration inventory at the referenced native commit contains 53 active topics and 147 recipes. Every recipe resolves to one primary article in the map. The 50 route rows above match the JSON slugs exactly. Guide identities, slugs, and per-article section IDs are unique; category references, related-guide references, featured sections, and the duplicate-example candidate resolve. The site's lint, TypeScript, and 18 unit tests pass. No rendered UI changed in this planning increment.
+The declaration inventory at the referenced native commit contains 53 active topics and 147 recipes. Every recipe resolves to one primary article in the map. The 50 route rows above match the JSON slugs exactly. Guide identities, slugs, and per-article section IDs are unique; category references, related-guide references, featured sections, and the duplicate-example candidate resolve. The implementation validates the current export against those assignments. The public articles render 146 distinct recipe sections, preserving the declared duplicate’s second source association and anchor. Static-content browser checks cover every article in Chromium and WebKit with JavaScript disabled.

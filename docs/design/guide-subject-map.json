@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "proposal",
+  "status": "active",
   "routePrefix": "/guides/",
   "source": {
     "repository": "figure",
