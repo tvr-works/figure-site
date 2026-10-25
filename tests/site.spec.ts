@@ -34,7 +34,7 @@ test('hero states the value and Help follows the complete calculation section wi
   await expect(page.getByRole('heading', { level: 2, name: 'See how Figure works.' })).toBeVisible();
   await expect(page.locator(calculation).getByRole('heading', { level: 3, name: 'Right Triangle' })).toBeVisible();
   await page.emulateMedia({ reducedMotion: 'no-preference' });
-  await expect(page.locator(calculation).getByRole('button', { name: /Pause|Play/ })).toHaveCount(0);
+  await expect(page.locator(calculation).getByRole('button', { name: 'Pause calculation demo', exact: true })).toBeVisible();
   const calculationBox = await page.locator('#demo').boundingBox();
   const helpBox = await page.locator('#help').boundingBox();
   expect(helpBox!.y).toBeGreaterThanOrEqual(calculationBox!.y + calculationBox!.height);
@@ -126,7 +126,7 @@ test('automatic playback pauses offscreen and keyboard pause survives returning'
   await expect(page.locator(help)).not.toHaveAttribute('data-demo-frame', 'help-touch-00');
 });
 
-test('hovering either phone holds its demo and leaving resumes without playback controls', async ({ page }) => {
+test('hovering either phone holds its demo and leaving resumes', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   for (const [selector, anchor] of [[calculation, 'demo'], [help, 'help']]) {
     await page.goto(`/#${anchor}`);
@@ -138,7 +138,7 @@ test('hovering either phone holds its demo and leaving resumes without playback 
     expect(await frame(page, selector)).toBe(held);
     await page.mouse.move(0, 0);
     await expect(page.locator(selector)).toHaveAttribute('data-demo-playing', 'true');
-    await expect(page.locator(selector).getByRole('button', { name: /Pause|Play|Replay|Back|Next step/ })).toHaveCount(0);
+    await expect(page.locator(selector).getByRole('button', { name: /Pause .* demo/ })).toBeVisible();
   }
 });
 
@@ -337,5 +337,39 @@ test('Help shows native touch gestures, holds its ending, then loops independent
   await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-touch-15');
   await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-touch-00', { timeout: 3000 });
   await expect(page.locator(help)).toHaveAttribute('data-demo-playing', 'true');
-  await expect(page.locator(help).getByRole('button')).toHaveCount(0);
+  await expect(page.getByRole('button', { name: 'Pause Help demo', exact: true })).toBeVisible();
+});
+
+
+test('persistent demo controls pause independently and retain an explicit pause across mode selection', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto('/#demo');
+  await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'true');
+  await page.getByRole('button', { name: 'Pause calculation demo', exact: true }).click();
+  await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'false');
+  const held = await frame(page);
+  await page.waitForTimeout(1800);
+  expect(await frame(page)).toBe(held);
+  await pickMode(page, 'Cylinder');
+  await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'false');
+  await expect(page.getByRole('button', { name: 'Resume calculation demo', exact: true })).toBeVisible();
+  await page.getByRole('button', { name: 'Resume calculation demo', exact: true }).click();
+  await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'true');
+  await page.locator(help).scrollIntoViewIfNeeded();
+  await expect(page.locator(help)).toHaveAttribute('data-demo-playing', 'true');
+  await page.getByRole('button', { name: 'Pause Help demo', exact: true }).click();
+  const helpHeld = await frame(page, help);
+  await page.waitForTimeout(1800);
+  expect(await frame(page, help)).toBe(helpHeld);
+  await page.locator(calculation).scrollIntoViewIfNeeded();
+  await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'true');
+  await page.locator(help).scrollIntoViewIfNeeded();
+  await expect(page.locator(help)).toHaveAttribute('data-demo-playing', 'false');
+  const resume = page.getByRole('button', { name: 'Resume Help demo', exact: true });
+  await resume.focus();
+  await resume.press('Enter');
+  await expect(page.locator(help)).toHaveAttribute('data-demo-playing', 'true');
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await expect(page.locator(help)).toHaveAttribute('data-demo-playing', 'false');
+  await expect(page.getByRole('button', { name: /(?:Pause|Resume) .* demo/ })).toHaveCount(0);
 });

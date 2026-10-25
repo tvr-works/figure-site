@@ -6,6 +6,7 @@ import type { useDemoEnvironment } from './useDemoEnvironment';
 export function useDemoPlayback(frames: readonly Frame[], index: number, onAdvance: () => boolean, environment: ReturnType<typeof useDemoEnvironment>, suspended = false) {
   const { hydrated, reducedMotion, pageVisible } = environment;
   const [playing, setPlaying] = useState(true);
+  const [pausedByUser, setPausedByUser] = useState(false);
   const [inView, setInView] = useState(false);
   const [loadedImage, setLoadedImage] = useState('');
   const [failedImage, setFailedImage] = useState('');
@@ -13,7 +14,7 @@ export function useDemoPlayback(frames: readonly Frame[], index: number, onAdvan
   const frame = frames[index];
   const src = `/assets/demo/${frame.image}.webp`;
   const failed = failedImage === src;
-  const active = hydrated && !suspended && playing && inView && pageVisible && !reducedMotion && loadedImage === src && !failed;
+  const active = hydrated && !suspended && playing && !pausedByUser && inView && pageVisible && !reducedMotion && loadedImage === src && !failed;
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), { threshold: 0.3 });
@@ -49,9 +50,13 @@ export function useDemoPlayback(frames: readonly Frame[], index: number, onAdvan
     if (!event.currentTarget.contains(event.relatedTarget) && event.target instanceof HTMLElement && event.target.matches(':focus-visible')) setPlaying(false);
   }
   return {
-    ref, hydrated, reducedMotion, playing: playing && !reducedMotion, active, onFocusCapture,
+    ref, hydrated, reducedMotion, playing: playing && !pausedByUser && !reducedMotion, active, onFocusCapture,
     start: () => setPlaying(!reducedMotion),
     pause: () => setPlaying(false),
+    togglePlayback: () => {
+      if (pausedByUser || !playing) { setPausedByUser(false); setPlaying(!reducedMotion); }
+      else setPausedByUser(true);
+    },
     media: { src, failed, onMount, onLoad: () => setLoadedImage(src), onError: () => { setFailedImage(src); setPlaying(false); } },
   };
 }
