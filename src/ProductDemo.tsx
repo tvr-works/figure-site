@@ -1,11 +1,11 @@
 import { useCallback, useState } from 'react';
-import { StepForward } from 'lucide-react';
+import { StepBack, StepForward } from 'lucide-react';
 import { ModePicker } from './ModePicker';
 import { DemoPlaybackControl } from './DemoPlaybackControl';
 import { DemoPhone } from './DemoPhone';
 import { Button } from './components/ui/button';
 import { framesForMode, modes } from './demo-content';
-import { advance, initialState, nextResult, selectMode } from './demo-state';
+import { advance, initialState, nextResult, previousResult, selectMode } from './demo-state';
 import { useDemoPlayback } from './useDemoPlayback';
 import { useDemoEnvironment } from './useDemoEnvironment';
 
@@ -28,8 +28,8 @@ export function ProductDemo() {
     start();
     setAnnouncement(`${modes[next.mode].label}. ${framesForMode(next.mode)[next.frame].caption}`);
   }
-  function showNextResult() {
-    const next = nextResult(state);
+  function showResult(direction: 'previous' | 'next') {
+    const next = direction === 'previous' ? previousResult(state) : nextResult(state);
     setState(next);
     pause();
     setAnnouncement(frames[next.frame].caption);
@@ -44,12 +44,17 @@ export function ProductDemo() {
           <ol className="mode-instructions" aria-label="How to use this mode">
             {mode.steps.map((step, index) => <li key={step} data-current={frame.step === index} aria-current={frame.step === index ? 'step' : undefined}>{step}</li>)}
           </ol>
-          <div className="demo-controls">
-            {hydrated && !reducedMotion && !media.failed && <DemoPlaybackControl label="calculation" playing={playing} onToggle={togglePlayback} />}
-            {hydrated && !playing && <Button variant="control" onClick={showNextResult}><StepForward data-icon="inline-start" />Next result</Button>}
-          </div>
         </div>
-        <DemoPhone onHoverChange={setPhoneHovered} frame={frame} cue={cue} resetKey={mode.id} active={active} reducedMotion={reducedMotion} media={media} />
+        <div className="demo-phone-panel">
+          <DemoPhone onHoverChange={setPhoneHovered} frame={frame} cue={cue} resetKey={mode.id} active={active} reducedMotion={reducedMotion} media={media} />
+          {hydrated && <fieldset className="demo-controls">
+            <legend className="sr-only">{mode.label} demo controls</legend>
+            <Button variant="control" size="control-icon" aria-label={`Previous result in ${mode.label}`} title="Previous result" onClick={() => showResult('previous')}><StepBack aria-hidden="true" /></Button>
+            <DemoPlaybackControl label={mode.label} playing={playing} onToggle={togglePlayback} disabled={reducedMotion || media.failed} describedBy={reducedMotion || media.failed ? 'calculation-playback-note' : undefined} />
+            <Button variant="control" size="control-icon" aria-label={`Next result in ${mode.label}`} title="Next result" onClick={() => showResult('next')}><StepForward aria-hidden="true" /></Button>
+            {(reducedMotion || media.failed) && <p id="calculation-playback-note" className="sr-only">{reducedMotion ? 'Animation is off because you prefer reduced motion. Previous and next show still results.' : 'Animation is unavailable because an app image could not load.'}</p>}
+          </fieldset>}
+        </div>
       </div>
       <p className="sr-only" aria-live="polite" aria-atomic="true">{announcement}</p>
     </div>

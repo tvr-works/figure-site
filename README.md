@@ -93,7 +93,7 @@ The nine expanded introductions cover feet/inches, length conversion, right tria
 
 The committed 1200 × 630 `public/social-card.png` uses the existing Figure artwork and typography. Regenerate it with `npm run asset:social` when the design changes; that optional authoring command uses the existing Playwright Chromium installation. Ordinary production builds only copy the PNG and require no browser. The social metadata remains app-neutral while the listing is pending.
 
-Both demos have a discreet persistent pause/resume button for normal-motion browsing. An explicit user pause survives mode selection and scrolling. Reduced motion remains still and retains manual calculation results; hover, keyboard-entry, offscreen and hidden-page suspension remain supported.
+Each calculation mode has a compact icon-only previous-result, play/pause and next-result row directly beneath its phone; playback repeats the selected mode. Help has its icon-only play/pause control in the same position. Buttons retain accessible names, focus indicators and 44px targets. An explicit user pause survives mode selection and scrolling. Reduced motion remains still and retains manual calculation results; hover, keyboard-entry, offscreen and hidden-page suspension remain supported.
 
 ### Preview deployment checkpoint
 
