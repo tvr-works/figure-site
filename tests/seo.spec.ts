@@ -23,6 +23,8 @@ test('every static page has complete unique metadata and valid internal destinat
       robots: values('meta[name="robots"]', 'content'),
       canonical: values('link[rel="canonical"]', 'href'),
       heading: values('h1'),
+      sharingImage: values('meta[property="og:image"]', 'content'),
+      sharingCard: values('meta[name="twitter:card"]', 'content'),
       openGraphUrl: values('meta[property="og:url"]', 'content'),
       ids: values('[id]', 'id'),
       links: [...document.querySelectorAll<HTMLAnchorElement>('a[href]')].map(element => new URL(element.getAttribute('href')!, origin + path).href),
@@ -48,6 +50,8 @@ test('every static page has complete unique metadata and valid internal destinat
     descriptions.add(description);
     expect(report.canonical[0]).toBe(site.origin + report.path);
     expect(report.openGraphUrl[0]).toBe(report.canonical[0]);
+    expect(report.sharingImage).toEqual([`${site.origin}/social-card.png`]);
+    expect(report.sharingCard).toEqual(['summary_large_image']);
     expect(report.robots[0]).toBe(report.path === '/404' ? 'noindex, nofollow' : expectedRobots);
     expect(new Set(report.ids).size, `${report.path}: duplicate IDs`).toBe(report.ids.length);
     if (report.path === '/') expect(report.schemas).toContainEqual(expect.objectContaining({ '@type': 'WebSite', name: 'Figure', url: site.origin + '/' }));
@@ -75,6 +79,9 @@ test('every static page has complete unique metadata and valid internal destinat
     }
   }
   for (const asset of localAssets) expect((await stat(new URL(`.${asset}`, output))).size, asset).toBeGreaterThan(0);
+  const card = await readFile(new URL('social-card.png', output));
+  expect(card.subarray(1, 4).toString()).toBe('PNG');
+  expect([card.readUInt32BE(16), card.readUInt32BE(20)]).toEqual([1200, 630]);
   const sitemap = await readFile(new URL('sitemap.xml', output), 'utf8');
   const entries = await page.evaluate(xml => [...new DOMParser().parseFromString(xml, 'application/xml').querySelectorAll('url')].map(element => ({ location: element.querySelector('loc')!.textContent!, modified: element.querySelector('lastmod')?.textContent })), sitemap);
   for (const entry of entries) expect(entry.modified, entry.location).toBe((updates as Record<string, string>)[new URL(entry.location).pathname]);

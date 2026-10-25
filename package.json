@@ -14,7 +14,8 @@
     "lint:fix": "oxlint --fix --deny-warnings --report-unused-disable-directives",
     "check": "npm run lint && npm run typecheck && npm test",
     "content": "tsx scripts/build-guides.ts",
-    "routes": "tsx scripts/generate-routes.ts"
+    "routes": "tsx scripts/generate-routes.ts",
+    "asset:social": "tsx scripts/render-social-card.ts"
   },
   "engines": {
     "node": ">=22.12.0"
