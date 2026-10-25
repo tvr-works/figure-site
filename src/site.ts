@@ -1,7 +1,9 @@
+import { indexingRobots, resolveSiteIndexing } from './indexing.ts';
+
 export const site = {
   name: 'Figure',
   origin: 'https://figure.tvr.works',
-  robots: 'noindex, follow',
+  robots: indexingRobots(resolveSiteIndexing(import.meta.env?.VITE_SITE_INDEXING)),
 };
 
 export function pageHead(path: string, title: string, description: string, robots = site.robots) {

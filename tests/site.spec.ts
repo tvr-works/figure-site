@@ -1,3 +1,5 @@
+import { indexingRobots, resolveSiteIndexing } from '../src/indexing';
+const expectedRobots = indexingRobots(resolveSiteIndexing(process.env.VITE_SITE_INDEXING));
 import { expect, test } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
@@ -13,7 +15,7 @@ async function pickMode(page: import('@playwright/test').Page, label: string) {
 
 test('purchase status and static public routes are honest and reachable', async ({ page, request }) => {
   await page.goto('/');
-  await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex, follow');
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', expectedRobots);
   await page.locator('.hero-actions').getByRole('link', { name: 'Get Figure' }).click();
   await expect(page.getByText('Preparing for the App Store.')).toBeInViewport();
   for (const path of ['/support', '/privacy']) {

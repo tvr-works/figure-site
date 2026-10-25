@@ -1,3 +1,5 @@
+import { indexingRobots, resolveSiteIndexing } from '../src/indexing';
+const expectedRobots = indexingRobots(resolveSiteIndexing(process.env.VITE_SITE_INDEXING));
 import { expect, test } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { readFile } from 'node:fs/promises';
@@ -46,7 +48,7 @@ test('guide navigation, anchors and browser history work without hydration error
 
 test('guide metadata and sitemap match the public subject routes while indexing stays off', async ({ page, request }) => {
   await page.goto(articlePath);
-  await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex, follow');
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', expectedRobots);
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://figure.tvr.works' + articlePath);
   await expect(page.locator('meta[property="og:url"]')).toHaveAttribute('content', 'https://figure.tvr.works' + articlePath);
   const schema = await page.locator('script[type="application/ld+json"]').textContent();

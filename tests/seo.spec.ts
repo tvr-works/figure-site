@@ -1,6 +1,9 @@
 import { expect, test } from '@playwright/test';
 import { readFile, readdir, stat } from 'node:fs/promises';
 import { site } from '../src/site';
+import { indexingRobots, resolveSiteIndexing } from '../src/indexing';
+import updates from '../content/page-updates.json' with { type: 'json' };
+const expectedRobots = indexingRobots(resolveSiteIndexing(process.env.VITE_SITE_INDEXING));
 
 const output = new URL('../dist/client/', import.meta.url);
 
@@ -44,7 +47,7 @@ test('every static page has complete unique metadata and valid internal destinat
     descriptions.add(description);
     expect(report.canonical[0]).toBe(site.origin + report.path);
     expect(report.openGraphUrl[0]).toBe(report.canonical[0]);
-    expect(report.robots[0]).toBe(report.path === '/404' ? 'noindex, nofollow' : site.robots);
+    expect(report.robots[0]).toBe(report.path === '/404' ? 'noindex, nofollow' : expectedRobots);
     expect(new Set(report.ids).size, `${report.path}: duplicate IDs`).toBe(report.ids.length);
     for (const href of report.links) {
       const url = new URL(href);
@@ -61,6 +64,8 @@ test('every static page has complete unique metadata and valid internal destinat
   }
   for (const asset of localAssets) expect((await stat(new URL(`.${asset}`, output))).size, asset).toBeGreaterThan(0);
   const sitemap = await readFile(new URL('sitemap.xml', output), 'utf8');
-  const locations = await page.evaluate(xml => [...new DOMParser().parseFromString(xml, 'application/xml').querySelectorAll('loc')].map(element => element.textContent), sitemap);
+  const entries = await page.evaluate(xml => [...new DOMParser().parseFromString(xml, 'application/xml').querySelectorAll('url')].map(element => ({ location: element.querySelector('loc')!.textContent!, modified: element.querySelector('lastmod')?.textContent })), sitemap);
+  for (const entry of entries) expect(entry.modified, entry.location).toBe((updates as Record<string, string>)[new URL(entry.location).pathname]);
+  const locations = entries.map(entry => entry.location);
   expect(locations.sort()).toEqual(reports.filter(report => report.path !== '/404').map(report => site.origin + report.path).sort());
 });

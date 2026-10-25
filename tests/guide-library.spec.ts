@@ -1,3 +1,5 @@
+import { indexingRobots, resolveSiteIndexing } from '../src/indexing';
+const expectedRobots = indexingRobots(resolveSiteIndexing(process.env.VITE_SITE_INDEXING));
 import { expect, test } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import native from '../content/native-help.json' with { type: 'json' };
@@ -52,7 +54,7 @@ test('every published subject has complete static content, accessible diagrams a
     }, { article, destinations });
     expect(missing, article.slug).toEqual([]);
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://figure.tvr.works/guides/${article.slug}`);
-    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex, follow');
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', expectedRobots);
   }
   const sitemap = await (await request.get('/sitemap.xml')).text();
   for (const slug of published) expect(sitemap).toContain(`<loc>https://figure.tvr.works/guides/${slug}</loc>`);
