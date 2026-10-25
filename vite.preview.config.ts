@@ -12,7 +12,6 @@ export default defineConfig({
     name: 'static-pages-404',
     configurePreviewServer(server) {
       const directory = fileURLToPath(new URL('./dist/client/', import.meta.url));
-      const notFound = readFileSync(new URL('./dist/client/404.html', import.meta.url));
       return () => {
         server.middlewares.use((request, response, next) => {
           // Vite has rewritten clean URLs, but serves their HTML after this hook.
@@ -21,7 +20,7 @@ export default defineConfig({
           if (file.startsWith(directory) && existsSync(file)) return next();
           response.statusCode = 404;
           response.setHeader('Content-Type', 'text/html; charset=utf-8');
-          response.end(request.method === 'HEAD' ? undefined : notFound);
+          response.end(request.method === 'HEAD' ? undefined : readFileSync(new URL('./dist/client/404.html', import.meta.url)));
         });
       };
     },

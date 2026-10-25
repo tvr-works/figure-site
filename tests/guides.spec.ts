@@ -85,6 +85,7 @@ test('guide index and article pass automated accessibility checks', async ({ pag
 test('unknown subjects return the static 404 instead of a homepage fallback', async ({ page }) => {
   expect((await page.goto('/guides/not-a-guide'))?.status()).toBe(404);
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Page not found');
+  await expect(page.locator('header.site-header')).toHaveCSS('display', 'flex');
   await expect(page.getByRole('link', { name: 'Figure', exact: true })).toBeVisible();
 });
 
