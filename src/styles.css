@@ -239,7 +239,7 @@
   .guide-header { max-width: 850px; padding-block: 6px 42px; }
   .guide-category { color: var(--primary); font-size: 12px; font-weight: 650; letter-spacing: .08em; margin: 0 0 18px; }
   .guide-heading { font-size: clamp(40px, 4.5vw, 64px); line-height: 1.08; letter-spacing: -.05em; overflow-wrap: anywhere; }
-  .guide-lede { max-width: 680px; margin: 22px 0 0; font-size: 22px; line-height: 1.5; color: var(--muted-foreground); }
+  .guide-lede { overflow-wrap: anywhere; max-width: 680px; margin: 22px 0 0; font-size: 22px; line-height: 1.5; color: var(--muted-foreground); }
   .guide-article-layout { display: grid; grid-template-columns: minmax(0, 740px) minmax(180px, 1fr); gap: 80px; align-items: start; border-top: 1px solid var(--border); padding-top: 36px; }
   .guide-article { min-width: 0; }
   .guide-article :where(.guide-example, .guide-step-section, .guide-settings, .guide-app-note) > :where(h2, h3) { margin-block-start: 0; }

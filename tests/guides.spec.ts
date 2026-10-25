@@ -87,3 +87,18 @@ test('unknown subjects return the static 404 instead of a homepage fallback', as
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Page not found');
   await expect(page.getByRole('link', { name: 'Figure', exact: true })).toBeVisible();
 });
+
+
+test('guide introductions reflow with doubled text and increased spacing at 320px', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 900 });
+  for (const slug of ['circles', 'duct-offsets']) {
+    await page.goto(`/guides/${slug}`);
+    await page.evaluate(() => {
+      const sizes = [...document.querySelectorAll<HTMLElement>('h1,h2,h3,p,a,span,kbd,li,text,button')].map(node => [node, parseFloat(getComputedStyle(node).fontSize)] as const);
+      for (const [node, size] of sizes) node.style.fontSize = `${size * 2}px`;
+    });
+    await page.addStyleTag({ content: 'p{margin-bottom:2em!important}*{line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important}' });
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), slug).toBe(true);
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+  }
+});
