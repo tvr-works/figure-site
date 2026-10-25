@@ -27,6 +27,7 @@ test('every static page has complete unique metadata and valid internal destinat
       ids: values('[id]', 'id'),
       links: [...document.querySelectorAll<HTMLAnchorElement>('a[href]')].map(element => new URL(element.getAttribute('href')!, origin + path).href),
       images: [...document.querySelectorAll<HTMLImageElement>('img')].map(element => ({ src: new URL(element.getAttribute('src')!, origin + path).href, alt: element.getAttribute('alt') })),
+      breadcrumb: [...document.querySelectorAll('[aria-label="Breadcrumb"] a, [aria-label="Breadcrumb"] [aria-current="page"]')].map(element => element.textContent?.trim()),
       schemas: [...document.querySelectorAll('script[type="application/ld+json"]')].map(element => JSON.parse(element.textContent!)),
     };
   }), { documents, origin: site.origin });
@@ -49,6 +50,17 @@ test('every static page has complete unique metadata and valid internal destinat
     expect(report.openGraphUrl[0]).toBe(report.canonical[0]);
     expect(report.robots[0]).toBe(report.path === '/404' ? 'noindex, nofollow' : expectedRobots);
     expect(new Set(report.ids).size, `${report.path}: duplicate IDs`).toBe(report.ids.length);
+    if (report.path === '/') expect(report.schemas).toContainEqual(expect.objectContaining({ '@type': 'WebSite', name: 'Figure', url: site.origin + '/' }));
+    if (report.path !== '/' && report.path !== '/404') {
+      const breadcrumb = report.schemas.find(schema => schema['@type'] === 'BreadcrumbList');
+      expect(breadcrumb?.itemListElement.map((item: { name: string }) => item.name), report.path).toEqual(report.breadcrumb);
+      expect(breadcrumb.itemListElement.at(-1).item).toBe(report.canonical[0]);
+    }
+    if (report.path.startsWith('/guides/')) {
+      const article = report.schemas.find(schema => schema['@type'] === 'TechArticle');
+      expect(article?.dateModified).toBe((updates as Record<string, string>)[report.path]);
+      expect(article?.mainEntityOfPage).toBe(report.canonical[0]);
+    }
     for (const href of report.links) {
       const url = new URL(href);
       if (url.origin !== site.origin) continue;

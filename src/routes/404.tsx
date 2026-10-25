@@ -3,6 +3,6 @@ import { NotFoundPage } from '../components/legal/NotFoundPage';
 import { pageHead } from '../site';
 
 export const Route = createFileRoute('/404')({
-  head: () => pageHead('/404', "Page not found · Figure", "The requested Figure page could not be found.", 'noindex, nofollow'),
+  head: () => pageHead('/404', "Page not found · Figure", "The requested Figure page could not be found.", { robots: 'noindex, nofollow' }),
   component: NotFoundPage,
 });

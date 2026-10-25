@@ -10,7 +10,7 @@ import { pageHead } from '../site';
 
 export const Route = createFileRoute('/guides/')({
   validateSearch: parseGuideSearch,
-  head: () => pageHead('/guides', 'Calculation guides · Figure', 'Understand the math, work through an example, and follow the steps in Figure for iPhone.'),
+  head: () => pageHead('/guides', 'Calculation guides · Figure', 'Understand the math, work through an example, and follow the steps in Figure for iPhone.', { breadcrumbs: [{ name: 'Guides', path: '/guides' }] }),
   component: GuideIndex,
 });
 

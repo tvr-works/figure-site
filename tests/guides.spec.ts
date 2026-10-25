@@ -51,7 +51,7 @@ test('guide metadata and sitemap match the public subject routes while indexing 
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', expectedRobots);
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://figure.tvr.works' + articlePath);
   await expect(page.locator('meta[property="og:url"]')).toHaveAttribute('content', 'https://figure.tvr.works' + articlePath);
-  const schema = await page.locator('script[type="application/ld+json"]').textContent();
+  const schema = await page.locator('#article-data').textContent();
   expect(JSON.parse(schema!)).toMatchObject({ '@type': 'TechArticle', headline: 'Inverse cosine', url: 'https://figure.tvr.works' + articlePath });
   const sitemap = await (await request.get('/sitemap.xml')).text();
   expect(sitemap).toContain('<loc>https://figure.tvr.works/guides/inverse-cosine</loc>');

@@ -3,6 +3,6 @@ import { PrivacyPage } from '../components/legal/PrivacyPage';
 import { pageHead } from '../site';
 
 export const Route = createFileRoute('/privacy')({
-  head: () => pageHead('/privacy', "Privacy · Figure", "How Figure handles local calculator data, diagnostics, support email and visits to this website."),
+  head: () => pageHead('/privacy', "Privacy · Figure", "How Figure handles local calculator data, diagnostics, support email and visits to this website.", { breadcrumbs: [{ name: 'Privacy', path: '/privacy' }] }),
   component: PrivacyPage,
 });
