@@ -1,7 +1,7 @@
 import { existsSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { framesForMode, modes } from './demo-content';
-import { advance, firstResult, initialState, nextResult, selectMode } from './demo-state';
+import { advance, firstResult, initialState, nextResult, previousResult, selectMode } from './demo-state';
 
 describe('complete native examples', () => {
   it.each(modes)('$label has an input path, real results, and available screenshots', mode => {
@@ -43,22 +43,20 @@ describe('complete native examples', () => {
   });
 });
 
-describe('mode tour boundaries', () => {
+describe('selected-mode playback boundaries', () => {
   it('starts animation at mode selection and reduced motion at a completed result', () => {
     expect(initialState(false)).toEqual({ mode: 0, frame: 0 });
     const still = initialState(true);
     expect(framesForMode(still.mode)[still.frame].result).toBe(true);
   });
-  it('keeps the selected mode until every captured frame has played', () => {
-    let state = { mode: 0, frame: 0 };
-    for (let i = 1; i < framesForMode(0).length; i++) {
+  it.each(modes)('$label plays every frame then repeats without changing modes', mode => {
+    const index = modes.indexOf(mode);
+    let state = { mode: index, frame: 0 };
+    for (let i = 1; i < framesForMode(index).length; i++) {
       state = advance(state);
-      expect(state).toEqual({ mode: 0, frame: i });
+      expect(state).toEqual({ mode: index, frame: i });
     }
-    expect(advance(state)).toEqual({ mode: 1, frame: 0 });
-  });
-  it('wraps from the final mode to the first', () => {
-    expect(advance({ mode: 8, frame: framesForMode(8).length - 1 })).toEqual({ mode: 0, frame: 0 });
+    expect(advance(state)).toEqual({ mode: index, frame: 0 });
   });
   it.each([false, true])('direct selection respects reduced motion: %s', reducedMotion => {
     const state = selectMode(initialState(false), 4, reducedMotion);
@@ -69,14 +67,20 @@ describe('mode tour boundaries', () => {
     expect(selectMode(state, -1)).toBe(state);
     expect(selectMode(state, modes.length)).toBe(state);
   });
-  it('manual result navigation stays in the mode and wraps its results', () => {
-    let state = initialState(true);
-    const results = framesForMode(0).filter(frame => frame.result);
-    for (let i = 0; i < results.length; i++) {
-      expect(framesForMode(0)[state.frame]).toEqual(results[i]);
+  it.each(modes)('$label navigates completed results in both directions and wraps within the mode', mode => {
+    const index = modes.indexOf(mode);
+    const results = framesForMode(index).flatMap((frame, i) => frame.result ? [i] : []);
+    let state = { mode: index, frame: results[0] };
+    for (const result of results) {
+      expect(state).toEqual({ mode: index, frame: result });
       state = nextResult(state);
-      expect(state.mode).toBe(0);
     }
-    expect(state.frame).toBe(firstResult(0));
+    expect(state).toEqual({ mode: index, frame: results[0] });
+    for (const result of [...results].reverse()) {
+      state = previousResult(state);
+      expect(state).toEqual({ mode: index, frame: result });
+    }
+    expect(nextResult({ mode: index, frame: 0 }).frame).toBe(results[0]);
+    expect(previousResult({ mode: index, frame: 0 }).frame).toBe(results.at(-1));
   });
 });

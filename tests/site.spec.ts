@@ -34,7 +34,7 @@ test('hero states the value and Help follows the complete calculation section wi
   await expect(page.getByRole('heading', { level: 2, name: 'See how Figure works.' })).toBeVisible();
   await expect(page.locator(calculation).getByRole('heading', { level: 3, name: 'Right Triangle' })).toBeVisible();
   await page.emulateMedia({ reducedMotion: 'no-preference' });
-  await expect(page.locator(calculation).getByRole('button', { name: 'Pause calculation demo', exact: true })).toBeVisible();
+  await expect(page.locator(calculation).getByRole('button', { name: 'Pause Right Triangle demo', exact: true })).toBeVisible();
   const calculationBox = await page.locator('#demo').boundingBox();
   const helpBox = await page.locator('#help').boundingBox();
   expect(helpBox!.y).toBeGreaterThanOrEqual(calculationBox!.y + calculationBox!.height);
@@ -44,7 +44,8 @@ test('hero states the value and Help follows the complete calculation section wi
 
 test('reduced motion shows completed examples and allows manual results in every mode', async ({ page }) => {
   await page.goto('/#demo');
-  await expect(page.getByRole('button', { name: 'Play calculation demo', exact: true })).toHaveCount(0);
+  await expect(page.getByRole('button', { name: 'Play Right Triangle demo', exact: true })).toBeDisabled();
+  await expect(page.getByRole('button', { name: 'Play Right Triangle demo', exact: true })).toHaveAccessibleDescription(/prefer reduced motion/);
   const first = await frame(page);
   await page.waitForTimeout(1500);
   expect(await frame(page)).toBe(first);
@@ -52,9 +53,22 @@ test('reduced motion shows completed examples and allows manual results in every
     await pickMode(page, label);
     await expect(page.locator(calculation)).toHaveAttribute('data-demo-frame', new RegExp(`worked-${id}-`));
     await expect.poll(() => page.locator(`${calculation} .native-screen img`).evaluate((img: HTMLImageElement) => img.naturalWidth)).toBe(720);
+    const controls = page.getByRole('group', { name: `${label} demo controls`, exact: true });
+    await expect(controls.getByRole('button')).toHaveCount(3);
+    await expect(controls.getByRole('button', { name: `Play ${label} demo`, exact: true })).toBeDisabled();
     const before = await frame(page);
-    await page.locator(calculation).getByRole('button', { name: 'Next result', exact: true }).click();
+    const previous = controls.getByRole('button', { name: `Previous result in ${label}`, exact: true });
+    await previous.focus();
+    await previous.press('Enter');
     expect(await frame(page)).not.toBe(before);
+    const next = controls.getByRole('button', { name: `Next result in ${label}`, exact: true });
+    await next.focus();
+    await next.press('Enter');
+    expect(await frame(page)).toBe(before);
+    await next.press('Enter');
+    expect(await frame(page)).not.toBe(before);
+    await expect(page.locator('#adaptive-mode-content h3')).toHaveText(label);
+    await expect(page.locator(`${calculation} [aria-live=polite]`)).toHaveText((await page.locator(`${calculation} figure`).getAttribute('aria-label'))!);
     await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'false');
   }
 });
@@ -77,7 +91,7 @@ test('specific mode steps track completed results and conversion boundaries', as
     await pickMode(page, example.mode);
     await expect(page.locator(`${calculation} .mode-instructions li`)).toHaveCount(example.count);
     for (const [index, highlight] of example.highlights.entries()) {
-      if (index) await page.locator(calculation).getByRole('button', { name: 'Next result', exact: true }).click();
+      if (index) await page.locator(calculation).getByRole('button', { name: /^Next result in / }).click();
       await expect(current).toHaveText(highlight);
     }
   }
@@ -86,9 +100,9 @@ test('specific mode steps track completed results and conversion boundaries', as
 test('manual results include unit conversion and reduced-motion Help holds the resumed guide', async ({ page }) => {
   await page.goto('/#demo');
   await expect(page.locator(`${calculation} figure`)).toHaveAttribute('aria-label', 'Right Triangle · Diagonal, 5 feet 0 inches');
-  await page.locator(calculation).getByRole('button', { name: 'Next result', exact: true }).click();
+  await page.locator(calculation).getByRole('button', { name: /^Next result in / }).click();
   await expect(page.locator(`${calculation} figure`)).toHaveAttribute('aria-label', 'Right Triangle · Diagonal, 60 inches');
-  await page.locator(calculation).getByRole('button', { name: 'Next result', exact: true }).click();
+  await page.locator(calculation).getByRole('button', { name: /^Next result in / }).click();
   await expect(page.locator(`${calculation} figure`)).toHaveAttribute('aria-label', 'Right Triangle · Diagonal, 1.524 meters');
   await page.locator('#help-title').scrollIntoViewIfNeeded();
   await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-touch-15');
@@ -147,6 +161,9 @@ test('missing screenshots retain readable calculation and Help guidance', async 
   await page.goto('/#demo');
   await expect(page.locator(calculation).getByText('App image could not load. The steps explain the example.')).toBeVisible();
   await expect(page.getByRole('list', { name: 'How to use this mode' })).toContainText('Set the run to 3 ft.');
+  await expect(page.getByRole('button', { name: 'Play Right Triangle demo', exact: true })).toBeDisabled();
+  await page.getByRole('button', { name: 'Next result in Right Triangle', exact: true }).click();
+  await expect(page.locator(`${calculation} figure`)).toHaveAttribute('aria-label', 'Right Triangle · Diagonal, 60 inches');
   await page.locator(help).scrollIntoViewIfNeeded();
   await expect(page.locator(help).getByText('App image could not load. The steps explain the example.')).toBeVisible();
   await expect(page.getByRole('list', { name: 'Help demo steps' })).toContainText('Your calculation stays in place');
@@ -253,7 +270,7 @@ test('mode navigation is keyboard accessible and starts from a completed still',
   await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'false');
 });
 
-test('the automatic tour completes the cylinder results before moving to Cone', async ({ page }) => {
+test('automatic playback completes and repeats the selected cylinder mode', async ({ page }) => {
   test.setTimeout(35000);
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto('/#demo');
@@ -268,8 +285,8 @@ test('the automatic tour completes the cylinder results before moving to Cone', 
   await expect(page.locator(`${calculation} figure`)).toHaveAttribute('aria-label', /Cylinder · Volume, 75.39822 cubic feet/, { timeout: 5000 });
   await expect(page.locator(`${calculation} figure`)).toHaveAttribute('aria-label', /Cylinder · Surface area, 100.531 square feet/, { timeout: 5000 });
   await expect(current).toHaveText('Cycle to the surface area.');
-  await expect(page.locator(calculation)).toHaveAttribute('data-demo-frame', 'worked-cone-00', { timeout: 5000 });
-  await expect(page.locator('#adaptive-mode-content h3')).toHaveText('Cone');
+  await expect(page.locator(calculation)).toHaveAttribute('data-demo-frame', 'worked-cylinder-00', { timeout: 5000 });
+  await expect(page.locator('#adaptive-mode-content h3')).toHaveText('Cylinder');
 });
 
 test('touch movement and contact remain smooth with a pause between stages', async ({ page }) => {
@@ -345,15 +362,15 @@ test('persistent demo controls pause independently and retain an explicit pause 
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto('/#demo');
   await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'true');
-  await page.getByRole('button', { name: 'Pause calculation demo', exact: true }).click();
+  await page.getByRole('button', { name: 'Pause Right Triangle demo', exact: true }).click();
   await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'false');
   const held = await frame(page);
   await page.waitForTimeout(1800);
   expect(await frame(page)).toBe(held);
   await pickMode(page, 'Cylinder');
   await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'false');
-  await expect(page.getByRole('button', { name: 'Resume calculation demo', exact: true })).toBeVisible();
-  await page.getByRole('button', { name: 'Resume calculation demo', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Play Cylinder demo', exact: true })).toBeVisible();
+  await page.getByRole('button', { name: 'Play Cylinder demo', exact: true }).click();
   await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'true');
   await page.locator(help).scrollIntoViewIfNeeded();
   await expect(page.locator(help)).toHaveAttribute('data-demo-playing', 'true');
@@ -365,11 +382,12 @@ test('persistent demo controls pause independently and retain an explicit pause 
   await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'true');
   await page.locator(help).scrollIntoViewIfNeeded();
   await expect(page.locator(help)).toHaveAttribute('data-demo-playing', 'false');
-  const resume = page.getByRole('button', { name: 'Resume Help demo', exact: true });
+  const resume = page.getByRole('button', { name: 'Play Help demo', exact: true });
   await resume.focus();
   await resume.press('Enter');
   await expect(page.locator(help)).toHaveAttribute('data-demo-playing', 'true');
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await expect(page.locator(help)).toHaveAttribute('data-demo-playing', 'false');
-  await expect(page.getByRole('button', { name: /(?:Pause|Resume) .* demo/ })).toHaveCount(0);
+  await expect(page.locator(help).getByRole('button')).toHaveCount(0);
+  await expect(page.getByRole('button', { name: 'Play Cylinder demo', exact: true })).toBeDisabled();
 });

@@ -28,17 +28,29 @@ test('every published subject has complete static content, accessible diagrams a
         if (section?.querySelector('h2')?.textContent !== recipe.title) failures.push(`Missing example: ${recipe.sectionId}`);
         for (const alias of recipe.aliasSectionIds) if (!document.getElementById(alias)) failures.push(`Missing alias: ${alias}`);
         contains(recipe.introduction);
-        for (const step of recipe.sections) {
+        for (const [index, step] of recipe.sections.entries()) {
           if (step.text) contains(step.text);
           if (step.result) contains(step.result);
           if (step.resultNote) contains(step.resultNote);
           for (const row of step.instructionRows) contains(`Press ${row.steps.map(key => key.spoken).join(', then ')}.`);
           if (step.diagram && ![...section!.querySelectorAll('svg[role="img"] title')].some(title => title.textContent === step.diagram!.explanation)) failures.push(`Missing accessible diagram: ${step.diagram.id}`);
-          if (step.cycle) {
-            if (step.cycle.jobNames) step.cycle.jobNames.forEach(contains);
-            else for (const result of step.cycle.results) { contains(result.name); contains(result.value); }
-            if (step.cycle.jobNote) contains(step.cycle.jobNote);
-          }
+          const renderedStep = section!.querySelectorAll('.guide-step-section')[index];
+          const results = renderedStep.querySelector('.guide-results');
+          if (step.result || step.cycle) {
+            if (!results || results.closest('details')) failures.push(`Results require disclosure: ${step.id}`);
+            const rows = [...(results?.querySelectorAll('.guide-result-line') ?? [])];
+            const expected = [
+              ...(step.result ? [{ value: step.result, name: step.resultLabel }] : []),
+              ...(step.cycle?.jobNames ? step.cycle.jobNames.map(name => ({ name, value: undefined })) : step.cycle?.results ?? []),
+            ];
+            if (rows.length !== expected.length) failures.push(`Wrong result count: ${step.id}`);
+            expected.forEach((result, i) => {
+              if ((rows[i]?.querySelector('strong')?.textContent ?? undefined) !== result.value) failures.push(`Wrong result value/order: ${step.id}/${i}`);
+              if (result.name && rows[i]?.querySelector('span')?.textContent !== result.name) failures.push(`Wrong result name/order: ${step.id}/${i}`);
+              if (!rows[i]?.getClientRects().length) failures.push(`Hidden result: ${step.id}/${i}`);
+            });
+            if (step.cycle?.jobNote && !results?.textContent?.includes(step.cycle.jobNote)) failures.push(`Missing job note: ${step.id}`);
+          } else if (results) failures.push(`Unexpected result: ${step.id}`);
           for (const setting of step.settings) { contains(setting.title); contains(setting.value); }
         }
         for (const setting of [...recipe.exampleSetup, ...recipe.exampleDisplay]) { contains(setting.title); contains(setting.value); }
@@ -47,6 +59,21 @@ test('every published subject has complete static content, accessible diagrams a
         const url = new URL(link.href);
         const slug = url.pathname.split('/').at(-1)!;
         if (!destinations[slug] || (url.hash && !destinations[slug].includes(decodeURIComponent(url.hash.slice(1))))) failures.push(`Broken example link: ${link.getAttribute('href')}`);
+      }
+      const settingsKey = (settings: typeof article.recipes[number]['exampleDisplay']) => JSON.stringify([...settings].sort((a, b) => a.id.localeCompare(b.id)));
+      const displaySets = new Set(article.recipes.filter(recipe => recipe.exampleDisplay.length).map(recipe => settingsKey(recipe.exampleDisplay)));
+      if (body.querySelectorAll('.guide-footnotes > ol > li').length !== displaySets.size) failures.push('Wrong display-assumption grouping');
+      const shared = displaySets.size === 1 && article.recipes.every(recipe => recipe.exampleDisplay.length);
+      for (const recipe of article.recipes) {
+        const reference = document.getElementById(`display-ref-${shared ? 'guide' : recipe.sectionId}`) as HTMLAnchorElement | null;
+        if (!recipe.exampleDisplay.length) {
+          if (reference) failures.push(`Undeclared display assumptions: ${recipe.sectionId}`);
+          continue;
+        }
+        const note = reference?.hash ? document.getElementById(reference.hash.slice(1)) : null;
+        const expected = recipe.exampleDisplay.map(setting => `${setting.title}: ${setting.value}`).join('; ') + '.';
+        if (!note?.textContent?.startsWith(expected)) failures.push(`Wrong display assumptions: ${recipe.sectionId}`);
+        if (!note?.querySelector(`a[href="#display-ref-${shared ? 'guide' : recipe.sectionId}"]`)) failures.push(`Missing assumption return link: ${recipe.sectionId}`);
       }
       const ids = [...document.querySelectorAll('[id]')].map(node => node.id);
       if (new Set(ids).size !== ids.length) failures.push('Duplicate DOM anchors');
@@ -63,20 +90,52 @@ test('every published subject has complete static content, accessible diagrams a
   await reading.close();
 });
 
-test('native result disclosures and duplicate example anchors work with the keyboard', async ({ page }) => {
-  await page.goto('/guides/common-rafters');
-  const cycle = page.locator('details').first();
-  await cycle.locator('summary').focus();
-  await page.keyboard.press('Enter');
-  await expect(cycle).toHaveAttribute('open', '');
-  await expect(cycle.getByText('30.25644°', { exact: true })).toBeVisible();
+test('result sequences remain visible and duplicate example anchors still reach the example', async ({ page }) => {
+  await page.goto('/guides/roof-pitch#pitch-inches');
+  const sequence = page.locator('#pitch-inches').getByRole('list', { name: 'Results in calculation order' }).first();
+  await expect(sequence.getByRole('listitem')).toHaveText([
+    'Pitch8 inches', 'Angle33.69007°', 'Percent grade66.66667', 'Slope ratio0.6666667', 'Pitch again8 inches',
+  ]);
+  for (const row of await sequence.getByRole('listitem').all()) await expect(row).toBeVisible();
+  await expect(page.locator('details')).toHaveCount(0);
   await page.goto('/guides/irregular-roofs');
-  await page.locator('details').first().locator('summary').click();
   await expect(page.getByText('Pitch 2 jack lengths', { exact: true }).first()).toBeVisible();
   await page.goto('/guides/squares-and-square-roots#power-square-area');
   await expect(page.locator('#power-square-area')).toBeAttached();
   await expect(page.getByRole('heading', { level: 2, name: 'Square area', exact: true })).toBeInViewport();
   await expect(page.locator('.guide-example')).toHaveCount(3);
+});
+
+test('shared and example-specific assumption footnotes support keyboard round trips', async ({ page }) => {
+  await page.goto('/guides/roof-pitch');
+  await expect(page.locator('.guide-note-reference')).toHaveCount(1);
+  const shared = page.getByRole('link', { name: 'Display assumptions, note 1', exact: true });
+  await shared.focus();
+  await shared.press('Enter');
+  await expect(page.locator('#display-note-1')).toBeFocused();
+  await expect(page.locator('#display-note-1')).toContainText('1/16');
+  const returnToGuide = page.getByRole('link', { name: 'Return to guide description', exact: true });
+  await returnToGuide.focus();
+  await returnToGuide.press('Enter');
+  await expect(shared).toBeFocused();
+  await page.goto('/guides/area-and-volume-units');
+  await expect(page.locator('.guide-footnotes > ol > li')).toHaveCount(2);
+  for (const [example, number, setting] of [
+    ['square-entry', 1, 'Area units'], ['square-mm-entry', 1, 'Area units'],
+    ['cubic-entry', 2, 'Volume units'], ['cubic-mm-entry', 2, 'Volume units'],
+  ] as const) {
+    const reference = page.locator(`#display-ref-${example}`);
+    await expect(reference).toHaveAccessibleName(`Display assumptions, note ${number}`);
+    await reference.focus();
+    await reference.press('Enter');
+    const note = page.locator(`#display-note-${number}`);
+    await expect(note).toBeFocused();
+    await expect(note).toContainText(setting);
+    const back = note.locator(`a[href="#display-ref-${example}"]`);
+    await back.focus();
+    await back.press('Enter');
+    await expect(reference).toBeFocused();
+  }
 });
 
 
@@ -110,7 +169,7 @@ test('guide search supports direct query URLs, native application terms and brow
 });
 
 test('expanded guide types retain accessible and responsive reading layouts', async ({ page }) => {
-  for (const slug of ['circles', 'stairs', 'duct-offsets', 'right-angle-duct-offsets', 'fan-laws', 'calculator-messages']) {
+  for (const slug of ['roof-pitch', 'area-and-volume-units', 'circles', 'stairs', 'duct-offsets', 'right-angle-duct-offsets', 'fan-laws', 'calculator-messages']) {
     await page.setViewportSize({ width: 320, height: 900 });
     await page.goto(`/guides/${slug}`);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), slug).toBe(true);
