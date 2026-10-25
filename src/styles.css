@@ -262,6 +262,9 @@
   .guide-result { margin-block: var(--typeset-flow) 0; display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: baseline; padding: 16px 20px; border-left: 3px solid var(--primary); background: var(--secondary); }
   .guide-result span { font-size: 14px; color: var(--muted-foreground); }
   .guide-result strong { font-size: 25px; font-weight: 600; }
+  .guide-display-settings { margin-block: 32px; border-top: 1px solid var(--border); padding-top: 16px; font-size: 16px; }
+  .guide-display-settings > summary { color: var(--muted-foreground); cursor: pointer; font-weight: 550; }
+  .guide-settings > h3 { font-size: 1em; font-weight: 600; }
   .guide-settings, .guide-cycle { margin-block: 24px; }
   .guide-settings dl > div, .guide-cycle dl > div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 20px; border-bottom: 1px solid var(--border); padding-block: 8px; }
   .guide-settings dd, .guide-cycle dd { font-weight: 550; }

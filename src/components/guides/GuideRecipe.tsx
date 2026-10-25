@@ -3,24 +3,19 @@ import { Link } from '@tanstack/react-router';
 import type { GuideRecipe as Recipe } from '../../content/catalog';
 import { Kbd, KbdGroup } from '../ui/kbd';
 import { GuideDiagram } from './GuideDiagram';
-
-function Settings({ settings, label }: { settings: Recipe['exampleSetup']; label?: string }) {
-  if (!settings.length) return null;
-  return <div className="guide-settings">{label && <h3>{label}</h3>}<dl data-not-typeset>{settings.map(setting => <div key={setting.id}><dt>{setting.title}</dt><dd>{setting.value}</dd></div>)}</dl></div>;
-}
+import { GuideSettings } from './GuideSettings';
 
 export function GuideRecipe({ recipe }: { recipe: Recipe }) {
   return <section id={recipe.sectionId} className="guide-example">
     {recipe.aliasSectionIds.map(id => <span key={id} id={id} className="guide-anchor" aria-hidden="true" />)}
     <h2>{recipe.title}</h2>
     <p>{recipe.introduction}</p>
-    <Settings settings={recipe.exampleSetup} label="Example setup" />
-    <Settings settings={recipe.exampleDisplay} label="Example display" />
+    <GuideSettings settings={recipe.exampleSetup} label="Settings for this example" />
     {recipe.sections.map(section => <section key={section.id} className="guide-step-section">
       {section.title && <h3>{section.title}{section.isOptional && ' (optional)'}</h3>}
       {section.text && <p>{section.text}</p>}
       {section.diagram && <GuideDiagram diagram={section.diagram} />}
-      {section.settings.length > 0 && <Settings settings={section.settings} />}
+      {section.settings.length > 0 && <GuideSettings settings={section.settings} />}
       {section.instructionRows.length > 0 && <ol className="guide-instructions" data-not-typeset>
         {section.instructionRows.map(row => <li key={row.id}>
           {row.title && <p className="guide-instruction-title">{row.title}</p>}
