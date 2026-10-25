@@ -248,20 +248,33 @@
   .guide-example, .guide-anchor { scroll-margin-top: 30px; }
   .guide-anchor { display: block; }
   .guide-example-related, .guide-references, .guide-related { margin-top: 32px; }
-  .guide-cycle summary { min-height: 44px; padding-block: 8px; font-weight: 550; }
-  .guide-cycle ul { list-style: disc; padding-left: 24px; }
-  .guide-cycle li { margin-block: 8px; }
   .guide-example + .guide-example { margin-top: 56px; padding-top: 36px; border-top: 1px solid var(--border); }
   .guide-step-section { margin-top: 32px; }
   .guide-instructions { list-style: decimal; padding-left: 24px; margin: 24px 0; }
   .guide-instructions li { padding-left: 8px; margin-block: 22px; }
   .guide-instructions li::marker { color: var(--primary); font-size: 14px; font-weight: 600; }
-  .guide-instructions p, .guide-cycle p { margin: 12px 0 20px; }
+  .guide-instructions p { margin: 12px 0 20px; }
   .guide-instructions .guide-instruction-title { font-weight: 550; margin-bottom: 10px; }
   .guide-key-arrow { margin-inline: 2px; color: var(--muted-foreground); font-size: 13px; }
-  .guide-result { margin-block: var(--typeset-flow) 0; display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: baseline; padding: 16px 20px; border-left: 3px solid var(--primary); background: var(--secondary); }
-  .guide-result span { font-size: 14px; color: var(--muted-foreground); }
-  .guide-result strong { font-size: 25px; font-weight: 600; }
+  .guide-results { margin-block: 24px; border-block: 1px solid var(--border); padding-block: 12px; }
+  .guide-results-header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 20px; margin: 0 0 8px; color: var(--muted-foreground); font-size: 14px; }
+  .guide-results-header strong { color: var(--foreground); font-weight: 600; }
+  .guide-results-header > span { display: inline-flex; align-items: center; gap: 6px; }
+  .guide-results ol { list-style: decimal; margin: 0; padding-inline-start: 24px; }
+  .guide-results li { padding-block: 10px; padding-inline-start: 6px; }
+  .guide-results li + li { border-top: 1px solid var(--border); }
+  .guide-results li::marker { color: var(--muted-foreground); font-size: 12px; font-variant-numeric: tabular-nums; }
+  .guide-results[data-sequence=false] ol { list-style: none; padding: 0; }
+  .guide-results[data-sequence=false] li { padding-inline-start: 0; }
+  .guide-result-line { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: baseline; gap: 6px 24px; }
+  .guide-result-line > * { min-width: 0; overflow-wrap: anywhere; }
+  .guide-result-line > span { color: var(--muted-foreground); font-size: 16px; }
+  .guide-result-line > strong { font-size: 18px; font-weight: 600; text-align: end; font-variant-numeric: tabular-nums; }
+  .guide-results-note { margin: 12px 0 0; color: var(--muted-foreground); font-size: 14px; line-height: 1.6; }
+  @media (max-width: 740px) {
+    .guide-result-line { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+    .guide-result-line > strong { text-align: start; }
+  }
   .guide-note-reference { margin-inline-start: .2em; font-size: .65em; line-height: 0; vertical-align: super; }
   .guide-note-reference a { color: var(--primary); text-decoration: none; padding-inline: .15em; }
   .guide-footnotes { margin-top: 40px; border-top: 1px solid var(--border); padding-top: 16px; color: var(--muted-foreground); font-size: 14px; line-height: 1.65; overflow-wrap: anywhere; }
@@ -271,10 +284,10 @@
   .guide-footnotes p { margin: 0; }
   .guide-note-return { display: inline-block; margin-inline-start: .5em; color: var(--primary); text-decoration: none; }
   .guide-settings > h3 { font-size: 1em; font-weight: 600; }
-  .guide-settings, .guide-cycle { margin-block: 24px; }
-  .guide-settings dl > div, .guide-cycle dl > div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 20px; border-bottom: 1px solid var(--border); padding-block: 8px; }
-  .guide-settings dd, .guide-cycle dd { font-weight: 550; }
-  .guide-settings dl > div > *, .guide-cycle dl > div > * { min-width: 0; overflow-wrap: anywhere; }
+  .guide-settings { margin-block: 24px; }
+  .guide-settings dl > div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 20px; border-bottom: 1px solid var(--border); padding-block: 8px; }
+  .guide-settings dd { font-weight: 550; }
+  .guide-settings dl > div > * { min-width: 0; overflow-wrap: anywhere; }
   .guide-diagram { width: min(100%, 500px); margin: 28px auto; }
   .guide-diagram svg { display: block; width: 100%; height: auto; }
   .guide-diagram-lines { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
