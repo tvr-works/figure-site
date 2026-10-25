@@ -25,7 +25,7 @@ Before deploying this implementation, change the Pages build command to `npm run
 
 ## Content and support
 
-The support and privacy route components retain the existing public policies and contact information. They share the scoped styles in `src/legal.css`. Update the privacy policy if app, website or support data practices change.
+The support and privacy route components retain the existing public policies and contact information. They use the shared site header/footer and breadcrumb, a readable Typeset layout, and section navigation. Scoped styles in `src/legal.css` retain system dark mode without changing the marketing or guide theme. Update the privacy policy if app, website or support data practices change.
 
 The public contact is `support@figure.tvr.works`. Cloudflare Email Routing was verified on October 21, 2026, including receipt of a test message. Outbound sending as that address remains unconfigured. Private forwarding destinations do not belong in published files.
 

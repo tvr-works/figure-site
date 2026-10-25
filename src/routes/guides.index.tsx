@@ -3,7 +3,7 @@ import { ArrowUpRight } from 'lucide-react';
 import { guideSummaries } from '../content/generated/summaries';
 import { filterGuides, parseGuideSearch } from '../content/search-guides';
 import { SiteHeader, SiteFooter } from '../components/SiteChrome';
-import { GuideBreadcrumb } from '../components/guides/GuideBreadcrumb';
+import { SiteBreadcrumb } from '../components/SiteBreadcrumb';
 import { Field, FieldGroup, FieldLabel } from '../components/ui/field';
 import { Input } from '../components/ui/input';
 import { pageHead } from '../site';
@@ -24,7 +24,7 @@ function GuideIndex() {
   const categories = [...new Map(guides.map(guide => [guide.categoryId, guide.categoryTitle])).entries()];
   return <><a className="skip-link" href="#main">Skip to content</a><SiteHeader />
     <main id="main" className="guide-shell"><div className="guide-main page-width">
-      <GuideBreadcrumb />
+      <SiteBreadcrumb current="Guides" />
       <header className="guide-header"><h1 className="guide-heading">Guides</h1><p className="guide-lede">Understand the math, work through an example, and follow the steps in Figure.</p></header>
       <ClientOnly><search className="guide-search" aria-label="Guide library"><FieldGroup><Field><FieldLabel htmlFor="guide-search">Search guides</FieldLabel><Input id="guide-search" type="search" value={q} maxLength={160} autoComplete="off" placeholder="Try brace angle, pipe wrap, or fan speed" aria-controls="guide-results" onChange={event => { void navigate({ search: event.target.value ? { q: event.target.value } : {}, replace: true, resetScroll: false }); }} /></Field></FieldGroup></search></ClientOnly>
       <output htmlFor={hydrated ? 'guide-search' : undefined} className="guide-search-status">{guides.length} {guides.length === 1 ? 'guide' : 'guides'}{hydrated && q.trim() ? ' found' : ` across ${categories.length} categories`}</output>

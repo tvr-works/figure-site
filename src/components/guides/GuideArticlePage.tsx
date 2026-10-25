@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router';
 import type { GuideArticle } from '../../content/catalog';
 import { SiteHeader, SiteFooter } from '../SiteChrome';
-import { GuideBreadcrumb } from './GuideBreadcrumb';
+import { SiteBreadcrumb } from '../SiteBreadcrumb';
 import { GuideRecipe } from './GuideRecipe';
 
 export function GuideArticlePage({ article }: { article: GuideArticle }) {
@@ -10,7 +10,7 @@ export function GuideArticlePage({ article }: { article: GuideArticle }) {
     <SiteHeader />
     <main id="main" className="guide-shell">
       <div className="guide-main page-width">
-        <GuideBreadcrumb title={article.title} />
+        <SiteBreadcrumb current={article.title} section={{ title: 'Guides', to: '/guides' }} />
         <header className="guide-header"><p className="guide-category">{article.categoryTitle}</p><h1 className="guide-heading">{article.title}</h1><p className="guide-lede">{article.summary}</p></header>
         <div className="guide-article-layout">
           <article className="guide-article typeset typeset-figure-guide" aria-label={article.title}>

@@ -1,34 +1,27 @@
 @layer components {
-.legal-shell {
-  color-scheme: light dark;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --background: #fafafa;
-  --foreground: #202124;
-  --muted-foreground: #62666c;
-  --border: #d8dadd;
-  --color-foreground: var(--foreground);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-border: var(--border);
-  --color-ring: var(--foreground);
-  background: var(--background);
-  min-height: 100svh;
-  padding-block: clamp(2rem, 8vh, 5rem);
-  color: var(--foreground);
-  -webkit-text-size-adjust: 100%;
-}
-.legal-page {
-  max-width: 39rem;
-  margin-inline: auto;
-  padding: 0 1.5rem;
-}
-.legal-page .muted { color: var(--muted-foreground); }
-.legal-page a { color: inherit; text-underline-offset: .2em; overflow-wrap: anywhere; }
-.legal-page a:hover { text-decoration-thickness: .13em; }
-.legal-page a:focus-visible { outline: 2px solid currentColor; outline-offset: 5px; border-radius: 2px; }
-.legal-page nav { display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--border); }
-.legal-page nav a { display: inline-flex; align-items: center; min-height: 44px; }
-.legal-page nav a[aria-current="page"] { font-weight: 600; }
-@media (prefers-color-scheme: dark) {
-  .legal-shell { --background: #141414; --foreground: #ededed; --muted-foreground: #a9adb4; --border: #383838; }
-}
+  /* Information pages share the site's shell and reading layout. Theme overrides
+     stay inside main so system dark mode does not change the shared navigation. */
+  .legal-shell {
+    color-scheme: light dark;
+    --color-foreground: var(--foreground);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-border: var(--border);
+    --color-ring: var(--primary);
+    color: var(--foreground);
+    background: var(--background);
+    -webkit-text-size-adjust: 100%;
+  }
+  .legal-date { margin: 16px 0 0; font-size: 14px; line-height: 1.5; color: var(--muted-foreground); }
+  .legal-lede a, .legal-content a { color: var(--primary); text-decoration: underline; text-underline-offset: .2em; overflow-wrap: anywhere; }
+  .legal-content { grid-column: 1; grid-row: 1; min-width: 0; max-width: 680px; }
+  .legal-content > section { scroll-margin-top: 32px; }
+  .legal-content > section + section { margin-top: 36px; }
+  .legal-content > section > h2 { margin-block-start: 0; }
+  .legal-layout > aside { grid-column: 2; grid-row: 1; }
+  @media (max-width: 740px) {
+    .legal-content, .legal-layout > aside { grid-column: 1; grid-row: auto; }
+  }
+  @media (prefers-color-scheme: dark) {
+    .legal-shell { --background: #141414; --foreground: #ededed; --muted-foreground: #a9adb4; --border: #383838; --primary: var(--hero-accent); }
+  }
 }

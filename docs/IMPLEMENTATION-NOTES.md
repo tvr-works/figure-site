@@ -164,3 +164,16 @@ The final visual review covered the desktop/mobile index, application search, ar
 Final validation passed lint, TypeScript, production prerendering and 38 unit tests. All original marketing/guide regression cases passed in the expanded run. After the malformed-query fix and SVG alignment adjustment, all eight affected full-library, keyboard disclosure, search/history, responsive and WCAG 2.2 automated-scan cases passed in Chromium and WebKit. The complete-library contract reads every article without JavaScript and checks content and internal links. New guide types were checked at 320px and 200% text. Browser console captures were clear. Browser plugin not available; validation used the existing Playwright workflow. This does not establish complete WCAG conformance or a manual VoiceOver audit.
 
 Local commits only. The app source, public indexing policy and deployment settings remain unchanged.
+
+
+## Support and Privacy design alignment (October 25)
+
+The temporary standalone information pages now use the established Figure header, footer, page width, title scale, reading layout and breadcrumb. The existing guide breadcrumb became `SiteBreadcrumb`; its Guide index/article output is preserved while Support, Privacy and the shared 404 shell use a direct home/current-page trail. Current navigation links have a persistent underline. The 404 template inherits the same shell and provides an unambiguous Return to Figure link.
+
+Support and Privacy sections now have stable anchors and one authored title/content record per section. The sidebar derives its links from those records. It is sticky on desktop and appears before the text on mobile; DOM order follows the navigation-before-content sequence. Support keeps email prominent in its introduction. Policy prose continues through Typeset with an 18px reading size and stronger section headings. The local dark palette and brighter dark-mode links stay inside the information main element.
+
+This is an alignment with the existing design system rather than a new visual direction. No new imagery or UI library was needed. The page titles intentionally shorten Figure support/privacy to Support/Privacy because the shared brand and breadcrumb provide context. Every original paragraph and list item was compared against a pre-change capture and retained verbatim. Contact details, Cloudflare email exemptions, policy meaning and the October 21 update date are unchanged.
+
+Verification passed lint, TypeScript, 38 unit tests and the static production build. Fourteen relevant Chromium/WebKit regression cases passed, with the 404 cases rerun after disambiguating its new home link. Temporary probes also checked both pages at 320, 390, 768 and 1440px, light/dark automated WCAG 2.2 scans, 200% text, WCAG text-spacing overrides, keyboard section navigation, Support-to-Guides navigation, and section links without JavaScript. All passed with no runtime errors. Before/after desktop, mobile and dark-mode screenshots were inspected for type, hierarchy, palette, reading width, navigation and content preservation. Browser plugin not available; the existing Playwright workflow supplied verification. Manual assistive-technology conformance remains unverified.
+
+Local commit only; indexing and hosting settings are unchanged.
