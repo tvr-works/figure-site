@@ -31,6 +31,7 @@ function GuideIndex() {
       {categories.length > 0 && <nav className="guide-category-nav" aria-label="Guide categories">{categories.map(([id, title]) => <a key={id} href={`#guide-category-${id}`}>{title}</a>)}</nav>}
       <div id="guide-results" className="guide-index">{categories.map(([id, title]) => <section key={id} aria-labelledby={`guide-category-${id}`}><h2 id={`guide-category-${id}`}>{title}</h2><ul>{guides.filter(guide => guide.categoryId === id).map(guide => <li key={guide.id}><Link to="/guides/$slug" params={{ slug: guide.slug }}><h3>{guide.title}<ArrowUpRight aria-hidden="true" /></h3><p>{guide.summary}</p></Link></li>)}</ul></section>)}</div>
       {guides.length === 0 && <p className="guide-no-results">No guides match this search. Try a subject, measurement, or application.</p>}
+      <p className="guide-index-note">Worked examples and key sequences come from Figure’s built-in Help. Check each example’s stated setup and units before following it; displayed results may be rounded.</p>
       <p className="guide-index-note">Figure also includes searchable Help inside the calculator. <Link to="/" hash="help">See how it works →</Link></p>
     </div></main><SiteFooter /></>;
 }

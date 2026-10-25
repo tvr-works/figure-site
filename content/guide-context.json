@@ -66,7 +66,15 @@
   },
   "feet-and-inches": {
     "paragraphs": [
-      "Enter a measurement in parts: feet, whole inches, then an inch fraction. The fraction-entry key builds a fraction; the division key performs arithmetic. Keep those two roles separate when reading a key sequence."
+      "Enter a measurement in parts: feet, whole inches, then an inch fraction. The fraction-entry key builds a fraction; the division key performs arithmetic. Keep those two roles separate when reading a key sequence.",
+      "One foot contains 12 inches. To turn a mixed measurement into inches, multiply the feet by 12, add the whole inches, then add the inch fraction. Keep the fraction attached to the inches rather than treating it as a decimal part of a foot.",
+      "The first example enters 12 ft 6⅜ in: 12 × 12 + 6 + 3/8 = 150.375 inches. Figure lets you enter those parts directly instead of doing that conversion first."
+    ],
+    "references": [
+      {
+        "title": "NIST: SI units — length and the exact inch conversion",
+        "url": "https://www.nist.gov/pml/owm/si-units-length"
+      }
     ]
   },
   "metric-measurements": {
@@ -76,7 +84,15 @@
   },
   "length-conversions": {
     "paragraphs": [
-      "Converting a measurement changes its unit or displayed format while keeping the same length. A decimal foot is a portion of a foot, not a number of inches. Displayed fractions follow your fraction-precision setting."
+      "Converting a measurement changes its unit or displayed format while keeping the same length. A decimal foot is a portion of a foot, not a number of inches. Displayed fractions follow your fraction-precision setting.",
+      "To convert feet and inches to decimal feet, divide the inches by 12 and add the whole feet. For decimal feet in the other direction, multiply the part after the decimal point by 12 to get inches.",
+      "For example, 5 ft 7½ in is 5 + 7.5 ÷ 12 = 5.625 ft. The decimal describes a fraction of a foot; 5.625 ft does not mean 5 ft 0.625 in. An inch is exactly 25.4 millimeters, so metric conversion preserves the same physical length before display rounding."
+    ],
+    "references": [
+      {
+        "title": "NIST: SI units — length and the exact inch conversion",
+        "url": "https://www.nist.gov/pml/owm/si-units-length"
+      }
     ]
   },
   "area-and-volume-units": {
@@ -101,7 +117,15 @@
   },
   "right-triangles": {
     "paragraphs": [
-      "A right triangle has one 90° corner. Run, rise and diagonal describe its horizontal, vertical and sloping sides. Two compatible independent inputs determine the remaining sides and related angles."
+      "A right triangle has one 90° corner. Run, rise and diagonal describe its horizontal, vertical and sloping sides. Two compatible independent inputs determine the remaining sides and related angles.",
+      "For perpendicular run and rise, diagonal² = run² + rise². Use the same length unit for both legs before squaring. To find a missing leg instead, subtract the known leg’s square from the diagonal’s square, then take the square root.",
+      "The first example uses a 3 ft run and a 4 ft rise, giving √(3² + 4²) = 5 ft diagonally. The diagonal is the longest side. A measured shape must have a right angle for this relationship to apply."
+    ],
+    "references": [
+      {
+        "title": "OpenStax: Right triangle trigonometry",
+        "url": "https://openstax.org/books/contemporary-mathematics/pages/10-8-right-triangle-trigonometry"
+      }
     ]
   },
   "oblique-triangles": {
@@ -111,7 +135,9 @@
   },
   "circles": {
     "paragraphs": [
-      "Diameter crosses the whole circle through its center; radius reaches from the center to the edge. Circumference is the distance around it, and area is the surface enclosed. Use the measurement at the surface relevant to the job."
+      "Diameter crosses the whole circle through its center; radius reaches from the center to the edge. Circumference is the distance around it, and area is the surface enclosed. Use the measurement at the surface relevant to the job.",
+      "If d is diameter and r is radius, r = d ÷ 2, circumference = π × d, and area = π × r². Circumference has length units; area has square units. For a pipe wrapper, use the diameter at the surface whose distance around you need.",
+      "A 12 in diameter gives a circumference of 12π ≈ 37.699 in. The pipe example displays this as 37 11/16 in at its selected fraction precision. That fraction is a rounded display, not an exact value of π."
     ]
   },
   "arcs": {
@@ -131,7 +157,9 @@
   },
   "cylinders": {
     "paragraphs": [
-      "For a circular cylinder, volume depends on the base-circle area and perpendicular height. Figure’s closed-cylinder surface area includes the curved side and both ends. Radius and diameter describe different inputs for the same base circle."
+      "For a circular cylinder, volume depends on the base-circle area and perpendicular height. Figure’s closed-cylinder surface area includes the curved side and both ends. Radius and diameter describe different inputs for the same base circle.",
+      "For radius r and perpendicular height h, cylinder volume = π × r² × h. Closed-cylinder surface area = 2π × r × h + 2π × r²: the curved side plus two circular ends. Convert diameter to radius before using these formulas.",
+      "The example’s diameter is 2 ft 4 in, so its radius is 1⅙ ft. At 4 ft 6 in high, the volume is π × (7/6)² × 4.5 ≈ 19.24226 ft³. An open-ended shell uses a different surface-area total from the closed cylinder shown here."
     ]
   },
   "cones": {
@@ -141,7 +169,9 @@
   },
   "roof-pitch": {
     "paragraphs": [
-      "Pitch per foot, degrees, percent grade and rise/run ratio describe the same slope in different forms. Distinguish horizontal run from full roof span and from the sloping rafter length."
+      "Pitch per foot, degrees, percent grade and rise/run ratio describe the same slope in different forms. Distinguish horizontal run from full roof span and from the sloping rafter length.",
+      "An 8/12 pitch means 8 inches of rise for every 12 inches of horizontal run. Its rise/run ratio is 8 ÷ 12, its percent grade is that ratio × 100, and its angle above horizontal is inverse tangent of that ratio.",
+      "For 8/12, those forms are approximately 0.6667, 66.67% and 33.69°. With a known run, rise = run × pitch ÷ 12 when pitch is stated in inches per foot. Keep rise and run in matching units; a pitch angle is entered in degrees rather than labeled as a length."
     ]
   },
   "common-rafters": {
@@ -166,7 +196,9 @@
   },
   "stairs": {
     "paragraphs": [
-      "Stair layout relates total rise, horizontal run and target step dimensions. Calculated riser and tread sizes can differ from those targets. The examples state the rounding, headroom and floor-thickness assumptions that affect later results."
+      "Stair layout relates total rise, horizontal run and target step dimensions. Calculated riser and tread sizes can differ from those targets. The examples state the rounding, headroom and floor-thickness assumptions that affect later results.",
+      "Total rise is the vertical floor-to-floor height. Total run is the horizontal distance available for the flight. A target riser or tread is a starting preference; the calculator chooses a whole-number layout and reports the resulting dimensions.",
+      "Read the actual riser, tread, count and headroom results together, using the floor-thickness and rounding settings shown in the example. These are geometric worked examples; they do not establish that a stair design meets the requirements for a particular project."
     ]
   },
   "equal-spacing": {
@@ -176,7 +208,9 @@
   },
   "duct-offsets": {
     "paragraphs": [
-      "The Offset mode uses straight length, vertical shift and opening height to calculate an OGEE fitting’s related dimensions. Diagonal slant length is not the straight-length input. Label these measurements before comparing wrappers, radii or elbow angles."
+      "The Offset mode uses straight length, vertical shift and opening height to calculate an OGEE fitting’s related dimensions. Diagonal slant length is not the straight-length input. Label these measurements before comparing wrappers, radii or elbow angles.",
+      "Start with the three dimensions shown in the fitting sketch: actual length is the straight distance between the ends, offset is their vertical shift, and height is the opening’s vertical size. For a round profile, the opening height is its diameter. An OGEE wrapper follows the fitting’s curves, so its length is not just the diagonal between the ends.",
+      "The first example uses 10 ft actual length, 5 ft offset and 7 ft height. It reports a 6 ft 3 in radius and an 11 ft 7⅛ in wrapper. The later examples show fractional and metric entry, changes to the offset, and how the bend angle is divided into elbows. Keep each result’s caption with its value."
     ]
   },
   "single-duct-offsets": {
@@ -196,7 +230,9 @@
   },
   "airflow": {
     "paragraphs": [
-      "Volume airflow equals the free cross-sectional area multiplied by average air speed through that area. Use the open area air can pass through, and keep the speed and area units attached to their values."
+      "Volume airflow equals the free cross-sectional area multiplied by average air speed through that area. Use the open area air can pass through, and keep the speed and area units attached to their values.",
+      "The relationship is Q = A × V, where Q is volume airflow, A is free area, and V is average air speed through that area. Square feet multiplied by feet per minute gives cubic feet per minute (CFM).",
+      "The example uses 2 ft² × 600 ft/min = 1200 CFM. Nominal outside duct dimensions do not necessarily describe the free opening. Area and air speed must refer to the same section of the airflow."
     ]
   },
   "airflow-conversions": {
