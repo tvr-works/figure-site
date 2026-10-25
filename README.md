@@ -21,7 +21,7 @@ The agreed copy and interaction plan lives in [the storyboard](docs/MARKETING-ST
 
 The existing Cloudflare Pages project is `figure-site`, domain `figure.tvr.works`, production branch `main`. The previous configuration used build command `exit 0` and output `public`.
 
-Before deploying this implementation, change the Pages build command to `npm run build` and output directory to `dist/client`. These dashboard settings have not been changed here. Pushes to `main` deploy automatically; local worktree commits do not publish the site.
+On October 25, 2026, the approved Pages build settings were updated to `npm run build` with output directory `dist/client`. The marketing branch publishes a noindex preview at [codex-figure-site-marketing.figure-site.pages.dev](https://codex-figure-site-marketing.figure-site.pages.dev). Pushes to `main` deploy production automatically; keep preview work on `codex/figure-site-marketing`. The production domain has not been updated with the marketing site.
 
 ## Content and support
 
@@ -52,7 +52,7 @@ Browser tests use a separate static-only production preview on port 4174, with r
 
 ## Launch content
 
-Price is intentionally omitted. Both Get Figure links lead to the footer availability note until the public App Store URL is verified. At launch, update those links and the footer availability copy in the marketing route components, optionally add a confirmed price, remove `noindex` from the content pages when indexing is wanted, and update Cloudflare's build settings described above. No store settings, hosting settings, pushes or deployments were performed for this implementation.
+Price is intentionally omitted. Both Get Figure links lead to the footer availability note until the public App Store URL is verified. At launch, update those links and the footer availability copy in the marketing route components, optionally add a confirmed price, enable production indexing when wanted, and complete the public launch checkpoint below. The approved branch push and Cloudflare preview deployment are complete; public launch and App Store integration remain pending.
 
 The hero is a generated product render based on the supplied app screen. The nine complete mode examples and separate Help sequence use actual app captures, with tap cues placed from simulator action coordinates. They are edited demonstrations, not a browser calculator. Image sources and native capture evidence live in `docs/design/`.
 
