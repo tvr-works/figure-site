@@ -262,8 +262,14 @@
   .guide-result { margin-block: var(--typeset-flow) 0; display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: baseline; padding: 16px 20px; border-left: 3px solid var(--primary); background: var(--secondary); }
   .guide-result span { font-size: 14px; color: var(--muted-foreground); }
   .guide-result strong { font-size: 25px; font-weight: 600; }
-  .guide-display-settings { margin-block: 32px; border-top: 1px solid var(--border); padding-top: 16px; font-size: 16px; }
-  .guide-display-settings > summary { color: var(--muted-foreground); cursor: pointer; font-weight: 550; }
+  .guide-note-reference { margin-inline-start: .2em; font-size: .65em; line-height: 0; vertical-align: super; }
+  .guide-note-reference a { color: var(--primary); text-decoration: none; padding-inline: .15em; }
+  .guide-footnotes { margin-top: 40px; border-top: 1px solid var(--border); padding-top: 16px; color: var(--muted-foreground); font-size: 14px; line-height: 1.65; overflow-wrap: anywhere; }
+  .guide-footnotes > h2 { margin: 0 0 12px; font-size: 14px; line-height: 1.5; letter-spacing: normal; font-weight: 600; }
+  .guide-footnotes ol { margin: 0; padding-inline-start: 20px; list-style: decimal; }
+  .guide-footnotes li { margin-block: 8px; padding-inline-start: 4px; scroll-margin-top: 30px; }
+  .guide-footnotes p { margin: 0; }
+  .guide-note-return { display: inline-block; margin-inline-start: .5em; color: var(--primary); text-decoration: none; }
   .guide-settings > h3 { font-size: 1em; font-weight: 600; }
   .guide-settings, .guide-cycle { margin-block: 24px; }
   .guide-settings dl > div, .guide-cycle dl > div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 20px; border-bottom: 1px solid var(--border); padding-block: 8px; }
