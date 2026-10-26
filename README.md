@@ -15,13 +15,13 @@ npm run preview -- --port 4173 --strictPort
 
 TanStack Start and Vite prerender the home, `/support`, `/privacy`, `/guides`, published guide articles and 404 pages to `dist/client`. React hydrates the existing calculation and Help demonstrations. Tailwind uses its Vite plugin; shadcn components use Base UI. The site deploys as static files; no runtime backend or analytics is required.
 
-The agreed copy and interaction plan lives in [the storyboard](docs/MARKETING-STORYBOARD.md). The subject-based web Help library and remaining publication plan are mapped in [the guide structure](docs/GUIDE-LIBRARY-STRUCTURE.md). Price and the public App Store URL still require the owner's launch decision. Keep `noindex` until public launch is requested.
+The agreed copy and interaction plan lives in [the storyboard](docs/MARKETING-STORYBOARD.md). The subject-based web Help library and remaining publication plan are mapped in [the guide structure](docs/GUIDE-LIBRARY-STRUCTURE.md). The owner approved a one-time US$9.99 App Store price with automatic regional pricing; the public store destination still requires verification before purchase links are enabled. Keep `noindex` until public launch is requested.
 
 ## Deployment
 
 The existing Cloudflare Pages project is `figure-site`, domain `figure.tvr.works`, production branch `main`. The previous configuration used build command `exit 0` and output `public`.
 
-On October 25, 2026, the approved Pages build settings were updated to `npm run build` with output directory `dist/client`. The marketing branch publishes a noindex preview at [codex-figure-site-marketing.figure-site.pages.dev](https://codex-figure-site-marketing.figure-site.pages.dev). Pushes to `main` deploy production automatically; keep preview work on `codex/figure-site-marketing`. The production domain has not been updated with the marketing site.
+On October 25, 2026, the approved Pages build settings were updated to `npm run build` with output directory `dist/client`. The marketing branch publishes a noindex preview at [codex-figure-site-marketing.figure-site.pages.dev](https://codex-figure-site-marketing.figure-site.pages.dev). Pushes to `main` deploy production automatically; keep preview work on `codex/figure-site-marketing`. The marketing site is prepared for production promotion with the prelaunch availability message and `noindex, follow` retained. The verified rollback checkpoint is deployment `8f5b07ed-51ad-4ae9-95fe-38999ac4d4e3` (commit `e9f86270edfcbf73efcc18c074c78d1beb84a3e2`).
 
 ## Content and support
 
@@ -52,7 +52,7 @@ Browser tests use a separate static-only production preview on port 4174, with r
 
 ## Launch content
 
-Price is intentionally omitted. Both Get Figure links lead to the footer availability note until the public App Store URL is verified. At launch, update those links and the footer availability copy in the marketing route components, optionally add a confirmed price, enable production indexing when wanted, and complete the public launch checkpoint below. The approved branch push and Cloudflare preview deployment are complete; public launch and App Store integration remain pending.
+Price is intentionally omitted. Both Get Figure links lead to the footer availability note until the public App Store URL is verified. At launch, update those links and the footer availability copy in the marketing route components, optionally add a confirmed price, enable production indexing when wanted, and complete the public launch checkpoint below. Production preparation retains the prelaunch message and noindex policy; App Store purchase links and public indexing remain a later launch switch. The app ID is `6825452227`; verify its public listing before enabling a store destination. The homepage browser/sharing title is Figure · Trade Calculator for iPhone; the visible tagline remains Trade math. Made intuitive.
 
 The hero is a generated product render based on the supplied app screen. The nine complete mode examples and separate Help sequence use actual app captures, with tap cues placed from simulator action coordinates. They are edited demonstrations, not a browser calculator. Image sources and native capture evidence live in `docs/design/`.
 
