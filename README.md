@@ -1,6 +1,6 @@
 # Figure site
 
-Marketing, support and privacy site for Figure. The iPhone app lives in the separate private `tvanreenen/figure` repository.
+Marketing, support and privacy site for Figure, maintained in the private [`tvr-works/figure-site`](https://github.com/tvr-works/figure-site) repository. The iPhone app lives in the separate private [`tvr-works/figure`](https://github.com/tvr-works/figure) repository.
 
 ## Local development
 
@@ -20,6 +20,8 @@ The agreed copy and interaction plan lives in [the storyboard](docs/MARKETING-ST
 ## Deployment
 
 The existing Cloudflare Pages project is `figure-site`, domain `figure.tvr.works`, production branch `main`. The previous configuration used build command `exit 0` and output `public`.
+
+The Git source is `tvr-works/figure-site`. The existing Cloudflare Workers and Pages GitHub App installation for `tvr-works` uses selected-repository access; retain `key-site` when adding or adjusting access for `figure-site`. Reconnect the existing Pages project's Git source when changing repository ownership so its domains, deployment history and runtime configuration remain in place. Keep build command `npm run build`, output `dist/client`, production branch `main` and the existing prelaunch indexing policy.
 
 On October 25, 2026, the approved Pages build settings were updated to `npm run build` with output directory `dist/client`. The marketing branch publishes a noindex preview at [codex-figure-site-marketing.figure-site.pages.dev](https://codex-figure-site-marketing.figure-site.pages.dev). Pushes to `main` deploy production automatically; keep preview work on `codex/figure-site-marketing`. On October 26, 2026, the complete marketing site was published to [figure.tvr.works](https://figure.tvr.works/) by fast-forwarding `main` to verified content commit `0566da1d734ce99a89ca2f1e3dd733202d071c8e`. Its first successful production deployment is `cd76800b-9d1e-44f5-a62e-2f1c75038a62`; the corresponding preview is `53b78467-9a16-4a11-a104-962c4e4f9eea`. The prelaunch availability message and `noindex, follow` remain active. The previous basic-site rollback checkpoint is deployment `8f5b07ed-51ad-4ae9-95fe-38999ac4d4e3` (commit `e9f86270edfcbf73efcc18c074c78d1beb84a3e2`).
 
