@@ -439,12 +439,17 @@ test('mode navigation is keyboard accessible and starts from a completed still',
   await page.goto('/#demo');
   const compact = page.getByRole('combobox', { name: 'Choose a calculation mode' });
   if (await compact.isVisible()) {
+    // focus() does not wait for the prerendered disabled control to hydrate.
+    await expect(compact).toBeEnabled();
     await compact.focus();
+    await expect(compact).toBeFocused();
     await compact.selectOption({ label: 'Cone' });
     await expect(compact).toBeFocused();
   } else {
     const cone = page.getByRole('button', { name: 'Cone', exact: true });
+    await expect(cone).toBeEnabled();
     await cone.focus();
+    await expect(cone).toBeFocused();
     await cone.press('Enter');
     await expect(cone).toBeFocused();
     await expect(cone).toHaveAttribute('aria-pressed', 'true');
