@@ -5,7 +5,8 @@ import AxeBuilder from '@axe-core/playwright';
 
 const calculation = '[data-demo-kind="calculation"]';
 const help = '[data-demo-kind="help"]';
-const frame = (page: import('@playwright/test').Page, selector = calculation) => page.locator(selector).getAttribute('data-demo-frame');
+const frame = (page: import('@playwright/test').Page, selector = calculation) =>
+  page.locator(selector).getAttribute('data-demo-frame');
 
 async function pickMode(page: import('@playwright/test').Page, label: string) {
   const compact = page.getByRole('combobox', { name: 'Choose a calculation mode' });
@@ -13,7 +14,10 @@ async function pickMode(page: import('@playwright/test').Page, label: string) {
   else await page.getByRole('button', { name: label, exact: true }).click();
 }
 
-test('purchase status and static public routes are honest and reachable', async ({ page, request }) => {
+test('purchase status and static public routes are honest and reachable', async ({
+  page,
+  request,
+}) => {
   await page.goto('/');
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', expectedRobots);
   await page.locator('.hero-actions').getByRole('link', { name: 'Get Figure' }).click();
@@ -26,38 +30,82 @@ test('purchase status and static public routes are honest and reachable', async 
   expect((await request.get('/missing-page')).status()).toBe(404);
 });
 
-test('hero states the value and Help follows the complete calculation section without tabs', async ({ page }) => {
+test('hero states the value and Help follows the complete calculation section without tabs', async ({
+  page,
+}) => {
   await page.goto('/');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Trade math.Made intuitive.');
-  await expect(page.locator('.hero-description')).toHaveText('Helpful modes. Adaptive keys. Visual results. Easy conversions.');
+  await expect(page.locator('.hero-description')).toHaveText(
+    'Helpful modes. Adaptive keys. Visual results. Easy conversions.',
+  );
   await expect(page.getByRole('tab')).toHaveCount(0);
-  await expect(page.getByRole('heading', { level: 2, name: 'See how Figure works.' })).toBeVisible();
-  await expect(page.locator(calculation).getByRole('heading', { level: 3, name: 'Right Triangle' })).toBeVisible();
+  await expect(
+    page.getByRole('heading', { level: 2, name: 'See how Figure works.' }),
+  ).toBeVisible();
+  await expect(
+    page.locator(calculation).getByRole('heading', { level: 3, name: 'Right Triangle' }),
+  ).toBeVisible();
   await page.emulateMedia({ reducedMotion: 'no-preference' });
-  await expect(page.locator(calculation).getByRole('button', { name: 'Pause Right Triangle demo', exact: true })).toBeVisible();
+  await expect(
+    page
+      .locator(calculation)
+      .getByRole('button', { name: 'Pause Right Triangle demo', exact: true }),
+  ).toBeVisible();
   const calculationBox = await page.locator('#demo').boundingBox();
   const helpBox = await page.locator('#help').boundingBox();
   expect(helpBox!.y).toBeGreaterThanOrEqual(calculationBox!.y + calculationBox!.height);
   await page.locator('#help-title').scrollIntoViewIfNeeded();
-  await expect(page.getByRole('heading', { name: 'Help without losing your place.' })).toBeInViewport();
+  await expect(
+    page.getByRole('heading', { name: 'Help without losing your place.' }),
+  ).toBeInViewport();
 });
 
-test('reduced motion shows completed examples and allows manual results in every mode', async ({ page }) => {
+test('reduced motion shows completed examples and allows manual results in every mode', async ({
+  page,
+}) => {
   await page.goto('/#demo');
-  await expect(page.getByRole('button', { name: 'Play Right Triangle demo', exact: true })).toBeDisabled();
-  await expect(page.getByRole('button', { name: 'Play Right Triangle demo', exact: true })).toHaveAccessibleDescription(/prefer reduced motion/);
+  await expect(
+    page.getByRole('button', { name: 'Play Right Triangle demo', exact: true }),
+  ).toBeDisabled();
+  await expect(
+    page.getByRole('button', { name: 'Play Right Triangle demo', exact: true }),
+  ).toHaveAccessibleDescription(/prefer reduced motion/);
   const first = await frame(page);
   await page.waitForTimeout(1500);
   expect(await frame(page)).toBe(first);
-  for (const [id, label] of [['oblique', 'Oblique Triangle'], ['circle', 'Circle'], ['cylinder', 'Cylinder'], ['cone', 'Cone'], ['ratios', 'Ratios'], ['offset', 'Offset'], ['roof', 'Roof'], ['stairs', 'Stairs'], ['right', 'Right Triangle']]) {
+  for (const [id, label] of [
+    ['oblique', 'Oblique Triangle'],
+    ['circle', 'Circle'],
+    ['cylinder', 'Cylinder'],
+    ['cone', 'Cone'],
+    ['ratios', 'Ratios'],
+    ['offset', 'Offset'],
+    ['roof', 'Roof'],
+    ['stairs', 'Stairs'],
+    ['right', 'Right Triangle'],
+  ]) {
     await pickMode(page, label);
-    await expect(page.locator(calculation)).toHaveAttribute('data-demo-frame', new RegExp(`worked-${id}-`));
-    await expect.poll(() => page.locator(`${calculation} .native-screen img`).evaluate((img: HTMLImageElement) => img.naturalWidth)).toBe(720);
+    await expect(page.locator(calculation)).toHaveAttribute(
+      'data-demo-frame',
+      new RegExp(`worked-${id}-`),
+    );
+    await expect
+      .poll(() =>
+        page
+          .locator(`${calculation} .native-screen img`)
+          .evaluate((img: HTMLImageElement) => img.naturalWidth),
+      )
+      .toBe(720);
     const controls = page.getByRole('group', { name: `${label} demo controls`, exact: true });
     await expect(controls.getByRole('button')).toHaveCount(3);
-    await expect(controls.getByRole('button', { name: `Play ${label} demo`, exact: true })).toBeDisabled();
+    await expect(
+      controls.getByRole('button', { name: `Play ${label} demo`, exact: true }),
+    ).toBeDisabled();
     const before = await frame(page);
-    const previous = controls.getByRole('button', { name: `Previous result in ${label}`, exact: true });
+    const previous = controls.getByRole('button', {
+      name: `Previous result in ${label}`,
+      exact: true,
+    });
     await previous.focus();
     await previous.press('Enter');
     expect(await frame(page)).not.toBe(before);
@@ -68,7 +116,9 @@ test('reduced motion shows completed examples and allows manual results in every
     await next.press('Enter');
     expect(await frame(page)).not.toBe(before);
     await expect(page.locator('#adaptive-mode-content h3')).toHaveText(label);
-    await expect(page.locator(`${calculation} [aria-live=polite]`)).toHaveText((await page.locator(`${calculation} figure`).getAttribute('aria-label'))!);
+    await expect(page.locator(`${calculation} [aria-live=polite]`)).toHaveText(
+      (await page.locator(`${calculation} figure`).getAttribute('aria-label'))!,
+    );
     await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'false');
   }
 });
@@ -77,44 +127,127 @@ test('specific mode steps track completed results and conversion boundaries', as
   await page.goto('/#demo');
   const current = page.locator(`${calculation} .mode-instructions [aria-current="step"]`);
   const cases = [
-    { mode: 'Right Triangle', count: 6, highlights: ['Find the 5 ft diagonal.', 'Convert to inches or meters.', 'Convert to inches or meters.', 'Cycle through the sides and angles.'] },
-    { mode: 'Oblique Triangle', count: 6, highlights: ['Find the three angles.', 'Find the three angles.', 'Find the three angles.', 'Cycle to the triangle’s area.'] },
-    { mode: 'Circle', count: 6, highlights: ['Find the arc length.', 'Cycle to the chord length.', 'Cycle to the segment rise.'] },
+    {
+      mode: 'Right Triangle',
+      count: 6,
+      highlights: [
+        'Find the 5 ft diagonal.',
+        'Convert to inches or meters.',
+        'Convert to inches or meters.',
+        'Cycle through the sides and angles.',
+      ],
+    },
+    {
+      mode: 'Oblique Triangle',
+      count: 6,
+      highlights: [
+        'Find the three angles.',
+        'Find the three angles.',
+        'Find the three angles.',
+        'Cycle to the triangle’s area.',
+      ],
+    },
+    {
+      mode: 'Circle',
+      count: 6,
+      highlights: [
+        'Find the arc length.',
+        'Cycle to the chord length.',
+        'Cycle to the segment rise.',
+      ],
+    },
     { mode: 'Cylinder', count: 5, highlights: ['Find the volume.', 'Cycle to the surface area.'] },
     { mode: 'Cone', count: 5, highlights: ['Find the volume.', 'Cycle to the lateral area.'] },
-    { mode: 'Ratios', count: 6, highlights: ['Read the 12 ft result.', 'Read the updated 24 ft result.'] },
-    { mode: 'Offset', count: 6, highlights: ['Find the centerline radius.', 'Compare wrapper length, heel radius, and throat radius.'] },
-    { mode: 'Roof', count: 6, highlights: ['Compare common and hip/valley rafters.', 'Compare common and hip/valley rafters.', 'Compare common and hip/valley rafters.', 'Cycle to the jack rafter results.'] },
-    { mode: 'Stairs', count: 6, highlights: ['Compare riser height and stair counts.', 'Compare riser height and stair counts.', 'Compare riser height and stair counts.', 'Compare riser height and stair counts.', 'Find the 12 ft 6 in required run.'] },
+    {
+      mode: 'Ratios',
+      count: 6,
+      highlights: ['Read the 12 ft result.', 'Read the updated 24 ft result.'],
+    },
+    {
+      mode: 'Offset',
+      count: 6,
+      highlights: [
+        'Find the centerline radius.',
+        'Compare wrapper length, heel radius, and throat radius.',
+      ],
+    },
+    {
+      mode: 'Roof',
+      count: 6,
+      highlights: [
+        'Compare common and hip/valley rafters.',
+        'Compare common and hip/valley rafters.',
+        'Compare common and hip/valley rafters.',
+        'Cycle to the jack rafter results.',
+      ],
+    },
+    {
+      mode: 'Stairs',
+      count: 6,
+      highlights: [
+        'Compare riser height and stair counts.',
+        'Compare riser height and stair counts.',
+        'Compare riser height and stair counts.',
+        'Compare riser height and stair counts.',
+        'Find the 12 ft 6 in required run.',
+      ],
+    },
   ];
   for (const example of cases) {
     await pickMode(page, example.mode);
     await expect(page.locator(`${calculation} .mode-instructions li`)).toHaveCount(example.count);
     for (const [index, highlight] of example.highlights.entries()) {
-      if (index) await page.locator(calculation).getByRole('button', { name: /^Next result in / }).click();
+      if (index)
+        await page
+          .locator(calculation)
+          .getByRole('button', { name: /^Next result in / })
+          .click();
       await expect(current).toHaveText(highlight);
     }
   }
 });
 
-test('manual results include unit conversion and reduced-motion Help holds the resumed guide', async ({ page }) => {
+test('manual results include unit conversion and reduced-motion Help holds the resumed guide', async ({
+  page,
+}) => {
   await page.goto('/#demo');
-  await expect(page.locator(`${calculation} figure`)).toHaveAttribute('aria-label', 'Right Triangle · Diagonal, 5 feet 0 inches');
-  await page.locator(calculation).getByRole('button', { name: /^Next result in / }).click();
-  await expect(page.locator(`${calculation} figure`)).toHaveAttribute('aria-label', 'Right Triangle · Diagonal, 60 inches');
-  await page.locator(calculation).getByRole('button', { name: /^Next result in / }).click();
-  await expect(page.locator(`${calculation} figure`)).toHaveAttribute('aria-label', 'Right Triangle · Diagonal, 1.524 meters');
+  await expect(page.locator(`${calculation} figure`)).toHaveAttribute(
+    'aria-label',
+    'Right Triangle · Diagonal, 5 feet 0 inches',
+  );
+  await page
+    .locator(calculation)
+    .getByRole('button', { name: /^Next result in / })
+    .click();
+  await expect(page.locator(`${calculation} figure`)).toHaveAttribute(
+    'aria-label',
+    'Right Triangle · Diagonal, 60 inches',
+  );
+  await page
+    .locator(calculation)
+    .getByRole('button', { name: /^Next result in / })
+    .click();
+  await expect(page.locator(`${calculation} figure`)).toHaveAttribute(
+    'aria-label',
+    'Right Triangle · Diagonal, 1.524 meters',
+  );
   await page.locator('#help-title').scrollIntoViewIfNeeded();
   await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-touch-15');
-  await expect(page.locator(help).getByRole('heading', { level: 3, name: 'Find rise and run from a slant.' })).toBeVisible();
+  await expect(
+    page.locator(help).getByRole('heading', { level: 3, name: 'Find rise and run from a slant.' }),
+  ).toBeVisible();
   await expect(page.locator(help).getByRole('button')).toHaveCount(0);
   await page.waitForTimeout(1500);
   await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-touch-15');
   await expect(page.locator(help)).toHaveAttribute('data-demo-playing', 'false');
-  await expect(page.getByRole('list', { name: 'Help demo steps' })).toContainText('saved reading position');
+  await expect(page.getByRole('list', { name: 'Help demo steps' })).toContainText(
+    'saved reading position',
+  );
 });
 
-test('automatic playback pauses offscreen and keyboard pause survives returning', async ({ page }) => {
+test('automatic playback pauses offscreen and keyboard pause survives returning', async ({
+  page,
+}) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto('/#demo');
   await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'true');
@@ -142,7 +275,10 @@ test('automatic playback pauses offscreen and keyboard pause survives returning'
 
 test('hovering either phone holds its demo and leaving resumes', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
-  for (const [selector, anchor] of [[calculation, 'demo'], [help, 'help']]) {
+  for (const [selector, anchor] of [
+    [calculation, 'demo'],
+    [help, 'help'],
+  ]) {
     await page.goto(`/#${anchor}`);
     await expect(page.locator(selector)).toHaveAttribute('data-demo-playing', 'true');
     await page.locator(`${selector} .demo-phone-figure`).hover();
@@ -152,58 +288,95 @@ test('hovering either phone holds its demo and leaving resumes', async ({ page }
     expect(await frame(page, selector)).toBe(held);
     await page.mouse.move(0, 0);
     await expect(page.locator(selector)).toHaveAttribute('data-demo-playing', 'true');
-    await expect(page.locator(selector).getByRole('button', { name: /Pause .* demo/ })).toBeVisible();
+    await expect(
+      page.locator(selector).getByRole('button', { name: /Pause .* demo/ }),
+    ).toBeVisible();
   }
 });
 
 test('missing screenshots retain readable calculation and Help guidance', async ({ page }) => {
-  await page.route('**/assets/demo/**', route => route.abort());
+  await page.route('**/assets/demo/**', (route) => route.abort());
   await page.goto('/#demo');
-  await expect(page.locator(calculation).getByText('App image could not load. The steps explain the example.')).toBeVisible();
-  await expect(page.getByRole('list', { name: 'How to use this mode' })).toContainText('Set the run to 3 ft.');
-  await expect(page.getByRole('button', { name: 'Play Right Triangle demo', exact: true })).toBeDisabled();
+  await expect(
+    page.locator(calculation).getByText('App image could not load. The steps explain the example.'),
+  ).toBeVisible();
+  await expect(page.getByRole('list', { name: 'How to use this mode' })).toContainText(
+    'Set the run to 3 ft.',
+  );
+  await expect(
+    page.getByRole('button', { name: 'Play Right Triangle demo', exact: true }),
+  ).toBeDisabled();
   await page.getByRole('button', { name: 'Next result in Right Triangle', exact: true }).click();
-  await expect(page.locator(`${calculation} figure`)).toHaveAttribute('aria-label', 'Right Triangle · Diagonal, 60 inches');
+  await expect(page.locator(`${calculation} figure`)).toHaveAttribute(
+    'aria-label',
+    'Right Triangle · Diagonal, 60 inches',
+  );
   await page.locator(help).scrollIntoViewIfNeeded();
-  await expect(page.locator(help).getByText('App image could not load. The steps explain the example.')).toBeVisible();
-  await expect(page.getByRole('list', { name: 'Help demo steps' })).toContainText('Your calculation stays in place');
+  await expect(
+    page.locator(help).getByText('App image could not load. The steps explain the example.'),
+  ).toBeVisible();
+  await expect(page.getByRole('list', { name: 'Help demo steps' })).toContainText(
+    'Your calculation stays in place',
+  );
 });
 
-test('no-JavaScript content retains the proposition, completed proof, Help and navigation', async ({ browser, baseURL }) => {
+test('no-JavaScript content retains the proposition, completed proof, Help and navigation', async ({
+  browser,
+  baseURL,
+}) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
   const page = await context.newPage();
   await page.goto(baseURL!);
   await expect(page.getByRole('heading', { name: 'Trade math. Made intuitive.' })).toBeVisible();
-  await expect(page.getByRole('heading', { name: 'Help without losing your place.' })).toBeVisible();
+  await expect(
+    page.getByRole('heading', { name: 'Help without losing your place.' }),
+  ).toBeVisible();
   await expect(page.locator('#demo')).toContainText('5 ft diagonal');
-  await page.locator('.hero-actions').getByRole('link', { name: 'Get Figure', exact: true }).click();
+  await page
+    .locator('.hero-actions')
+    .getByRole('link', { name: 'Get Figure', exact: true })
+    .click();
   await expect(page.getByText('Preparing for the App Store.')).toBeInViewport();
   await context.close();
 });
 
-test('responsive layouts and 200% text retain both sections and controls without overflow', async ({ page }) => {
+test('responsive layouts and 200% text retain both sections and controls without overflow', async ({
+  page,
+}) => {
   for (const width of [320, 390, 768, 1024, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto('/#demo');
-    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
     await expect(page.locator(calculation)).toBeVisible();
     await expect(page.locator(help)).toBeVisible();
     for (const selector of [calculation, help]) {
-      const fit = await page.locator(`${selector} .phone-aperture`).evaluate(aperture => {
+      const fit = await page.locator(`${selector} .phone-aperture`).evaluate((aperture) => {
         const opening = aperture.getBoundingClientRect();
         const screen = aperture.querySelector('.native-screen')!.getBoundingClientRect();
-        return { top: screen.top - opening.top, bottom: opening.bottom - screen.bottom, ratio: screen.width / screen.height };
+        return {
+          top: screen.top - opening.top,
+          bottom: opening.bottom - screen.bottom,
+          ratio: screen.width / screen.height,
+        };
       });
-      expect(Math.abs(fit.top)).toBeLessThan(.5);
-      expect(Math.abs(fit.bottom)).toBeLessThan(.5);
+      expect(Math.abs(fit.top)).toBeLessThan(0.5);
+      expect(Math.abs(fit.bottom)).toBeLessThan(0.5);
       expect(fit.ratio).toBeCloseTo(440 / 956, 3);
     }
   }
   await page.setViewportSize({ width: 390, height: 844 });
   await page.evaluate(() => {
-    const nodes = [...document.querySelectorAll<HTMLElement>('h1,h2,h3,p,a,button,select,summary,strong,small,li')];
-    const sizes = nodes.map(node => [node, parseFloat(getComputedStyle(node).fontSize)] as const);
-    sizes.forEach(([node, size]) => { node.style.fontSize = `${size * 2}px`; });
+    const nodes = [
+      ...document.querySelectorAll<HTMLElement>(
+        'h1,h2,h3,p,a,button,select,summary,strong,small,li',
+      ),
+    ];
+    const sizes = nodes.map((node) => [node, parseFloat(getComputedStyle(node).fontSize)] as const);
+    sizes.forEach(([node, size]) => {
+      node.style.fontSize = `${size * 2}px`;
+    });
   });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await expect(page.getByRole('combobox', { name: 'Choose a calculation mode' })).toBeVisible();
@@ -211,17 +384,26 @@ test('responsive layouts and 200% text retain both sections and controls without
 
 test('automated accessibility scans pass the mode gallery, Help and policies', async ({ page }) => {
   const errors: string[] = [];
-  page.on('pageerror', error => errors.push(error.message));
+  page.on('pageerror', (error) => errors.push(error.message));
   await page.goto('/#demo');
   for (const mode of ['Right Triangle', 'Roof', 'Cone']) {
     await pickMode(page, mode);
-    expect((await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze()).violations).toEqual([]);
+    expect(
+      (await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze())
+        .violations,
+    ).toEqual([]);
   }
   await page.locator(help).scrollIntoViewIfNeeded();
-  expect((await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze()).violations).toEqual([]);
+  expect(
+    (await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze())
+      .violations,
+  ).toEqual([]);
   for (const path of ['/support', '/privacy']) {
     await page.goto(path);
-    expect((await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze()).violations).toEqual([]);
+    expect(
+      (await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze())
+        .violations,
+    ).toEqual([]);
   }
   expect(errors).toEqual([]);
 });
@@ -251,7 +433,9 @@ test('keyboard focus and visibility changes suspend a running calculation', asyn
   await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'true');
 });
 
-test('mode navigation is keyboard accessible and starts from a completed still', async ({ page }) => {
+test('mode navigation is keyboard accessible and starts from a completed still', async ({
+  page,
+}) => {
   await page.goto('/#demo');
   const compact = page.getByRole('combobox', { name: 'Choose a calculation mode' });
   if (await compact.isVisible()) {
@@ -266,7 +450,10 @@ test('mode navigation is keyboard accessible and starts from a completed still',
     await expect(cone).toHaveAttribute('aria-pressed', 'true');
   }
   await expect(page.locator('#adaptive-mode-content h3')).toHaveText('Cone');
-  await expect(page.locator(`${calculation} figure`)).toHaveAttribute('aria-label', /Cone · Volume/);
+  await expect(page.locator(`${calculation} figure`)).toHaveAttribute(
+    'aria-label',
+    /Cone · Volume/,
+  );
   await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'false');
 });
 
@@ -282,18 +469,34 @@ test('automatic playback completes and repeats the selected cylinder mode', asyn
   await expect(current).toHaveText('Set the diameter to 4 ft.', { timeout: 5000 });
   await expect(current).toHaveText('Set the height to 6 ft.', { timeout: 5000 });
   await expect(current).toHaveText('Find the volume.', { timeout: 5000 });
-  await expect(page.locator(`${calculation} figure`)).toHaveAttribute('aria-label', /Cylinder · Volume, 75.39822 cubic feet/, { timeout: 5000 });
-  await expect(page.locator(`${calculation} figure`)).toHaveAttribute('aria-label', /Cylinder · Surface area, 100.531 square feet/, { timeout: 5000 });
+  await expect(page.locator(`${calculation} figure`)).toHaveAttribute(
+    'aria-label',
+    /Cylinder · Volume, 75.39822 cubic feet/,
+    { timeout: 5000 },
+  );
+  await expect(page.locator(`${calculation} figure`)).toHaveAttribute(
+    'aria-label',
+    /Cylinder · Surface area, 100.531 square feet/,
+    { timeout: 5000 },
+  );
   await expect(current).toHaveText('Cycle to the surface area.');
-  await expect(page.locator(calculation)).toHaveAttribute('data-demo-frame', 'worked-cylinder-00', { timeout: 5000 });
+  await expect(page.locator(calculation)).toHaveAttribute('data-demo-frame', 'worked-cylinder-00', {
+    timeout: 5000,
+  });
   await expect(page.locator('#adaptive-mode-content h3')).toHaveText('Cylinder');
 });
 
 test('touch movement and contact remain smooth with a pause between stages', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto('/#demo');
-  await page.waitForFunction(() => document.querySelector('[data-demo-kind="calculation"]')?.getAttribute('data-demo-frame') === 'worked-right-01');
-  await expect(page.locator(`${calculation} .mode-instructions [aria-current="step"]`)).toHaveText('Set the run to 3 ft.');
+  await page.waitForFunction(
+    () =>
+      document.querySelector('[data-demo-kind="calculation"]')?.getAttribute('data-demo-frame') ===
+      'worked-right-01',
+  );
+  await expect(page.locator(`${calculation} .mode-instructions [aria-current="step"]`)).toHaveText(
+    'Set the run to 3 ft.',
+  );
   const samples = await page.evaluate(async () => {
     const cue = document.querySelector<HTMLElement>('[data-demo-kind="calculation"] .press-cue')!;
     const contact = cue.querySelector<HTMLElement>('.touch-contact')!;
@@ -303,26 +506,40 @@ test('touch movement and contact remain smooth with a pause between stages', asy
     while (performance.now() - start < 1600 && contact.isConnected) {
       const bounds = cue.getBoundingClientRect();
       const transform = new DOMMatrix(getComputedStyle(contact).transform);
-      samples.push({ time: performance.now() - start, y: (bounds.y + bounds.height / 2 - screen.y) / screen.height, scale: transform.a });
+      samples.push({
+        time: performance.now() - start,
+        y: (bounds.y + bounds.height / 2 - screen.y) / screen.height,
+        scale: transform.a,
+      });
       await new Promise(requestAnimationFrame);
     }
     return samples;
   });
-  expect(samples.filter(sample => sample.time < 180).every(sample => sample.y < .4)).toBe(true);
-  expect(samples.some(sample => sample.y > .4 && sample.y < .75)).toBe(true);
-  expect(samples.some(sample => Math.abs(sample.y - 777 / 956) < .01)).toBe(true);
-  expect(samples.some(sample => sample.scale < .85)).toBe(true);
+  expect(samples.filter((sample) => sample.time < 180).every((sample) => sample.y < 0.4)).toBe(
+    true,
+  );
+  expect(samples.some((sample) => sample.y > 0.4 && sample.y < 0.75)).toBe(true);
+  expect(samples.some((sample) => Math.abs(sample.y - 777 / 956) < 0.01)).toBe(true);
+  expect(samples.some((sample) => sample.scale < 0.85)).toBe(true);
 });
 
-test('Help shows native touch gestures, holds its ending, then loops independently', async ({ page }) => {
+test('Help shows native touch gestures, holds its ending, then loops independently', async ({
+  page,
+}) => {
   test.setTimeout(45000);
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto('/#help');
-  await expect.poll(() => page.locator('#help').evaluate(element => Math.abs(element.getBoundingClientRect().top))).toBeLessThan(80);
+  await expect
+    .poll(() =>
+      page.locator('#help').evaluate((element) => Math.abs(element.getBoundingClientRect().top)),
+    )
+    .toBeLessThan(80);
   await expect(page.locator(help)).toHaveAttribute('data-demo-playing', 'true');
   await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'false');
   const current = page.locator(`${help} .mode-instructions [aria-current="step"]`);
-  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-touch-02', { timeout: 5000 });
+  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-touch-02', {
+    timeout: 5000,
+  });
   await expect(current).toHaveText('Open Help without leaving your calculation.');
   const gesture = await page.evaluate(async () => {
     const root = document.querySelector<HTMLElement>('[data-demo-kind="help"]')!;
@@ -333,32 +550,56 @@ test('Help shows native touch gestures, holds its ending, then loops independent
     const start = performance.now();
     while (performance.now() - start < 2500 && path.isConnected) {
       const bounds = path.getBoundingClientRect();
-      samples.push({ time: performance.now() - start, y: (bounds.y + bounds.height / 2 - screen.y) / screen.height, scale: new DOMMatrix(getComputedStyle(contact).transform).a });
+      samples.push({
+        time: performance.now() - start,
+        y: (bounds.y + bounds.height / 2 - screen.y) / screen.height,
+        scale: new DOMMatrix(getComputedStyle(contact).transform).a,
+      });
       await new Promise(requestAnimationFrame);
     }
     return samples;
   });
-  expect(gesture.some(sample => sample.time > 600 && sample.y > .78)).toBe(true);
-  expect(gesture.some(sample => sample.time > 1500 && Math.abs(sample.y - 604 / 956) < .02)).toBe(true);
-  expect(gesture.some(sample => sample.scale < .85)).toBe(true);
-  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-touch-04', { timeout: 6000 });
-  await expect(current).toHaveText('Close Help and try the steps. Your calculation stays in place.');
-  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-touch-05', { timeout: 5000 });
-  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-touch-12', { timeout: 12000 });
-  await expect(page.locator(`${help} figure`)).toHaveAttribute('aria-label', 'The 5 ft rise is highlighted. Open More to return to Help.');
+  expect(gesture.some((sample) => sample.time > 600 && sample.y > 0.78)).toBe(true);
+  expect(
+    gesture.some((sample) => sample.time > 1500 && Math.abs(sample.y - 604 / 956) < 0.02),
+  ).toBe(true);
+  expect(gesture.some((sample) => sample.scale < 0.85)).toBe(true);
+  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-touch-04', {
+    timeout: 6000,
+  });
+  await expect(current).toHaveText(
+    'Close Help and try the steps. Your calculation stays in place.',
+  );
+  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-touch-05', {
+    timeout: 5000,
+  });
+  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-touch-12', {
+    timeout: 12000,
+  });
+  await expect(page.locator(`${help} figure`)).toHaveAttribute(
+    'aria-label',
+    'The 5 ft rise is highlighted. Open More to return to Help.',
+  );
   await expect(current).toHaveText('Reopen the same guide at your saved reading position.');
-  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-touch-14', { timeout: 5000 });
-  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-touch-15', { timeout: 5000 });
+  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-touch-14', {
+    timeout: 5000,
+  });
+  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-touch-15', {
+    timeout: 5000,
+  });
   await expect(page.locator(`${help} .press-cue`)).toHaveCSS('opacity', '0');
   await page.waitForTimeout(2500);
   await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-touch-15');
-  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-touch-00', { timeout: 3000 });
+  await expect(page.locator(help)).toHaveAttribute('data-demo-frame', 'help-touch-00', {
+    timeout: 3000,
+  });
   await expect(page.locator(help)).toHaveAttribute('data-demo-playing', 'true');
   await expect(page.getByRole('button', { name: 'Pause Help demo', exact: true })).toBeVisible();
 });
 
-
-test('persistent demo controls pause independently and retain an explicit pause across mode selection', async ({ page }) => {
+test('persistent demo controls pause independently and retain an explicit pause across mode selection', async ({
+  page,
+}) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto('/#demo');
   await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'true');
@@ -389,5 +630,7 @@ test('persistent demo controls pause independently and retain an explicit pause 
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await expect(page.locator(help)).toHaveAttribute('data-demo-playing', 'false');
   await expect(page.locator(help).getByRole('button')).toHaveCount(0);
-  await expect(page.getByRole('button', { name: 'Play Cylinder demo', exact: true })).toBeDisabled();
+  await expect(
+    page.getByRole('button', { name: 'Play Cylinder demo', exact: true }),
+  ).toBeDisabled();
 });

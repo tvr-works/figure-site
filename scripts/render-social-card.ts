@@ -2,7 +2,8 @@ import { readFile } from 'node:fs/promises';
 import { chromium } from '@playwright/test';
 
 const root = new URL('../', import.meta.url);
-const data = async (path: string, type: string) => `data:${type};base64,${(await readFile(new URL(path, root))).toString('base64')}`;
+const data = async (path: string, type: string) =>
+  `data:${type};base64,${(await readFile(new URL(path, root))).toString('base64')}`;
 const [font, phone, atmosphere, mark, symbol] = await Promise.all([
   data('node_modules/@fontsource-variable/geist/files/geist-latin-wght-normal.woff2', 'font/woff2'),
   data('public/assets/hero-phone.webp', 'image/webp'),
@@ -12,7 +13,10 @@ const [font, phone, atmosphere, mark, symbol] = await Promise.all([
 ]);
 const browser = await chromium.launch();
 try {
-  const page = await browser.newPage({ viewport: { width: 1200, height: 630 }, deviceScaleFactor: 1 });
+  const page = await browser.newPage({
+    viewport: { width: 1200, height: 630 },
+    deviceScaleFactor: 1,
+  });
   await page.setContent(`<!doctype html><html lang="en"><head><meta charset="utf-8"><style>
     @font-face { font-family: Geist; src: url('${font}') format('woff2'); font-weight: 100 900; }
     * { box-sizing: border-box; } body { margin: 0; width: 1200px; height: 630px; overflow: hidden; font-family: Geist, sans-serif; color: #f7f8fa; background: #101214 url('${atmosphere}') center / cover; }
@@ -29,7 +33,7 @@ try {
   <p class="eyebrow">Construction · Fabrication · DIY</p><h1>Trade math.<br>Made intuitive.</h1><p class="description">Adaptive keys. Visual results.<br>Feet, inches, fractions and metric.</p><p class="address">figure.tvr.works</p><img class="phone" src="${phone}" alt="Figure’s Circle calculator on iPhone"></main></body></html>`);
   await page.evaluate(async () => {
     await document.fonts.ready;
-    await Promise.all([...document.images].map(image => image.decode()));
+    await Promise.all([...document.images].map((image) => image.decode()));
   });
   await page.screenshot({ path: new URL('public/social-card.png', root).pathname });
   console.log('Rendered public/social-card.png at 1200 × 630 from the existing Figure assets.');

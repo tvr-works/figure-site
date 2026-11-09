@@ -11,17 +11,29 @@ export default defineConfig(({ mode }) => {
   const environment = loadEnv(mode, process.cwd(), 'VITE_SITE_');
   const indexing = resolveSiteIndexing(environment.VITE_SITE_INDEXING, process.env.CF_PAGES_BRANCH);
   return {
-  define: { 'import.meta.env.VITE_SITE_INDEXING': JSON.stringify(indexing) },
-  plugins: [
-    tailwindcss(),
-    tanstackStart({
-      prerender: { enabled: true, autoStaticPathsDiscovery: false, autoSubfolderIndex: false, crawlLinks: false, failOnError: true },
-      sitemap: { enabled: true, host: site.origin },
-      pages: [...publicPages.map(({ path, lastModified }) => ({ path, sitemap: { lastmod: lastModified } })), { path: '/404', sitemap: { exclude: true }, prerender: { outputPath: '/404.html' } }],
-    }),
-    react(),
-  ],
-  resolve: { alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) } },
-  server: { host: '127.0.0.1' },
+    define: { 'import.meta.env.VITE_SITE_INDEXING': JSON.stringify(indexing) },
+    plugins: [
+      tailwindcss(),
+      tanstackStart({
+        prerender: {
+          enabled: true,
+          autoStaticPathsDiscovery: false,
+          autoSubfolderIndex: false,
+          crawlLinks: false,
+          failOnError: true,
+        },
+        sitemap: { enabled: true, host: site.origin },
+        pages: [
+          ...publicPages.map(({ path, lastModified }) => ({
+            path,
+            sitemap: { lastmod: lastModified },
+          })),
+          { path: '/404', sitemap: { exclude: true }, prerender: { outputPath: '/404.html' } },
+        ],
+      }),
+      react(),
+    ],
+    resolve: { alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) } },
+    server: { host: '127.0.0.1' },
   };
 });
