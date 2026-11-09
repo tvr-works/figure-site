@@ -142,9 +142,15 @@ test('guide introductions reflow with doubled text and increased spacing at 320p
       ].map((node) => [node, parseFloat(getComputedStyle(node).fontSize)] as const);
       for (const [node, size] of sizes) node.style.fontSize = `${size * 2}px`;
     });
-    await page.addStyleTag({
-      content:
-        'p{margin-bottom:2em!important}*{line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important}',
+    await page.evaluate(() => {
+      for (const node of document.querySelectorAll<HTMLElement>('*')) {
+        node.style.setProperty('line-height', '1.5', 'important');
+        node.style.setProperty('letter-spacing', '.12em', 'important');
+        node.style.setProperty('word-spacing', '.16em', 'important');
+      }
+      for (const node of document.querySelectorAll<HTMLElement>('p')) {
+        node.style.setProperty('margin-bottom', '2em', 'important');
+      }
     });
     expect(
       await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),

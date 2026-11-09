@@ -4,7 +4,14 @@ export default defineConfig({
   testDir: './tests',
   fullyParallel: true,
   workers: 2,
-  use: { baseURL: 'http://127.0.0.1:4174', reducedMotion: 'reduce', trace: 'retain-on-failure' },
+  forbidOnly: Boolean(process.env.CI),
+  reporter: process.env.CI ? [['github'], ['html', { open: 'never' }]] : 'list',
+  use: {
+    baseURL: 'http://127.0.0.1:4174',
+    reducedMotion: 'reduce',
+    trace: 'retain-on-failure',
+    screenshot: 'only-on-failure',
+  },
   projects: [
     {
       name: 'chromium',

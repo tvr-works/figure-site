@@ -1,0 +1,8 @@
+{
+  "javascript": { "rawKiB": 1050, "gzipKiB": 300 },
+  "css": { "rawKiB": 90, "gzipKiB": 18 },
+  "fonts": { "rawKiB": 40 },
+  "initialLinkedCode": { "rawKiB": 640, "gzipKiB": 200 },
+  "initialBrowserCode": { "rawKiB": 640, "gzipKiB": 200 },
+  "demoMedia": { "rawMiB": 16, "largestKiB": 220 }
+}
