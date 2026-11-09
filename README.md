@@ -1,6 +1,6 @@
 # Figure site
 
-Marketing, support and privacy site for Figure, maintained in the private [`tvr-works/figure-site`](https://github.com/tvr-works/figure-site) repository. The iPhone app lives in the separate private [`tvr-works/figure`](https://github.com/tvr-works/figure) repository.
+Marketing, support and privacy site for Figure, maintained in the public [`tvr-works/figure-site`](https://github.com/tvr-works/figure-site) repository. The iPhone app lives in the separate private [`tvr-works/figure`](https://github.com/tvr-works/figure) repository.
 
 ## Local development
 
@@ -15,13 +15,13 @@ npm run preview -- --port 4173 --strictPort
 
 TanStack Start and Vite prerender the home, `/support`, `/privacy`, `/guides`, published guide articles and 404 pages to `dist/client`. React hydrates the existing calculation and Help demonstrations. Tailwind uses its Vite plugin; shadcn components use Base UI. The site deploys as static files; no runtime backend or analytics is required.
 
-The agreed copy and interaction plan lives in [the storyboard](docs/MARKETING-STORYBOARD.md). The subject-based web Help library and remaining publication plan are mapped in [the guide structure](docs/GUIDE-LIBRARY-STRUCTURE.md). The owner approved a one-time US$9.99 App Store price with automatic regional pricing; the public store destination still requires verification before purchase links are enabled. Keep `noindex` until public launch is requested.
+The agreed copy and interaction plan lives in [the storyboard](docs/MARKETING-STORYBOARD.md). The subject-based web Help library and remaining publication plan are mapped in [the guide structure](docs/GUIDE-LIBRARY-STRUCTURE.md). The owner approved a one-time US$9.99 App Store price with automatic regional pricing; the public store destination still requires verification before purchase links are enabled. Production search indexing was enabled on November 9, 2026; previews remain excluded.
 
 ## Deployment
 
 The existing Cloudflare Pages project is `figure-site`, domain `figure.tvr.works`, production branch `main`. The previous configuration used build command `exit 0` and output `public`.
 
-The Git source is `tvr-works/figure-site`. The existing Cloudflare Workers and Pages GitHub App installation for `tvr-works` uses selected-repository access; retain `key-site` when adding or adjusting access for `figure-site`. Reconnect the existing Pages project's Git source when changing repository ownership so its domains, deployment history and runtime configuration remain in place. Keep build command `npm run build`, output `dist/client`, production branch `main` and the existing prelaunch indexing policy.
+The Git source is `tvr-works/figure-site`. The existing Cloudflare Workers and Pages GitHub App installation for `tvr-works` uses selected-repository access; retain `key-site` when adding or adjusting access for `figure-site`. Keep the existing project, domains, output `dist/client`, production branch `main`, public production indexing and noindex previews. [CI and deployment](docs/ci-deployment.md) documents the prepared validation workflow, publication gate and coordinator-owned cutover from the current `npm run build` command.
 
 On October 25, 2026, the approved Pages build settings were updated to `npm run build` with output directory `dist/client`. The marketing branch publishes a noindex preview at [codex-figure-site-marketing.figure-site.pages.dev](https://codex-figure-site-marketing.figure-site.pages.dev). Pushes to `main` deploy production automatically; keep preview work on `codex/figure-site-marketing`. On October 26, 2026, the complete marketing site was published to [figure.tvr.works](https://figure.tvr.works/) by fast-forwarding `main` to verified content commit `0566da1d734ce99a89ca2f1e3dd733202d071c8e`. Its first successful production deployment is `cd76800b-9d1e-44f5-a62e-2f1c75038a62`; the corresponding preview is `53b78467-9a16-4a11-a104-962c4e4f9eea`. The prelaunch availability message and `noindex, follow` remain active. The previous basic-site rollback checkpoint is deployment `8f5b07ed-51ad-4ae9-95fe-38999ac4d4e3` (commit `e9f86270edfcbf73efcc18c074c78d1beb84a3e2`).
 
@@ -56,7 +56,7 @@ Browser tests use a separate static-only production preview on port 4174, with r
 
 ## Launch content
 
-Price is intentionally omitted. Both Get Figure links lead to the footer availability note until the public App Store URL is verified. At launch, update those links and the footer availability copy in the marketing route components, optionally add a confirmed price, enable production indexing when wanted, and complete the public launch checkpoint below. Production preparation retains the prelaunch message and noindex policy; App Store purchase links and public indexing remain a later launch switch. The app ID is `6825452227`; verify its public listing before enabling a store destination. The homepage browser/sharing title is Figure · Trade Calculator for iPhone; the visible tagline remains Trade math. Made intuitive.
+Price is intentionally omitted. Both Get Figure links lead to the footer availability note until the public App Store URL is verified. At launch, update those links and the footer availability copy in the marketing route components, optionally add a confirmed price, and complete the public launch checkpoint below. The prelaunch availability message remains while production search indexing is already enabled; App Store purchase links remain a separate launch switch. The app ID is `6825452227`; verify its public listing before enabling a store destination. The homepage browser/sharing title is Figure · Trade Calculator for iPhone; the visible tagline remains Trade math. Made intuitive.
 
 The hero is a generated product render based on the supplied app screen. The nine complete mode examples and separate Help sequence use actual app captures, with tap cues placed from simulator action coordinates. They are edited demonstrations, not a browser calculator. Image sources and native capture evidence live in `docs/design/`.
 
@@ -81,7 +81,7 @@ npm run check
 npm run test:browser
 ```
 
-Review the snapshot diff and its source revision before committing. For future catalog additions, add subject context in `content/guide-context.json`, update the subject map, add the slug to `content/published-guides.json`, implement any required diagram renderer, and verify the generated article and static route. Builds regenerate the sitemap from explicit page choices and retain `noindex, follow` until launch. Search uses the published subject summaries, application aliases and native recipe titles. The query stays in the URL for sharing and Back navigation. Category links and all article links work without JavaScript; the search control appears after hydration. Each article loads from its own generated module, so opening one guide does not download the full library.
+Review the snapshot diff and its source revision before committing. For future catalog additions, add subject context in `content/guide-context.json`, update the subject map, add the slug to `content/published-guides.json`, implement any required diagram renderer, and verify the generated article and static route. Builds regenerate the production-canonical sitemap from explicit page choices; HTML and response indexing follow the selected production/preview policy. Search uses the published subject summaries, application aliases and native recipe titles. The query stays in the URL for sharing and Back navigation. Category links and all article links work without JavaScript; the search control appears after hydration. Each article loads from its own generated module, so opening one guide does not download the full library.
 
 ## SEO and release preparation
 
@@ -114,7 +114,7 @@ Each calculation mode has a compact icon-only previous-result, play/pause and ne
 - Confirm the public creator/publisher credit and account-conversion status. Add only the factual app/publisher schema supported by visible information. Software-app rich-result eligibility requires real supporting offer/review data; do not invent it.
 - Verify Google Search Console and Bing Webmaster Tools ownership. Submit the sitemap after production indexing is authorized. Use conventional and generative-AI performance reports when data is available; Bing's topic reporting needs sufficient activity.
 - Consider App Store campaign links once Apple's analytics prerequisites are met. Keep website analytics absent unless separately chosen; review Privacy if actual data practices change.
-- Build the production artifact with `VITE_SITE_INDEXING=public`, verify emitted metadata and edge headers, deploy only when requested, and inspect representative live URLs. Keep preview environments excluded.
+- Preserve the production setting `VITE_SITE_INDEXING=public`, verify emitted metadata and edge headers on each release, and keep preview environments excluded. Production indexing was authorized and enabled on November 9, 2026.
 - Use real indexing, query, citation and acquisition results to choose future guide work. IndexNow is optional for significant URL additions/updates/removals after launch. No `llms.txt`, FAQ rich-result markup or keyword-variation routes are required for this release.
 
-The local release-preparation commits do not authorize or perform a push, Pages settings change, public deployment, account verification, sitemap submission, bot-policy change or public indexing change.
+The CI implementation branch is authorized for skip-marked pushes and Actions validation. Main integration and all Cloudflare settings/publication changes belong to the coordinator; account verification, sitemap submission and bot-policy changes remain separate work.
