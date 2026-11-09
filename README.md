@@ -118,3 +118,5 @@ Each calculation mode has a compact icon-only previous-result, play/pause and ne
 - Use real indexing, query, citation and acquisition results to choose future guide work. IndexNow is optional for significant URL additions/updates/removals after launch. No `llms.txt`, FAQ rich-result markup or keyword-variation routes are required for this release.
 
 The CI implementation branch is authorized for skip-marked pushes and Actions validation. Main integration and all Cloudflare settings/publication changes belong to the coordinator; account verification, sitemap submission and bot-policy changes remain separate work.
+
+Production and branch previews now use the CI publication gate described in [the deployment runbook](docs/ci-deployment.md). The existing Pages project and public-indexing policy are retained.

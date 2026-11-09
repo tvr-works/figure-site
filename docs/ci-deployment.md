@@ -96,3 +96,9 @@ The first [Blacksmith push validation](https://github.com/tvr-works/figure-site/
 - [Cloudflare Pages header rules and limits](https://developers.cloudflare.com/pages/configuration/headers/)
 - [Cloudflare Pages build configuration](https://developers.cloudflare.com/pages/configuration/build-configuration/)
 - [Cloudflare skip build markers](https://developers.cloudflare.com/pages/configuration/git-integration/#skip-builds)
+
+## Coordinator cutover record
+
+Main integration `95b4874243e476fa777891039026bba3023bdd9f` passed [push CI](https://github.com/tvr-works/figure-site/actions/runs/42661427845) before the existing Pages build command changed to `npm run ci:gate && npm run build`. A fresh API readback preserved project `25b3fcdc-3929-4532-9338-5d41c838fb32`, organization source/repository identity, `main` production, enabled production automation, all branch previews, `dist/client`, domains, public production indexing and the existing preview policy.
+
+The negative preview acceptance used commit `64f7538880043b3f90829580918f6961cd01ffcb` on `codex/ci-publication-verification`. [CI run 42662245430](https://github.com/tvr-works/figure-site/actions/runs/42662245430) failed only at the intentional probe test. Pages deployment `2286f35f-780c-4fb2-871e-04dd0e0a1111` rejected that failed run at the gate, before application build/publication; its deploy stage remained idle. Canonical production stayed `4a137ede-b353-4932-9d8e-a0294bd95e75` at `f17c8f7`. The intentional test never entered main. Positive preview and production checks use their own exact commit identities and mode-aware hosted verification.
