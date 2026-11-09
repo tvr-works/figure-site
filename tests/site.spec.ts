@@ -627,10 +627,15 @@ test('persistent demo controls pause independently and retain an explicit pause 
   await page.locator(calculation).scrollIntoViewIfNeeded();
   await expect(page.locator(calculation)).toHaveAttribute('data-demo-playing', 'true');
   await page.locator(help).scrollIntoViewIfNeeded();
+  // Scrolling can place the phone under the last clicked mouse position.
+  // Leave hover suspension before testing keyboard playback independently.
+  await page.mouse.move(0, 0);
   await expect(page.locator(help)).toHaveAttribute('data-demo-playing', 'false');
   const resume = page.getByRole('button', { name: 'Play Help demo', exact: true });
   await resume.focus();
+  await expect(resume).toBeFocused();
   await resume.press('Enter');
+  await expect(page.getByRole('button', { name: 'Pause Help demo', exact: true })).toBeVisible();
   await expect(page.locator(help)).toHaveAttribute('data-demo-playing', 'true');
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await expect(page.locator(help)).toHaveAttribute('data-demo-playing', 'false');
