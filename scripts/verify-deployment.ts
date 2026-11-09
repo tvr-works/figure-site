@@ -40,6 +40,10 @@ export async function verifyDeployment({
   assert.match(expectedCommit, /^[a-f0-9]{40}$/, 'Expected the exact deployed commit SHA.');
   assert.ok(mode === 'production' || mode === 'preview', 'Expected production or preview mode.');
   const origin = target.origin;
+  // Pages excludes immutable hash hostnames independently of the artifact's
+  // public HTML/manifest. The custom production alias must remain indexable.
+  const immutablePagesHost = /^[a-f0-9]{8}\.figure-site\.pages\.dev$/.test(target.hostname);
+  const edgeNoindex = mode === 'preview' || immutablePagesHost;
   const expectedIndexing = mode === 'production' ? 'public' : 'preview';
   const expectedRobots = mode === 'production' ? 'index, follow' : 'noindex, follow';
   const get = (path: string) =>
@@ -82,7 +86,7 @@ export async function verifyDeployment({
           );
           assert.equal(
             /\bnoindex\b|\bnone\b/i.test(response.headers.get('x-robots-tag') ?? ''),
-            mode === 'preview',
+            edgeNoindex,
             `${path}: edge indexing`,
           );
           assert.deepEqual(

@@ -88,9 +88,35 @@ describe('supplied deployment verification', () => {
       if (new URL(String(url)).pathname === '/') response.headers.set('x-robots-tag', 'noindex');
       return Promise.resolve(response);
     });
-    await expect(verifyDeployment({ ...options, mode: 'production' })).rejects.toThrow(
-      'edge indexing',
-    );
+    await expect(
+      verifyDeployment({ ...options, url: canonical, mode: 'production' }),
+    ).rejects.toThrow('edge indexing');
+  });
+
+  it('keeps production HTML public while requiring edge exclusion on an immutable Pages hostname', async () => {
+    request.mockImplementation((url) => {
+      const response = fixture(String(url), 'production');
+      response.headers.set('x-robots-tag', 'noindex');
+      return Promise.resolve(response);
+    });
+    await expect(
+      verifyDeployment({
+        ...options,
+        url: 'https://1234abcd.figure-site.pages.dev',
+        mode: 'production',
+      }),
+    ).resolves.toBeUndefined();
+  });
+
+  it('rejects missing edge exclusion on an immutable production Pages hostname', async () => {
+    request.mockImplementation((url) => Promise.resolve(fixture(String(url), 'production')));
+    await expect(
+      verifyDeployment({
+        ...options,
+        url: 'https://1234abcd.figure-site.pages.dev',
+        mode: 'production',
+      }),
+    ).rejects.toThrow('edge indexing');
   });
   it('rejects a redirect or a healthy homepage substituted for a missing page', async () => {
     request.mockImplementation((url) => {

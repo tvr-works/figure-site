@@ -82,11 +82,11 @@ EXPECTED_COMMIT_SHA=FULL_40_CHARACTER_SHA \
 npm run verify:deployment
 ```
 
-For production, run with `DEPLOYMENT_MODE=production` against the immutable production deployment and then separately against `https://figure.tvr.works`. The checker never substitutes or automatically visits another origin. It rejects redirects, wrong identity/mode, incorrect HTML/edge indexing, bad canonicals, missing script hashes/security headers, incorrect sitemap/crawler/social-image responses and a homepage fallback for unknown URLs. Requests are bounded and page concurrency is six; three CLI attempts allow short edge-propagation delays.
+For production, run with `DEPLOYMENT_MODE=production` against the immutable production deployment and then separately against `https://figure.tvr.works`. Public HTML and build identity are expected on both, but Pages' immutable hash hostname must have edge `noindex`; the custom production alias must not. The checker never substitutes or automatically visits another origin. It rejects redirects, wrong identity/mode, incorrect HTML/edge indexing, bad canonicals, missing script hashes/security headers, incorrect sitemap/crawler/social-image responses and a homepage fallback for unknown URLs. Requests are bounded and page concurrency is six; three CLI attempts allow short edge-propagation delays.
 
 A failed Actions run leaves current production in place once the gate is live. A later successful CI rerun does not automatically retry a failed Pages build: retry that build after correcting the cause. Recover normal content with a revert through the same checks. An emergency Pages rollback is coordinator-owned and must be recorded and reconciled with main afterward.
 
-At branch implementation time, local validation passed 102 unit/contract cases and 66 preview browser cases. Actual Blacksmith validation and the public artifact pass are recorded in the task's final result. Live gated publication, the disposable failing-preview test and production smoke verification remain coordinator cutover work.
+The first [Blacksmith push validation](https://github.com/tvr-works/figure-site/actions/runs/42659644207) passed 102 unit/contract cases, all 66 preview browser cases and eight public artifact cases on commit `58184b2162d4e51ef1fa24118111d820c751f156`. Later contract coverage adds the immutable-hostname edge-indexing distinction. Actual final-tip validation is recorded in the task's final result. Live gated publication, the disposable failing-preview test and production smoke verification remain coordinator cutover work.
 
 ## References
 
