@@ -11,11 +11,23 @@ export function SiteHeader() {
 }
 
 export function SiteFooter() {
-  return <footer className="site-footer" id="get-figure" aria-label="Figure availability and support" tabIndex={-1}>
-    <div className="footer-row page-width">
-      <Link className="brand" to="/" aria-label="Figure home">Figure</Link>
-      <p className="footer-status">Preparing for the App Store.</p>
-      <nav aria-label="Footer"><Link to="/guides">Guides</Link><Link to="/support">Support</Link><Link to="/privacy">Privacy</Link></nav>
-    </div>
-  </footer>;
+  return (
+    <footer className="site-footer" id="get-figure" tabIndex={-1}>
+      <div className="footer-row page-width">
+        <div className="footer-legal">
+          <small>© 2026 TVR Works LLC</small>{' '}
+          <span className="footer-legal-links">
+            <span aria-hidden="true">·</span>{' '}
+            <a href="https://tvr.works/software">Software</a>{' '}
+            <span aria-hidden="true">·</span>{' '}
+            <Link to="/privacy">Privacy</Link>
+          </span>
+        </div>
+        <nav aria-label="Footer">
+          <Link to="/guides">Guides</Link>
+          <Link to="/support">Support</Link>
+        </nav>
+      </div>
+    </footer>
+  );
 }

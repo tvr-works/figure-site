@@ -14,18 +14,20 @@ async function pickMode(page: import('@playwright/test').Page, label: string) {
   else await page.getByRole('button', { name: label, exact: true }).click();
 }
 
-test('purchase status and static public routes are honest and reachable', async ({
-  page,
-  request,
-}) => {
+test('the footer and static public routes are reachable', async ({ page, request }) => {
   await page.goto('/');
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', expectedRobots);
   await page.locator('.hero-actions').getByRole('link', { name: 'Get Figure' }).click();
-  await expect(page.getByText('Preparing for the App Store.')).toBeInViewport();
+  await expect(page).toHaveURL(/\/#get-figure$/);
+  const footer = page.getByRole('contentinfo');
+  await expect(footer).toBeInViewport();
+  await footer.getByRole('link', { name: 'Privacy', exact: true }).click();
+  await expect(page).toHaveURL(/\/privacy$/);
+  await expect(page.getByRole('heading', { level: 1, name: 'Figure privacy' })).toBeVisible();
   for (const path of ['/support', '/privacy']) {
     expect((await page.goto(path))?.status()).toBe(200);
     await expect(page.locator('h1')).toBeVisible();
-    await expect(page.locator('a[href="mailto:support@figure.tvr.works"]').first()).toBeVisible();
+    await expect(page.locator('a[href="mailto:support@tvr.works"]').first()).toBeVisible();
   }
   expect((await request.get('/missing-page')).status()).toBe(404);
 });
@@ -336,7 +338,8 @@ test('no-JavaScript content retains the proposition, completed proof, Help and n
     .locator('.hero-actions')
     .getByRole('link', { name: 'Get Figure', exact: true })
     .click();
-  await expect(page.getByText('Preparing for the App Store.')).toBeInViewport();
+  await expect(page).toHaveURL(/\/#get-figure$/);
+  await expect(page.getByRole('contentinfo')).toBeInViewport();
   await context.close();
 });
 
